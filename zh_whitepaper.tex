@@ -563,11 +563,11 @@ Loopring协议的另一个显著特点是消除了传统交易所中\texttt{交�
 \begin{tabular}{p{5cm}|p{2.5cm}|p{2.5cm}} %设置了每一列的宽度，强制转换。
 &传统交易所 & Loopring交易所 \\ %用&来分隔单元格的内容 \\表示进入下一行
     \hline
-托管下单资金& 是 & 否 \tablefootnote{Loopring交易所无需托管下单资金 --- 交易用代币存放到自己区块链地址中，成交前无需要转账。资产丢失或者被盗风险为零。} \\
+托管下单资金& 是 & 否\tablefootnote{Loopring交易所无需托管下单资金 --- 交易用代币存放到自己区块链地址中，成交前无需要转账。资产丢失或者被盗风险为零。} \\
 \hline
-下单资金冻结& 是 & 否 \tablefootnote{Loopring交易所无需冻结下单资金 --- 用户下单后依然可以任意动用账户任何资金，将资金部分或全部转移走等同于部分或全部撤单。} \\
+下单资金冻结& 是 & 否\tablefootnote{Loopring交易所无需冻结下单资金 --- 用户下单后依然可以任意动用账户任何资金，将资金部分或全部转移走等同于部分或全部撤单。} \\
 \hline
-需充值提现& 是 & 否 \tablefootnote{Loopring允许用户的同一个订单被多家Loopring交易所同时撮合，并可以被多家交易所不同程度部分或全部成交。}\\
+需充值提现& 是 & 否\tablefootnote{Loopring订单实际是交易指令，交易过程中用户资产一直保存在用户自己的区块链地址中，无需充值提现过程。}\\
 \hline
 
 有内部交易风险& 是 & 否\tablefootnote{Loopring交易所撮合全部基于区块链智能合约，数据不可更改，完全开放透明。}\\
@@ -578,9 +578,9 @@ Loopring协议的另一个显著特点是消除了传统交易所中\texttt{交�
 \hline
 支持法币& 是 & 是\tablefootnote{Loopring交易所对法币的支持是通过资产代币化，需要将法币在区块链上做ERC20代币发行。}\\
 \hline
-同一个订单可以提交给多个交易所& 否 & 是  \tablefootnote{Loopring允许用户的同一个订单被多家Loopring交易所同时撮合，并可以被多家交易所不同程度部分或全部成交。}\\
+同一个订单可以提交给多个交易所& 否 & 是\tablefootnote{Loopring允许用户的同一个订单被多家Loopring交易所同时撮合，并可以被多家交易所不同程度部分或全部成交。}\\
 \hline
-Maker和Taker是否平等& 否 & 是 \tablefootnote{Loopring协议要求成交接近中间价，而不是过度倾向于Maker的价格。}\\
+Maker和Taker是否平等& 否 & 是\tablefootnote{Loopring协议要求成交接近中间价，而不是过度倾向于Maker的价格。}\\
 \hline
 支持环路交易& 否 & 是\tablefootnote{Loopring交易所支持环路发现，能最大程度找到最好的匹配订单。}\\
 \hline
