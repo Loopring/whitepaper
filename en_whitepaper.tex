@@ -107,7 +107,7 @@ This document is for informational purposes only and does not constitute an offe
 
 
 \begin{abstract}
-Loopring is an open, multilateral token exchange protocol, for decentralized exchange on the Ethereum blockchain. Loopring is intended to serve as common building block with open standards, driving interoperability among decentralized applications (DAPPs) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use, and that any dApp can hook into.
+Loopring is an open, multilateral token exchange protocol, for decentralized exchange on the Ethereum blockchain. Loopring is intended to serve as a common building block with open standards, driving interoperability among decentralized applications (DAPPs) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use, and that any dApp can hook into.
 \end{abstract}
 
 \newpage
@@ -381,7 +381,7 @@ and $O_{b\rightarrow c}\rightarrow O_{c\rightarrow d}\rightarrow O_{d\rightarrow
 
 \subsubsection{Denial-of-Service}
 
-Loopring allows exchanges to selectively handle orders. An exchange can set up their own criteria and may choose to hide or reveal these criteria. Therefor Loopring does not see denial of service as a form of unethical behavior.
+Loopring allows exchanges to selectively handle orders. An exchange can set up their own criteria and may choose to hide or reveal these criteria. Therefore Loopring does not see denial of service as a form of unethical behavior. 
 
 \subsubsection{Massive Tiny Order Attack}
 A user can send out a large amount of tiny orders to attack exchanges. Exchanges however, will reject most of these tiny orders because they do not yield satisfying profit when matched. As denial-of-service is not deemed as a form of attack, massive tiny order attack is not feasible.
@@ -450,7 +450,7 @@ message MatchRing {
 \subsection{Order Status\label{sec: orderstate}}
 
 
-An rrder cannot be modified once it has been signed and announced. Data will be updated on the blockchain once the smart contract finds the matched order. Thus $inAmount$ and $outAmount$ will modified correspondingly with the updated price. If $inAmount / outAmount$ shows 0,  it means that the order has been fully closed. For example, if the user wants to cancel the order, a special request will be filed,  $inAmount / outAmount$ will be 0 to close the order. An expired order will not be updated on the blockchain - it can be tracked through the final cutting time. Therefore, we expect most of the orders will expire or be invalidated.
+An order cannot be modified once it has been signed and announced. Data will be updated on the blockchain once the smart contract finds the matched order. Thus $inAmount$ and $outAmount$ will be modified correspondingly with the updated price. If $inAmount / outAmount$ shows 0,  it means that the order has been fully closed. For example, if the user wants to cancel the order, a special request will be filed,  $inAmount / outAmount$ will be 0 to close the order. An expired order will not be updated on the blockchain - it can be tracked through the final cutting time. Therefore, we expect most of the orders will expire or be invalidated.
 
 \subsection{Smart Contracts\label{sec: contracts}}
 
@@ -460,7 +460,7 @@ Loopring consists of many smart contracts, including:
  \item \textbf{Mix-Matched Contract} is responsible for ensuring each order status in the loop, calculating the price and volume,  transferring and interaction with other smart contracts, API for Loopring;
  \item  \textbf{Order Contract} updates order database and support cancelling policy;
  \item \textbf{Registration Contract} maintains and upgrades service for exchanges who accepted Loopring, support the token deposit from exchange and defaulted parameters backup;
- \item \textbf{Stats Contact} calculates the exchange volume and price between two tokens.
+ \item \textbf{Stats Contract} calculates the exchange volume and price between two tokens.
 
 \end{itemize}
 
