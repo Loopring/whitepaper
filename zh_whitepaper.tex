@@ -52,7 +52,7 @@
 %\usepackage[pages=some,placement=top]{background}
 \usepackage{eso-pic}
 
-\title{\textbf{LOOPRING（路印）}\\\textbf{去中心化代币交易撮合协议}\\1.22版}
+\title{\textbf{LOOPRING（路印）}\\\textbf{去中心化代币交易撮合协议}\\1.3版}
 \author{
     daniel@loopring.org\\
     alex@loopring.org\\
@@ -435,7 +435,7 @@ message Order {
   unit256 expiration  // 过期时间
   unit256 fee;        // 交易总费用（LRC），部分成交的费用按该次
                       // 撮合实际卖出代币额与outAmount比例计算
-  uint8 savingShare;  // fee不为0时支付给交易所的分润比例，否则视为100%
+  uint8 marginSplit;  // fee不为0时支付给交易所的分润比例，否则视为100%
   unit8 v;
   bytes32 r;
   bytes32 s;

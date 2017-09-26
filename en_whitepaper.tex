@@ -62,7 +62,7 @@
 %\usepackage[pages=some, placement=top]{background}
 \usepackage{eso-pic}
 
-\title{\textbf{LOOPRING}\\\textbf{Decentralized Token Exchange Protocol}\\v1.22}
+\title{\textbf{LOOPRING}\\\textbf{Decentralized Token Exchange Protocol}\\v1.3}
 \author{
   daniel@loopring.org\\
   jay@loopring.org\\
@@ -295,26 +295,26 @@ f^i = b^i \cdot m^i / \overline{b^i}
 \end{equation*}
 
 
-In order to encourage an exchange to offer best rate for users, Loopring would distribute profit from \texttt{cost saving} to the given exchange. as an order $O^i$,  if price for purchasing is $b^i$( $b^i \le \overline{b^i}$ ),  then we define the saving cost form as: 
+In order to encourage an exchange to offer best rate for users, Loopring would distribute profit from \texttt{margin} to the given exchange. as an order $O^i$,  if price for purchasing is $b^i$( $b^i \le \overline{b^i}$ ),  then we define margin as: 
 
 \begin{equation*}
 \Delta^i = b^i \cdot r^i \cdot \gamma
 \end{equation*}
 
-If Loopring requires every order to set up a saving cost distributing rate $\theta^i$, and minimum distributing ratio is $\Theta$. Then order $O^i$ should pay to exchange: 
+If Loopring requires every order to set up a margin split $\theta^i$, and minimum margin split percentage is $\Theta$. Then order $O^i$ should pay to exchange: 
 
 
 \begin{equation*}
 f^i = \Delta^i \cdot \Theta = b^i \cdot r^i \cdot \gamma \cdot \Theta
 \end{equation*}
 
-Income from cost saving among each matching trade is explicated by:
+Income from margin among each matching trade is explicated by:
 
 \begin{equation*}
 F = \sum^{n-1}_{i=0} b^i \cdot r^i \cdot \gamma \cdot \Theta
 \end{equation*}
 
-In order to encourage $LRC$ usage, if the order has no preset token fee $m^i$, or $m^i=0$, then the actual ratio is 100\% regardless of the relevant hash in this order. If none of the order has set up this rate $\Theta=100\%$, then all proceeds from the saving will go to the exchange.
+In order to encourage $LRC$ usage, if the order has no preset token fee $m^i$, or $m^i=0$, then the actual ratio is 100\% regardless of the relevant hash in this order. If none of the order has set up this rate $\Theta=100\%$, then all proceeds from the margin will go to the exchange.
 
 In the next chapter we will introduce a token pledge policy, and explain how the smart contract will list out each exchanges depositing tokens and rank them up. It will also calculate a \texttt{mandatory discount cost} for each exchange, $\lambda$. This figure will affect the total cost. Meanwhile, an exchange can also offer a discount, $\eta$. Total cost for completion of a full trade: 
 
@@ -422,7 +422,7 @@ message Order {
  uint256 inAmount;
  unit256 expiration
  unit256 fee;
- uint8 savingShare;
+ uint8 marginSplit;
  unit8 v;
  bytes32 r;
  bytes32 s;
@@ -542,7 +542,7 @@ Internal Trading Risk& Yes & No\tablefootnote{All matching trades are based on s
 \hline
 Customer loss from exchange closing& Yes & No\tablefootnote{ Loopring exchanges are not responsible for tokenization, thus Loopring users will not be affected if an exchange becomes insolvent. For example, a blockchain account will not affected if mining is terminated. In conclusion, exchanges are responsible for matching trades. Loopring's smart contract will complete clearing and settlement, furthermore, assets are always kept in user’s blockchain account.}\\
 \hline
-Transaction is the main income& Yes & No\tablefootnote{Transaction fee is not a mainstream income for Loopring exchanges, mainstream comes from “profit of transaction cost saving”, because it can effectively encourage trade matching.}\\
+Transaction is the main income& Yes & No\tablefootnote{Transaction fee is not a mainstream income for Loopring exchanges, mainstream comes from “profit of transaction margin”, because it can effectively encourage trade matching.}\\
 \hline
 Accept Fiat Money& Yes & Yes\tablefootnote{Loopring exchanges fully support asset tokenization, hence, it requires legitimate currency being tokenized on ERC20 standard.}\\
 \hline
