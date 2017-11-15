@@ -282,7 +282,7 @@ r_{0\rightarrow 1} \cdot (1-\gamma)\cdot r_{1\rightarrow 2} \cdot (1-\gamma) \cd
 \begin{split}
 &\hat{s}^{i}=\overline{s}_i\text{，} \hat{b}^{i}=\hat{s}^{i} / \hat{r}^i \text{，其中}\overline{s}_i\text{为订单的卖出代币余额;}\\
 &\hat{s}^{i\oplus 1}=\hat{b}^i\text{，} \hat{b}^{i\oplus 1}=\hat{s}^{i\oplus 1} / \hat{r}^{i\oplus 1}\text{;}\\
-&\hat{s}^{i\oplus 2}=\hat{b}^{i\oplus 2}\text{，} \hat{b}^{i\oplus 2}=\hat{s}^{i\oplus 2} / \hat{r}^{i\oplus 2}\text{;}\\
+&\hat{s}^{i\oplus 2}=\hat{b}^{i\oplus 1}\text{，} \hat{b}^{i\oplus 2}=\hat{s}^{i\oplus 2} / \hat{r}^{i\oplus 2}\text{;}\\
 & ...
 %\text{。}
 \end{split}
@@ -299,7 +299,7 @@ f^i = b^i \cdot m^i  / \overline{b^i}
 \end{equation*}
 
 
-为了鼓励交易所为用户找到兑换率折价比例最大的成交环路，Loopring协议要求将兑换率折价带来的\texttt{成本节约}分润给交易所。对与一个订单$O^i$, 假设买入订单的成交额度为$b^i$（$b^i \le \overline{b^i}$）,我们定义成本节约为：
+为了鼓励交易所为用户找到兑换率折价比例最大的成交环路，Loopring协议要求将兑换率折价带来的\texttt{成本节约}分润给交易所。对于一个订单$O^i$, 假设买入订单的成交额度为$b^i$（$b^i \le \overline{b^i}$）,我们定义成本节约为：
 
 \begin{equation*}
 \Delta^i = b^i \cdot r^i \cdot \gamma
