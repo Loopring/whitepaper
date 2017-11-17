@@ -107,7 +107,7 @@ This document is for informational purposes only and does not constitute an offe
 
 
 \begin{abstract}
-Loopring is an open, multilateral token exchange protocol, for decentralized exchange on the Ethereum blockchain. Loopring is intended to serve as common building block with open standards, driving interoperability among decentralized applications (dApps) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use, and that any dApp can hook into.
+Loopring is an open, multilateral token exchange protocol, for decentralized exchange on the Ethereum blockchain. Loopring is intended to serve as a common building block with open standards, driving interoperability among decentralized applications (DAPPs) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use, and that any dApp can hook into.
 \end{abstract}
 
 \newpage
@@ -380,7 +380,7 @@ Assume there are two orders $O_{a\rightarrow b}$, $O_{b\rightarrow a}$ that form
 
 \subsubsection{Denial-of-Service}
 
-Loopring allows exchanges to selectively handle orders. An exchange can set up their own criteria and may choose to hide or reveal this criteria. Therefore, Loopring does not see denial of service as a form of unethical behavior.
+Loopring allows exchanges to selectively handle orders. An exchange can set up their own criteria and may choose to hide or reveal these criteria. Therefore Loopring does not see denial of service as a form of unethical behavior. 
 
 \subsubsection{Massive Tiny Order Attacks}
 A user can send out a large amount of tiny orders to attack exchanges. Exchanges however, will reject most of these tiny orders because they do not yield satisfying profit when matched. As denial-of-service is not deemed as a form of attack, massive tiny order attacks are not feasible.
@@ -456,10 +456,10 @@ An order cannot be modified once it has been signed and announced. Data will be 
 Loopring consists of many smart contracts, including:
 
 \begin{itemize}
- \item \textbf{Mix-Matched Contract} is responsible for ensuring each order status in the loop, calculating the price and volume,  transferring and interacting with other smart contracts, and the API for Loopring;
- \item  \textbf{Order Contract} updates order database and provides the cancelation policy;
- \item \textbf{Registration Contract} maintains and upgrades service for exchanges that accept Loopring, and supports the token deposit from exchange and defaulted parameters backup;
- \item \textbf{Stats Contact} calculates the exchange volume and price between two tokens.
+ \item \textbf{Mix-Matched Contract} is responsible for ensuring each order status in the loop, calculating the price and volume,  transferring and interaction with other smart contracts, API for Loopring;
+ \item  \textbf{Order Contract} updates order database and supports cancelling policy;
+ \item \textbf{Registration Contract} maintains and upgrades service for exchanges who accepted Loopring, support the token deposit from exchange and defaulted parameters backup;
+ \item \textbf{Stats Contract} calculates the exchange volume and price between two tokens.
 
 \end{itemize}
 
