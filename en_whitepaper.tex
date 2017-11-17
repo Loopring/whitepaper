@@ -139,7 +139,7 @@ The OpenLedger Dex\cite{openledger} is a cryptocurrency exchange. It allows user
 
 The Bancor\cite{bancor}\cite{hanson2012logarithmic} protocol enables built-in price discovery and a liquidity mechanism for tokens on smart contract blockchains. These "smart tokens" hold one or more other tokens in reserve and enable any party to instantly purchase or liquidate the smart token in exchange for any of its reserve tokens. This is done directly through the smart token's contract, at a continuously calculated price according to a formula which balances buy and sell volumes.
 
-"0x"\cite{warren20170x} is a protocol that facilitates low friction peer-to-peer exchange of ERC20\cite{ERC20} tokens on the Ethereum blockchain. The protocol is intended to serve as an open standard and common building block driving interoperability among decentralized applications (dApps) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use and that any dApp can hook into. DApps built on top of the protocol can access public liquidity pools or create their own liquidity pool and charge transaction fees on the resulting volume. However, 0x protocol has limitations including  only being able to accept simple OTC orders, having an unclear competing mechanism among differenth exchanges, and lacking a protection mechanism for miners.
+"0x"\cite{warren20170x} is a protocol that facilitates low friction peer-to-peer exchange of ERC20\cite{ERC20} tokens on the Ethereum blockchain. The protocol is intended to serve as an open standard and common building block driving interoperability among decentralized applications (dApps) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use and that any dApp can hook into. DApps built on top of the protocol can access public liquidity pools or create their own liquidity pool and charge transaction fees on the resulting volume. However, 0x protocol has limitations including  only being able to accept simple OTC orders, having an unclear competing mechanism among different exchanges, and lacking a protection mechanism for miners.
 
 Taking in to account the advantages and limitations stated above, it is clear that centralized exchange still plays an important role in the cryptocurrency market at present. Nevertheless, Our team, inspired by both 0x protocol and payment channel, have conveived a new solution for a decentralized exchange protocol.
 
@@ -380,7 +380,7 @@ Assume there are two orders $O_{a\rightarrow b}$, $O_{b\rightarrow a}$ that form
 
 \subsubsection{Denial-of-Service}
 
-Loopring allows exchanges to selectively handle orders. An exchange can set up their own criteria and may choose to hide or reveal these criteria. Therefore Loopring does not see denial of service as a form of unethical behavior. 
+Loopring allows exchanges to selectively handle orders. An exchange can set up their own criteria and may choose to hide or reveal these criteria. Therefore Loopring does not see denial of service as a form of unethical behavior.
 
 \subsubsection{Massive Tiny Order Attacks}
 A user can send out a large amount of tiny orders to attack exchanges. Exchanges however, will reject most of these tiny orders because they do not yield satisfying profit when matched. As denial-of-service is not deemed as a form of attack, massive tiny order attacks are not feasible.
@@ -429,12 +429,11 @@ message Order {
 \end{verbatim}
 
 Though there is no indicated price from the order, we are still able to find out through the formula: $outAmount / inAmount$ to determine the exchange rate $r$. The actual exchange rate must be less than $r$. A user-friendly exchange should allow user to input $outAmount$, $inAmount$, selling and asking price, and use any two of those numbers in order to calculate the missing $outAmount$ or $outAmount$ figure.
-
-Actual orders can be defined in two different ways: Definition A - transaction can be completed once the number of tokens sold reaches $outAmount$ ; Definition B - transaction can be completed once the number of tokens purchased reaches $inAmount$; Therefore, we can setup a quote for exchange and mix-matching contract to help to define the trade. In our initial version, we would support Definition A only.
+Actual orders can be defined in two different ways: Definition A - transaction can be completed once the number of tokens sold reaches $outAmount$ ; Definition B - transaction can be completed once the number of tokens purchased reaches $inAmount$; Therefore, we can setup a quote for exchange and mix-matching contract to help to define the trade. At our initial version, we would support Definition A only.
 
 The exchange can create a Match-Ring by using this data structure:
 \begin{verbatim}
-message MatchRing {
+rmessage MatchRing {
   Order[] orders;
   address feeRecipient;
   unit256 additionalDiscount;
