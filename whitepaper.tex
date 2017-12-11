@@ -1,0 +1,126 @@
+% !TEX program = XeLaTeX
+% !TEX encoding = UTF-8
+\documentclass[UTF8,nofonts]{ctexart}
+\setCJKmainfont[BoldFont=FandolSong-Bold.otf,ItalicFont=FandolKai-Regular.otf]{FandolSong-Regular.otf}
+\setCJKsansfont[BoldFont=FandolHei-Bold.otf]{FandolHei-Regular.otf}
+\setCJKmonofont{FandolFang-Regular.otf}
+
+\usepackage{url}
+\usepackage{cancel}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{subfig}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage[a4paper,width=180mm,top=18mm,bottom=22mm,includeheadfoot]{geometry}
+\usepackage[a4paper,width=140mm,top=18mm,bottom=22mm,includeheadfoot]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{verbatim}
+\usepackage{caption}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{mathtools}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{afterpage}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{dirtree}
+\usepackage{amsfonts}
+\usepackage{tkz-graph}
+\newtheorem{definition}{定义}[section]
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{Lemma}
+\newtheorem{proof}{证明} [section]
+\usepackage[toc,page,title,titletoc,header]{appendix}
+\usepackage{marginnote}
+\usepackage{tablefootnote}
+
+\renewcommand\appendixname{附\ 录}
+\renewcommand\appendixpagename{附\ 录}
+\renewcommand\appendixtocname{附\ 录}
+
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+
+\usetikzlibrary{shapes.geometric}%
+\usepackage{color}
+%\usepackage[pages=some,placement=top]{background}
+\usepackage{eso-pic}
+
+\title{\textbf{TokenBank}\\v0.1}
+\author{
+    daniel@TokenBank.com
+}
+
+\makeatletter
+\def\CTEX@section@format{\Large\bfseries}
+\makeatother
+
+\makeatletter
+\newenvironment{tablehere}
+  {\def\@captype{table}}
+  {}
+
+\newenvironment{figurehere}
+  {\def\@captype{figure}}
+  {}
+\makeatother
+
+
+\begin{document}
+%\AddToShipoutPicture{\BackgroundPic}
+\maketitle
+
+\section{简述\label{sec:idea}}
+
+我将TokenBank定位成一个企业级的非托管钱包。它适用于企业级用户，大额用户，以及拥有多地址，多代币的虚拟资产持有者。我们和市面上现有的钱包软件几乎没有任何竞争关系。这样的钱包不但适合企业用户，也同样适用个人用户。是中心化和去中心化技术最好的结合，能够提供最佳的用户体验。我已经注册了tokenbank.com域名。
+
+\section{目标问题\label{sec:idea}}
+
+\subsection{转账历史维护困难}
+对于经常做区块链转账的人来讲，很难追踪每笔tx都花在了什么地方，每笔收入的来源到底是哪个人或实体。目前最好的方法就是用excel记录下来。TokenBank会要求用户在做转账的时候选择预定义的一些类别，或者加上自己的注释。这些记录会和tx id放到TokenBank中心数据库中，对企业内部（部分）管理者可见。
+
+另外我们对经常使用的地址，也可以像微信中那也，加tag或者label，这样后续使用更不容易出错。
+
+\subsection{多地址、多币种难管理}
+
+越来越多的人，特别是机构，慢慢会拥有大量的地址，这些地址的管理很成问题。现在市面上所有的钱包对多个地址的管理都存在问题。比如以太坊官方go语言钱包，如果地址超过50个，就会极其缓慢，而且地址的名称无法很好管理，把keystore 文件导出后，地址名字完全丢失。
+
+TokenBank会将所有地址在TokenBank的智能合约里关联起来。这样可以通过单一的入口地址（root address）对所有地址进行管理。核心管理者可以授权新的私钥一定的花费额度，并且通过App可以授权和查看所有的花费情况（需要多重签名支持）。
+
+\subsection{多重签名不好用}
+对于机构用户，多重签名十分重要，但多重签名的流程如果没有中心和服务器的接入，很难提供好的用户体验。TokenBank通过多重签名流程的中心化管理，可以将这个过程极大简化，提供更好的用户体验。
+
+\subsection{缺乏资产灾难管理}
+
+TokenBank允许用户通过智能合约，设置遗产分配。比如可以设置多个账号按照一定比例分割token和ETH。一旦该root账号超过指定的时间没有活跃（没有进行任何的私钥签名），遗产继承账号就可以通过智能合约claim应得的资产。
+
+\subsection{机构资产的交易依然需要信任交易所}
+我们将允许用户通过使用Loopring协议进行交易，特别是大额，匿名的交易。
+
+\subsection{很难批量进行转账}
+
+现在如果为几十个用户发ETH工资，是个很痛苦的过程。TokenBank可以帮助用户生成多个tx，一键签名即可为所有交易授权。如果转账不成功，也会主动提醒再次授权新的交易。生成多个tx时候可以指定是以法币为价值标准，自动按照当前价格换算成ETH或者特定的TOKEN，也可以指定固定数量的ETH或者token。
+
+\subsection{转账通知}
+结合email和电话，可以对转账成功或失败进行通知，因为有了各种标注，通知的内容更加直观。
+
+\subsection{转入和转出Hook}
+企业管理员可以根据特定条件，设置到账和出账后自动执行一些操作。这个功能主要用作将TokenBank做特定功能的拓展，便于第三方程序员的个性化。
+
+\subsection{缺乏企业转账的报表、审计、和税务管理}
+
+TokenBank还会提供转账记录的导出功能，用于企业后续的记账。所有记录都会根据企业进行汇总，并且标注是哪个人进行的转账，当时的USD/CNY价格是多少，等等。各种数据可以通过web下载，生成特定的报表。
+
+以后会根据地区和国家法律，做税务报表汇总和生成等。
+
+\section{内置代币}
+
+我们可以设计内置代币，也可完全股权融资。TokenBank的内置代币可以为上面所有服务进行计费。
+
+\end{document}
