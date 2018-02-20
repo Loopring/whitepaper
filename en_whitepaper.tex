@@ -117,15 +117,15 @@ Loopring is an open, multilateral token exchange protocol, for decentralized exc
 
 \section{Background\label{sec: background}}
 
-Blockchain\cite{staff2016blockchains}\cite{swan2015blockchain} technology was created to facilitate the cryptocurrency Bitcoin\cite{nakamoto2008Bitcoin}. It was originally intended for use as a decentralized system to enforce financial agreements\cite{lamport1982byzantine}\cite{christidis2016blockchains}. The technology that underlies such agreements can be applied to other transactions such as: trading stock, IP, purchasing and saling of real estate, purchasing music, and much more. Both consortium blockchains and private blockchains have been developed and implemented during the last few years, however the value only exists within a closed set of entities. Conversely, fully public blockchains operates through a large number of participants, resulting in trust through numbers. According to coinmarketcap.com stats, the total cryptocurrency market cap value has reached 113 billion USD,  including 32 billion USD for Ethereum\cite{wood2014ethereum} as June 12, 2017.
+Blockchain\cite{staff2016blockchains}\cite{swan2015blockchain} technology was created to facilitate the cryptocurrency Bitcoin\cite{nakamoto2008Bitcoin}. It was originally intended for use as a decentralized system to enforce financial agreements\cite{lamport1982byzantine}\cite{christidis2016blockchains}. The technology that underlies such agreements can be applied to other transactions such as: trading stock, IP, purchasing and selling of real estate, purchasing music, and much more. Both consortium blockchains and private blockchains have been developed and implemented during the last few years, however the value only exists within a closed set of entities. Conversely, fully public blockchains operate through a large number of participants, resulting in trust through numbers. According to coinmarketcap.com stats, the total cryptocurrency market cap value has reached 113 billion USD,  including 32 billion USD for Ethereum\cite{wood2014ethereum} as of June 12, 2017.
 
-Blockchain has a massive influence across many domains,  particularly in the finance sector. It is strongly believed that tokenization\cite{liu2016medical}\cite{christidis2016blockchains}\cite{swan2015blockchain} offers many solutions across these domains. Asset tokenization can reduce costs, asset and increase the market liquidity. As this technology expands, an increase in dApps will require the use of different tokens. As a result, an open standard for exchanging tokens is critical to support this open economy.
+Blockchain has a massive influence across many domains,  particularly in the finance sector. It is strongly believed that tokenization\cite{liu2016medical}\cite{christidis2016blockchains}\cite{swan2015blockchain} offers many solutions across these domains. Asset tokenization can reduce costs and increase the market liquidity. As this technology expands, an increase in dApps will require the use of different tokens. As a result, an open standard for exchanging tokens is critical to support this open economy.
 
-A regular exchange platform is based on peer-to-peer IOUs, and blockchain technology. Firstly,  users need to deposit their money or tokens into an exchange's bank account or wallet. Since user accounts will be credited an IOU. They are in fact trading their IOU on the exchange. Users have to file a ticket when they want to withdraw or sell the tokens.
+A regular exchange platform is based on peer-to-peer IOUs, and blockchain technology. Firstly,  users need to deposit their money or tokens into an exchange's bank account or wallet and user accounts will be credited an IOU. They are in fact trading their IOU on the exchange. Users have to file a ticket when they want to withdraw or sell the tokens.
 
 Multiple exchanges have faced problems in past years. In February 2014, the largest Bitcoin exchange "Mt. Gox" suspended trading,  shut down its website and exchange services, and filed for bankruptcy protection from creditors\cite{mcmillan2014inside}. Mt. Gox announced that approximately 850,000 Bitcoins(BTC) belonging to customers and the company went missing and were likely stolen; an amount valued at more than \$450 million at the time. Research showed that less than 1 percent (7000 btc) of missing funds were lost due to cyber attacks. In 2016, the Bitfinex Hack occurred in which \$72 million in BTC were stolen from customer accounts. As such, it is evident that a lack of regulation and customer protection has been injurious toward BTC and other cryptocurrencies across many regions. It also illustrates how centralized exchange platforms carry unavoidable risks.
 
-Loopring epitomizes a protocol that facilitates a decentralized exchange mechanism of ERC20 tokens on the Ethereum blockchain to solve the aforementioned issues. One of the strengths of decentralization is risk mitigation, wherein tokens are not held by a central authority. Therefore, asset theft or confiscation is impossible, leading to greater trust between customers and exchanges at a very low cost. Additionally, this mechanism has no time or regional limitations, is highly transparent, and has traceability features. Such features lead to executing transactions in more liquid market, and minimize bid-ask price spreads.
+Loopring epitomizes a protocol that facilitates a decentralized exchange mechanism of ERC20 tokens on the Ethereum blockchain to solve the aforementioned issues. One of the strengths of decentralization is risk mitigation, wherein tokens are not held by a central authority. Therefore, asset theft or confiscation is impossible, leading to greater trust between customers and exchanges at a very low cost. Additionally, this mechanism has no time or regional limitations, is highly transparent, and has traceability features. Such features lead to executing transactions in more liquid markets, and minimize bid-ask price spreads.
 
 \section{Market and Industry\label{sec: existingworks}}
 
@@ -141,10 +141,10 @@ The Bancor\cite{bancor}\cite{hanson2012logarithmic} protocol enables built-in pr
 
 "0x"\cite{warren20170x} is a protocol that facilitates low friction peer-to-peer exchange of ERC20\cite{ERC20} tokens on the Ethereum blockchain. The protocol is intended to serve as an open standard and common building block driving interoperability among decentralized applications (dApps) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use and that any dApp can hook into. DApps built on top of the protocol can access public liquidity pools or create their own liquidity pool and charge transaction fees on the resulting volume. However, 0x protocol has limitations including  only being able to accept simple OTC orders, having an unclear competing mechanism among different exchanges, and lacking a protection mechanism for miners.
 
-Taking in to account the advantages and limitations stated above, it is clear that centralized exchange still plays an important role in the cryptocurrency market at present. Nevertheless, Our team, inspired by both 0x protocol and payment channel, have conveived a new solution for a decentralized exchange protocol.
+Taking in to account the advantages and limitations stated above, it is clear that centralized exchange still plays an important role in the cryptocurrency market at present. Nevertheless, Our team, inspired by both 0x protocol and payment channel, have conceived a new solution for a decentralized exchange protocol.
 
 
-\section{Design Protocol\label{sec: protocol}}
+\section{Protocol Design\label{sec: protocol}}
 
 \begin{center}
 \begin{figurehere}
@@ -154,7 +154,7 @@ Taking in to account the advantages and limitations stated above, it is clear th
 \end{figurehere}
 \end{center}
 
-Figure 1 presents the general sequence of steps used for three separate transaction under Loopring:
+Figure 1 presents the general sequence of steps used for three separate transactions under Loopring:
 
 \begin{enumerate}
  \item User X, Y, and Z authorize the Loopring smart contract to access their accounts for token trading. From the above figure, such a contract may transfer out 1000 A tokens from User X's account, transfer out 9 B tokens from User Y's account, and 100 C tokens from User Z's account;
@@ -239,7 +239,7 @@ Here we introduce the concept of an order-chain. It contains two or more orders,
 
 \subsection{Match-Ring}
 
-Most, if not all, centralized exchanges match orders from the two sides of a trading pair. Loopring, however, detects detecting a ring of orders that may involve multiple tokens/currencies. With one order Match-Ring, multiple orders can be filled instantly.
+Most, if not all, centralized exchanges match orders from the two sides of a trading pair. Loopring, however, detects a ring of orders that may involve multiple tokens/currencies. With one order Match-Ring, multiple orders can be filled instantly.
 
 \begin{definition}[Match-Ring] Let $C_{0}$, $C_{1}$, $\cdots$, $C_{n-1}$ be $n$ different kinds of token, $O_{0\rightarrow 1}$, $\cdots$, $O_{i\rightarrow i\oplus 1}$, $\cdots$, $O_{n-1 \rightarrow 0}$ be $n$ orders. Those orders can form a ring for trading:
 $$O_{0\rightarrow 1} \rightarrow \cdots \rightarrow O_{i\rightarrow i\oplus 1} \rightarrow \cdots \rightarrow O_{n-1\rightarrow 0} \text{, }$$
@@ -271,7 +271,7 @@ where $r^i$ is the order turnover rate of $i$-th order. Obviously, only when the
 
 \subsubsection{Fill Volume\label{sec: matchquantity}}
 
-finding the lowest value order can help to figure out the fill volume for each order. For instance, if the $i$-th order is the lowest value order, then the number of tokens sold from each order $\hat{s}$ and number of tokens purchased $\hat{b}$ from each order can be calculated as:
+Finding the lowest value order can help to figure out the fill volume for each order. For instance, if the $i$-th order is the lowest value order, then the number of tokens sold from each order $\hat{s}$ and number of tokens purchased $\hat{b}$ from each order can be calculated as:
 
 \[
 \begin{split}
@@ -374,7 +374,7 @@ Figure \ref{fig:discount} shows, $\lambda_{2} - \lambda_{1} \gg \lambda_{100} - 
 
 \subsubsection{Exchange Covered Interest Arbitrage}
 
-Loopring endeavors to create a fair ecosystem and to find a balance between customers (users) and exchanges. First, we will explain how an exchange could archive a zero-risk covered interest arbitrage.
+Loopring endeavors to create a fair ecosystem and to find a balance between customers (users) and exchanges. First, we will explain how an exchange could achieve a zero-risk covered interest arbitrage.
 
 Assume there are two orders $O_{a\rightarrow b}$, $O_{b\rightarrow a}$ that form a loop, $r_{a\rightarrow b} \cdot r_{b\rightarrow a} > 1$. An exchange can input three new orders between those two. $O_{b\rightarrow c}$, $O_{c\rightarrow d}$, $O_{d\rightarrow b}$, to create a five order loop,  $r_{a\rightarrow b} \cdot r_{b\rightarrow c} \cdot r_{c\rightarrow d}\cdot r_{d\rightarrow b}\cdot r_{b\rightarrow a} = 1$. An exchange could bring the possible cost down to zero once the transaction completed, implementing zero-risk covered interest arbitrage, $O_{b\rightarrow c}\rightarrow O_{c\rightarrow d}\rightarrow O_{d\rightarrow b}$. In order to stop these parameters, Loopring requires: {\bfseries a verified loop that cannot create a further sub-loop to continue trading}.
 
@@ -387,7 +387,7 @@ A user can send out a large amount of tiny orders to attack exchanges. Exchanges
 
 \subsubsection{Insufficient Balance}
 
-Malicious users may sign and spread out orders in which the order value is not zero,but the wallet address actually has a zero balance. This again is a not a good way to attack exchanges. Exchanges will monitor and notice that some orders actual balance is zero and update these orders states accordingly, then discard them.  
+Malicious users may sign and spread out orders in which the order value is not zero,but the wallet address actually has a zero balance. This again is a not a good way to attack exchanges. Exchanges will monitor and notice that some orders' actual balance is zero and update these orders states accordingly, then discard them.  
 
 Exchanges do have to spend time to update the order status, but can also choose to minimize these effort by, for example, blacklisting some addresses and drop all related orders.
 
@@ -400,15 +400,15 @@ A deviant exchange could monitor all unconfirmed Match-Rings and broadcast the s
 \end{itemize}
 Hash rate:
 $$h = H(r,  nonce)\text{, }$$
-where $H()$ is a one-way hash function, $r$ is Match-Ring record. Hash Hash function contains a random number $nonce$.
+where $H()$ is a one-way hash function, $r$ is Match-Ring record. Hash function contains a random number $nonce$.
 
 \subsection{Market Depth\label{sec: marketdepth}}
 
-Exchange do not need to offer market depth data. Under this ecosystem, it is possible for both single entities and corporations to possibly pool all unclosed orders into one instance of market depth data. We can ascertain trading data between any two ERC20 tokens according to the agreement in chapter 3.3.
+Exchanges do not need to offer market depth data. Under this ecosystem, it is possible for both single entities and corporations to possibly pool all unclosed orders into one instance of market depth data. We can ascertain trading data between any two ERC20 tokens according to the agreement in chapter 3.3.
 
 \subsection{Data Structure\label{sec: dataformat}}
 
-All of orders can be represented by using one data structure due to adopting the OTC module. This data structure contains both a digital signature and all parameters. Before the signature, the parameter data is connected from the orders into a set of data, the order's hash is calculated by using Keccak SHA3 method, and then signed by using this account's private keys with ECDSA.
+All orders can be represented by using one data structure due to adopting the OTC module. This data structure contains both a digital signature and all parameters. Before the signature, the parameter data is connected from the orders into a set of data, the order's hash is calculated by using Keccak SHA3 method, and then signed by using this account's private keys with ECDSA.
 
 
 \begin{verbatim}
@@ -428,7 +428,7 @@ message Order {
 }
 \end{verbatim}
 
-Though there is no indicated price from the order, we are still able to find out through the formula: $outAmount / inAmount$ to determine the exchange rate $r$. The actual exchange rate must be less than $r$. A user-friendly exchange should allow user to input $outAmount$, $inAmount$, selling and asking price, and use any two of those numbers in order to calculate the missing $outAmount$ or $outAmount$ figure.
+Though there is no indicated price from the order, we are still able to find out through the formula: $outAmount / inAmount$ to determine the exchange rate $r$. The actual exchange rate must be less than $r$. A user-friendly exchange should allow user to input $outAmount$, $inAmount$, selling and asking price, and use any two of those numbers in order to calculate the missing $outAmount$ or $inAmount$ figure.
 Actual orders can be defined in two different ways: Definition A - transaction can be completed once the number of tokens sold reaches $outAmount$ ; Definition B - transaction can be completed once the number of tokens purchased reaches $inAmount$; Therefore, we can setup a quote for exchange and mix-matching contract to help to define the trade. At our initial version, we would support Definition A only.
 
 The exchange can create a Match-Ring by using this data structure:
@@ -494,7 +494,7 @@ The decentralized mechanism includes token registration, exchange registration, 
    \item \textbf{Stat hash} Data will increase to a certain amount after a long period of operation. The more data exchanges have, the more accurate the system computation ability will be.
   \item \textbf{Deposit scale} Deposit for each exchange should be measurable. If the amount is large, the liquidation gets worse; and vice verse.
    \item \textbf{Maximum length} Technically, more orders can create more profit, however the risk of failure also increases, as well as the trading cost.
-   \item \textbf{Discount hash} Discount hash will be adjust with the market. The below figure shows the normal market (represented by the blue line), the supply market (represented by the blue line), and the demand market (represented by the red line ).
+   \item \textbf{Discount hash} Discount hash will be adjusted with the market. The below figure shows the normal market (represented by the blue line), the supply market (represented by the blue line), and the demand market (represented by the red line ).
 \begin{center}
 \begin{figurehere}
 \includegraphics[height=10cm]{images/rate_adjust.jpg}
@@ -515,11 +515,11 @@ Loopring's token is based on the ERC20 Ethereum Token Standard and can be liquid
 
 \section{Exchange\label{sec: exchange}}
 
-An exchange is unable to guarantee that all transactions will make lead to profits after Loopring adoption. The first reason is high operation cost. Secondly, high expectation may not result in projected outcomes. There are few other reasons that would cause this saturation. Overall,  both the exchange platform and other parties have a reciprocal relationship: the exchange looks for a profitable order, while order senders look for an exchange with the lowest fee.
+An exchange is unable to guarantee that all transactions will lead to profits after Loopring adoption. The first reason is high operation cost. Secondly, high expectation may not result in projected outcomes. There are few other reasons that would cause this saturation. Overall,  both the exchange platform and other parties have a reciprocal relationship: the exchange looks for a profitable order, while order senders look for an exchange with the lowest fee.
 An exchange is not responsible for users ERC20 token after accepting Loopring. The workload has moved from money deposit, withdrawal,  and internal virtual account management services, to mix-matched order service. Meanwhile, for the users, Loopring does not require the customer to deposit or lock any asset, meaning an asset has zero third-party custod risk. Concurrently, a single order can mix and match multiple trades. For Non-ERC20 assets, an exchange can offer an asset tokenization service.
 
 \subsection{Regular and Loopring Exchange Comparison}
-In a regular exchange, the "Maker" sends an order, and the "Taker" receive this order. The exchange's price highly depends on the sender's end. However Loopring circumstances, has adopted (OTC) module.
+In a regular exchange, the "Maker" sends an order, and the "Taker" receives this order. The exchange's price highly depends on the sender's end. However Loopring has adopted the over-the-counter (OTC) model.
 In the current marketplace, centralized exchanges pose considerably high risk for users trading in these platforms; there are no laws to regulate the exchange if they vanish. But with Loopring, users do not deposit money to centralized exchange. All of the transactions will be made through the user's coin address.
 Loopring also changes the "Trading Pair" concept utilized by centralized exchanges. Transactions can be completed with multiple parties, rather than two parties in current exchange scenarios.
 
@@ -562,7 +562,7 @@ Supervision & Strong & Weak\tablefootnote{Loopring exchanges do not require a de
 
 \section{Summary\label{sec: summary}}
 
-Loopring is a protocol that facilitates decentralized exchange of ERC20 tokens on the Ethereum blockchain. Loopring allows multi-token transaction exchange, as well as liquidation exchange on the blockchain under different circumstances. Loopring offers benefits to both users and exchanges by deferring risk from both parties in decentralized smart contracts, minimizing fees and cost to create more profitable orders through ring-matching and order-sharing, and as a cross-platform protocol. Loopring protocol fits any ERC20 and smart contract blockchain platform. After many discussion,  our team will develop Loopring on the Ethereum blockchain.
+Loopring is a protocol that facilitates decentralized exchange of ERC20 tokens on the Ethereum blockchain. Loopring allows multi-token transaction exchange, as well as liquidation exchange on the blockchain under different circumstances. Loopring offers benefits to both users and exchanges by deferring risk from both parties in decentralized smart contracts, minimizing fees and cost to create more profitable orders through ring-matching and order-sharing, and as a cross-platform protocol. Loopring protocol fits any ERC20 and smart contract blockchain platform. After many discussions,  our team will develop Loopring on the Ethereum blockchain.
 
 \section{Acknowledgements\label{sec: acknowledgement}}
 
