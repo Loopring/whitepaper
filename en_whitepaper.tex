@@ -62,15 +62,19 @@
 %\usepackage[pages=some, placement=top]{background}
 \usepackage{eso-pic}
 
-\title{\textbf{LOOPRING}\\\textbf{Decentralized Token Exchange Protocol}\\v1.5}
+\title{\textbf{Loopring:}\\\textbf{A Decentralized Token Exchange Protocol}}
 \author{
-  daniel@loopring.org\\
-  jay@loopring.org\\
-  alex@loopring.org\\ 
+  Daniel Wang\\
+  \texttt{daniel@loopring.org}\\
   \\
-  \textit{Loopring Project Ltd}\\
-%  \textit{http://Loopring.io}\\
-  \textit{foundation@loopring.org}\\
+  Jay Zhou\\
+  \texttt{jay@loopring.org}\\
+  \\
+  Matthew Finestone\\
+  \texttt{matt.finestone@gmail.com}\\ 
+  \\
+  Loopring Project Ltd\\
+  \texttt{https://loopring.org}
  }
 
 \makeatletter
@@ -102,12 +106,10 @@
 \begin{document}
 %\AddToShipoutPicture{\BackgroundPic}
 \maketitle
-This document is for informational purposes only and does not constitute an offer or solicitation to sell shares or securities. Any such offer or solicitation will be made only by means of a confidential offering memorandum and in accordance with the terms of all applicable securities and other laws.
-
 
 
 \begin{abstract}
-Loopring is an open, multilateral token exchange protocol, for decentralized exchange on the Ethereum blockchain. Loopring is intended to serve as a common building block with open standards, driving interoperability among decentralized applications (DAPPs) that incorporate exchange functionality. Trades are executed by a system of Ethereum smart contracts that are publicly accessible, free to use, and that any dApp can hook into.
+Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols are the ability for users’ orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it’s operable on Ethereum and QTUM, with NEO also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading. 
 \end{abstract}
 
 \newpage
