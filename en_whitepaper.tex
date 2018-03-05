@@ -208,7 +208,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 \item \textbf{Send order to the network}: Once the authorization is made, the order's data is signed with the private key of the sender. Then, the wallet sends the order along with its signature to one or more nodes (relays) in the network.
 \item \textbf{Relay broadcast}: On the reception of the order, relays update their public order book and broadcast the order to other relays/ring miners. The protocol doesn’t require order books to be built in a certain way, for example, first-come-first-serve. Instead, relays have the power to make their own design decisions to build their own order books.
 \item \textbf{Ring-mining (order matching)}: Ring Miners receive the order and add it to their order book. Each miner tries to fill it fully or partially at the given exchange rate or better by ring-matching it with multiple other orders. Ring-matching is the main reason why the protocol is able to provide high liquidity over any pair. If the executed rate is better than what the user asked for, the savings (margin) are shared amongst all orders in the ring. As a reward (fee), the miner can choose between claiming the Margin Split and giving back the LRx to the user, or just keeping the LRx fee.
-\item \textbf{Validation \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract automatically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC are insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and can’t be reversed.
+\item \textbf{Verification \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract automatically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC are insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and can’t be reversed.
 
 \end{enumerate}
 
@@ -222,9 +222,45 @@ Relays are similarly free to design how they share liquidity and orders with one
 
 
 
+\section{Protocol Specification}
+
+\subsection{Anatomy of an Order}
+An order is a pack of data that describes the intent of the user’s trade. To ensure the origin of the order, it is signed against the hash of its parameters with the user's private key. The signature is sent alongside the order on the network. This requires the order to stay immutable during its whole lifetime to verify the sender's address. Even if the order never changes, the LSC has the possibility to compute its current state.
+
+
+\begin{verbatim}
+message Order {
+ address protocol;
+ address owner;
+ address tokenS;
+ address tokenB;
+ uint256 amountS;
+ uint256 amountB;
+ unit256 lrcFee
+ unit256 validSince;             // Seconds since epoch
+ unit256 validUntil;             // Seconds since epoch
+ uint8   marginSplitPercentage;  // In the rage of [1-100]
+ bool    buyNoMoreThanAmountB;
+ uint256 walletId;
+ address authAddr; // Dual-Authoring address
+ uint8   v;        // Part of the signature
+ bytes32 r;        // Part of the signature
+ bytes32 s;        // Part of the signature
+ string  _authKey; // Dual-Authoring private key,
+                   // not used for calculating order's hash.
+}
+\end{verbatim}
+
+
+where $authAddr$ is not signed by the order address’s private key.
+
+\subsection{Signing an Order}
+[TODO:] Daniel Wang.
+
+\section{Ring Verification}
+
+
 \section{===========}
-
-
 
 
 
