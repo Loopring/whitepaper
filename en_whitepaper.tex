@@ -111,16 +111,16 @@
 
 
 \begin{abstract}
-Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols are the ability for users' orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum and QTUM, with NEO also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading. 
+Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols are the ability for users' orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum \cite{buterin2017ethereum} \cite{wood2014ethereum} and Qtum \cite{dai2017smart} with NEO \cite{atterlonn2018distributed} also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading. 
 \end{abstract}
 
 \section{Introduction\label{sec:introduction}}
 
-With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new tokens are introduced - including the tokenization of traditional assets - this need is magnified. Whether exchanging for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem.
+With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new tokens are introduced -- including the tokenization of traditional assets - this need is magnified. Whether exchanging for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem.
  
-As such, the trustless exchange of tokens (value) is a compelling use case for blockchain technology. Until now, however, crypto enthusiasts have largely settled for trading tokens on traditional centralized exchanges. The Loopring protocol is needed because, just as Bitcoin(1) dutifully pointed out that, in regards to peer-to-peer electronic cash, “the main benefits are lost if a trusted third party is still required to prevent double-spending”, so too are the main benefits of decentralized assets lost if they must pass through trusted, gated, centralized exchanges.
+As such, the trustless exchange of tokens (value) is a compelling use case for blockchain technology. Until now, however, crypto enthusiasts have largely settled for trading tokens on traditional centralized exchanges. The Loopring protocol is needed because, just as Bitcoin \cite{nakamoto2008bitcoin} dutifully pointed out that, in regards to peer-to-peer electronic cash, "the main benefits are lost if a trusted third party is still required to prevent double-spending", so too are the main benefits of decentralized assets lost if they must pass through trusted, gated, centralized exchanges.
 
-Trading decentralized tokens on centralized exchanges doesn't make sense from a philosophical perspective, as it fails to uphold the virtues these decentralized projects espouse. There are also numerous practical risks and limitations in using centralized exchanges which are described below. Decentralized exchanges (DEXs) have sought to address these issues, and in many cases have succeeded in alleviating security risks. However, there is still vast room for improvement in performance as DEX capability becomes important infrastructure for the new economy. Loopring hopes to provide critical tools for said infrastructure with its open protocol for building DEXs. 
+Trading decentralized tokens on centralized exchanges doesn't make sense from a philosophical perspective, as it fails to uphold the virtues these decentralized projects espouse. There are also numerous practical risks and limitations in using centralized exchanges which are described below. Decentralized exchanges (DEXs) \cite{schuh2015bitshares} \cite{bancor} \cite{kyber} \cite{warren20170x} have sought to address these issues, and in many cases have succeeded in alleviating security risks. However, there is still vast room for improvement in performance as DEX capability becomes important infrastructure for the new economy. Loopring hopes to provide critical tools for said infrastructure with its open protocol for building DEXs. 
 
 \section{Current Exchange Landscape\label{sec:current_exchange_landscape}}
 
@@ -128,7 +128,7 @@ Trading decentralized tokens on centralized exchanges doesn't make sense from a 
 The three primary risks of centralized exchanges are; 1) Lack of security, 2) Lack of transparency, and 3) Lack of liquidity.
 
 \subsubsection{Lack of Security}
-Security risks arise from the fact that users must typically surrender control of their private keys (funds) to one centralized entity. This exposes users to the possibility that centralized exchanges fall prey to malicious hackers. The security and hacking risks facing all centralized exchanges are well known(2), yet are often accepted as ‘table stakes' for token trading. Centralized exchanges, such as Coinbase and Bittrex, continue to be honeypots for hackers to attack, as their servers control millions of dollars of users' funds. Exchange developers can also make honest, accidental errors with your funds. You are simply not in control of your own tokens when they are deposited at a centralized exchange.
+Security risks arise from the fact that users must typically surrender control of their private keys (funds) to one centralized entity. This exposes users to the possibility that centralized exchanges fall prey to malicious hackers. The security and hacking risks facing all centralized exchanges are well known \cite{coincheckhack} \cite{mtgox} \cite{mcmillan2014inside}, yet are often accepted as ‘table stakes' for token trading. Centralized exchanges, such as Coinbase and Bittrex, continue to be honeypots for hackers to attack, as their servers control millions of dollars of users' funds. Exchange developers can also make honest, accidental errors with your funds. You are simply not in control of your own tokens when they are deposited at a centralized exchange.
 
 \subsubsection{Lack of Transparency}
 Beyond security hacks, a lack of transparency exposes users to the risk of dishonest exchanges acting unfairly. The distinction here is by the exchange operator's malintentions. 
@@ -152,14 +152,14 @@ Furthermore, since trades are performed on chain, DEXs often inherit the limitat
 Finally, because blockchain order books are public, the transaction to place an order is visible by miners as it awaits being mined into the next block, and placed into an order book. This delay exposes the user to the risk of being front run and having the price move against him.
 
 \subsection{Hybrid Solutions}
-For the above reasons, purely blockchain-based exchanges have limitations that make them uncompetitive with centralized exchanges. There is a tradeoff between on-chain inherent trustlessness, and centralized exchange speed and order flexibility. Protocols such as Loopring and 0x extend a solution of on-chain settlement with off-chain order relay. These solutions revolve around open smart contracts, but navigate scalability limitations by performing several functions off-chain, and giving nodes flexibility in fulfilling critical roles for the network. While Loopring admires protocols such as 0x, as we demonstrate throughout the paper, we propose meaningful differences in our approach to a hybrid solution.
+For the above reasons, purely blockchain-based exchanges have limitations that make them uncompetitive with centralized exchanges. There is a tradeoff between on-chain inherent trustlessness, and centralized exchange speed and order flexibility. Protocols such as Loopring and 0x \cite{warren20170x} extend a solution of on-chain settlement with off-chain order relay. These solutions revolve around open smart contracts, but navigate scalability limitations by performing several functions off-chain, and giving nodes flexibility in fulfilling critical roles for the network. While Loopring admires protocols such as 0x, as we demonstrate throughout the paper, we propose meaningful differences in our approach to a hybrid solution.
 
 
 \section{Loopring Protocol\label{sec:loopring_protocol}}
 Loopring is not a DEX, but a protocol for building DEXs on multiple blockchains. We disassemble the component parts of a traditional exchange and offer a set of public smart contracts and decentralized actors in its place. The roles in the network include wallets, relays, liquidity-sharing consortium blockchains, order book browsers, ring-miners, and asset tokenization services. Before defining each, we should first understand what a Loopring compliant order looks like. 
 
 \subsection{Order Ring}
-Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM (2)). UDOM expresses orders as token exchange requests - amountS/amountB - instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
+Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests - amountS/amountB - instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
 
 Each order's token to sell is another order's token to buy. It creates a loop that allows each order to exchange their desired tokens without requiring an opposing order for its pair. Traditional order pair trades can, of course, still be executed, in what is essentially a special case of an Order Ring. 
 
@@ -197,7 +197,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \item \textbf{Loopring Protocol Smart Contracts}: A set of public and free smart contracts that checks Order Rings received from miners, does token transfers on behalf of users, incentivizes miners/wallets, and emits events. Relays/order browsers listen to these events to keep their order books and trade history up to date.
 
-\item \textbf{Asset Tokenization Services}: A bridge between assets that cannot be directly traded on Loopring. They are centralized services run by trustworthy companies or organizations. A user could deposit his assets (real, fiat or tokens from other chains) and get tokens issued. By returning these tokens the user gets back his deposit. Loopring is not a cross-chain exchange protocol, but Asset Tokenization Services make it possible to trade Ethereum ERC20 tokens with physical assets as well as assets on other blockchains. 
+\item \textbf{Asset Tokenization Services}: A bridge between assets that cannot be directly traded on Loopring. They are centralized services run by trustworthy companies or organizations. A user could deposit his assets (real, fiat or tokens from other chains) and get tokens issued. By returning these tokens the user gets back his deposit. Loopring is not a cross-chain exchange protocol, but Asset Tokenization Services make it possible to trade Ethereum ERC20 \cite{ERC20} tokens with physical assets as well as assets on other blockchains. 
 
 \end{itemize}
 
@@ -350,7 +350,7 @@ The protocol emits events that allow relays, order browsers, and other actors to
 
 
 \section{LRx Token}
-LRx is our generalized token notation. LRC is the Loopring token on Ethereum, LRQ on QTUM, and LRN on NEO. More LRx will be introduced in future as Loopring is deployed on other public blockchains.
+LRx is our generalized token notation. LRC is the Loopring token on Ethereum, LRQ on Qtum, and LRN on NEO. More LRx will be introduced in future as Loopring is deployed on other public blockchains.
 
 \subsection{Fee Model} 
 When a user creates an order, they specify an amount of LRx to be paid to the miner as a fee, in conjunction with a percentage of the margin made on the order that the miner can claim. This is called the margin split. The decision of which one to choose is left to the miner.
@@ -438,7 +438,7 @@ Nodes have to spend time to update the status of an order, but can also choose t
 
 
 \section{Summary}
-Money, as an intermediate commodity, is used to facilitate barter exchange and solve the double coincidence of wants problem (6). Similarly, Loopring protocol aims to dispense of our dependencies on coincidence of wants in trading pairs. With ring matching, double coincidence of wants is no longer required before a trade could be consummated. This is profound for how society and capital markets transfer value with tokens, traditional assets, and beyond.
+Money, as an intermediate commodity, is used to facilitate barter exchange and solve the double coincidence of wants problem \cite{unenumerated2006}. Similarly, Loopring protocol aims to dispense of our dependencies on coincidence of wants in trading pairs. With ring matching, double coincidence of wants is no longer required before a trade could be consummated. This is profound for how society and capital markets transfer value with tokens, traditional assets, and beyond.
 
 \begin{itemize}
 	\item Off-chain order management and on-chain settlement = no sacrifice in performance for security.
@@ -454,7 +454,7 @@ Network is maintained by a self-motivated group of relays who have flexibility i
 \section{Acknowledgements}
 We would like to express our gratitude to our mentors, advisers and to the many people in the community that have been so welcoming and generous with their knowledge. In particular, we would like to thank Shuo Bai (from ChinaLedger); Professor Haibin Kan; Alex Cheng, Hongfei Da; Yin Cao; Xiaochuan Wu; Zhen Wang, Wei Yu, Nian Duan, Jun Xiao, Jiang Qian, Jiangxu Xiang, Yipeng Guo, Dahai Li, Kelvin Long, Huaxia Xia, Jun Ma, and Encephalo Path for reviewing and providing feedback on this project. We also welcome more feedback from the community.
 
-\bibliography{whitepaper}
+\bibliography{whitepaper2}
 \bibliographystyle{unsrt}
 
 
