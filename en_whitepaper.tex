@@ -35,7 +35,7 @@
 \usepackage{dirtree}
 \usepackage{amsfonts}
 \usepackage{tkz-graph}
-
+\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,intersections}
 
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
@@ -113,6 +113,9 @@
 \begin{abstract}
 Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols are the ability for users' orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum \cite{buterin2017ethereum} \cite{wood2014ethereum} and Qtum \cite{dai2017smart} with NEO \cite{atterlonn2018distributed} also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading. 
 \end{abstract}
+
+
+
 
 \section{Introduction\label{sec:introduction}}
 
@@ -454,8 +457,235 @@ Network is maintained by a self-motivated group of relays who have flexibility i
 \section{Acknowledgements}
 We would like to express our gratitude to our mentors, advisers and to the many people in the community that have been so welcoming and generous with their knowledge. In particular, we would like to thank Shuo Bai (from ChinaLedger); Professor Haibin Kan; Alex Cheng, Hongfei Da; Yin Cao; Xiaochuan Wu; Zhen Wang, Wei Yu, Nian Duan, Jun Xiao, Jiang Qian, Jiangxu Xiang, Yipeng Guo, Dahai Li, Kelvin Long, Huaxia Xia, Jun Ma, and Encephalo Path for reviewing and providing feedback on this project. We also welcome more feedback from the community.
 
+
+
 \bibliography{whitepaper2}
 \bibliographystyle{unsrt}
+
+\newpage
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+
+\def \n {6}
+\def \radius {1.2cm}
+\def \margin {14} % margin in angles, depends on the radius
+
+\foreach \s in {1,...,\n}
+{
+  \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
+  \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
+    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+}
+
+
+\end{tikzpicture}
+\caption{FOSS in Chrome influences industry structure by increasing competition}
+\label{fig:6forces}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+[node distance = 1cm, auto,font=\footnotesize,
+% STYLES
+every node/.style={node distance=3cm},
+% The comment style is used to describe the characteristics of each force
+comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+% The force style is used to draw the forces' name
+force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+
+% Draw forces
+\node [force] (rivalry) {Rivalry among existing competitors};
+\node [force, above of=rivalry] (substitutes) {Threat of substitutes};
+\node [force, text width=3cm, dashed, left=1cm of substitutes] (state) {Public policies};
+\node [force, left=1cm of rivalry] (suppliers) {Bargaining power of suppliers};
+\node [force, right=1cm of rivalry] (users) {Bargaining power of users};
+\node [force, below of=rivalry] (entrants) {Threat of new entrants};
+
+%%%%%%%%%%%%%%%
+% Change data from here
+
+% RIVALRY
+\node [comment, below=0.25 of rivalry] (comment-rivalry) {(+) A war against Microsoft\\
+(+) Limiting sunk costs\\
+(+) Coopetition};
+
+% SUPPLIERS
+\node [comment, below=0.25cm of suppliers] {(+) Efficiency\\
+(+) Attracting other developers\\
+(+) Creating a Chrome community};
+
+% SUBSTITUTES
+\node [comment, right=0.25 of substitutes] {(+) Portability};
+
+% USERS
+\node [comment, below=0.25 of users] {(+) Increasing the user information\\
+(+) Reducing the switching costs};
+
+% NEW ENTRANTS
+\node [comment, right=0.25 of entrants] {(+) EC vs. Microsoft};
+
+% PUBLIC POLICIES
+\node [comment, text width=3cm, below=0.25 of state] {(+) Positively framed\\
+(+) Transparency\\
+(--) A new monopoly?};
+
+%%%%%%%%%%%%%%%%
+
+% Draw the links between forces
+\path[->,thick] 
+(substitutes) edge (rivalry)
+(suppliers) edge (rivalry)
+(users) edge (rivalry)
+(entrants) edge (comment-rivalry);
+
+\end{tikzpicture} 
+\caption{FOSS in Chrome influences industry structure by increasing competition}
+\label{fig:6forces}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+    thick,
+    >=stealth',
+    dot/.style = {
+      draw,
+      fill = white,
+      circle,
+      inner sep = 0pt,
+      minimum size = 4pt
+    }
+  ]
+  \coordinate (O) at (0,0);
+  \draw[->] (-0.3,0) -- (8,0) coordinate[label = {below:$x$}] (xmax);
+  \draw[->] (0,-0.3) -- (0,5) coordinate[label = {right:$f(x)$}] (ymax);
+  \path[name path=x] (0.3,0.5) -- (6.7,4.7);
+  \path[name path=y] plot[smooth] coordinates {(-0.3,2) (2,1.5) (4,2.8) (6,5)};
+  \scope[name intersections = {of = x and y, name = i}]
+    \fill[gray!20] (i-1) -- (i-2 |- i-1) -- (i-2) -- cycle;
+    \draw      (0.3,0.5) -- (6.7,4.7) node[pos=0.8, below right] {Sekante};
+    \draw[red] plot[smooth] coordinates {(-0.3,2) (2,1.5) (4,2.8) (6,5)};
+    \draw (i-1) node[dot, label = {above:$P$}] (i-1) {} -- node[left]
+      {$f(x_0)$} (i-1 |- O) node[dot, label = {below:$x_0$}] {};
+    \path (i-2) node[dot, label = {above:$Q$}] (i-2) {} -- (i-2 |- i-1)
+      node[dot] (i-12) {};
+    \draw           (i-12) -- (i-12 |- O) node[dot,
+                              label = {below:$x_0 + \varepsilon$}] {};
+    \draw[blue, <->] (i-2) -- node[right] {$f(x_0 + \varepsilon) - f(x_0)$}
+                              (i-12);
+    \draw[blue, <->] (i-1) -- node[below] {$\varepsilon$} (i-12);
+    \path       (i-1 |- O) -- node[below] {$\varepsilon$} (i-2 |- O);
+    \draw[gray]      (i-2) -- (i-2 -| xmax);
+    \draw[gray, <->] ([xshift = -0.5cm]i-2 -| xmax) -- node[fill = white]
+      {$f(x_0 + \varepsilon)$}  ([xshift = -0.5cm]xmax);
+  \endscope
+\end{tikzpicture}
+\caption{FOSS in Chrome influences industry structure by increasing competition}
+\label{fig:6forces}
+\end{figure}
+
+
+
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[
+	scale=0.75,
+	start chain=1 going below, 
+	start chain=2 going right,
+	node distance=1mm,
+	desc/.style={
+		scale=0.75,
+		on chain=2,
+		rectangle,
+		rounded corners,
+		draw=black, 
+		very thick,
+		text centered,
+		text width=8cm,
+		minimum height=12mm,
+		fill=blue!30
+		},
+	it/.style={
+		fill=blue!10
+	},
+	level/.style={
+		scale=0.75,
+		on chain=1,
+		minimum height=12mm,
+		text width=2cm,
+		text centered
+	},
+	every node/.style={font=\sffamily}
+]
+
+% Levels
+\node [level] (Level 5) {Level 5};
+\node [level] (Level 4) {Level 4};
+\node [level] (Level 3) {Level 3};
+\node [level] (Level 2) {Level 2};
+\node [level] (Level 1.5) { };
+\node [level] (Level 1) {Level 1};
+\node [level] (Level 0) {Level 0};
+
+% Descriptions
+\chainin (Level 5); % Start right of Level 5
+% IT levels
+\node [desc, it] (Archives) {Archives/File Servers};
+\node [desc, it, continue chain=going below] (ERP) {ERP/Finance/Messaging};
+% ICS levels
+\node [desc] (Operations) {Operations Management/Historians};
+\node [desc] (Supervisory) {Supervisory Controls};
+\node [desc, text width=3.5cm, xshift=2.25cm] (PLC) {PLC/RTU IP Communication};
+\node [desc, text width=3.5cm, xshift=-4.5cm] (SIS) {Safety Instrumented Systems};
+\node [desc, xshift=2.25cm] (IO) {I/O from Sensors};
+
+\end{tikzpicture}
+\caption{FOSS in Chrome influences industry structure by increasing competition}
+\label{fig:6forces}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[auto, node distance=2cm,>=latex']
+    % We start by placing the blocks
+    \node [input, name=input] {};
+    \node [sum, right of=input] (sum) {};
+    \node [block, right of=sum] (controller) {Controller};
+    \node [block, right of=controller, pin={[pinstyle]above:Disturbances},
+            node distance=3cm] (system) {System};
+    % We draw an edge between the controller and system block to 
+    % calculate the coordinate u. We need it to place the measurement block. 
+    \draw [->] (controller) -- node[name=u] {$u$} (system);
+    \node [output, right of=system] (output) {};
+    \node [block, below of=u] (measurements) {Measurements};
+
+    % Once the nodes are placed, connecting them is easy. 
+    \draw [draw,->] (input) -- node {$r$} (sum);
+    \draw [->] (sum) -- node {$e$} (controller);
+    \draw [->] (system) -- node [name=y] {$y$}(output);
+    \draw [->] (y) |- (measurements);
+    \draw [->] (measurements) -| node[pos=0.99] {$-$} 
+        node [near end] {$y_m$} (sum);
+\end{tikzpicture}
+
+\caption{FOSS in Chrome influences industry structure by increasing competition}
+\label{fig:6forces}
+\end{figure}
+
 
 
 %\newpage
