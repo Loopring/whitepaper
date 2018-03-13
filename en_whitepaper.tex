@@ -418,7 +418,7 @@ How it works:
 [TODO: daniel wang]
 
 
-The result it that now:
+The result is that now:
 
 \begin{itemize}
 
@@ -490,66 +490,9 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 
 
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}
-[node distance = 1cm, auto,font=\footnotesize,
-% STYLES
-every node/.style={node distance=3cm},
-% The comment style is used to describe the characteristics of each force
-comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
-% The force style is used to draw the forces' name
-force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
 
-% Draw forces
-\node [force] (rivalry) {Rivalry among existing competitors};
-\node [force, above of=rivalry] (substitutes) {Threat of substitutes};
-\node [force, text width=3cm, dashed, left=1cm of substitutes] (state) {Public policies};
-\node [force, left=1cm of rivalry] (suppliers) {Bargaining power of suppliers};
-\node [force, right=1cm of rivalry] (users) {Bargaining power of users};
-\node [force, below of=rivalry] (entrants) {Threat of new entrants};
 
-%%%%%%%%%%%%%%%
-% Change data from here
 
-% RIVALRY
-\node [comment, below=0.25 of rivalry] (comment-rivalry) {(+) A war against Microsoft\\
-(+) Limiting sunk costs\\
-(+) Coopetition};
-
-% SUPPLIERS
-\node [comment, below=0.25cm of suppliers] {(+) Efficiency\\
-(+) Attracting other developers\\
-(+) Creating a Chrome community};
-
-% SUBSTITUTES
-\node [comment, right=0.25 of substitutes] {(+) Portability};
-
-% USERS
-\node [comment, below=0.25 of users] {(+) Increasing the user information\\
-(+) Reducing the switching costs};
-
-% NEW ENTRANTS
-\node [comment, right=0.25 of entrants] {(+) EC vs. Microsoft};
-
-% PUBLIC POLICIES
-\node [comment, text width=3cm, below=0.25 of state] {(+) Positively framed\\
-(+) Transparency\\
-(--) A new monopoly?};
-
-%%%%%%%%%%%%%%%%
-
-% Draw the links between forces
-\path[->,thick] 
-(substitutes) edge (rivalry)
-(suppliers) edge (rivalry)
-(users) edge (rivalry)
-(entrants) edge (comment-rivalry);
-
-\end{tikzpicture} 
-\caption{FOSS in Chrome influences industry structure by increasing competition}
-\label{fig:6forces}
-\end{figure}
 
 \begin{figure}[h]
 \centering
@@ -654,6 +597,24 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 \end{figure}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \begin{figure}[h]
 \centering
 \tikzstyle{block} = [draw, fill=blue!20, rectangle, 
@@ -685,15 +646,91 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
         node [near end] {$y_m$} (sum);
 \end{tikzpicture}
 
-\caption{FOSS in Chrome influences industry structure by increasing competition}
-\label{fig:6forces}
+\caption{A Ring of 3 Orders}
+\label{fig:ring}
 \end{figure}
 
 
 
-%\newpage
-%
-%\begin{appendices}
 
-%\end{appendices}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{appendices}
+
+\section{Protocol Ethereum Smart-Contracts}
+
+
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+[node distance = 1cm, auto,font=\footnotesize,
+% STYLES
+every node/.style={node distance=3cm},
+% The comment style is used to describe the characteristics of each force
+comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+% The force style is used to draw the forces' name
+force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+
+% Draw forces
+\node [force] (impl) {LoopringProtocolImpl};
+\node [force, dashed, above of=impl] (protocol_interface) {LoopringProtocol};
+\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
+\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
+\node [force, below of=impl] (delegate) {TokenTransferDelegate};
+\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
+
+%%%%%%%%%%%%%%%
+% Change data from here
+
+% impl
+\node [comment, below=0.25 of impl] (comment-impl) {- Validates order-rings\\
+- Transfers tokens for settlement\\
+- Omits events};
+
+% nameregistry
+\node [comment, below=0.25cm of nameregistry] {- Registers wallets and relays};
+
+% protocol_interface
+\node [comment, right=0.25 of protocol_interface] {- Defines interfaces and events};
+
+% tokenregistry
+\node [comment, below=0.25 of tokenregistry] {- Registers ERC20/ERC223 tokens};
+
+% delegate
+\node [comment, below=0.25 of delegate] {- Makes token transfers on behalf of users};
+
+% PUBLIC POLICIES
+\node [comment, text width=3cm, below=0.25 of multisig] { - Enables multi-sigature ownership};
+
+%%%%%%%%%%%%%%%%
+
+% Draw the links between forces
+\path[->,thick] 
+(protocol_interface) edge (impl)
+(nameregistry) edge (impl)
+(tokenregistry) edge (impl)
+(delegate) edge (comment-impl);
+
+\end{tikzpicture} 
+\caption{Loopring Ethereum Smart-Contracts}
+\label{fig:smartcontracts}
+\end{figure}
+
+The source code of these smart contract are available at:\\
+https://github.com/Loopring/protocol/tree/master/contracts.
+
+
+\end{appendices}
 \end{document}
