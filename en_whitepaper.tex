@@ -17,8 +17,8 @@
 \usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{amssymb}
-%\usepackage[a4paper, width=180mm, top=18mm, bottom=22mm, includeheadfoot]{geometry}
-\usepackage[a4paper, width=140mm, top=18mm, bottom=22mm, includeheadfoot]{geometry}
+\usepackage[a4paper, width=186mm, top=18mm, bottom=18mm, includeheadfoot]{geometry}
+%\usepackage[a4paper, width=140mm, top=18mm, bottom=22mm, includeheadfoot]{geometry}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{verbatim}
@@ -34,6 +34,7 @@
 \usepackage{tikz}
 \usepackage{dirtree}
 \usepackage{amsfonts}
+\usepackage{tikz}
 \usepackage{tkz-graph}
 \usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,intersections}
 
@@ -119,7 +120,7 @@ Loopring is an open protocol for building decentralized exchanges. Loopring oper
 
 
 
-
+\begin{multicols}{2}
 \section{Introduction\label{sec:introduction}}
 
 With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new tokens are introduced -- including the tokenization of traditional assets - this need is magnified. Whether exchanging for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem.
@@ -244,17 +245,20 @@ An order is a pack of data that describes the intent of the user's trade. A Loop
     uint256 amountS;
     uint256 amountB;
     unit256 lrcFee
-    unit256 validSince;             // Seconds since epoch
-    unit256 validUntil;             // Seconds since epoch
-    uint8   marginSplitPercentage;  // In the rage of [1-100]
+    unit256 validSince; // Seconds since epoch
+    unit256 validUntil; // Seconds since epoch
+    uint8   marginSplitPercentage;  // [1-100]
     bool    buyNoMoreThanAmountB;
     uint256 walletId;
-    address authAddr; // Dual-Authoring address
-    uint8   v;        // Part of the signature
-    bytes32 r;        // Part of the signature
-    bytes32 s;        // Part of the signature
-    string  _authKey; // Dual-Authoring private key,
-                      // it is not used for calculating order's hash.
+    // Dual-Authoring address
+    address authAddr;
+   	// v, r, s are parts of the signature
+    uint8   v;       
+    bytes32 r;
+    bytes32 s;
+    // Dual-Authoring private key,
+    // not used for calculating order's hash.
+    string  _authKey;          
   }
 \end{verbatim}
 To ensure the origin of the order, it is signed against the hash of its parameters, excluding $\_authAddr$, with the user's private key. The $\_authAddr$ parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{dual_authoring} for more details. The signature is represented by the $v$, $r$, and $s$ fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
@@ -266,9 +270,11 @@ When a miner ring-matches orders, it's possible that a better rate will be execu
 
 If we use
 
-\begin{equation}
-	Order(amountS, tokenS, amountB, tokenB, buyNoMoreThanTokenB)
-\end{equation}
+\begin{verbatim}
+	      Order(amountS,tokenS,
+	            amountB,tokenB,
+	            buyNoMoreThanTokenB)
+\end{verbatim}
 
 to represent a order in a simplified form, then for ETH/USD markets on a traditional exchange, traditional buy-sell modeling can express the 1st and the 3rd order below, but not the other two:
 
@@ -306,6 +312,7 @@ In the other circumstance, if transaction cross $n$ orders, the \texttt{discount
 \begin{equation*}
 \gamma = 1- \frac{1}{\sqrt[n]{\prod_{i=0}^{n-1} r^i}} \text{,}
 \end{equation*}
+
 where $r^i$ is the order turnover rate of $i$-th order. Obviously, only when the discount rate is $\gamma \ge 0$, these orders can be filled; and the $i$-th order's $O^i$ actual exchange rate $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
 
 \subsubsection{Fill Tracking \& Cancellation}
@@ -368,11 +375,40 @@ A representation of the margin split:
 If the margin on the ring is too small, a miner will choose the LRx fee. On the contrary, if the margin is substantial enough for the resulting margin split to be worth more than the LRx fee, they will choose the margin split. There is another proviso, however: when the miner chooses the margin split, they must pay the user (order creator) a fee, which is equal to the LRx the user would have paid to the miner as a fee. This increases the threshold of where the miner will choose the margin split to twice the LRx fee of the order, increasing the propensity of the LRx fee choice. This allows miners to get a constant income on low margin rings with for the tradeoff of getting less income on higher margin rings. Our fee model is based on the expectation that as the market grows and matures, there will be fewer high margin rings, thus necessitating LRx fees as incentive.
 We end up with the following graph:
 
-[TODO: daniel wang]
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}[scale=1.5]
+    % Draw axes
+    \draw [<->,thick] (0,2.8) node (yaxis) [above] {$y$}
+        |- (4,0) node (xaxis) [right] {$x$};
+        
+    \draw
+  	(1,1) coordinate (A)
+  	(2,1) coordinate (B);
+  	
+  	
+  	\draw[thick] (B) -- (3.7,2.7);
+  	\draw[dotted] (B) -- (2,0) node[below] {$2f$};
+  	\draw[dotted] (A) -- (1,0) node[below] {$f$};
+  	\draw[dashed] (0,0) -- (2.7,2.7);
+  	\draw[thick] (0,1) node[left] {$f$}--(B) node[
+      circle,
+      draw,
+      fill=white,
+      inner sep = 1pt,
+      minimum size = 4pt,
+     ]{$$};
 
-where $f$ is the LRx fee, $x$ is the margin split, $y$ is the miner's income.
 
-If $f$ is the LRx fee and $x$ the margin split, then the miner's income $y$ is $y=max(f, x-f)$ and we get the blue line; if the LRx fee for the order is $0$, the equation is $y=max(0, x - 0)$ that simplifies to $y=x$ and we get the orange line.
+
+\end{tikzpicture}
+\caption{Loopring Fee Model}
+\label{fig:6forces}
+\end{figurehere}
+\end{center}
+
+where $f$ is the LRx fee, $x$ is the margin split, $y$ is the mining income. $y=max(f, x-f)$ as indicated by the solid line; if the LRx fee for the order is $0$, the equation is $y=max(0, x - 0)$ that simplifies to $y=x$ as indicated by the dashed line.
 
 The consequences are:  
 \begin{enumerate}
@@ -465,6 +501,9 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 \bibliography{whitepaper2}
 \bibliographystyle{unsrt}
 
+
+\end{multicols}
+
 \newpage
 
 \begin{figure}[h]
@@ -492,48 +531,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 
 
-
-
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}[
-    thick,
-    >=stealth',
-    dot/.style = {
-      draw,
-      fill = white,
-      circle,
-      inner sep = 0pt,
-      minimum size = 4pt
-    }
-  ]
-  \coordinate (O) at (0,0);
-  \draw[->] (-0.3,0) -- (8,0) coordinate[label = {below:$x$}] (xmax);
-  \draw[->] (0,-0.3) -- (0,5) coordinate[label = {right:$f(x)$}] (ymax);
-  \path[name path=x] (0.3,0.5) -- (6.7,4.7);
-  \path[name path=y] plot[smooth] coordinates {(-0.3,2) (2,1.5) (4,2.8) (6,5)};
-  \scope[name intersections = {of = x and y, name = i}]
-    \fill[gray!20] (i-1) -- (i-2 |- i-1) -- (i-2) -- cycle;
-    \draw      (0.3,0.5) -- (6.7,4.7) node[pos=0.8, below right] {Sekante};
-    \draw[red] plot[smooth] coordinates {(-0.3,2) (2,1.5) (4,2.8) (6,5)};
-    \draw (i-1) node[dot, label = {above:$P$}] (i-1) {} -- node[left]
-      {$f(x_0)$} (i-1 |- O) node[dot, label = {below:$x_0$}] {};
-    \path (i-2) node[dot, label = {above:$Q$}] (i-2) {} -- (i-2 |- i-1)
-      node[dot] (i-12) {};
-    \draw           (i-12) -- (i-12 |- O) node[dot,
-                              label = {below:$x_0 + \varepsilon$}] {};
-    \draw[blue, <->] (i-2) -- node[right] {$f(x_0 + \varepsilon) - f(x_0)$}
-                              (i-12);
-    \draw[blue, <->] (i-1) -- node[below] {$\varepsilon$} (i-12);
-    \path       (i-1 |- O) -- node[below] {$\varepsilon$} (i-2 |- O);
-    \draw[gray]      (i-2) -- (i-2 -| xmax);
-    \draw[gray, <->] ([xshift = -0.5cm]i-2 -| xmax) -- node[fill = white]
-      {$f(x_0 + \varepsilon)$}  ([xshift = -0.5cm]xmax);
-  \endscope
-\end{tikzpicture}
-\caption{FOSS in Chrome influences industry structure by increasing competition}
-\label{fig:6forces}
-\end{figure}
 
 
 
@@ -700,25 +697,25 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 - Omits events};
 
 % nameregistry
-\node [comment, below=0.25cm of nameregistry] {- Registers wallets and relays};
+\node [comment, below=0.25cm of nameregistry]{- Registers wallets and relays};
 
 % protocol_interface
-\node [comment, right=0.25 of protocol_interface] {- Defines interfaces and events};
+\node [comment, below=0.25 of protocol_interface](comment-interface) {- Defines interfaces and events};
 
 % tokenregistry
 \node [comment, below=0.25 of tokenregistry] {- Registers ERC20/ERC223 tokens};
 
 % delegate
-\node [comment, below=0.25 of delegate] {- Makes token transfers on behalf of users};
+\node [comment, below=0.25 of delegate] {- Transfers tokens on behalf of users};
 
 % PUBLIC POLICIES
-\node [comment, text width=3cm, below=0.25 of multisig] { - Enables multi-sigature ownership};
+\node [comment, text width=3cm, below=0.25 of multisig] {- Enables multisignature ownership};
 
 %%%%%%%%%%%%%%%%
 
 % Draw the links between forces
 \path[->,thick] 
-(protocol_interface) edge (impl)
+(comment-interface) edge (impl)
 (nameregistry) edge (impl)
 (tokenregistry) edge (impl)
 (delegate) edge (comment-impl);
