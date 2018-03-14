@@ -280,7 +280,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \item \textbf{Consortium Liquidity Sharing Blockchain}: TODO(daniel)
 
-\item \textbf{Loopring Protocol Smart Contracts (LSC)}: A set of public and free smart contracts that checks Order Rings received from miners, does token transfers on behalf of users, incentivizes miners/wallets, and emits events. Relays/order browsers listen to these events to keep their order books and trade history up to date. See \ref{app:protocol_ethereum} for details.
+\item \textbf{Loopring Protocol Smart Contracts (LSC)}: A set of public and free smart contracts that checks Order Rings received from miners, does token transfers on behalf of users, incentivizes miners/wallets with fees, and emits events. Relays/order browsers listen to these events to keep their order books and trade history up to date. See appendix \ref{app:protocol_ethereum} for details.
 
 \item \textbf{Asset Tokenization Services}: A bridge between assets that cannot be directly traded on Loopring. They are centralized services run by trustworthy companies or organizations. A user could deposit his assets (real, fiat or tokens from other chains) and get tokens issued. By returning these tokens the user gets back his deposit. Loopring is not a cross-chain exchange protocol, but Asset Tokenization Services make it possible to trade Ethereum ERC20 \cite{ERC20} tokens with physical assets as well as assets on other blockchains. 
 
@@ -298,12 +298,12 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \item \textbf{Ring-mining (order matching)}: Ring Miners receive the order and add it to their order book. Each miner tries to fill it fully or partially at the given exchange rate or better by ring-matching it with multiple other orders. Ring-matching is the main reason why the protocol is able to provide high liquidity over any pair. If the executed rate is better than what the user asked for, the savings (margin) are shared amongst all orders in the ring. As a reward (fee), the miner can choose between claiming the Margin Split and giving back the LRx to the user, or just keeping the LRx fee.
 
-\item \textbf{Verification \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract automatically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC are insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and can't be reversed.
+\item \textbf{Verification \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract automatically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC is insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and cannot be reversed.
 
 \end{enumerate}
 
 \section{Business Model Flexibility\label{sec:business_model}}
-It's important to note that Loopring's open standard allows participants significant flexibility in how they conduct business. Actors with novel business models are free to implement them and provide value for their users, earning LRx fees on volume or other metrics in the process, if they so choose. The ecosystem is modular and meant to support participation from a multitude of applications. The non-proprietary protocol places control in the hands of users and collaborators.
+It's important to note that Loopring's open standard allows participants significant flexibility in how they operate. Actors with novel business models are free to implement them and provide value for their users, earning LRx fees on volume or other metrics in the process, if they so choose. The ecosystem is modular and meant to support participation from a multitude of applications. The non-proprietary protocol places control in the hands of users and collaborators.
 
 \subsection{Order Book\label{sec:order_book}}
 Relays can design their order books in any number of ways to display and match users' trades. A first implementation of our own order book follows an OTC model, where limit orders are ranked or positioned based on price alone. Timestamps of orders, in other words, have no bearing on the order book. However, a relay is free to design their order book in such a way as to emulate a typical centralized exchange's matching engine, where orders are ranked by price, but with a timestamp respecting filter as well. If a relay was inclined to offer this type of order book, they can own/integrate with a wallet, and have those wallet orders sent solely to the single relay, who would then be able to match orders based on time. Any such configuration is possible. 
@@ -342,17 +342,17 @@ An order is a pack of data that describes the intent of the user's trade. A Loop
     string  authKey;          
   }
 \end{verbatim}
-To ensure the origin of the order, it is signed against the hash of its parameters, excluding $\_authAddr$, with the user's private key. The $\_authAddr$ parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{sec:dual_authoring} for more details. The signature is represented by the $v$, $r$, and $s$ fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
+To ensure the origin of the order, it is signed against the hash of its parameters, excluding $\_authAddr$, with the user's private key. The $\_authAddr$ parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference section \ref{sec:dual_authoring} for more details. The signature is represented by the $v$, $r$, and $s$ fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
 
 
 UDOM doesn't include a price (which must be a floating-point number by nature), but, instead uses the term $rate$, which is expressed as $amountS \over amountB$. The rate is not a floating-point number but an expression that will only be evaluated with other unsigned integers on demand, to keep all intermediate results as unsigned integers and increase calculation accuracy. 
 
 \subsubsection{Buy Amounts}
-When a miner ring-matches orders, it's possible that a better rate will be executable, allowing you to get more $tokenB$ than the $amountB$ you specified. However, if $buyNoMoreThanAmountB$ is set to $true$, the protocol ensures you receive exactly $amountB$ of $tokenB$. Thus, UDOM's $buyNoMoreThanTokenB$ parameter determines when an order is considered completely filled. $buyNoMoreThanTokenB$ applies a cap on either $amountS$ or $amountB$, and allows users to express more granular trade intentions than traditional buy/sell orders.
+When a miner ring-matches orders, it's possible that a better rate will be executable, allowing users to get more $tokenB$ than the $amountB$ they specified. However, if $buyNoMoreThanAmountB$ is set to $true$, the protocol ensures users receive exactly $amountB$ of $tokenB$. Thus, UDOM's $buyNoMoreThanTokenB$ parameter determines when an order is considered completely filled. $buyNoMoreThanTokenB$ applies a cap on either $amountS$ or $amountB$, and allows users to express more granular trade intentions than traditional buy/sell orders.
 
-Example: with amountS = 10 and amountB = 2, r = 10/2 = 5. Thus the user is willing to sell 5 tokenS for each tokenB. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 tokensB instead of 2. However, if the user only wants 2 tokensB and set the buyNoMoreThanAmountB flag to true, the LSC performs the transaction at a rate of 4 and the user sells 4 tokenS for each tokenB, effectively saving 2 tokenS. Keep in mind this does not take into account miners' fees (See \ref{sec:fee_model}).
+Example: with amountS = 10 and amountB = 2, r = 10/2 = 5. Thus the user is willing to sell 5 $tokenS$ for each $tokenB$. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 $tokenB$ instead of 2. However, if the user only wants 2 $tokenB$ and set the $buyNoMoreThanTokenB$ flag to $true$, the LSC performs the transaction at a rate of 4 and the user sells 4 tokenS for each $tokenB$, effectively saving 2 tokenS. Keep in mind this does not take into account miners' fees (See section \ref{sec:fee_model}).
 
-If we use
+Indeed, if we use
 
 \begin{verbatim}
 	      Order(amountS,tokenS,
@@ -360,7 +360,7 @@ If we use
 	            buyNoMoreThanTokenB)
 \end{verbatim}
 
-to represent a order in a simplified form, then for ETH/USD markets on a traditional exchange, traditional buy-sell modeling can express the 1st and the 3rd order below, but not the other two:
+to represent an order in a simplified form, then for ETH/USD markets on a traditional exchange, traditional buy-sell modeling can express the 1st and the 3rd order below, but not the other two:
 
 \begin{enumerate}
 	\item User wants to sell 10 ETH at price 300 USD/ETH. This order can expressed as $Order(10, ETH, 3000, USD, false)$.
@@ -371,14 +371,12 @@ to represent a order in a simplified form, then for ETH/USD markets on a traditi
 
 
 
-
-
 \subsection{Ring Verification\label{sec:ring_verification}}
 
-LSC does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. This is done by miners for two main reasons: solidity does not have support for floating point math, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
+The Loopring Smart Contract does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. These calculations are done by miners for two main reasons: solidity does not have support for floating point math, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
 
 \subsubsection{Sub-Ring Checking\label{sec:sub_ring_check}}
-This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempting to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-ring. To check this, the LSC ensures a token cannot be in a buy or sell position twice. In the below diagram, we can see that tokenA is a sell token twice and a buy token twice, which would be disallowed. 
+This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempting to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-ring. To check this, the LSC ensures a token cannot be in a buy or sell position twice. In Figure 2 below, we can see that tokenA is a sell token twice and a buy token twice, which would be disallowed. 
 
 \begin{center}
 \begin{figurehere}
@@ -477,7 +475,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
 \end{center}
 
 \subsubsection{Fill Rate Checking\label{sec:fill_rate_check}}
-The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is at least equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LSC ensures that each order in the ring shares the same rate (margin) discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
+The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LSC ensures that each order in the ring shares the same rate (margin) discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
 
 $r_{0\rightarrow 1} \cdot (1-\gamma)$, $r_{1\rightarrow 2} \cdot (1-\gamma)$, $r_{2 \rightarrow 0} \cdot (1-\gamma)$, and satisfied: 
 \begin{equation}
@@ -487,15 +485,15 @@ We can find out:
 \begin{equation*}
 \gamma = 1- \frac{1}{\sqrt[3]{r_{0\rightarrow 1} \cdot r_{1\rightarrow 2} \cdot r_{2\rightarrow 0}}}\text{.}
 \end{equation*}
-In the other circumstance, if transaction cross $n$ orders, the \texttt{discount} is: 
+If the transaction crosses $n$ orders, the \texttt{discount} is: 
 \begin{equation*}
 \gamma = 1- \frac{1}{\sqrt[n]{\prod_{i=0}^{n-1} r^i}} \text{,}
 \end{equation*}
 
-where $r^i$ is the order turnover rate of $i$-th order. Obviously, only when the discount rate is $\gamma \ge 0$, these orders can be filled; and the $i$-th order's $O^i$ actual exchange rate $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
+where $r^i$ is the order turnover rate of $i$-th order. Obviously, only when the discount rate is $\gamma \ge 0$, can these orders be filled; and the $i$-th order's $O^i$ actual exchange rate $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
 
 \subsubsection{Fill Tracking \& Cancellation}
-A user can partially or fully cancel an order by sending a special transaction to the LSC, containing the details about the order and the amounts to cancel. The LSC takes that into account, stores the amounts to cancel, and emits an OrderCancelled event to the network. The LSC keeps track of fill and cancellation amounts by storing their values using the order's hash as an identifier. This data is publicly accessible and OrderCancelled / OrderFilled events are emitted when it changes. Tracking these values is critical for the LSC during the ring settlement step.
+A user can partially or fully cancel an order by sending a special transaction to the LSC, containing the details about the order and the amounts to cancel. The LSC takes that into account, stores the amounts to cancel, and emits an $OrderCancelled$ event to the network. The LSC keeps track of fill and cancellation amounts by storing their values using the order's hash as an identifier. This data is publicly accessible and $OrderCancelled$ / $OrderFilled$ events are emitted when it changes. Tracking these values is critical for the LSC during the ring settlement step.
 
 
 \subsubsection{Order Scaling\label{sec:order_scaling}}
@@ -515,7 +513,7 @@ Finding the lowest value order can help to figure out the fill volume for each o
 \]
 where $\overline{s}_i$ is the the balance left after orders are partially filled.
 
-During implementation we can safely assume any order in the ring to have the lowest value, then iterate through the ring at most twice to calculate each orders' fill volume. 
+During implementation we can safely assume any order in the ring to have the lowest value, then iterate through the ring at most twice to calculate each order's fill volume. 
 
 Example: If the smallest amount to be filled compared to the original order is 5\%, all the transactions in the ring are scaled down to 5\%. Once the transactions are completed, the order that was considered to have the smallest amount remaining to be filled should be completely filled.
 
@@ -586,9 +584,6 @@ When a user creates an order, they specify an amount of LRx to be paid to the mi
 
 A representation of the margin split:
 
-
-If the margin on the ring is too small, a miner will choose the LRx fee. If, on the contrary, the margin is substantial enough for the resulting margin split to be worth more than the LRx fee, a miner will choose the margin split. There is another proviso, however: when the miner chooses the margin split, they must pay the user (order creator) a fee, which is equal to the LRx the user would have paid to the miner as a fee. This increases the threshold of where the miner will choose the margin split to twice the LRx fee of the order, increasing the propensity of the LRx fee choice. This allows miners to receive a constant income on low margin rings for the tradeoff of receiving less income on higher margin rings. Our fee model is based on the expectation that as the market grows and matures, there will be fewer high margin rings, thus necessitating fixed LRx fees as incentive.
-
 \begin{center}
 \begin{figurehere}
 \centering
@@ -641,6 +636,9 @@ oneway/.style={->,dashed,shorten >=2pt,shorten <=2pt,>=stealth}
 \end{figurehere}
 \end{center}
 
+If the margin on the ring is too small, a miner will choose the LRx fee. If, on the contrary, the margin is substantial enough for the resulting margin split to be worth more than the LRx fee, a miner will choose the margin split. There is another proviso, however: when the miner chooses the margin split, they must pay the user (order creator) a fee, which is equal to the LRx the user would have paid to the miner as a fee. This increases the threshold of where the miner will choose the margin split to twice the LRx fee of the order, increasing the propensity of the LRx fee choice. This allows miners to receive a constant income on low margin rings for the tradeoff of receiving less income on higher margin rings. Our fee model is based on the expectation that as the market grows and matures, there will be fewer high margin rings, thus necessitating fixed LRx fees as incentive.
+
+
 We end up with the following graph:
 
 \begin{center}
@@ -678,7 +676,7 @@ scale=1.5]
 \end{figurehere}
 \end{center}
 
-where $f$ is the LRx fee, $x$ is the margin split, $y$ is the mining income. $y=max(f, x-f)$ as indicated by the solid line; if the LRx fee for the order is $0$, the equation is $y=max(0, x - 0)$ that simplifies to $y=x$ as indicated by the dashed line.
+where $f$ is the LRx fee, $x$ is the margin split, $y$ is the mining income. $y=max(f, x-f)$ as indicated by the solid line; if the LRx fee for the order is $0$, the equation is $y=max(0, x - 0)$ that simplifies to $y=x$ as indicated by the dashed line.\\
 
 The consequences are:  
 \begin{enumerate}
@@ -689,12 +687,12 @@ The consequences are:
 
 It should be noted that if the LRx fee is non-zero, no matter which option the miner chooses, there will always be a transfer of LRx between the miner and the order's sender. Either the miner earns the LRx fee, or pays the LRx fee back to the sender to take the margin split.
 
-Ring miners will share a certain percentage of fees with wallets. When a user places an order through a wallet and it is filled, the wallet is rewarded with a portion of the fees or margin split. Wallets represent a primary target for protocol integration as they have the user base, but little source of income. 
+Ring miners will share a certain percentage of fees with wallets. When a user places an order through a wallet and gets filled, the wallet is rewarded with a portion of the fees or margin split. Wallets represent a primary target for protocol integration as they have the user base, but little source of income. 
 
 \subsection{Decentralized Governance}
 LRx tokens are used to align the financial incentives of the various participants in the network. Such alignment is necessary for broad adoption of the protocol, whose success rests largely on improving liquidity in a robust decentralized ecosystem.
 
-LRx tokens will be used to effectuate protocol updates through decentralized governance. Smart contract upgrades will be voted on by token holders to dissuade rogue forks from potentially siphoning off liquidity through incompatibility. Upgradeability is crucial to the protocol's success as it must adapt to market demands, and the changing underlying blockchains. Decentralized governance will alow for continuous updates to be integrated securely into the protocol without disrupting dApps or end users.
+LRx tokens will be used to effectuate protocol updates through decentralized governance. Smart contract upgrades will be voted on by token holders to dissuade rogue forks from potentially siphoning off liquidity through incompatibility. Upgradeability is crucial to the protocol's success as it must adapt to market demands, and the changing underlying blockchains. Decentralized governance will allow for continuous updates to be integrated securely into the protocol without disrupting dApps or end users.
 
 \section{Fraud and Attack Protections}
 
