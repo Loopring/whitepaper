@@ -200,7 +200,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
   \textbf{owner: addressY}\\
-  \textbf{amountS: 1  tokenB}\\
+  \textbf{amountS: 9  tokenB}\\
   \textbf{amountB: 12 tokenC}
  \end{tabular}
  };
@@ -210,7 +210,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
   \textbf{owner: addressX}\\
-  \textbf{amountS: 2102 tokenA}\\
+  \textbf{amountS: 10000 tokenA}\\
   \textbf{amountB: 2    tokenB}
  \end{tabular}
  };
@@ -221,7 +221,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  \begin{tabular}{l}
   \textbf{ORDER 3}\\
   \textbf{owner: addressZ}\\
-  \textbf{amountS: 2   tokenC}\\
+  \textbf{amountS: 100 tokenC}\\
   \textbf{amountB: 160 tokenA}
  \end{tabular}
  };
@@ -412,7 +412,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
   \textbf{owner: addressY}\\
-  \textbf{amountS: 1  tokenB}\\
+  \textbf{amountS: 9  tokenB}\\
   \textbf{amountB: 12 tokenC}
  \end{tabular}
  };
@@ -422,7 +422,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
   \textbf{owner: addressX}\\
-  \textbf{amountS: 2102 tokenA}\\
+  \textbf{amountS: 10000 tokenA}\\
   \textbf{amountB: 2    tokenB}
  \end{tabular}
  };
@@ -433,7 +433,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  \begin{tabular}{l}
   \textbf{ORDER 3}\\
   \textbf{owner: addressZ}\\
-  \textbf{amountS: 2   tokenC}\\
+  \textbf{amountS: 100   tokenC}\\
   \textbf{amountB: 160 tokenA}
  \end{tabular}
  };
@@ -442,9 +442,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 4}\\
-  \textbf{owner: addressX}\\
-  \textbf{amountS: 2102 tokenA}\\
-  \textbf{amountB: 2    tokenB}
+  \textbf{owner: addressM}\\
+  \textbf{amountS: x1 tokenA}\\
+  \textbf{amountB: y1 tokenB}
  \end{tabular}
  };
  
@@ -453,17 +453,17 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 5}\\
-  \textbf{owner: addressZ}\\
-  \textbf{amountS: 2   tokenC}\\
-  \textbf{amountB: 160 tokenA}
+  \textbf{owner: addressM}\\
+  \textbf{amountS: x2   tokenC}\\
+  \textbf{amountB: y2 tokenA}
  \end{tabular}
  };
  
- \draw [draw,->] (order1) -- node [label, xshift=-2cm] {\textbf{7898 tokenA}} (order5);
- \draw [draw,->] (order2) -| node [label, xshift=-1.6cm] {\textbf{8 tokenB}} (order1);
- \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
- \draw [draw,->] (order4) -- node [label, xshift=1.8cm] {\textbf{98 tokenC}} (order3);
- \draw [draw,->] (order5) -- node [label, yshift=0.2cm] {\textbf{98 tokenC}} (order4);
+ \draw [draw,->] (order1) -- node [label, xshift=-2cm] {} (order5);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.6cm] {} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm] {} (order2);
+ \draw [draw,->] (order4) -- node [label, xshift=1.8cm] {} (order3);
+ \draw [draw,->] (order5) -- node [label, yshift=0.2cm] {} (order4);
   
 \end{tikzpicture}
 
