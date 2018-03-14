@@ -188,7 +188,6 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
 		rectangle,
 		rounded corners,
 		draw=black, 
-		very thick,
 		text centered,
 %		text width=5cm,
 		minimum height=12mm,
@@ -235,24 +234,6 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 tokenB}} (order1);
  \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
 
-%    \node [input, name=input] {};
-%    \node [sum, right of=input] (sum) {};
-%    \node [block, right of=sum] (controller) {Controller};
-%    \node [block, right of=controller, pin={[pinstyle]above:Disturbances},
-%            node distance=3cm] (system) {System};
-%    % We draw an edge between the controller and system block to 
-%    % calculate the coordinate u. We need it to place the measurement block. 
-%    \draw [->] (controller) -- node[name=u] {$u$} (system);
-%    \node [output, right of=system] (output) {};
-%    \node [block, below of=u] (measurements) {Measurements};
-%
-%    % Once the nodes are placed, connecting them is easy. 
-%    \draw [draw,->] (input) -- node {$r$} (sum);
-%    \draw [->] (sum) -- node {$e$} (controller);
-%    \draw [->] (system) -- node [name=y] {$y$}(output);
-%    \draw [->] (y) |- (measurements);
-%    \draw [->] (measurements) -| node[pos=0.99] {$-$} 
-%        node [near end] {$y_m$} (sum);
 \end{tikzpicture}
 
 \caption{A Ring of 3 Orders}
@@ -387,8 +368,103 @@ to represent a order in a simplified form, then for ETH/USD markets on a traditi
 
 LSC does not perform exchange rate or amount calculations, but must receive and verify what the miner supplied for these values. This is done by miners for two main reasons: solidity does not have support for floating point maths, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
 
-\subsubsection{Sub-Loop Checking}
+\subsubsection{Sub-Ring Checking}
 This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempted to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-loop. To check this, LSC ensure a token cannot be in a buy or sell position twice. In the above diagram we can see that ARK is a sell token twice, and a buy token twice, which would be disallowed. 
+
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    node distance=3cm,
+    >=latex',
+    order/.style={
+		scale=0.7,
+		rectangle,
+		rounded corners,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		fill=white
+	},
+	label/.style={
+		scale=0.7
+	}
+  ]
+    % We start by placing the blocks
+
+  \node [order] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 2}\\
+  \textbf{owner: addressY}\\
+  \textbf{amountS: 1  tokenB}\\
+  \textbf{amountB: 12 tokenC}
+ \end{tabular}
+ };
+ 
+  \node [order, below of=order2, xshift=-3.5cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 1}\\
+  \textbf{owner: addressX}\\
+  \textbf{amountS: 2102 tokenA}\\
+  \textbf{amountB: 2    tokenB}
+ \end{tabular}
+ };
+ 
+ 
+  \node [order, below of=order2, xshift=3.5cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 3}\\
+  \textbf{owner: addressZ}\\
+  \textbf{amountS: 2   tokenC}\\
+  \textbf{amountB: 160 tokenA}
+ \end{tabular}
+ };
+ 
+   \node [order, below of=order3, fill=gray!20] (order4) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 4}\\
+  \textbf{owner: addressX}\\
+  \textbf{amountS: 2102 tokenA}\\
+  \textbf{amountB: 2    tokenB}
+ \end{tabular}
+ };
+ 
+ 
+  \node [order, below of=order1, fill=gray!20] (order5) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 5}\\
+  \textbf{owner: addressZ}\\
+  \textbf{amountS: 2   tokenC}\\
+  \textbf{amountB: 160 tokenA}
+ \end{tabular}
+ };
+ 
+ \draw [draw,->] (order1) -- node [label, xshift=-2.4cm] {\textbf{7898 tokenA}} (order5);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 tokenB}} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
+ \draw [draw,->] (order4) -- node [label, xshift=2cm] {\textbf{98 tokenC}} (order3);
+ \draw [draw,->] (order5) -- node [label, yshift=0.24cm] {\textbf{98 tokenC}} (order4);
+  
+\end{tikzpicture}
+
+\caption{A Ring with Sub-Ring}
+\label{fig:ring}
+\end{figurehere}
+\end{center}
 
 \subsubsection{Fill Rate Checking}
 The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is at least equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, LSC makes sure that all the margins (discounts) are the same percentage for every order, to ensure fairness.
@@ -438,7 +514,44 @@ Example: If the smallest amount to be filled compared to the original order is 5
 
 If the Order Ring fulfills all the previous checks, the ring can be closed, and transactions can be made. This means that all the $n$ orders $O$ form a closed ring of orders, connected as in the figure below:
 
-[TODO: DIAGRAM]
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}[
+circle/.style={
+		scale=0.75,
+		rounded corners,
+		draw=black, 
+		text centered,
+		}
+]
+
+\def \n {6}
+\def \m {4}
+\def \radius {1.4cm}
+\def \margin {12} % margin in angles, depends on the radius
+
+\foreach \s in {1,...,\m}
+{
+  \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$O_\s$};
+  \draw[<-, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
+    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+}
+
+\node[draw, circle] at ({360/\n * 4}:\radius) {$O_5$};
+  \draw[<-, dashed, >=latex] ({360/\n * 4+\margin}:\radius) 
+    arc ({360/\n * 4+\margin}:{360/\n * (5)-\margin}:\radius);
+    
+\node[draw, circle] at ({360/\n * 5}:\radius) {$O_n$};
+  \draw[<-, >=latex] ({360/\n * 5+\margin}:\radius) 
+    arc ({360/\n * 5+\margin}:{360/\n * (6)-\margin}:\radius);
+
+
+\end{tikzpicture}
+\caption{Ring Settlement}
+\label{fig:settlement}
+\end{figurehere}
+\end{center}
 
 To make the transactions, the LSC uses the $TokenTransferDelegate$ smart contract. The introduction of such a delegate makes upgrading the protocol smart contract easier as all orders only need to authorize this delegate instead of different versions of the protocol.
 
@@ -600,26 +713,7 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 \newpage
 
-\begin{figure}[h]
-\centering
-\begin{tikzpicture}
 
-\def \n {6}
-\def \radius {1.2cm}
-\def \margin {14} % margin in angles, depends on the radius
-
-\foreach \s in {1,...,\n}
-{
-  \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$\s$};
-  \draw[->, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
-    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
-}
-
-
-\end{tikzpicture}
-\caption{FOSS in Chrome influences industry structure by increasing competition}
-\label{fig:6forces}
-\end{figure}
 
 
 
@@ -642,7 +736,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 		rectangle,
 		rounded corners,
 		draw=black, 
-		very thick,
 		text centered,
 		text width=8cm,
 		minimum height=12mm,
