@@ -221,6 +221,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \end{enumerate}
 
+
 \section{Business Model Flexibility}
 It's important to note that Loopring's open standard allows participants significant flexibility in how they conduct business. Actors with novel business models are free to implement them and provide value for their users, earning LRx fees on volume or other metrics in the process, if they so choose. The ecosystem is modular and meant to support participation from a multitude of applications. The non-proprietary protocol places control in the hands of its users and collaborators.
 
@@ -261,10 +262,12 @@ An order is a pack of data that describes the intent of the user's trade. A Loop
 \end{verbatim}
 To ensure the origin of the order, it is signed against the hash of its parameters, excluding $\_authAddr$, with the user's private key. The $\_authAddr$ parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{Dual-Authoring: Front-running Prevention} for more details. The signature is represented by the $v$, $r$, and $s$ fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
 
-
 UDOM doesn't include a price (which must be a floating-point number by nature), but, instead uses the term $rate$, which is expressed as $amountS \over amountB$. The rate is not a floating-point number but an expression that will only be evaluated with other unsigned integers on demand, to keep all intermediate results as unsigned integers and increase calculation accuracy. 
 
-When a miner ring-matches orders, it's possible that a better rate will be executable, allowing you to get more $tokenB$ than the $amountB$ you specified. However, if $buyNoMoreThanAmountB$ is set to $true$, the protocol ensures you receive exactly $amountB$ of $tokenB$. Thus, UDOM's $buyNoMoreThanTokenB$ parameter determines when an order is considered completely filled. $buyNoMoreThanTokenB$ applies a cap on either $amountS$ or $amountB$, and allows users to express more granular trade intentions than traditional buy/sell orders. 
+\subsubsection{Buy Amounts}
+When a miner ring-matches orders, it's possible that a better rate will be executable, allowing you to get more $tokenB$ than the $amountB$ you specified. However, if $buyNoMoreThanAmountB$ is set to $true$, the protocol ensures you receive exactly $amountB$ of $tokenB$. Thus, UDOM's $buyNoMoreThanTokenB$ parameter determines when an order is considered completely filled. $buyNoMoreThanTokenB$ applies a cap on either $amountS$ or $amountB$, and allows users to express more granular trade intentions than traditional buy/sell orders.\\
+
+Example: with amountS = 10 and amountB = 2, r = 10/2 = 5. Thus the user is willing to sell 5 tokenS for each tokenB. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 tokensB instead of 2. However, if the user only wants 2 tokensB and set the buyNoMoreThanAmountB flag to true, the LSC performs the transaction at a rate of 4 and the user sells 4 tokenS for each tokenB, effectively saving 2 tokenS. Keep in mind this does not take into account miners' fees \ref{Fee Model}.
 
 If we use
 
@@ -283,19 +286,15 @@ to represent a order in a simplified form, then for ETH/USD markets on a traditi
 
 
 
-
-
 \subsection{Ring Verification}
 
-LSC does not perform exchange rate or amount calculations, but must receive and verify what the miner supplied for these values. This is done by miners for two main reasons: solidity does not have support for floating point maths, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
+LSC does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. This is done by miners for two main reasons: solidity does not have support for floating point math, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
 
 \subsubsection{Sub-Loop Checking}
-This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempted to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-loop. To check this, LSC ensure a token cannot be in a buy or sell position twice. In the above diagram we can see that ARK is a sell token twice, and a buy token twice, which would be disallowed. 
+This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempting to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-loop. To check this, LSC ensure a token cannot be in a buy or sell position twice. In the above diagram we can see that there is a sell token twice, and a buy token twice, which would be disallowed. 
 
 \subsubsection{Fill Rate Checking}
-The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is at least equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, LSC makes sure that all the margins (discounts) are the same percentage for every order, to ensure fairness.
-
-According to Loopring protocol, each order in the ring would share the same rate (price) discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
+The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is at least equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LSC ensures that each order in the ring shares the same rate (margin) discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
 $r_{0\rightarrow 1} \cdot (1-\gamma)$, $r_{1\rightarrow 2} \cdot (1-\gamma)$, $r_{2 \rightarrow 0} \cdot (1-\gamma)$, and satisfied: 
 \begin{equation}
 r_{0\rightarrow 1} \cdot (1-\gamma)\cdot r_{1\rightarrow 2} \cdot (1-\gamma) \cdot r_{2 \rightarrow 0} \cdot (1-\gamma) = 1
@@ -343,7 +342,7 @@ If the Order Ring fulfills all the previous checks, the ring can be closed, and 
 
 To make the transactions, the LSC uses the $TokenTransferDelegate$ smart contract. The introduction of such a delegate makes upgrading the protocol smart contract easier as all orders only need to authorize this delegate instead of different versions of the protocol.
 
-For each order in the ring, a payment of $tokenS$ is made to the following order. Then the miner's fee is paid depending on the fee model chosen by the miner. An $OrderFilled$ event is then emitted. Finally, once all the transaction are made, a $RingMined$ event is emitted.
+For each order in the ring, a payment of $tokenS$ is made to the following order. Then the miner's fee is paid depending on the fee model chosen by the miner. An $OrderFilled$ event is then emitted. Finally, once all the transactions are made, a $RingMined$ event is emitted.
 
 \subsubsection{Emitted Events}
 
@@ -351,8 +350,8 @@ The protocol emits events that allow relays, order browsers, and other actors to
 
 \begin{itemize}
 	\item \textbf{OrderCancelled}: a specific order has been cancelled.
-	\item \textbf{OrdersCancelled}: all orders of a trading pair for an owning address have been cancelled.
-	\item \textbf{AllOrdersCancelled}: all orders of all trading pairs for an owning address have been cancelled.	
+	\item \textbf{OrdersCancelled}: all orders of a trading pair from an owning address have been cancelled.
+	\item \textbf{AllOrdersCancelled}: all orders of all trading pairs from an owning address have been cancelled.	
 	\item \textbf{RingMined}: A ring has been settled successfully. This event contains data related to each inner-ring token transfer.
 \end{itemize}
 
