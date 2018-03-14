@@ -36,7 +36,7 @@
 \usepackage{amsfonts}
 \usepackage{tikz}
 \usepackage{tkz-graph}
-\usetikzlibrary{arrows,decorations.pathmorphing,backgrounds,fit,positioning,shapes.symbols,chains,intersections}
+\usetikzlibrary{arrows,decorations.pathmorphing,automata,positioning,backgrounds,fit,shapes.symbols,chains,intersections}
 
 \newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
@@ -65,6 +65,7 @@
 \usepackage[final]{pdfpages}
 
 %\includepdf[pages=1]{cover}
+\hyphenpenalty=750
 
 \title{\textbf{Loopring:}\\\textbf{A Decentralized Token Exchange Protocol}}
 \author{
@@ -168,6 +169,99 @@ Loopring is not a DEX, but a protocol for building DEXs on multiple blockchains.
 \subsection{Order Ring}
 Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests - amountS/amountB - instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
 
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    node distance=3cm,
+    >=latex',
+    order/.style={
+		scale=0.7,
+		rectangle,
+		rounded corners,
+		draw=black, 
+		very thick,
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		fill=white
+	},
+	label/.style={
+		scale=0.7
+	}
+  ]
+    % We start by placing the blocks
+
+  \node [order] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 2}\\
+  \textbf{owner: addressY}\\
+  \textbf{amountS: 1  tokenB}\\
+  \textbf{amountB: 12 tokenC}
+ \end{tabular}
+ };
+ 
+  \node [order, below of=order2, xshift=-3.5cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 1}\\
+  \textbf{owner: addressX}\\
+  \textbf{amountS: 2102 tokenA}\\
+  \textbf{amountB: 2    tokenB}
+ \end{tabular}
+ };
+ 
+ 
+  \node [order, below of=order2, xshift=3.5cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 3}\\
+  \textbf{owner: addressZ}\\
+  \textbf{amountS: 2   tokenC}\\
+  \textbf{amountB: 160 tokenA}
+ \end{tabular}
+ };
+ 
+ \draw [draw,->] (order1) -- node [label] {\textbf{7898 tokenA}} (order3);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 tokenB}} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
+
+%    \node [input, name=input] {};
+%    \node [sum, right of=input] (sum) {};
+%    \node [block, right of=sum] (controller) {Controller};
+%    \node [block, right of=controller, pin={[pinstyle]above:Disturbances},
+%            node distance=3cm] (system) {System};
+%    % We draw an edge between the controller and system block to 
+%    % calculate the coordinate u. We need it to place the measurement block. 
+%    \draw [->] (controller) -- node[name=u] {$u$} (system);
+%    \node [output, right of=system] (output) {};
+%    \node [block, below of=u] (measurements) {Measurements};
+%
+%    % Once the nodes are placed, connecting them is easy. 
+%    \draw [draw,->] (input) -- node {$r$} (sum);
+%    \draw [->] (sum) -- node {$e$} (controller);
+%    \draw [->] (system) -- node [name=y] {$y$}(output);
+%    \draw [->] (y) |- (measurements);
+%    \draw [->] (measurements) -| node[pos=0.99] {$-$} 
+%        node [near end] {$y_m$} (sum);
+\end{tikzpicture}
+
+\caption{A Ring of 3 Orders}
+\label{fig:ring}
+\end{figurehere}
+\end{center}
+
+
+
 Each order's token to sell is another order's token to buy. It creates a loop that allows each order to exchange their desired tokens without requiring an opposing order for its pair. Traditional order pair trades can, of course, still be executed, in what is essentially a special case of an Order Ring. 
 
 
@@ -185,7 +279,7 @@ Who is buying and who is selling? This depends only on the asset we fix to give 
 In the first situation Alice is willing to pay a higher price than the price Bob is selling his tokens for, in the second situation Bob is willing to pay a higher price than the price Alice is selling her tokens for. It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the selling price, no matter how we fix the prices. If we recall our basic arithmetic we learned in school we can verify easily that:
 
 \begin{equation}
-{{15\over 4} \over {30\over 10}} = {3.75 \over 3.00}	= {0.33333334 \over 0.26666667} = {{10 \over 30} \over {4 \over 15}} = {15 \over 4} \cdot {10 \over 30} = {150 \over 120} = 1.25 > 1
+{{15\over 4} \over {30\over 10}} =  {{10 \over 30} \over {4 \over 15}} = {15 \over 4} \cdot {10 \over 30} = 1.25 > 1
 \end{equation}
 
 In this article, we reference this as the Uni-Directional Order Model, or UDOM for short. See \ref{anatomy} for more details about Loopring's orders.
@@ -428,7 +522,7 @@ LRx tokens will be used to effectuate protocol updates through decentralized gov
 
 \section{Fraud and Attack Protections}
 
-\subsection{Dual-Authoring: Front-running Prevention}
+\subsection{Front-running Prevention}
 
 In decentralized exchanges, front-running is when someone tries to copy another node's ring solution, and have it mined before the original transaction that is in the pending transaction pool (mempool). This can be achieved by specifying a higher transaction fee (gas price). The major scheme of front-running in Loopring (and any protocol for order-matching) are order-filch: when a front-runner steals one or more orders from a pending ring settlement transaction; and Ring-filch: when a front-runner steals the entire ring from the pending transaction.
 
@@ -611,41 +705,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 
 
-
-\begin{figure}[h]
-\centering
-\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
-    minimum height=3em, minimum width=6em]
-\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
-\tikzstyle{input} = [coordinate]
-\tikzstyle{output} = [coordinate]
-\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
-
-\begin{tikzpicture}[auto, node distance=2cm,>=latex']
-    % We start by placing the blocks
-    \node [input, name=input] {};
-    \node [sum, right of=input] (sum) {};
-    \node [block, right of=sum] (controller) {Controller};
-    \node [block, right of=controller, pin={[pinstyle]above:Disturbances},
-            node distance=3cm] (system) {System};
-    % We draw an edge between the controller and system block to 
-    % calculate the coordinate u. We need it to place the measurement block. 
-    \draw [->] (controller) -- node[name=u] {$u$} (system);
-    \node [output, right of=system] (output) {};
-    \node [block, below of=u] (measurements) {Measurements};
-
-    % Once the nodes are placed, connecting them is easy. 
-    \draw [draw,->] (input) -- node {$r$} (sum);
-    \draw [->] (sum) -- node {$e$} (controller);
-    \draw [->] (system) -- node [name=y] {$y$}(output);
-    \draw [->] (y) |- (measurements);
-    \draw [->] (measurements) -| node[pos=0.99] {$-$} 
-        node [near end] {$y_m$} (sum);
-\end{tikzpicture}
-
-\caption{A Ring of 3 Orders}
-\label{fig:ring}
-\end{figure}
 
 
 
