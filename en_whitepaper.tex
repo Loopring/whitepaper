@@ -159,10 +159,10 @@ For the above reasons, purely blockchain-based exchanges have limitations that m
 
 
 \section{Loopring Protocol\label{sec:loopring_protocol}}
-Loopring is not a DEX, but a modular protocol for building DEXs on multiple blockchains. We disassemble the component parts of a traditional exchange and offer a set of public smart contracts and decentralized actors in its place. The roles in the network include wallets, relays, liquidity-sharing consortium blockchains, order book browsers, ring-miners, and asset tokenization services. Before defining each, we should first understand what a Loopring compliant order looks like. 
+Loopring is not a DEX, but a modular protocol for building DEXs on multiple blockchains. We disassemble the component parts of a traditional exchange and offer a set of public smart contracts and decentralized actors in its place. The roles in the network include wallets, relays, liquidity-sharing consortium blockchains, order book browsers, ring-miners, and asset tokenization services. Before defining each, however, we should first understand what a Loopring compliant order looks like. 
 
 \subsection{Order Ring\label{sec:order_ring}}
-Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests - amountS/amountB - instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
+Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests, $amountS \over amountB$, (amount to sell/buy)  instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
 
 \begin{center}
 \begin{figurehere}
@@ -238,31 +238,35 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
 \end{center}
 
 
-
+Each order's token to sell is another order's token to buy. It creates a loop that allows each order to exchange their desired tokens without requiring an opposing order for its pair. Traditional order pair trades can, of course, still be executed, in what is essentially a special case of an Order Ring. 
 
 \begin{definition}[Order Ring] Let $C_{0}$, $C_{1}$, $\cdots$, $C_{n-1}$ be $n$ different kinds of token, $O_{0\rightarrow 1}$, $\cdots$, $O_{i\rightarrow i\oplus 1}$, $\cdots$, $O_{n-1 \rightarrow 0}$ be $n$ orders. Those orders can form a ring for trading:
 $$O_{0\rightarrow 1} \rightarrow \cdots \rightarrow O_{i\rightarrow i\oplus 1} \rightarrow \cdots \rightarrow O_{n-1\rightarrow 0} \text{, }$$
 where $n$ is the length of the ring, and $i\oplus 1 \equiv i+1 \mod n$.
 \end{definition}
 
-Each order's token to sell is another order's token to buy. It creates a loop that allows each order to exchange their desired tokens without requiring an opposing order for its pair. Traditional order pair trades can, of course, still be executed, in what is essentially a special case of an Order Ring. 
-
-An order ring is valid when all component transactions can be executed at an exchange rate equal to or better than the original rate specified by the user. To verify ring validity, Loopring protocol smart contract (protocol) must receive Order Rings from miners where the product of the original exchange rates of all orders is equal to or greater than 1.
+An order ring is valid when all component transactions can be executed at an exchange rate equal to or better than the original rate specified by the user. To verify ring validity, Loopring protocol smart contracts must receive Order Rings from miners where the product of the original exchange rates of all orders is equal to or greater than 1.
 
 Let's assume Alice and Bob want to trade their tokens A and B. Alice has 15 tokens A and she wants 4 tokens B for them; Bob has 10 tokens B  and he wants 30 tokens A for them.
 
-Who is buying and who is selling? This depends only on the asset we fix to give price quotations. If token A is the reference, then Alice is buying tokens B for ${15 \over 4} = 3.75$ XTA, while Bob is selling 10 tokens B for ${30 \over 10} = 3.00$ XTA. In the case of fixing token B as reference we say that Alice is selling 15 tokens A for ${4\over 15}=0.26666667$ XTB and Bob is buying 10 tokens A for ${10 \over 30}=0.33333334$ XTB. Hence, who's the buyer or seller is purely arbitrary.
+Who is buying and who is selling? This depends only on the asset we fix to give price quotations. If token A is the reference, then Alice is buying tokens B for ${15 \over 4} = 3.75$ XTA, while Bob is selling 10 tokens B for ${30 \over 10} = 3.00$ XTA. In the case of fixing token B as reference we say that Alice is selling 15 tokens A for ${4\over 15}=0.26666667$ XTB and Bob is buying 10 tokens A for ${10 \over 30}=0.33333334$ XTB. Hence, who's the buyer or seller is arbitrary.
 
-In the first situation Alice is willing to pay a higher price than the price Bob is selling his tokens for, in the second situation Bob is willing to pay a higher price than the price Alice is selling her tokens for. It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the selling price.
+In the first situation Alice is willing to pay a higher price than the price Bob is selling his tokens for, while in the second situation Bob is willing to pay a higher price than the price Alice is selling her tokens for. It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the seller's price.
 
 \begin{equation}
-{{15\over 4} \over {30\over 10}} = {3.75 \over 3.00}	= {0.33333334 \over 0.26666667} = {{10 \over 30} \over {4 \over 15}} = {15 \over 4} \cdot {10 \over 30} = {150 \over 120} = 1.25 > 1
+{{15\over 4} \over {30\over 10}} = {15 \over 4} \cdot {10 \over 30} = {150 \over 120} = 1.25 > 1
 \end{equation}
 
-Thus, for a set of n orders to be able to be filled, in full or partially, we need to know if the product of each one of the exchange rates as buy orders results in a number greater or equal to 1. If so, all the n orders can be either partially, or totally filled.
+Thus, for a set of n orders to be able to be filled, fully or partially, we need to know if the product of each one of the exchange rates as buy orders results in a number greater or equal to 1. If so, all the n orders can be either partially, or totally filled.
+
+If we introduce a third counterparty, Charlie, such that  Alice wants to give x1 tokens A and receive y1 tokens B, Bob wants to give x2 tokens B and receive y2 tokens C, and Charlie wants to give x3 tokens C and receive y3 tokens A. The necessary tokens are present, and the trade is possible if,
+
+\begin{equation}
+{{x1 \cdot x2 \cdot x3 \over y1 \cdot y2 \cdot y3} \geq 1}
+\end{equation}
 
 
-In this article, we reference this as the Uni-Directional Order Model, or UDOM for short. See \ref{anatomy} for more details about Loopring's orders.
+See section \ref{anatomy} for more details about Loopring's orders.
 
 
 \section{Ecosystem Participants\label{sec:ecosystem}}
@@ -270,7 +274,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \begin{itemize}
 
-\item \textbf{Wallets}: A common wallet service or interface that gives users access to their tokens and a way to send orders to the Loopring network. Wallets will be incentivized to produce orders by sharing fees (see \ref{sec:token}).
+\item \textbf{Wallets}: A common wallet service or interface that gives users access to their tokens and a way to send orders to the Loopring network. Wallets will be incentivized to produce orders by sharing fees (see section \ref{sec:token}).
 
 \item \textbf{Relays / Ring Miners}: Relays are nodes that form a decentralized network for order propagation. They maintain public order books and trade history and broadcast new orders to other relays via any arbitrary off-chain medium. Ring-mining is a feature of relays. It is computationally heavy and is done completely off-chain. Ring-mining produces Order Rings: rings of between 2 and 10 tokens created by stitching together disparate orders. Relays are free in how they choose to communicate with one another. 
 
