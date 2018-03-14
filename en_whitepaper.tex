@@ -183,6 +183,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
     auto, 
     node distance=3cm,
     >=latex',
+    font=\bfseries\footnotesize\sffamily,
     order/.style={
 		scale=0.7,
 		rectangle,
@@ -385,6 +386,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
     auto, 
     node distance=3cm,
     >=latex',
+    font=\bfseries\footnotesize\sffamily,
     order/.style={
 		scale=0.7,
 		rectangle,
@@ -453,11 +455,11 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  \end{tabular}
  };
  
- \draw [draw,->] (order1) -- node [label, xshift=-2.4cm] {\textbf{7898 tokenA}} (order5);
- \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 tokenB}} (order1);
+ \draw [draw,->] (order1) -- node [label, xshift=-2cm] {\textbf{7898 tokenA}} (order5);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.6cm] {\textbf{8 tokenB}} (order1);
  \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
- \draw [draw,->] (order4) -- node [label, xshift=2cm] {\textbf{98 tokenC}} (order3);
- \draw [draw,->] (order5) -- node [label, yshift=0.24cm] {\textbf{98 tokenC}} (order4);
+ \draw [draw,->] (order4) -- node [label, xshift=1.8cm] {\textbf{98 tokenC}} (order3);
+ \draw [draw,->] (order5) -- node [label, yshift=0.2cm] {\textbf{98 tokenC}} (order4);
   
 \end{tikzpicture}
 
@@ -577,7 +579,33 @@ When a user creates an order, they specify an amount of LRx to be paid to the mi
 
 A representation of the margin split:
 
-[TODO: daniel wang]
+
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}
+[
+scale=0.75,
+font=\bfseries\footnotesize\sffamily,
+force/.style={rectangle, draw, text badly centered, minimum height=0.6cm}] 
+
+% Draw forces
+\node [force] (total) {Total Buy Amount};
+\node [force, above of=total] (origin) {Original Buy Amount};
+\node [force, fill=black!10, right of=origin] (margin) {Margin};
+\node [force, above of=origin] (user) {Final User Buy Amount};
+\node [force, fill=black!20, right of=user] (split) {Margin Split};
+%\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
+%\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
+%\node [force, below of=impl] (delegate) {TokenTransferDelegate};
+%\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
+
+
+\end{tikzpicture} 
+\caption{Margin Split}
+\label{fig:marginsplit}
+\end{figurehere}
+\end{center}
 
 If the margin on the ring is too small, a miner will choose the LRx fee. On the contrary, if the margin is substantial enough for the resulting margin split to be worth more than the LRx fee, they will choose the margin split. There is another proviso, however: when the miner chooses the margin split, they must pay the user (order creator) a fee, which is equal to the LRx the user would have paid to the miner as a fee. This increases the threshold of where the miner will choose the margin split to twice the LRx fee of the order, increasing the propensity of the LRx fee choice. This allows miners to get a constant income on low margin rings with for the tradeoff of getting less income on higher margin rings. Our fee model is based on the expectation that as the market grows and matures, there will be fewer high margin rings, thus necessitating LRx fees as incentive.
 We end up with the following graph:
@@ -611,7 +639,7 @@ We end up with the following graph:
 
 \end{tikzpicture}
 \caption{Loopring Fee Model}
-\label{fig:6forces}
+\label{fig:feemodel}
 \end{figurehere}
 \end{center}
 
