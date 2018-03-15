@@ -176,7 +176,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
 
 \begin{tikzpicture}[
     auto, 
-    node distance=3cm,
+    node distance=2cm,
     >=latex',
     font=\bfseries\footnotesize\sffamily,
     order/.style={
@@ -199,9 +199,9 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  {%
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
-  \textbf{owner: addressY}\\
-  \textbf{amountS: 9  tokenB}\\
-  \textbf{amountB: 12 tokenC}
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9  B}\\
+  \textbf{amountB: 12 C}
  \end{tabular}
  };
  
@@ -209,9 +209,9 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  {%
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
-  \textbf{owner: addressX}\\
-  \textbf{amountS: 10000 tokenA}\\
-  \textbf{amountB: 2    tokenB}
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
  \end{tabular}
  };
  
@@ -220,15 +220,15 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  {%
  \begin{tabular}{l}
   \textbf{ORDER 3}\\
-  \textbf{owner: addressZ}\\
-  \textbf{amountS: 100 tokenC}\\
-  \textbf{amountB: 160 tokenA}
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
  \end{tabular}
  };
  
- \draw [draw,->] (order1) -- node [label] {\textbf{7898 tokenA}} (order3);
- \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 tokenB}} (order1);
- \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
+ \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 B}} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 C}} (order2);
 
 \end{tikzpicture}
 
@@ -284,6 +284,9 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 
 \section{Exchange Process\label{sec:process}}
+
+
+
 \begin{enumerate} 
 
 \item \textbf{Order Initiation \& ERC20 Authorization}: A user wants to exchange X amount of TokenA for Y amount of TokenB. The current rate and order book for this pair can be found on multiple sources provided by relays or other interfaces hooked up to the network, such as order book browsers. The user places an order through a wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The wallet authorizes the LSC to handle X amount of TokenA the user wants to sell, but does not lock the user's tokens, who remains free to move them while the order is being processed.
@@ -297,6 +300,198 @@ The following ecosystem participants jointly provide all functionalities a centr
 \item \textbf{Verification \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract automatically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC are insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and can't be reversed.
 
 \end{enumerate}
+
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    scale=0.7,
+    node distance=2cm,
+    >=latex',
+    font=\bfseries\footnotesize\sffamily,
+    order/.style={
+		rectangle,
+		scale=0.7,
+		rounded corners,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=30mm,
+		fill=white
+	},
+	role/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=12mm,
+		fill=white
+	},
+	account/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=12mm,
+		fill=gray!20
+	},
+	label/.style={
+	  scale=0.7
+    }
+  ]
+
+ 
+ \node [role] (user1)  {user X};
+ \node [role, below of=user1] (user2)  {user Y};
+ \node [role, below of=user2] (user3)  {user Z};
+ \node [role, below of=user3] (relay1)  {Relay M};
+ \node [role, below of=relay1] (relay2)  {Relay N};
+
+ 
+ \node [order, left of=user1, xshift=-1cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 1}\\
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user1) -- (order1) [label]{};
+ \draw [draw, ->]  (order1) |- (relay1) [label]{};
+ \draw [draw, ->]  (order1) |- (relay2) [label]{};
+ 
+ \node [order, left of=user2, xshift=-1.5cm] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 2}\\
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9  B}\\
+  \textbf{amountB: 12 C}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user2) -- (order2) [label]{};
+ \draw [draw, ->]  (order2) |- (relay1) [label]{};
+ \draw [draw, ->]  (order2) |- (relay2) [label]{};
+ 
+\node [order, left of=user3, xshift=-2cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 3}\\
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user3) -- (order3) [label]{};
+ \draw [draw, ->]  (order3) |- (relay1) [label]{};
+ \draw [draw, ->]  (order3) |- (relay2) [label]{};
+ 
+% // The Ring
+\node [order, 
+yshift=-1.5cm,
+xshift=-2.25cm,
+below of=relay2,
+minimum width=4.2cm,
+minimum height=5cm] (ring) {};
+
+
+\node [order, dashed, below of=relay2,xshift=-2cm] (order11) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 1}\\
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
+ \end{tabular}
+ };
+ \node [order, dashed,below of=order11,xshift=-0.25cm,yshift=0.7cm] (order21) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 2}\\
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9  B}\\
+  \textbf{amountB: 12 C}
+ \end{tabular}
+ };
+\node [order, dashed,below of=order21,xshift=-0.25cm,yshift=0.7cm] (order31) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 3}\\
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
+ \end{tabular}
+ };
+ 
+ 
+ % // The blockchain
+\node [
+rectangle,
+fill=gray!10, 
+right of=user1,
+yshift=-4.5cm,
+xshift=0.1cm,
+minimum width=1.8cm,
+minimum height=11cm] (blockchain) {};
+% blockchain accounts
+  \node [account, right of=user1, xshift=1cm] (account1)  {accnt X};
+  \node [account, right of=user2, xshift=1cm] (account2)  {accnt Y};
+  \node [account, right of=user3, xshift=1cm] (account3)  {accnt Z};
+  \node [account, right of=relay1, xshift=1cm] (account4)  {accnt M};
+  \node [account, right of=relay2, xshift=1cm] (account5)  {accnt N};
+  \node [account, double, below of=account5, yshift=-1.5cm] (psc)  {Loopring PSC};
+  
+ \draw [draw, ->]  (user1) -- (account1) [label]{};
+ \draw [draw, ->]  (user2) -- (account2) [label]{};
+ \draw [draw, ->]  (user3) -- (account3) [label]{};
+ \draw [draw, ->]  (relay1) -- (account4) [label]{};
+ \draw [draw, ->]  (relay2) -- (account5) [label]{};
+ \draw [draw, <->, dashed]  (relay1) -- (relay2) [label]{};
+ \draw [draw, ->]  (relay1) -- (ring) [label]{};
+ \draw [draw, ->]  (relay2) -- (ring) [label]{};
+ \draw [draw, ->]  (ring) -- (psc) [label]{};
+
+  
+  
+% \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
+% \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 B}} (order1);
+% \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 C}} (order2);
+
+\end{tikzpicture}
+
+\caption{Loopring Trading Process}
+\label{fig:process}
+\end{figurehere}
+\end{center}
+
+
+
+%
+%\end{multicols}
+%
+%\begin{center}
+%\begin{figurehere}
+%\includegraphics[height=8cm]{images/en_protocol.png}
+%\caption{Loopring Trading Process}
+%\label{fig: Loopringrotocol}
+%\end{figurehere}
+%\end{center}
+%
+%\begin{multicols}{2}
 
 \section{Business Model Flexibility\label{sec:business_model}}
 It's important to note that Loopring's open standard allows participants significant flexibility in how they conduct business. Actors with novel business models are free to implement them and provide value for their users, earning LRx fees on volume or other metrics in the process, if they so choose. The ecosystem is modular and meant to support participation from a multitude of applications. The non-proprietary protocol places control in the hands of users and collaborators.
@@ -388,7 +583,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
 
 \begin{tikzpicture}[
     auto, 
-    node distance=3cm,
+    node distance=2cm,
     >=latex',
     font=\bfseries\footnotesize\sffamily,
     order/.style={
@@ -411,9 +606,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
-  \textbf{owner: addressY}\\
-  \textbf{amountS: 9  tokenB}\\
-  \textbf{amountB: 12 tokenC}
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9B}\\
+  \textbf{amountB: 12C}
  \end{tabular}
  };
  
@@ -421,9 +616,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
-  \textbf{owner: addressX}\\
-  \textbf{amountS: 10000 tokenA}\\
-  \textbf{amountB: 2    tokenB}
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
  \end{tabular}
  };
  
@@ -432,9 +627,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 3}\\
-  \textbf{owner: addressZ}\\
-  \textbf{amountS: 100   tokenC}\\
-  \textbf{amountB: 160 tokenA}
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
  \end{tabular}
  };
  
@@ -442,9 +637,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 4}\\
-  \textbf{owner: addressM}\\
-  \textbf{amountS: x1 tokenA}\\
-  \textbf{amountB: y1 tokenB}
+  \textbf{owner: M}\\
+  \textbf{amountS: x1 A}\\
+  \textbf{amountB: y1 B}
  \end{tabular}
  };
  
@@ -454,8 +649,8 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  \begin{tabular}{l}
   \textbf{ORDER 5}\\
   \textbf{owner: addressM}\\
-  \textbf{amountS: x2   tokenC}\\
-  \textbf{amountB: y2 tokenA}
+  \textbf{amountS: x2 C}\\
+  \textbf{amountB: y2 A}
  \end{tabular}
  };
  
