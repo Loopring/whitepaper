@@ -368,8 +368,8 @@ The following ecosystem participants jointly provide all functionalities a centr
  \node [role] (user1)  {user X};
  \node [role, below of=user1] (user2)  {user Y};
  \node [role, below of=user2] (user3)  {user Z};
- \node [role, below of=user3, fill=gray!20] (relay1)  {Relay M};
- \node [role, below of=relay1, fill=gray!20] (relay2)  {Relay N};
+ \node [role, below of=user3, fill=gray!20] (relay1)  {relay M};
+ \node [role, below of=relay1, fill=gray!20] (relay2)  {relay N};
 
  
  \node [order, left of=user1, xshift=-1cm] (order1) 
@@ -421,14 +421,14 @@ The following ecosystem participants jointly provide all functionalities a centr
 % // The Ring
 \node [order, 
 yshift=-1.5cm,
-xshift=-2.25cm,
+xshift=-2.75cm,
 below of=relay2,
 fill=gray!10,
 minimum width=4.2cm,
 minimum height=5cm] (ring) {};
 
 
-\node [order, dashed, below of=relay2,xshift=-2cm] (order11) 
+\node [order, dashed, below of=relay2,yshift=-0.2cm,xshift=-2.5cm] (order11) 
  {%
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
@@ -479,7 +479,7 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
  \draw [draw, ->]  (user3) -- (account3) [label]{};
 % \draw [draw, ->]  (relay1) -- (account4) [label]{};
 % \draw [draw, ->]  (relay2) -- (account5) [label]{};
- \draw [draw, dotted, thick]  (relay1) to node [auto, scale=0.7] {share liquidity}  (relay2) [label]{};
+ \draw [draw, double, thick]  (relay1) to node [auto, scale=0.7] {share liquidity}  (relay2) [label]{};
 % \draw [draw, ->]  (relay1) -- (ring) [label]{};
  \draw [draw, ->]  (relay2) to node [auto, scale=0.7, xshift=-1.8cm, yshift=0.3cm] {ring-mining}  (ring) [label]{};
  \draw [draw, ->]  (ring) to node [auto, scale=0.7] {submitRing} (psc) [label]{};
@@ -501,14 +501,14 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 \node [steps, left of=user2, xshift=0.8cm] () {2};
 \node [steps, left of=relay2, xshift=0.3cm, yshift=1cm] () {3};
 \node [steps, left of=relay1, xshift=3.3cm, yshift=-1.6cm] () {4};
-\node [steps, below of=relay2, xshift=0.2cm, yshift=0.4cm] () {5};
+\node [steps, below of=relay2, xshift=-0.2cm, yshift=0.4cm] () {5};
 \node [steps, right of=account3, xshift=-0.6cm] (step5) {6};
 
- \draw [bend right]  (psc) to node [auto, scale=0.7] {settle} (step5) [label]{};
+ \draw [bend right, ->]  (psc) to node [auto, scale=0.7, xshift=0.5cm] {settlement} (step5) [label]{};
  
 \end{tikzpicture}
 
-\caption{Exchange Process}
+\caption{Loopring Exchange Process}
 \label{fig:process}
 \end{figurehere}
 \end{center}
@@ -874,10 +874,11 @@ We end up with the following graph:
 \centering
 \begin{tikzpicture}[
 font=\bfseries\footnotesize\sffamily,
-scale=1.5]
+oneway/.style={->,dashed,shorten >=2pt,shorten <=2pt,>=stealth},
+scale=1]
     % Draw axes
-    \draw [<->,thick] (0,2.8) node (yaxis) [above] {$y$}
-        |- (4,0) node (xaxis) [right] {$x$};
+    \draw [<->,thick] (0,2.7) node (yaxis) [above] {$y$}
+        |- (3.7,0) node (xaxis) [right] {$x$};
         
     \draw
   	(1,1) coordinate (A)
@@ -887,15 +888,9 @@ scale=1.5]
   	\draw[thick] (B) -- (3.7,2.7);
   	\draw[dotted] (B) -- (2,0) node[below] {$2f$};
   	\draw[dotted] (A) -- (1,0) node[below] {$f$};
-  	\draw[dashed] (0,0) -- (2.7,2.7);
-  	\draw[thick] (0,1) node[left] {$f$}--(B) node[
-      circle,
-      draw,
-      fill=white,
-      inner sep = 1pt,
-      minimum size = 4pt,
-     ]{$$};
-
+%  	\draw[dashed] (0,0) -- (2.7,2.7);
+  	\draw[thick] (0,1) node[left] {$f$}--(B) node[     ]{$$};
+ 	\draw[oneway] (4,1) node[right]{$Expected Mining Income$} -- (3, 2);
 
 
 \end{tikzpicture}
