@@ -289,7 +289,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \begin{enumerate} 
 
-\item \textbf{Order Initiation \& ERC20 Authorization}: A user wants to exchange X amount of TokenA for Y amount of TokenB. The current rate and order book for this pair can be found on multiple sources provided by relays or other interfaces hooked up to the network, such as order book browsers. The user places an order through a wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The wallet authorizes the LPSC to handle X amount of TokenA the user wants to sell, but does not lock the user's tokens, who remains free to move them while the order is being processed.
+\item \textbf{Order Initiation \& ERC20 Authorization}: A user wants to exchange X amount of tokenA for Y amount of tokenB. The current rate and order book for this pair can be found on multiple sources provided by relays or other interfaces hooked up to the network, such as order book browsers. The user places an order through a wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The wallet authorizes the LPSC to handle X amount of tokenA the user wants to sell, but does not lock the user's tokens, who remains free to move them while the order is being processed.
 
 \item \textbf{Send order to the network}: Once the authorization is made, the order's data is signed with the private key of the sender. Then, the wallet sends the order along with its signature to one or more nodes (relays) in the network.
 
@@ -568,31 +568,30 @@ An order is a pack of data that describes the intent of the user's trade. A Loop
     string  authKey;          
   }
 \end{verbatim}
-To ensure the origin of the order, it is signed against the hash of its parameters, excluding $authAddr$, with the user's private key. The $authAddr$ parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{sec:dual_authoring} for more details. The signature is represented by the $v$, $r$, and $s$ fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
+To ensure the origin of the order, it is signed against the hash of its parameters, excluding \verb|authAddr|, with the user's private key. The \verb|authAddr| parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{sec:dual_authoring} for more details. The signature is represented by the \verb|v|, \verb|r|, and \verb|s| fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its wh	ole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
 
 
-UDOM doesn't include a price (which must be a floating-point number by nature), but, instead uses the term $rate$, which is expressed as $amountS \over amountB$. The rate is not a floating-point number but an expression that will only be evaluated with other unsigned integers on demand, to keep all intermediate results as unsigned integers and increase calculation accuracy. 
+UDOM doesn't include a price (which must be a floating-point number by nature), but, instead uses the term \verb|rate|($r$), which is expressed as $\verb|amountS|/\verb|amountB|$. The rate is not a floating-point number but an expression that will only be evaluated with other unsigned integers on demand, to keep all intermediate results as unsigned integers and increase calculation accuracy. 
 
 \subsubsection{Buy Amounts}
-When a miner ring-matches orders, it's possible that a better rate will be executable, allowing you to get more $tokenB$ than the $amountB$ you specified. However, if $buyNoMoreThanAmountB$ is set to $true$, the protocol ensures you receive exactly $amountB$ of $tokenB$. Thus, UDOM's $buyNoMoreThanTokenB$ parameter determines when an order is considered completely filled. $buyNoMoreThanTokenB$ applies a cap on either $amountS$ or $amountB$, and allows users to express more granular trade intentions than traditional buy/sell orders.
+When a miner ring-matches orders, it's possible that a better rate will be executable, allowing you to get more \verb|tokenB| than the \verb|amountB| you specified. However, if \verb|buyNoMoreThanAmountB| is set to \verb|True|, the protocol ensures you receive exactly \verb|amountB| of \verb|tokenB|. Thus, UDOM's \verb|buyNoMoreThantokenB| parameter determines when an order is considered completely filled. \verb|buyNoMoreThantokenB| applies a cap on either \verb|amountS| or \verb|amountB|, and allows users to express more granular trade intentions than traditional buy/sell orders.
 
-Example: with amountS = 10 and amountB = 2, r = 10/2 = 5. Thus the user is willing to sell 5 tokenS for each tokenB. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 tokensB instead of 2. However, if the user only wants 2 tokensB and set the buyNoMoreThanAmountB flag to true, the LPSC performs the transaction at a rate of 4 and the user sells 4 tokenS for each tokenB, effectively saving 2 tokenS. Keep in mind this does not take into account miners' fees (See \ref{sec:fee_model}).
+Example: with \verb|amountS| = 10 and \verb|amountB| = 2, $r$ = 10/2 = 5. Thus the user is willing to sell 5 \verb|tokenS| for each \verb|tokenB|. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 \verb|tokenB| instead of 2. However, if the user only wants 2 \verb|tokenB| and set the \verb|buyNoMoreThanAmountB| flag to \verb|True|, the LPSC performs the transaction at a rate of 4 and the user sells 4 \verb|tokenS| for each \verb|tokenB|, effectively saving 2 \verb|tokenS|. Keep in mind this does not take into account miners' fees (See \ref{sec:fee_model}).
 
 If we use
-
 \begin{verbatim}
 	      Order(amountS,tokenS,
 	            amountB,tokenB,
-	            buyNoMoreThanTokenB)
+	            buyNoMoreThantokenB)
 \end{verbatim}
 
 to represent a order in a simplified form, then for ETH/USD markets on a traditional exchange, traditional buy-sell modeling can express the 1st and the 3rd order below, but not the other two:
 
 \begin{enumerate}
-	\item User wants to sell 10 ETH at price 300 USD/ETH. This order can expressed as $Order(10, ETH, 3000, USD, false)$.
-	\item User wants to sell ETH at price 300 USD/ETH to get 3000 USD. This order can expressed as $Order(10, ETH, 3000, USD, true)$.
-	\item User wants to buy 10 ETH at price 300 USD/ETH, This order can expressed as $Order(3000, USD, 10, ETH, true)$.
-	\item User wants to spend 3000 USD to buy as many ETH as possible at price 300 USD/ETH, This order can expressed as $Order(3000, USD, 10, ETH, false)$.
+	\item User wants to sell 10 ETH at price 300 USD/ETH. This order can expressed as \verb|Order(10, ETH, 3000, USD, false)|.
+	\item User wants to sell ETH at price 300 USD/ETH to get 3000 USD. This order can expressed as \verb|Order(10, ETH, 3000, USD, true)|.
+	\item User wants to buy 10 ETH at price 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, true)|.
+	\item User wants to spend 3000 USD to buy as many ETH as possible at price 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, false)|.
 \end{enumerate}
 
 
@@ -601,7 +600,7 @@ to represent a order in a simplified form, then for ETH/USD markets on a traditi
 
 \subsection{Ring Verification\label{sec:ring_verification}}
 
-LPSC does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. This is done by miners for two main reasons: solidity does not have support for floating point math, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
+LPSC does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. This is done by miners for two main reasons: solidity does not have support for floating point math, especially $pow(x, 1/n)$, and it is desirable for the computation to be made off-chain to save gas.
 
 \subsubsection{Sub-Ring Checking\label{sec:sub_ring_check}}
 This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempting to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-ring. To check this, the LPSC ensures a token cannot be in a buy or sell position twice. In the below diagram, we can see that tokenA is a sell token twice and a buy token twice, which would be disallowed. 
@@ -788,9 +787,9 @@ circle/.style={
 \end{figurehere}
 \end{center}
 
-To make the transactions, the LPSC uses the $TokenTransferDelegate$ smart contract. The introduction of such a delegate makes upgrading the protocol smart contract easier as all orders only need to authorize this delegate instead of different versions of the protocol.
+To make the transactions, the LPSC uses the \verb|TokenTransferDelegate| smart contract. The introduction of such a delegate makes upgrading the protocol smart contract easier as all orders only need to authorize this delegate instead of different versions of the protocol.
 
-For each order in the ring, a payment of $tokenS$ is made to the following order. Then the miner's fee is paid depending on the fee model chosen by the miner. An $OrderFilled$ event is then emitted. Finally, once all the transactions are made, a $RingMined$ event is emitted.
+For each order in the ring, a payment of \verb|tokenS| is made to the following order. Then the miner's fee is paid depending on the fee model chosen by the miner. An \verb|OrderFilled| event is then emitted. Finally, once all the transactions are made, a \verb|RingMined| event is emitted.
 
 \subsubsection{Emitted Events\label{sec:events}}
 
@@ -923,25 +922,25 @@ LRx tokens will be used to effectuate protocol updates through decentralized gov
 
 In decentralized exchanges, front-running is when someone tries to copy another node's ring solution, and have it mined before the original transaction that is in the pending transaction pool (mempool). This can be achieved by specifying a higher transaction fee (gas price). The major scheme of front-running in Loopring (and any protocol for order-matching) are order-filch: when a front-runner steals one or more orders from a pending ring settlement transaction; and Ring-filch: when a front-runner steals the entire ring from the pending transaction.
 
-When a submitRing transaction is not confirmed and still in the pending transaction pool, anyone can easily spot such a transaction and replace $miner\_address$ with their own address (the filcher\_address) , then they can re-sign the payload with filcher\_address to replace the ring's signature. The fincher can set a higher gas price and submit a new transaction hoping block miners will pick his new transaction into the next block instead of the original submitRing transaction.
+When a submitRing transaction is not confirmed and still in the pending transaction pool, anyone can easily spot such a transaction and replace \verb|minerAddress| with their own address (the \verb|filcherAddress|) , then they can re-sign the payload with \verb|filcherAddress| to replace the ring's signature. The fincher can set a higher gas price and submit a new transaction hoping block miners will pick his new transaction into the next block instead of the original submitRing transaction.
 
-Previous solutions to this problem had important downsides (v1.1): requiring more transactions and thus cost miners more gas; and taking at least twice the blocks to settle a ring.  Our new solution involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for mining.
+Previous solutions to this problem had important downsides: requiring more transactions and thus cost miners more gas; and taking at least twice the blocks to settle a ring.  Our new solution involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for mining.
 
 How it works:
 
 \begin{enumerate}
 
-	\item For each order, the wallet software will generate a random public-key/private-key pair, and put the key pair into the order's JSON snippet. (An alternative is to use the address derived from the public-key instead of the public-key itself to reduce byte size. We use $authAddr$ to represent such an address, and $authKey$ to represent $authAddr$'s matching private-key).
+	\item For each order, the wallet software will generate a random public-key/private-key pair, and put the key pair into the order's JSON snippet. (An alternative is to use the address derived from the public-key instead of the public-key itself to reduce byte size. We use \verb|authAddr| to represent such an address, and \verb|authKey| to represent \verb|authAddr|'s matching private-key).
 
-	\item All fields in the order except $authKey$ is signed using the $owner$ address's private-key (not $authKey$) as shown in the image below.
+	\item All fields in the order except \verb|authKey| is signed using the \verb|owner| address's private-key (not \verb|authKey|) as shown in the image below.
 
-	\item The wallet will send the order, together with the $authKey$ to miners (relays) for matching.The miner will verify that $authKey$ and $authAddr$ are correctly paired and the order's signature is valid with respect to owner\_address.
+	\item The wallet will send the order, together with the \verb|authKey| to miners (relays) for matching.The miner will verify that \verb|authKey| and \verb|authAddr| are correctly paired and the order's signature is valid with respect to owner\_address.
 
-	\item When a ring is identified, the miner will use each order's $authKey$ to sign the ring's hash, $miner\_address$, and all the mining parameters. In the example below, the ring contains 3 orders, therefore there will be 3 signatures by the 3 $authKey$s. We call these signatures the $auth\_signature$s. The miner also needs to sign the ring's hash together with all mining parameters using $miner\_address$'s private-key.
+	\item When a ring is identified, the miner will use each order's \verb|authKey| to sign the ring's hash, \verb|minerAddress|, and all the mining parameters. In the example below, the ring contains 3 orders, therefore there will be 3 signatures by the 3 \verb|authKey|s. We call these signatures the \verb|authSignature|s. The miner also needs to sign the ring's hash together with all mining parameters using \verb|minerAddress|'s private-key.
 
-	\item The miner calls the submitRing function with all the parameters, as well as the 3 extra $auth\_signature$s. Notice that $authKey$s are NOT part of the on-chain transaction and thus remain unknown to people other than the relay itself, as shown in the image below.
+	\item The miner calls the submitRing function with all the parameters, as well as the 3 extra \verb|authSignature|s. Notice that \verb|authKey|s are NOT part of the on-chain transaction and thus remain unknown to people other than the relay itself, as shown in the image below.
 
-	\item The Loopring Protocol will now verify each $auth\_signature$ against the corresponding $authAddr$ of each order, and reject the ring if any $auth\_signature$ is invalid.
+	\item The Loopring Protocol will now verify each \verb|authSignature| against the corresponding \verb|authAddr| of each order, and reject the ring if any \verb|authSignature| is invalid.
  
 \end{enumerate}
 
@@ -949,9 +948,9 @@ The result is that now:
 
 \begin{itemize}
 
-	\item  The order’s signature (by the private-key of the $owner\_address$) guarantees the order cannot be modified, including the $authAddr$.
-	\item  The miner’s signature (by the private-key of the $miner\_address$) guarantees nobody can use his identity to mine a ring.
-	\item  The $auth\_signature$s guarantees the entire ring cannot be modified, including $miner\_address$. And since ring-filchers do not have access to $authKey$s, they cannot re-generate a new set of $auth\_signature$s thus are unable to generate a filch transaction.
+	\item  The order’s signature (by the private-key of the \verb|owner| address) guarantees the order cannot be modified, including the \verb|authAddr|.
+	\item  The miner’s signature (by the private-key of the \verb|minerAddress|) guarantees nobody can use his identity to mine a ring.
+	\item  The \verb|authSignature|s guarantees the entire ring cannot be modified, including \verb|minerAddress|. And since ring-filchers do not have access to \verb|authKey|s, they cannot re-generate a new set of \verb|authSignature|s thus are unable to generate a filch transaction.
 
 \end{itemize}
 
@@ -993,15 +992,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 \end{multicols}
 
 \newpage
-
-
-
-
-
-
-
-
-
 
 
 \begin{figure}[h]
@@ -1060,41 +1050,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 \caption{FOSS in Chrome influences industry structure by increasing competition}
 \label{fig:6forces}
 \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \begin{appendices}
 
