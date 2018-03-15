@@ -500,8 +500,9 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 \node [steps, right of=user2, xshift=-0.6cm] () {1};
 \node [steps, left of=user2, xshift=0.8cm] () {2};
 \node [steps, left of=relay2, xshift=0.3cm, yshift=1cm] () {3};
-\node [steps, below of=relay2, xshift=0.3cm, yshift=-0.8cm] () {4};
-\node [steps, right of=account3, xshift=-0.6cm] (step5) {5};
+\node [steps, left of=relay1, xshift=3.3cm, yshift=-1.6cm] () {4};
+\node [steps, below of=relay2, xshift=0.3cm, yshift=-0.8cm] () {5};
+\node [steps, right of=account3, xshift=-0.6cm] (step5) {6};
 
  \draw [bend right]  (psc) to node [auto, scale=0.7] {settle} (step5) [label]{};
  
