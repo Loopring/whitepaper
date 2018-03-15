@@ -588,10 +588,10 @@ If we use
 to represent a order in a simplified form, then for ETH/USD markets on a traditional exchange, traditional buy-sell modeling can express the 1st and the 3rd order below, but not the other two:
 
 \begin{enumerate}
-	\item User wants to sell 10 ETH at price 300 USD/ETH. This order can expressed as \verb|Order(10, ETH, 3000, USD, false)|.
-	\item User wants to sell ETH at price 300 USD/ETH to get 3000 USD. This order can expressed as \verb|Order(10, ETH, 3000, USD, true)|.
-	\item User wants to buy 10 ETH at price 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, true)|.
-	\item User wants to spend 3000 USD to buy as many ETH as possible at price 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, false)|.
+	\item User wants to sell 10 ETH at price 300 USD/ETH. This order can expressed as \verb|Order(10, ETH, 3000, USD, False)|.
+	\item User wants to sell ETH at price 300 USD/ETH to get 3000 USD. This order can expressed as \verb|Order(10, ETH, 3000, USD, True)|.
+	\item User wants to buy 10 ETH at price 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, True)|.
+	\item User wants to spend 3000 USD to buy as many ETH as possible at price 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, False)|.
 \end{enumerate}
 
 
