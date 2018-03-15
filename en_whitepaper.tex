@@ -274,9 +274,9 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \begin{itemize}
 
-\item \textbf{Wallets}: A common wallet service or interface that gives users access to their tokens and a way to send orders to the Loopring network. Wallets will be incentivized to produce orders by sharing fees (see section \ref{sec:token}).
+\item \textbf{Wallets}: A common wallet service or interface that gives users access to their tokens and a way to send orders to the Loopring network. Wallets will be incentivized to produce orders by sharing fees with miners (see section \ref{sec:token}). We believe the future of trading will take place within the safe confines of individual user's wallets; connecting these liquidity pools through our protocol is paramount.
 
-\item \textbf{Relays / Ring Miners}: Relays are nodes that form a decentralized network for order propagation. They maintain public order books and trade history and broadcast new orders to other relays via any arbitrary off-chain medium. Ring-mining is a feature of relays. It is computationally heavy and is done completely off-chain. Ring-mining produces Order Rings: rings of between 2 and 10 tokens created by stitching together disparate orders. Relays are free in how they choose to communicate with one another. 
+\item \textbf{Relays / Ring Miners}: Relays are nodes that form a decentralized network for order propagation. They maintain public order books and trade history and broadcast new orders to other relays via any arbitrary off-chain medium. Ring-mining is a feature of relays. It is computationally heavy and is done completely off-chain. Ring-mining produces Order Rings: rings of between 2 and 10 orders created by stitching together disparate orders. Relays are free in how they choose to communicate with one another. 
 
 \item \textbf{Consortium Liquidity Sharing Blockchain}: TODO(daniel)
 
@@ -298,7 +298,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \item \textbf{Ring-mining (order matching)}: Ring Miners receive the order and add it to their order book. Each miner tries to fill it fully or partially at the given exchange rate or better by ring-matching it with multiple other orders. Ring-matching is the main reason why the protocol is able to provide high liquidity over any pair. If the executed rate is better than what the user asked for, the savings (margin) are shared amongst all orders in the ring. As a reward (fee), the miner can choose between claiming the Margin Split and giving back the LRx to the user, or just keeping the LRx fee.
 
-\item \textbf{Verification \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract automatically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC is insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and cannot be reversed.
+\item \textbf{Verification \& Settlement}: The ring is received by the Loopring Smart Contract. It makes multiple checks to verify the miner's supplied data and determines if the ring can be settled fully or partially (depending on the fill rate of orders in the ring and the tokens in the users' wallets). If all checks are successful, the contract atomically makes the token transfers to the users and pays the miner's fees at the same time. If the sender's balance as determined by the LSC is insufficient, it will be considered scaled-down. A scaled-down order is not the same as a cancelled order: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, while cancellation is a one way manual operation and cannot be reversed.
 
 \end{enumerate}
 
@@ -309,7 +309,7 @@ It's important to note that Loopring's open standard allows participants signifi
 Relays can design their order books in any number of ways to display and match users' trades. A first implementation of our own order book follows an OTC model, where limit orders are ranked or positioned based on price alone. Timestamps of orders, in other words, have no bearing on the order book. However, a relay is free to design their order book in such a way as to emulate a typical centralized exchange's matching engine, where orders are ranked by price, but with a timestamp respecting filter as well. If a relay was inclined to offer this type of order book, they can own/integrate with a wallet, and have those wallet orders sent solely to the single relay, who would then be able to match orders based on time. Any such configuration is possible. 
 
 \subsection{Liquidity Sharing\label{sec:liquidity_sharing}}
-Relays are similarly free to design how they share liquidity and orders with each other. Our consortium blockchain is but one solution to accomplish this, and the ecosystem is free to network and communicate as they wish. Besides joining a consortium blockchain, they can build and manage their own, creating rules/incentives as they see fit. Relays can also work solo, as seen in the time-sensitive wallet implementation above. Of course, there are clear advantages in communicating with other relays in pursuit of network effects, however, different business models could merit peculiar sharing designs. 
+Relays are similarly free to design how they share liquidity and orders with each other. Our consortium blockchain is but one solution to accomplish this, and the ecosystem is free to network and communicate as they wish. Besides joining a consortium blockchain, they can build and manage their own, creating rules/incentives as they see fit. Relays can also work solo, as seen in the time-sensitive wallet implementation above. Of course, there are clear advantages in communicating with other relays in pursuit of network effects, however, different business models could merit peculiar sharing designs and split fees in any number of ways. 
 
 
 \section{Protocol Specification\label{sec:protocol}}
@@ -687,12 +687,12 @@ The consequences are:
 
 It should be noted that if the LRx fee is non-zero, no matter which option the miner chooses, there will always be a transfer of LRx between the miner and the order's sender. Either the miner earns the LRx fee, or pays the LRx fee back to the sender to take the margin split.
 
-Ring miners will share a certain percentage of fees with wallets. When a user places an order through a wallet and gets filled, the wallet is rewarded with a portion of the fees or margin split. Wallets represent a primary target for protocol integration as they have the user base, but little source of income. 
+Ring miners will share a certain percentage of fees with wallets. When a user places an order through a wallet and gets filled, the wallet is rewarded with a portion of the fees or margin split. Wallets represent a primary target for Loopring protocol integration as they have the user base, but little source of income.
 
 \subsection{Decentralized Governance}
-LRx tokens are used to align the financial incentives of the various participants in the network. Such alignment is necessary for broad adoption of the protocol, whose success rests largely on improving liquidity in a robust decentralized ecosystem.
+At its root, the Loopring protocol is a social protocol in the sense that it relies on coordination amongst members to operate effectively towards a goal. This is not dissimilar to cryptoeconomic protocols at large, and indeed, its usefulness is largely protected by the same mechanisms of coordination problems, grim trigger equilibrium, and bounded rationality. To this end, LRx tokens are not only used to pay fees, but also to align the financial incentives of the various participants in the network. Such alignment is necessary for broad adoption of any protocol, but is particularly acute for exchange protocols, given that success rests largely on improving liquidity in a robust decentralized ecosystem.
 
-LRx tokens will be used to effectuate protocol updates through decentralized governance. Smart contract upgrades will be voted on by token holders to dissuade rogue forks from potentially siphoning off liquidity through incompatibility. Upgradeability is crucial to the protocol's success as it must adapt to market demands, and the changing underlying blockchains. Decentralized governance will allow for continuous updates to be integrated securely into the protocol without disrupting dApps or end users.
+LRx tokens will be used to effectuate protocol updates through decentralized governance. Smart contract updates will be voted on by token holders to dissuade rogue forks from potentially siphoning off liquidity through incompatibility. Given that smart contracts cannot be altered once deployed, there is a risk that dApps or end users continue to interact with deprecated versions and preclude themselves from the updated contract. Upgradeability is crucial to the protocol's success as it must adapt to market demands, and the changing underlying blockchains. Decentralized governance by LRx token holders will allow for smart contract updates to be integrated securely into the protocol without disrupting dApps or end users. At first, this will be done through a simple multisignature smart contract.
 
 \section{Fraud and Attack Protections}
 
@@ -907,7 +907,7 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 % impl
 \node [comment, below=0.25 of impl] (comment-impl) {- Validates order-rings\\
 - Transfers tokens for settlement\\
-- Omits events};
+- Emits events};
 
 % nameregistry
 \node [comment, below=0.25cm of nameregistry]{- Registers wallets and relays};
