@@ -338,6 +338,17 @@ The following ecosystem participants jointly provide all functionalities a centr
 		minimum width=12mm,
 		fill=white
 	},
+	steps/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+%		minimum height=12mm,
+%		minimum width=12mm,
+		fill=black,
+		text=white
+	},
 	account/.style={
 		circle,
 		scale=0.7,
@@ -486,6 +497,14 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 % \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 B}} (order1);
 % \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 C}} (order2);
 
+\node [steps, right of=user2, xshift=-0.6cm] () {1};
+\node [steps, left of=user2, xshift=0.8cm] () {2};
+\node [steps, left of=relay2, xshift=0.3cm, yshift=1cm] () {3};
+\node [steps, below of=relay2, xshift=0.3cm, yshift=-0.8cm] () {4};
+\node [steps, right of=account3, xshift=-0.6cm] (step5) {5};
+
+ \draw [bend right]  (psc) to node [auto, scale=0.7] {settle} (step5) [label]{};
+ 
 \end{tikzpicture}
 
 \caption{Exchange Process}
