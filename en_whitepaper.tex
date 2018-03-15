@@ -346,7 +346,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 %		text width=5cm,
 		minimum height=12mm,
 		minimum width=12mm,
-		fill=gray!20
+		fill=white
 	},
 	label/.style={
 	  scale=0.7
@@ -357,8 +357,8 @@ The following ecosystem participants jointly provide all functionalities a centr
  \node [role] (user1)  {user X};
  \node [role, below of=user1] (user2)  {user Y};
  \node [role, below of=user2] (user3)  {user Z};
- \node [role, below of=user3] (relay1)  {Relay M};
- \node [role, below of=relay1] (relay2)  {Relay N};
+ \node [role, below of=user3, fill=gray!20] (relay1)  {Relay M};
+ \node [role, below of=relay1, fill=gray!20] (relay2)  {Relay N};
 
  
  \node [order, left of=user1, xshift=-1cm] (order1) 
@@ -370,11 +370,14 @@ The following ecosystem participants jointly provide all functionalities a centr
   \textbf{amountB: 2 B}
  \end{tabular}
  };
- \draw [draw, ->]  (user1) -- (order1) [label]{};
- \draw [draw, ->]  (order1) |- (relay1) [label]{};
- \draw [draw, ->]  (order1) |- (relay2) [label]{};
  
- \node [order, left of=user2, xshift=-1.5cm] (order2) 
+ \draw [draw, ->]  (user1) -- (order1) [label]{};
+ \draw [bend right,->] (order1) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order1) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order1) |- (relay1) [label]{};
+% \draw [draw, ->]  (order1) |- (relay2) [label]{};
+ 
+ \node [order,left of=user2, xshift=-1.5cm] (order2) 
  {%
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
@@ -384,9 +387,11 @@ The following ecosystem participants jointly provide all functionalities a centr
  \end{tabular}
  };
  \draw [draw, ->]  (user2) -- (order2) [label]{};
- \draw [draw, ->]  (order2) |- (relay1) [label]{};
- \draw [draw, ->]  (order2) |- (relay2) [label]{};
- 
+ \draw [bend right,->] (order2) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order2) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order2) |- (relay1) [label]{};
+% \draw [draw, ->]  (order2) |- (relay2) [label]{};
+% 
 \node [order, left of=user3, xshift=-2cm] (order3) 
  {%
  \begin{tabular}{l}
@@ -397,14 +402,17 @@ The following ecosystem participants jointly provide all functionalities a centr
  \end{tabular}
  };
  \draw [draw, ->]  (user3) -- (order3) [label]{};
- \draw [draw, ->]  (order3) |- (relay1) [label]{};
- \draw [draw, ->]  (order3) |- (relay2) [label]{};
+ \draw [bend right,->] (order3) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order3) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order3) |- (relay1) [label]{};
+% \draw [draw, ->]  (order3) |- (relay2) [label]{};
  
 % // The Ring
 \node [order, 
 yshift=-1.5cm,
 xshift=-2.25cm,
 below of=relay2,
+fill=gray!10,
 minimum width=4.2cm,
 minimum height=5cm] (ring) {};
 
@@ -437,34 +445,41 @@ minimum height=5cm] (ring) {};
  \end{tabular}
  };
  
- 
  % // The blockchain
 \node [
 rectangle,
-fill=gray!10, 
+fill=gray!20, 
 right of=user1,
 yshift=-4.5cm,
 xshift=0.1cm,
-minimum width=1.8cm,
-minimum height=11cm] (blockchain) {};
+scale=0.7,
+minimum width=3.2cm,
+minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 % blockchain accounts
-  \node [account, right of=user1, xshift=1cm] (account1)  {accnt X};
-  \node [account, right of=user2, xshift=1cm] (account2)  {accnt Y};
-  \node [account, right of=user3, xshift=1cm] (account3)  {accnt Z};
-  \node [account, right of=relay1, xshift=1cm] (account4)  {accnt M};
-  \node [account, right of=relay2, xshift=1cm] (account5)  {accnt N};
+  \node [account, right of=user1, xshift=1cm] (account1)  {accountX};
+  \node [account, right of=user2, xshift=1cm] (account2)  {accountY};
+  \node [account, right of=user3, xshift=1cm] (account3)  {accountZ};
+  \node [account, right of=relay1, xshift=1cm] (account4)  {accountM};
+  \node [account, right of=relay2, xshift=1cm] (account5)  {accountN};
   \node [account, double, below of=account5, yshift=-1.5cm] (psc)  {Loopring PSC};
   
  \draw [draw, ->]  (user1) -- (account1) [label]{};
  \draw [draw, ->]  (user2) -- (account2) [label]{};
  \draw [draw, ->]  (user3) -- (account3) [label]{};
- \draw [draw, ->]  (relay1) -- (account4) [label]{};
- \draw [draw, ->]  (relay2) -- (account5) [label]{};
- \draw [draw, <->, dashed]  (relay1) -- (relay2) [label]{};
- \draw [draw, ->]  (relay1) -- (ring) [label]{};
- \draw [draw, ->]  (relay2) -- (ring) [label]{};
- \draw [draw, ->]  (ring) -- (psc) [label]{};
-
+% \draw [draw, ->]  (relay1) -- (account4) [label]{};
+% \draw [draw, ->]  (relay2) -- (account5) [label]{};
+ \draw [draw, dotted, thick]  (relay1) to node [auto, scale=0.7] {share liquidity}  (relay2) [label]{};
+% \draw [draw, ->]  (relay1) -- (ring) [label]{};
+ \draw [draw, ->]  (relay2) to node [auto, scale=0.7, xshift=-1.8cm, yshift=0.3cm] {ring-mining}  (ring) [label]{};
+ \draw [draw, ->]  (ring) to node [auto, scale=0.7] {submitRing} (psc) [label]{};
+ 
+ \draw [bend left,->] (account1) to node [auto, scale=0.7] {\textbf{7898 A}} (account3);
+ \draw [bend left,->] (account2) to node [auto, scale=0.7] {\textbf{8 B}} (account1);
+ \draw [bend left,->] (account3) to node [auto, scale=0.7] {\textbf{98 C}} (account2);
+ 
+ \draw [bend left,->, dashed] (account1) to node [auto, scale=0.7] {} (account5);
+ \draw [bend left,->, dashed] (account2) to node [auto, scale=0.7] {} (account5);
+ \draw [bend left,->, dashed] (account3) to node [auto, scale=0.7, xshift=.5cm] {\textbf{Fee}} (account5);
   
   
 % \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
@@ -473,7 +488,7 @@ minimum height=11cm] (blockchain) {};
 
 \end{tikzpicture}
 
-\caption{Loopring Trading Process}
+\caption{Exchange Process}
 \label{fig:process}
 \end{figurehere}
 \end{center}
