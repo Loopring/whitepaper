@@ -33,6 +33,7 @@
 \usepackage{pgf}
 \usepackage{tikz}
 \usepackage{dirtree}
+\usepackage[style=american]{csquotes}
 \usepackage{amsfonts}
 \usepackage{tikz}
 \usepackage{tkz-graph}
@@ -116,7 +117,7 @@
 
 
 \begin{abstract}
-Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols include the ability for users' orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and allowing for price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum \cite{buterin2017ethereum} \cite{wood2014ethereum} and Qtum \cite{dai2017smart} with NEO \cite{atterlonn2018distributed} also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading.
+Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols include the ability for orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and allowing for price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum \cite{buterin2017ethereum} \cite{wood2014ethereum} and Qtum \cite{dai2017smart} with NEO \cite{atterlonn2018distributed} also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading.
 \end{abstract}
 
 
@@ -124,9 +125,9 @@ Loopring is an open protocol for building decentralized exchanges. Loopring oper
 \begin{multicols}{2}
 \section{Introduction\label{sec:introduction}}
 
-With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new token \verb|A|re introduced - including the tokenization of traditional assets - this need is magnified. Whether exchanging tokens for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem. Indeed, there is a potential energy in assets \cite{desotocapital}, and realizing this energy - unlocking capital - requires not only asserting ownership, which blockchains have allowed for with immutability,  but the ability to freely transfer and transform these assets.
+With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new tokens are introduced - including the tokenization of traditional assets - this need is magnified. Whether exchanging tokens for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem. Indeed, there is a potential energy in assets \cite{desotocapital}, and realizing this energy - unlocking capital - requires not only asserting ownership, which blockchains have allowed for with immutability,  but the ability to freely transfer and transform these assets.
  
-As such, the trustless exchange of tokens (value) is a compelling use case for blockchain technology. Until now, however, crypto enthusiasts have largely settled for trading tokens on traditional centralized exchanges. The Loopring protocol is needed because, just as Bitcoin \cite{nakamoto2008bitcoin} dutifully pointed out that, in regards to peer-to-peer electronic cash, "the main benefits are lost if a trusted third party is still required to prevent double-spending", so too are the main benefits of decentralized assets lost if they must pass through trusted, gated, centralized exchanges.
+As such, the trustless exchange of tokens (value) is a compelling use case for blockchain technology. Until now, however, crypto enthusiasts have largely settled for trading tokens on traditional centralized exchanges. The Loopring protocol is needed because, just as Bitcoin \cite{nakamoto2008bitcoin} dutifully pointed out that, in regards to peer-to-peer electronic cash, \enquote{the main benefits are lost if a trusted third party is still required to prevent double-spending}, so too are the main benefits of decentralized assets lost if they must pass through trusted, gated, centralized exchanges.
 
 Trading decentralized tokens on centralized exchanges doesn't make sense from a philosophical perspective, as it fails to uphold the virtues these decentralized projects espouse. There are also numerous practical risks and limitations in using centralized exchanges which are described below. Decentralized exchanges (DEXs) \cite{schuh2015bitshares} \cite{bancor} \cite{kyber} have sought to address these issues, and in many cases have succeeded in alleviating security risks by using blockchains for disintermediation. However, as DEX capability becomes important infrastructure for the new economy, there is substantial room for improvement in performance. Loopring aims to provide critical tools for said infrastructure with its dApp agnostic open protocol. 
 
@@ -135,22 +136,22 @@ Trading decentralized tokens on centralized exchanges doesn't make sense from a 
 \subsection{Inadequacies of Centralized Exchanges}
 The three primary risks of centralized exchanges are; 1) Lack of security, 2) Lack of transparency, and 3) Lack of liquidity.
 
-\textbf{Lack of Security} arises from users typically surrendering control of their private keys (funds) to one centralized entity. This exposes users to the possibility that centralized exchanges fall prey to malicious hackers. The security and hacking risks facing all centralized exchanges are well known \cite{coincheckhack}  \cite{mcmillan2014inside}, yet are often accepted as "table stakes" for token trading. Centralized exchanges continue to be honeypots for hackers to attack as their servers have custody over millions of dollars of users' funds. Exchange developers can also make honest, accidental errors with user funds. Users are simply not in control of their own tokens when deposited at a centralized exchange.
+\textbf{Lack of Security} arises from users typically surrendering control of their private-keys (funds) to one centralized entity. This exposes users to the possibility that centralized exchanges fall prey to malicious hackers. The security and hacking risks facing all centralized exchanges are well known \cite{coincheckhack}  \cite{mcmillan2014inside}, yet are often accepted as \enquote{table stakes} for token trading. Centralized exchanges continue to be honeypots for hackers to attack as their servers have custody over millions of dollars of users' funds. Exchange developers can also make honest, accidental errors with user funds. Users are simply not in control of their own tokens when deposited at a centralized exchange.
 
-\textbf{Lack of Transparency} exposes users to the risk of dishonest exchanges acting unfairly. The distinction here is by the exchange operator's malintentions since users are not truly trading their own assets on a centralized exchange, but rather, an IOU. When token \verb|A|re sent to the exchange's wallet, the exchange takes custody, and offers an IOU in its place. All trades are then effectively between users' IOUs. To withdraw, users redeem their IOU with the exchange, and receive their tokens to their external wallet address. Throughout this process there is a lack of transparency, and the exchange can shutdown, freeze your account, go bankrupt, etc. It is also possible that they use user assets for other purposes while in custody, such as lending them out to third parties. Lack of transparency can cost users without a total loss of funds, such as in higher trading fees, delays at peak demand, regulatory risk, and orders being front ran.
+\textbf{Lack of Transparency} exposes users to the risk of dishonest exchanges acting unfairly. The distinction here is by the exchange operator's malintentions since users are not truly trading their own assets on a centralized exchange, but rather, an IOU. When tokens are sent to the exchange's wallet, the exchange takes custody, and offers an IOU in its place. All trades are then effectively between users' IOUs. To withdraw, users redeem their IOU with the exchange, and receive their tokens to their external wallet address. Throughout this process there is a lack of transparency, and the exchange can shutdown, freeze your account, go bankrupt, etc. It is also possible that they use user assets for other purposes while in custody, such as lending them out to third parties. Lack of transparency can cost users without a total loss of funds, such as in higher trading fees, delays at peak demand, regulatory risk, and orders being front ran.
 
 \textbf{Lack of Liquidity.} From the point of view of exchange operators, fragmented liquidity inhibits entry by new exchanges because of two winner-takes-all scenarios. First, the exchange with the greatest number of available trading pairs wins, because users find it desirable to conduct all their trades on one exchange. Second, the exchange with the largest order book wins, because of favorable bid-ask spreads for each trading pair. This discourages competition from newcomers because it is difficult for them to build up initial liquidity. As a result, many exchanges command a high market share despite user complaints and even major hacking incidents. It's worth noting that as centralized exchanges win market share, they become an ever-larger hacking target. 
 
-From the point of view of users, fragmented liquidity significantly reduces user experience. In a centralized exchange, users are only able to trade within the exchange's own liquidity pools, against its own order book, and between its supported token pairs. To trade Token A for Token B, users must go to an exchange that supports both tokens or register at different exchanges, disclosing personal information. Users often need to execute preliminary or intermediate trades, typically against BTC or ETH, paying bid-ask spreads in the process. Finally, the order books may not be deep enough to complete the trade without material slippage. Even if the exchange purports to process large volumes, there is no guarantee that this volume and liquidity is not fake \cite{fakevolume}.
+From the point of view of users, fragmented liquidity significantly reduces user experience. In a centralized exchange, users are only able to trade within the exchange's own liquidity pools, against its own order book, and between its supported token pairs. To trade token \verb|A| for token \verb|B|, users must go to an exchange that supports both tokens or register at different exchanges, disclosing personal information. Users often need to execute preliminary or intermediate trades, typically against BTC or ETH, paying bid-ask spreads in the process. Finally, the order books may not be deep enough to complete the trade without material slippage. Even if the exchange purports to process large volumes, there is no guarantee that this volume and liquidity is not fake \cite{fakevolume}.
 
 The result is disconnected silos of liquidity and a fragmented ecosystem that resembles the legacy financial system, with significant trading volume centralized on few exchanges. The global liquidity promises of blockchains hold no merit within centralized exchanges.
 
 \subsection{Inadequacies of Decentralized Exchanges}
-Decentralized exchanges differ from centralized exchanges in part because users maintain control of their private keys (assets) by performing trades directly on the underlying blockchain. By leveraging the trustless technology of cryptocurrencies themselves, they successfully mitigate many of the abovementioned risks surrounding security. However, problems persist in regards to performance and structural limitations. 
+Decentralized exchanges differ from centralized exchanges in part because users maintain control of their private-keys (assets) by performing trades directly on the underlying blockchain. By leveraging the trustless technology of cryptocurrencies themselves, they successfully mitigate many of the abovementioned risks surrounding security. However, problems persist in regards to performance and structural limitations. 
 
-Liquidity often remains an issue as users must search for counterparties across disparate liquidity pools and standards. Fragmented liquidity effects are present if DEXs or dApps at large don't employ consistent standards to interoperate, and if orders are not shared/propagated across a wide network. The liquidity of limit order books, and, specifically, their resiliency - how fast filled limit orders are regenerated - can significantly affect optimal trading strategies \cite{limitorderliquidity}. The absence of such standards has resulted not only in reduced liquidity, but also exposure to an array of potentially insecure proprietary smart contracts.
+Liquidity often remains an issue as users must search for counterparties across disparate liquidity pools and standards. Fragmented liquidity effects are present if DEXs or dApps at large don't employ consistent standards to interoperate, and if orders are not shared/propagated across a wide network. The liquidity of limit order books, and, specifically, their resiliency -- how fast filled limit orders are regenerated -- can significantly affect optimal trading strategies \cite{limitorderliquidity}. The absence of such standards has resulted not only in reduced liquidity, but also exposure to an array of potentially insecure proprietary smart contracts.
 
-Furthermore, since trades are performed on chain, DEXs inherit the limitations of the underlying blockchain, namely: scalability, delays in execution (mining), and costly modifications to orders. Thus, blockchain order books do not scale particularly well, as executing code on the blockchain incurs a cost (gas), making multiple order-cancel cadences prohibitively expensive. 
+Furthermore, since trades are performed on chain, DEXs inherit the limitations of the underlying blockchain, namely: scalability, delays in execution (mining), and costly modifications to orders. Thus, blockchain order books do not scale particularly well, as executing code on the blockchain incurs a cost (gas), making multiple order-cancellation cadences prohibitively expensive. 
 
 Finally, because blockchain order books are public, the transaction to place an order is visible by miners as it awaits being mined into the next block, and placed into an order book. This delay exposes the user to the risk of being front run and having the price or execution move against him.
 
@@ -162,7 +163,7 @@ For the above reasons, purely blockchain-based exchanges have limitations that m
 Loopring is not a DEX, but a modular protocol for building DEXs on multiple blockchains. We disassemble the component parts of a traditional exchange and offer a set of public smart contracts and decentralized actors in its place. The roles in the network include wallets, Relays, liquidity-sharing consortium blockchains, order book browsers, Ring-Miners, and asset tokenization services. Before defining each, however, we should first understand what a Loopring compliant order looks like. 
 
 \subsection{Order Ring\label{sec:order_ring}}
-Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests, \verb|amountS|/\verb|amountB|, (amount to sell/buy)  instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
+Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM)\cite{coinport2014udom}. UDOM expresses orders as token exchange requests, \verb|amountS|/\verb|amountB|, (amount to sell/buy)  instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 16 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
 
 \begin{center}
 \begin{figurehere}
@@ -198,20 +199,20 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
   \node [order] (order2) 
  {%
  \begin{tabular}{l}
-  \textbf{ORDER 2}\\
+  \textbf{ORDER\#2}\\
   \textbf{owner: Y}\\
-  \textbf{amountS: 9  B}\\
-  \textbf{amountB: 12 C}
+  \textbf{amountS: 9B}\\
+  \textbf{amountB: 12C}
  \end{tabular}
  };
  
   \node [order, below of=order2, xshift=-3.5cm] (order1) 
  {%
  \begin{tabular}{l}
-  \textbf{ORDER 1}\\
+  \textbf{ORDER\#1}\\
   \textbf{owner: X}\\
-  \textbf{amountS: 10000 A}\\
-  \textbf{amountB: 2 B}
+  \textbf{amountS: 10000A}\\
+  \textbf{amountB: 2B}
  \end{tabular}
  };
  
@@ -219,16 +220,16 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
   \node [order, below of=order2, xshift=3.5cm] (order3) 
  {%
  \begin{tabular}{l}
-  \textbf{ORDER 3}\\
+  \textbf{ORDER\#3}\\
   \textbf{owner: Z}\\
-  \textbf{amountS: 100 C}\\
-  \textbf{amountB: 160 A}
+  \textbf{amountS: 100C}\\
+  \textbf{amountB: 160A}
  \end{tabular}
  };
  
- \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
- \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 B}} (order1);
- \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 C}} (order2);
+ \draw [draw,->] (order1) -- node [label] {\textbf{7898A}} (order3);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8B}} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98C}} (order2);
 
 \end{tikzpicture}
 
@@ -238,28 +239,28 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
 \end{center}
 
 
-Each order's token to sell is another order's token to buy. It creates a loop that allows each order to exchange their desired tokens without requiring an opposing order for its pair. Traditional order pair trades can, of course, still be executed, in what is essentially a special case of an Order Ring. 
+The above figure shows a ring of 3 orders. Each order's token to sell (\verb|tokenS|) is another order's token to buy (\verb|tokenB|). It creates a loop that allows each order to exchange their desired tokens without requiring an opposing order for its pair. Traditional order pair trades can, of course, still be executed, in what is essentially a special case of an Order Ring. 
 
-\begin{definition}[Order Ring] Let $C_{0}$, $C_{1}$, $\cdots$, $C_{n-1}$ be $n$ different kinds of token, $O_{0\rightarrow 1}$, $\cdots$, $O_{i\rightarrow i\oplus 1}$, $\cdots$, $O_{n-1 \rightarrow 0}$ be $n$ orders. Those orders can form a ring for trading:
+\begin{definition}[Order Ring] Let $C_{0}$, $C_{1}$, $\cdots$, $C_{n-1}$ be $n$ different tokens, $O_{0\rightarrow 1}$, $\cdots$, $O_{i\rightarrow i\oplus 1}$, $\cdots$, $O_{n-1 \rightarrow 0}$ be $n$ orders. Those orders can form a ring for trading:
 $$O_{0\rightarrow 1} \rightarrow \cdots \rightarrow O_{i\rightarrow i\oplus 1} \rightarrow \cdots \rightarrow O_{n-1\rightarrow 0} \text{, }$$
 where $n$ is the length of the ring, and $i\oplus 1 \equiv i+1 \mod n$.
 \end{definition}
 
-An Order Ring is valid when all component transactions can be executed at an exchange rate equal to or better than the original rate specified by the user. To verify ring validity, Loopring protocol smart contracts must receive Order Rings from miners where the product of the original exchange rates of all orders is equal to or greater than 1.
+An Order Ring is valid when all component transactions can be executed at an exchange rate equal to or better than the original rate specified implicitly by the user. To verify ring validity, Loopring protocol smart contracts must receive Order Rings from miners where the product of the original exchange rates of all orders is equal to or greater than 1.
 
-Let's assume Alice and Bob want to trade their token \verb|A| and verb|B|. Alice has 15 token \verb|A| and she wants 4 token \verb|B| for them; Bob has 10 token \verb|B|  and he wants 30 token \verb|A| for them.
+Let's assume Alice and Bob want to trade their token \verb|A| and \verb|B|. Alice has 15 token \verb|A| and she wants 4 token \verb|B| for them; Bob has 10 token \verb|B|  and he wants 30 token \verb|A| for them.
 
-Who is buying and who is selling? This depends only on the asset we fix to give price quotations. If token A is the reference, then Alice is buying token \verb|B| for ${15 \over 4} = 3.75$ XTA, while Bob is selling 10 token \verb|B| for ${30 \over 10} = 3.00$ XTA. In the case of fixing token B as reference we say that Alice is selling 15 token \verb|A| for ${4\over 15}=0.26666667$ XTB and Bob is buying 10 token \verb|A| for ${10 \over 30}=0.33333334$ XTB. Hence, who's the buyer or seller is arbitrary.
+Who is buying and who is selling? This depends only on the asset we fix to give price quotations. If token \verb|A| is the reference, then Alice is buying token \verb|B| for the price of ${15 \over 4} = 3.75$\verb|A|, while Bob is selling 10 token \verb|B| for the price of ${30 \over 10} = 3.00$\verb|A|. In the case of fixing token B as reference we say that Alice is selling 15 token \verb|A| for the price of ${4\over 15}=0.26666667$\verb|B| and Bob is buying 10 token \verb|A| for the price of ${10 \over 30}=0.33333334$\verb|B|. Hence, who's the buyer or seller is arbitrary.
 
-In the first situation Alice is willing to pay a higher price than the price Bob is selling his tokens for, while in the second situation Bob is willing to pay a higher price than the price Alice is selling her tokens for. It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the seller's price.
+In the first situation Alice is willing to pay a higher price ($3.75$\verb|A|) than the price Bob is selling his tokens for ($3.00$\verb|A|), while in the second situation Bob is willing to pay a higher price ($0.33333334$\verb|B|) than the price Alice is selling her tokens for ($0.26666667$\verb|B|). It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the seller's price.
 
 \begin{equation}
-{{15\over 4} \over {30\over 10}} = {15 \over 4} \cdot {10 \over 30} = {150 \over 120} = 1.25 > 1
+{{15\over 4} \over {30\over 10}} = {{10\over 30} \over {4\over 15}}={15 \over 4} \cdot {10 \over 30} == 1.25 > 1
 \end{equation}
 
-Thus, for a set of n orders to be able to be filled, fully or partially, we need to know if the product of each one of the exchange rates as buy orders results in a number greater or equal to 1. If so, all the n orders can be either partially, or totally filled \cite{supersymmetry}.
+Thus, for a set of $n$ orders to be able to be filled, fully or partially, we need to know if the product of each one of the exchange rates as buy orders results in a number greater or equal to 1. If so, all the $n$ orders can be either partially, or totally filled \cite{supersymmetry}.
 
-If we introduce a third counterparty, Charlie, such that  Alice wants to give $x_1$ token \verb|A| and receive $y_1$ token \verb|B|, Bob wants to give $x_2$ token \verb|B| and receive $y_2$ token \verb|C|, and Charlie wants to give $x_3$ token \verb|C| and receive $y_3$ token \verb|A|. The necessary token \verb|A|re present, and the trade is possible if,
+If we introduce a third counterparty, Charlie, such that  Alice wants to give $x_1$ token \verb|A| and receive $y_1$ token \verb|B|, Bob wants to give $x_2$ token \verb|B| and receive $y_2$ token \verb|C|, and Charlie wants to give $x_3$ token \verb|C| and receive $y_3$ token \verb|A|. The necessary tokens are present, and the trade is possible if:
 
 \begin{equation}
 {{x1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
@@ -299,7 +300,7 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \item \textbf{Smart contract authorization}: User Y wants to exchange token \verb|A|nd authorizes the LPSC to handle \verb|amountS| of token \verb|B| the user wants to sell. This does not lock the user's tokens, who remains free to move them while the order is processed.
 
-\item \textbf{Create order}: The current rate and order book for token \verb|B| vs token \verb|C|, are provided by Relays or other agents hooked up to the network, such as order book browsers. User \verb|Y| places an order (limit order) specifying his exchange rate (\verb|amountS| / \verb|amountB|) and other parameters through any integrated wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The order's data is signed with User \verb|Y|'s private key.
+\item \textbf{Create order}: The current rate and order book for token \verb|B| vs token \verb|C|, are provided by Relays or other agents hooked up to the network, such as order book browsers. User \verb|Y| places an order (limit order) specifying his exchange rate (\verb|amountS| / \verb|amountB|) and other parameters through any integrated wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The order's data is signed with User \verb|Y|'s private-key.
 
 \begin{center}
 \begin{figurehere}
@@ -579,14 +580,14 @@ An order is a pack of data that describes the intent of the user's trade. A Loop
     uint8   v;       
     bytes32 r;
     bytes32 s;
-    // Dual-Authoring private key,
+    // Dual-Authoring private-key,
     // not used for calculating order's hash.
     string  authKey;          
   }
 \end{verbatim}
 
 
-To ensure the origin of the order, it is signed against the hash of its parameters, excluding \verb|authAddr|, with the user's private key. The \verb|authAddr| parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{sec:dual_authoring} for more details. The signature is represented by the \verb|v|, \verb|r|, and \verb|s| fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
+To ensure the origin of the order, it is signed against the hash of its parameters, excluding \verb|authAddr|, with the user's private-key. The \verb|authAddr| parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{sec:dual_authoring} for more details. The signature is represented by the \verb|v|, \verb|r|, and \verb|s| fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
 
 
 
