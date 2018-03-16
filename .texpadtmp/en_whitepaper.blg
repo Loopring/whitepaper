@@ -2,17 +2,17 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: /Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux
 The style file: unsrt.bst
-Database file #1: ../whitepaper2.bib
-I was expecting a `,' or a `}'---line 27 of file ../whitepaper2.bib
+Database file #1: ../whitepaper.bib
+I was expecting a `,' or a `}'---line 27 of file ../whitepaper.bib
  :   
  :   howpublished = "\url{https://medium.com/@sylvainartplayribes/chasing-fake-volume-a-crypto-plague-ea1a3c1e0b5e}"
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-"}" immediately follows an entry type---line 27 of file ../whitepaper2.bib
+"}" immediately follows an entry type---line 27 of file ../whitepaper.bib
  :   howpublished = "\url{https://medium.com/@sylvainartplayribes/chasing-fake-volume-a-crypto-plague-ea1a3c1e0b5e
  :                                                                                                                }"
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 61 of file ../whitepaper2.bib
+I was expecting a `,' or a `}'---line 61 of file ../whitepaper.bib
  :   
  :   howpublished = "\url{https://vitalik.ca/general/2017/12/17/voting.html}"
 (Error may have been on previous line)
@@ -21,45 +21,45 @@ Warning--empty journal in nakamoto2008bitcoin
 Warning--empty author in bancor
 Warning--empty journal in mcmillan2014inside
 Warning--empty journal in limitorderliquidity
-You've used 20 entries,
+You've used 22 entries,
             1791 wiz_defined-function locations,
-            527 strings with 6106 characters,
-and the built_in function-call counts, 2661 in all, are:
-= -- 207
-> -- 103
+            535 strings with 6367 characters,
+and the built_in function-call counts, 2936 in all, are:
+= -- 230
+> -- 111
 < -- 0
-+ -- 46
-- -- 26
-* -- 59
-:= -- 440
-add.period$ -- 54
-call.type$ -- 20
-change.case$ -- 19
++ -- 50
+- -- 28
+* -- 65
+:= -- 487
+add.period$ -- 60
+call.type$ -- 22
+change.case$ -- 20
 chr.to.int$ -- 0
-cite$ -- 24
-duplicate$ -- 129
-empty$ -- 330
-format.name$ -- 26
-if$ -- 605
+cite$ -- 26
+duplicate$ -- 147
+empty$ -- 363
+format.name$ -- 28
+if$ -- 668
 int.to.chr$ -- 0
-int.to.str$ -- 20
-missing$ -- 10
-newline$ -- 97
-num.names$ -- 19
-pop$ -- 107
+int.to.str$ -- 22
+missing$ -- 13
+newline$ -- 107
+num.names$ -- 21
+pop$ -- 117
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 69
+skip$ -- 74
 stack$ -- 0
 substring$ -- 0
-swap$ -- 17
+swap$ -- 19
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 4
-while$ -- 19
-width$ -- 22
-write$ -- 188
+while$ -- 21
+width$ -- 24
+write$ -- 208
 (There were 3 error messages)

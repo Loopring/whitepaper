@@ -97,9 +97,21 @@ Fabian Vogelsteller.
 \newblock Erc: Token standard.
 \newblock {\em URL https://github.com /ethereum /EIPs /issues /20}, 2015.
 
+\bibitem{dannen2017introducing}
+Chris Dannen.
+\newblock {\em Introducing Ethereum and Solidity}.
+\newblock Springer, 2017.
+
 \bibitem{vitalikgovernance}
 Vitalik Buterin.
 \newblock Notes on blockchain governance, Accessed: 2018-03-05.
+
+\bibitem{dualauthor}
+Daniel Wang.
+\newblock Dual authoring — loopring’s solution to front-running.
+\newblock {\em URL
+  https://medium.com/loopring-protocol/dual-authoring-looprings-solution-to-front-running-d0fc9c348ef1},
+  2018.
 
 \bibitem{unenumerated2006}
 Nick Szabo.
