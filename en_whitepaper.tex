@@ -117,7 +117,7 @@
 
 
 \begin{abstract}
-Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols include the ability for orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, drastically improving liquidity, and allowing for price improvement possibility. Loopring also employs a robust and unique solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum \cite{buterin2017ethereum} \cite{wood2014ethereum} and Qtum \cite{dai2017smart} with NEO \cite{atterlonn2018distributed} also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading.
+Loopring is an open protocol for building decentralized exchanges. Loopring operates as a public set of smart contracts responsible for trade and settlement, with an off-chain group of actors aggregating and communicating orders. The protocol is free, extensible, and serves as a standardized building block for decentralized applications (dApps) that incorporate exchange functionality. Important improvements over current decentralized exchange protocols include the ability for orders to be mix-and-matched with other orders, obviating the constraints of two-token trading pairs, and drastically improving liquidity and price. Loopring also employs a unique and robust solution to prevent front-running: the unfair attempt to submit transactions into a block quicker than the original solution provider. Loopring is blockchain agnostic, and deployable on any blockchain with smart contract functionality. At the time of writing, it's operable on Ethereum \cite{buterin2017ethereum} \cite{wood2014ethereum} and Qtum \cite{dai2017smart} with NEO \cite{atterlonn2018distributed} also under construction. Its interoperable standards ensure trustless, decentralized, and anonymous trading.
 \end{abstract}
 
 
@@ -255,7 +255,7 @@ Who is buying and who is selling? This depends only on the asset we fix to give 
 In the first situation Alice is willing to pay a higher price ($3.75$\verb|A|) than the price Bob is selling his tokens for ($3.00$\verb|A|), while in the second situation Bob is willing to pay a higher price ($0.33333334$\verb|B|) than the price Alice is selling her tokens for ($0.26666667$\verb|B|). It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the seller's price.
 
 \begin{equation}
-{{15\over 4} \over {30\over 10}} = {{10\over 30} \over {4\over 15}}={15 \over 4} \cdot {10 \over 30} == 1.25 > 1
+{{15\over 4} \over {30\over 10}} = {{10\over 30} \over {4\over 15}}={15 \over 4} \cdot {10 \over 30} = 1.25 > 1
 \end{equation}
 
 Thus, for a set of $n$ orders to be able to be filled, fully or partially, we need to know if the product of each one of the exchange rates as buy orders results in a number greater or equal to 1. If so, all the $n$ orders can be either partially, or totally filled \cite{supersymmetry}.
@@ -521,9 +521,11 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 \end{center}
 
 
+
 \item \textbf{Ring-Mining (Order Matching)}:  Ring-miners try to fill the order fully or partially at the given exchange rate or better by matching it with multiple other orders. Ring-mining is the main reason why the protocol is able to provide high liquidity over any pair. If the executed rate is better than what user Y specified, margin is shared amongst all orders in the order-ring. As a reward, the ring-miner chooses between claiming part of the margin (Margin-Split, and giving back the LRx to the user), or simply keeping the LRx fee.
 
 \item \textbf{Verification \& Settlement}: The order-ring is received by LPSM. It makes multiple checks to verify the ring-miner supplied data and determines if the order-ring can be settled fully or partially (depending on the fill rate of orders in-ring and tokens in users' wallets). If all checks are successful, the contract atomically transfers the tokens to users and pays the ring-miner and wallet fees at the same time. If user \verb|Y|'s balance as determined by the LPSC is insufficient, it will be considered scaled-down: a scaled-down order will automatically scale up to its original size if sufficient funds are deposited to its address, unlike a cancellation, which is a one way manual operation and cannot be reversed.
+
 
 \end{enumerate}
 
@@ -545,16 +547,17 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 %\begin{multicols}{2}
 
 \section{Operational Flexibility\label{sec:business_model}}
-It's important to note that Loopring's open standard allows participants significant flexibility in how they operate. Actors with novel business models are free to implement them and provide value for their users, earning LRx fees on volume or other metrics in the process (if they so choose). The ecosystem is modular and meant to support participation from a multitude of applications. The non-proprietary protocol places control in the hands of users and collaborators.
+It's important to note that Loopring's open standard allows participants significant flexibility in how they operate. Actors are free to implement novel business models and provide value for users, earning LRx fees on volume or other metrics in the process (if they so choose). The ecosystem is modular and meant to support participation from a multitude of applications.
 
 
 \subsection{Order Book\label{sec:order_book}}
 Relays can design their order books in any number of ways to display and match users' orders. A first implementation of our own order book follows an OTC model, where limit orders are positioned based on price alone. Timestamps of orders, in other words, have no bearing on the order book. However, a relay is free to design their order book in such a way as to emulate a typical centralized exchange's matching engine, where orders are ranked by price, while respecting timestamps as well. If a relay was inclined to offer this type of order book, they can own/integrate with a wallet, and have those wallet orders sent solely to the single relay, who would then be able to match orders based on time. Any such configuration is possible.
 
-Importantly, whereas other DEX protocols at times require relays to have resources -- initial token balances to place taker orders to fill user's maker orders -- Loopring relays need only find matchable orders to consummate a trade, and can do so without initial tokens.
+
+Importantly, whereas other DEX protocols at times require Relays to have resources - initial token balances to place taker orders - Loopring Relays need only find matchable orders to consummate a trade, and can do so without initial tokens.
 
 \subsection{Liquidity Sharing\label{sec:liquidity_sharing}}
-Relays are free to design how they share liquidity (orders) with each other. Our consortium blockchain-based relay mesh is but one solution to accomplish this, and the ecosystem is free to network and communicate as they wish. Besides joining a relay-mesh, they can build and manage their own, creating rules/incentives as they see fit. Relays can also work alone, as seen in the time-sensitive wallet implementation above. Of course, there are clear advantages in communicating with others in pursuit of network effects, however, different business models could merit peculiar sharing designs and split fees in any number of ways.
+Relays are free to design how they share liquidity (orders) with each other. Our consortium blockchain is but one solution to accomplish this, and the ecosystem is free to network and communicate as they wish. Besides joining a consortium blockchain, they can build and manage their own, creating rules/incentives as they see fit. Relays can also work alone, as seen in the time-sensitive wallet implementation. Of course, there are clear advantages in communicating with other Relays in pursuit of network effects, however, different business models could merit peculiar sharing designs and split fees in any number of ways.
 
 
 \section{Protocol Specification\label{sec:protocol}}
@@ -731,8 +734,8 @@ This is zero-risk, zero-value add to the network, and is considered unfair condu
 
 \subsubsection{Fill Rate Checking\label{sec:fill_rate_check}}
 
-The exchange rate calculations in the order-ring are made by ring-miners for reasons stated above. It is the LPSC that must verify they're correct. First, it verifies that the buy rate the ring-miner can execute for each order is equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LPSC ensures that each order in the order-ring shares the same rate discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
 
+The exchange rate calculations in the order-ring are made by ring-miners for reasons stated above. It is the LPSC that must verify they're correct. First, it verifies that the buy rate the ring-miner can execute for each order is equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LPSC ensures that each order in the order-ring shares the same rate discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
 
 $r_{0\rightarrow 1} \cdot (1-\gamma)$, $r_{1\rightarrow 2} \cdot (1-\gamma)$, $r_{2 \rightarrow 0} \cdot (1-\gamma)$, and satisfied: 
 \begin{equation}
@@ -1004,16 +1007,20 @@ Malicious users could sign and spread orders whose order value is non-zero but w
 Nodes must spend time to update the status of an order, but can also choose to minimize the effort by, for example, blacklisting addresses and dropping related orders.
 
 \section{Summary}
-The Loopring protocol sets out to be a foundational layer for decentralized exchange. In so doing, it has profound repurcussions in how people exchange assets and value. Money, as an intermediate commodity, facilitates or replaces barter exchange and solves the double coincidence of wants problem \cite{unenumerated2006}, whereby two counterparties must desire each other's distinct good or service. Similarly, Loopring protocol aims to dispense of our dependencies on coincidence of wants in trading pairs by using order-ring matching to more easily consummate trades. This is meaningful for how society and markets transfer value with tokens, traditional assets, and beyond. Indeed, just as decentralized cryptocurrencies pose threat to a nation's control over money, a combinatorial algorithm that can match traders (consumers/producers) at scale, is a threat to the concept of money itself. In addition, with Dual Authoring, Loopring solves the real and pernicious problem of front running faced by all decentralized exchanges and their users today.
+
+The Loopring protocol sets out to be a foundational layer for decentralized exchange. In so doing, it has profound repurcussions in how people exchange assets and value. Money, as an intermediate commodity, facilitates or replaces barter exchange and solves the double coincidence of wants problem \cite{unenumerated2006}, whereby two counterparties must desire each other's distinct good or service. Similarly, Loopring protocol aims to dispense of our dependencies on coincidence of wants in trading pairs, by using ring matching to more easily consummate trades. This is meaningful for how society and markets transfer value with tokens, traditional assets, and beyond. Indeed, just as decentralized cryptocurrencies pose threat to a nation's control over money, a combinatorial protocol that can match traders (consumers/producers) at scale, is a theoretical threat to the concept of money itself.
+
+Protocol benefits include:
 
 \begin{itemize}
-	\item Off-chain order management and on-chain settlement = no sacrifice in performance for security.
-	\item Network maintained by self-motivated group of relays with flexibility in running order books and communicating.
-	\item Greater liquidity due to more counterparties available through order sharing, and higher probability that any counterparty can be a useful trading partner due to multi-party trades.
+	\item Off-chain order management and on-chain settlement means no sacrifice in performance for security.
+	\item Greater liquidity due to ring-mining and order sharing.
+	\item Dual Authoring solves the pernicious problem of front running faced by all DEXs and their users today.
 	\item Free, public smart contracts enable any dApp to build or interact with the protocol.
-	\item Standardization among operators allows for network effects, deeper liquidity and an improved end user experience.
-	\item Reduced barriers to entry for market-makers = lower costs for nodes joining the network and end users.
-	\item Anonymous trading directly from users' wallets.
+	\item Standardization among operators allows for network effects and an improved end user experience.
+	\item Network maintained with flexibility in running order books and communicating.
+	\item Reduced barriers to entry means lower costs for nodes joining the network and end users.
+	\item Anonymous trading directly from users’ wallets.
 \end{itemize}
 
 \section{Acknowledgements}
