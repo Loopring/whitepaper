@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.24)  16 MAR 2018 10:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.24)  16 MAR 2018 14:02
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -515,6 +515,29 @@ Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
 \DT@baselineskip=\dimen275
 )
 File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
+) (/usr/local/texlive/2016/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2016/01/31 v5.1g context-sensitive quotations (JAW)
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count153
+)
+\csq@reset=\count154
+\csq@gtype=\count155
+\csq@glevel=\count156
+\csq@qlevel=\count157
+\csq@maxlvl=\count158
+\csq@tshold=\count159
+\csq@ltx@everypar=\toks39
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2016/01/31 v5.1g csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+ (/usr/local/texlive/2016/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+)
+Package csquotes Info: Disabling multilingual quotes.
+Package csquotes Info: Redefining alias 'default' -> 'american'.
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/tkz-graph/tkz-graph.sty
 Package: tkz-graph 2011/06/01 ctan v 1.00 base for graphs
  (/usr/local/texlive/2016/texmf-dist/tex/latex/etex-pkg/etex.sty
@@ -532,10 +555,10 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
  (/usr/local/texlive/2016/texmf-dist/tex/generic/xkeyval/xkeyval.tex (/usr/local/texlive/2016/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks39
-\XKV@tempa@toks=\toks40
+\XKV@toks=\toks40
+\XKV@tempa@toks=\toks41
 )
-\XKV@depth=\count153
+\XKV@depth=\count160
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 )) (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
 File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
@@ -543,23 +566,23 @@ File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
 File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
 \arrowsize=\dimen276
 ))
-\c@tkz@gr@a=\count154
-\c@tkz@gr@b=\count155
-\c@tkz@gr@c=\count156
-\c@tkz@gr@e=\count157
-\c@tkz@gr@d=\count158
-\c@tkz@gr@p=\count159
-\c@tkz@gr@i=\count160
-\c@tkz@gr@n=\count161
-\c@tkz@gr@ta=\count162
-\c@tkz@gr@tb=\count163
+\c@tkz@gr@a=\count161
+\c@tkz@gr@b=\count162
+\c@tkz@gr@c=\count163
+\c@tkz@gr@e=\count164
+\c@tkz@gr@d=\count165
+\c@tkz@gr@p=\count166
+\c@tkz@gr@i=\count167
+\c@tkz@gr@n=\count168
+\c@tkz@gr@ta=\count169
+\c@tkz@gr@tb=\count170
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
 \pgfdecoratedcompleteddistance=\dimen277
 \pgfdecoratedremainingdistance=\dimen278
 \pgfdecoratedinputsegmentcompleteddistance=\dimen279
 \pgfdecoratedinputsegmentremainingdistance=\dimen280
 \pgf@decorate@distancetomove=\dimen281
-\pgf@decorate@repeatstate=\count164
+\pgf@decorate@repeatstate=\count171
 \pgfdecorationsegmentamplitude=\dimen282
 \pgfdecorationsegmentlength=\dimen283
 )
@@ -606,20 +629,20 @@ File: pgflibraryshapes.symbols.code.tex 2013/09/11 v3.0.1a (rcs-revision 1.6)
 File: tikzlibrarychains.code.tex 2013/07/15 v3.0.1a (rcs-revision 1.6)
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryintersections.code.tex
 (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryintersections.code.tex (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)
-\pgf@intersect@solutions=\count165
+\pgf@intersect@solutions=\count172
 ))
-\c@definition=\count166
-\c@theorem=\count167
-\c@lemma=\count168
-\c@proof=\count169
+\c@definition=\count173
+\c@theorem=\count174
+\c@lemma=\count175
+\c@proof=\count176
  (/usr/local/texlive/2016/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count170
-\c@@ppsavesec=\count171
-\c@@ppsaveapp=\count172
+\c@@pps=\count177
+\c@@ppsavesec=\count178
+\c@@ppsaveapp=\count179
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/marginnote/marginnote.sty
 Package: marginnote 2012/03/29 v1.1i non floating margin notes for LaTeX
-\c@mn@abspage=\count173
+\c@mn@abspage=\count180
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/tablefootnote/tablefootnote.sty
 Package: tablefootnote 2014/01/26 v1.1c Table foot notes (HMM)
  (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/letltxmacro.sty
@@ -628,14 +651,11 @@ Package: letltxmacro 2016/05/16 v1.5 Let assignment for LaTeX macros (HO)
 Package: xifthen 2015/11/05 v1.4.0 Extended ifthen features
  (/usr/local/texlive/2016/texmf-dist/tex/latex/ifmtarg/ifmtarg.sty
 Package: ifmtarg 2009/09/02 v1.2a check for an empty argument
-)) (/usr/local/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
-Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count174
-)) (/usr/local/texlive/2016/texmf-dist/tex/latex/bigfoot/perpage.sty
+))) (/usr/local/texlive/2016/texmf-dist/tex/latex/bigfoot/perpage.sty
 Package: perpage 2014/10/25 2.0 Reset/sort counters per page
-\c@abspage=\count175
+\c@abspage=\count181
 )
-\c@pp@a@footnote=\count176
+\c@pp@a@footnote=\count182
  (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
 File: tikzlibraryshapes.geometric.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
  (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
@@ -652,47 +672,43 @@ Package: pdfpages 2016/04/19 v0.5f Insert pages of external PDF documents (AM)
 File: pppdftex.def 2016/04/19 v0.5f Pdfpages driver for pdfTeX (AM)
 )
 \AM@pagebox=\box92
-\AM@global@opts=\toks41
-\AM@toc@title=\toks42
-\c@AM@survey=\count177
+\AM@global@opts=\toks42
+\AM@toc@title=\toks43
+\c@AM@survey=\count183
 \AM@templatesizebox=\box93
 )
 
 LaTeX Warning: Unused global option(s):
     [UTF8,nofonts].
 
-(/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux
-
-LaTeX Warning: Label `fig:ring' multiply defined.
-
-)
+(/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux)
 \openout1 = `en_whitepaper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 113.
-LaTeX Font Info:    ... okay on input line 113.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
  (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count178
+\scratchcounter=\count184
 \scratchdimen=\dimen286
 \scratchbox=\box94
-\nofMPsegments=\count179
-\nofMParguments=\count180
-\everyMPshowfont=\toks43
-\MPscratchCnt=\count181
+\nofMPsegments=\count185
+\nofMParguments=\count186
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count187
 \MPscratchDim=\dimen287
-\MPnumerator=\count182
-\makeMPintoPDFobject=\count183
-\everyMPtoPDFconversion=\toks44
+\MPnumerator=\count188
+\makeMPintoPDFobject=\count189
+\everyMPtoPDFconversion=\toks45
 ) (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2016/05/10 v0.21 Utility functions of pdfTeX for LuaTeX (HO)
  (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/ifluatex.sty
@@ -769,17 +785,17 @@ ABD: EveryShipout initializing macros
 Package marginnote Info: \pdfoutput not 0 and \pdflastxpos available.
 (marginnote)             Extended position detection mode activated.
 \AtBeginShipoutBox=\box95
-LaTeX Font Info:    Try loading font information for U+msa on input line 115.
+LaTeX Font Info:    Try loading font information for U+msa on input line 116.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 115.
+LaTeX Font Info:    Try loading font information for U+msb on input line 116.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 7558) in paragraph at lines 148--148
+Underfull \hbox (badness 7558) in paragraph at lines 149--149
 []\OT1/cmr/bx/n/12 Inadequacies of De-cen-tral-ized Ex-
  []
 
@@ -787,53 +803,45 @@ Underfull \hbox (badness 7558) in paragraph at lines 148--148
 
 Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
-(amsmath)                 on input line 252.
+(amsmath)                 on input line 253.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 278.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 279.
 (/usr/local/texlive/2016/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 278.
- [3]
-Overfull \hbox (1.23373pt too wide) in paragraph at lines 468--468
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 279.
+
+Overfull \hbox (8.5214pt too wide) in paragraph at lines 281--282
+[]\OT1/cmr/bx/n/10 Consortium Liq-uid-ity Shar-ing Blockchain/Relay-
+ []
+
+[3]
+Overfull \hbox (1.23373pt too wide) in paragraph at lines 475--475
 []\OT1/cmss/bx/n/8 blockchain 
  []
 
 [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 614--615
+Underfull \hbox (badness 10000) in paragraph at lines 618--619
 []\OT1/cmr/m/n/10 Sell ETH at price of 300 USD/ETH to
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 614--615
-\OT1/cmr/m/n/10 get 3000 USD. This or-der can ex-pressed as
+Underfull \hbox (badness 5316) in paragraph at lines 618--619
+\OT1/cmr/m/n/10 get 3000 USD. This or-der can ex-pressed as:
  []
 
 [6]
-Underfull \hbox (badness 5519) in paragraph at lines 815--816
+Underfull \hbox (badness 5519) in paragraph at lines 824--825
 []\OT1/cmr/m/n/10 To make the trans-ac-tions, the LPSC uses the
  []
 
 [7] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 972--973
+Underfull \hbox (badness 10000) in paragraph at lines 981--982
 []\OT1/cmr/m/n/10 The Loopring Pro-to-col will now ver-ify each
  []
 
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-[9]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.bbl
+[9] (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 15--20
 []\OT1/cmr/m/n/10 Patrick Dai, Neil Mahi, Jor-dan Earls,
  []
@@ -924,28 +932,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 89--94
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 105--110
+Underfull \hbox (badness 10000) in paragraph at lines 110--115
 \OT1/cmtt/m/n/10 http : / / unenumerated . blogspot . ca / 2006 / 06 /
  []
 
-) [10] [11] (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[10]) [11] (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 21295 strings out of 493014
- 429120 string characters out of 6133351
- 518670 words of memory out of 5000000
- 24375 multiletter control sequences out of 15000+600000
- 15612 words of font info for 59 fonts, out of 8000000 for 9000
+ 21627 strings out of 493014
+ 434710 string characters out of 6133351
+ 532332 words of memory out of 5000000
+ 24700 multiletter control sequences out of 15000+600000
+ 15307 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,17n,77p,1275b,1035s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.pdf (11 pages, 324909 bytes).
+ 48i,17n,77p,1268b,1037s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on /Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.pdf (11 pages, 313045 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
