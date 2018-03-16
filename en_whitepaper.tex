@@ -162,7 +162,7 @@ For the above reasons, purely blockchain-based exchanges have limitations that m
 \section{Loopring Protocol\label{sec:loopring_protocol}}
 Loopring is not a DEX, but a modular protocol for building DEXs on multiple blockchains. We disassemble the component parts of a traditional exchange and offer a set of public smart contracts and decentralized actors in its place. The roles in the network include wallets, relays, liquidity-sharing consortium blockchains, order book browsers, Ring-Miners, and asset tokenization services. Before defining each, however, we should first understand what a Loopring compliant order looks like. 
 
-\subsection{order-ring\label{sec:order_ring}}
+\subsection{Order Ring\label{sec:order_ring}}
 Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM)\cite{coinport2014udom}. UDOM expresses orders as token exchange requests, \verb|amountS|/\verb|amountB|, (amount to sell/buy)  instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 16 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
 
 \begin{center}
@@ -624,7 +624,7 @@ to represent an order in a simplified form, then for ETH/USD markets on a tradit
 
 \subsection{Ring Verification\label{sec:ring_verification}}
 
-The Loopring Smart Contracts do not perform exchange rate or amount calculations, but must receive and verify what the ring-miners supply for these values. These calculations are done by ring-miners for two main reasons: (1) the programming language from smart contracts, such as solidity on Ethereum, does not have support for floating point math, especially $pow(x, 1/n)$ (calculating the n-th root of a floating point numbers), and (2) it is desirable for the computation to be made off-chain to reduce blockchain computation and cost.
+The Loopring Smart Contracts do not perform exchange rate or amount calculations, but must receive and verify what the ring-miners supply for these values. These calculations are done by ring-miners for two main reasons: (1) the programming language from smart contracts, such as solidity\cite{dannen2017introducing} on Ethereum, does not have support for floating point math, especially $pow(x, 1/n)$ (calculating the n-th root of a floating point numbers), and (2) it is desirable for the computation to be made off-chain to reduce blockchain computation and cost.
 
 
 \subsubsection{Sub-Ring Checking\label{sec:sub_ring_check}}
@@ -1087,13 +1087,10 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 (delegate) edge (comment-impl);
 
 \end{tikzpicture} 
-\caption{Loopring Ethereum Smart-Contracts}
+\caption{Loopring Protocol Smart  Contracts on Ethereum}
 \label{fig:smartcontracts}
 \end{figurehere}
 \end{center}
-
-The source code of these smart contract are available at:\\
-https://github.com/Loopring/protocol/tree/master/contracts.
 
 
 \end{appendices}
