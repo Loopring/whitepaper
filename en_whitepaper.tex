@@ -961,7 +961,7 @@ In decentralized exchanges, front-running is when someone tries to copy another 
 
 When a submitRing transaction is not confirmed and still in the pending transaction pool (mempool), anyone can easily spot such a transaction and replace \verb|minerAddress| with their own address (the \verb|filcherAddress|) , then they can re-sign the payload with \verb|filcherAddress| to replace the order-ring's signature. The fincher can set a higher gas price and submit a new transaction hoping block-miners will pick his new transaction into the next block instead of the original submitRing transaction.
 
-Previous solutions to this problem had important downsides: requiring more transactions and thus cost ring-miners more gas; and taking at least twice the blocks to settle a order-ring.  Our new solution called \enquote{Dual Authoring} involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for ring-mining.
+Previous solutions to this problem had important downsides: requiring more transactions and thus cost ring-miners more gas; and taking at least twice the blocks to settle a order-ring.  Our new solution called Dual Authoring\cite{dualauthor} involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for ring-mining.
 
 Here is how it works:
 
@@ -1021,7 +1021,7 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 
 
-\bibliography{whitepaper2}
+\bibliography{whitepaper}
 \bibliographystyle{unsrt}
 
 
