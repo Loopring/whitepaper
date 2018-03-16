@@ -1017,8 +1017,7 @@ The Loopring protocol sets out to be a foundational layer for decentralized exch
 \end{itemize}
 
 \section{Acknowledgements}
-We would like to express our gratitude to our mentors, advisers and to the many people in the community that have been so welcoming and generous with their knowledge. In particular, we would like to thank Shuo Bai (from ChinaLedger); Professor Haibin Kan; Alex Cheng, Hongfei Da; Yin Cao; Xiaochuan Wu; Zhen Wang, Wei Yu, Nian Duan, Jun Xiao, Jiang Qian, Jiangxu Xiang, Yipeng Guo, Dahai Li, Kelvin Long, Huaxia Xia, Jun Ma, and Encephalo Path for reviewing and providing feedback on this project. We welcome more feedback from the community.
-
+We would like to express our gratitude to our mentors, advisers and to the many people in the community that have been so welcoming and generous with their knowledge. In particular, we would like to thank Shuo Bai (from ChinaLedger); Professor Haibin Kan; Alex Cheng, Hongfei Da; Yin Cao; Xiaochuan Wu; Zhen Wang, Wei Yu, Nian Duan, Jun Xiao, Jiang Qian, Jiangxu Xiang, Yipeng Guo, Dahai Li, Kelvin Long, Huaxia Xia, Jun Ma, and Encephalo Path for reviewing and providing feedback on this project. 
 
 
 \bibliography{whitepaper}
@@ -1030,9 +1029,9 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 \begin{appendices}
 
-\section{Protocol Ethereum Smart-Contracts\label{app:protocol_ethereum}}
+\section{Loopring on Ethereum\label{app:protocol_ethereum}}
 
-
+\subsection{Smart Contracts}
 
 \begin{center}
 \begin{figurehere}
@@ -1087,11 +1086,22 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 (delegate) edge (comment-impl);
 
 \end{tikzpicture} 
-\caption{Loopring Protocol Smart  Contracts on Ethereum}
+\caption{Smart Contracts}
 \label{fig:smartcontracts}
 \end{figurehere}
 \end{center}
 
+\subsection{Deployment}
+
+The following smart contracts have been deployed on Ethereum mainnet:
+\begin{itemize}
+\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
+\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
+\item TokenTransferDelegate: \verb|0xc787aE8D6560FB77B82F42CED8eD39f94961e304|
+\item NameRegistry: \verb|0x0f3Dce8560a6010DE119396af005552B7983b7e7|
+\item LoopringProtocolImpl: \verb|0xc80BbAb86cED62CF795619A357581FaF0cB46511|
+\item TransferableMultsig: \verb|0x7421ad9C880eDF007a122f119AD12dEd5f7C123B|
+\end{itemize}
 
 \end{appendices}
 \end{document}
