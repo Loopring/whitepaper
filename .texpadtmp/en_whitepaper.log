@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.24)  16 MAR 2018 11:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.24)  16 MAR 2018 13:56
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -681,11 +681,7 @@ File: pppdftex.def 2016/04/19 v0.5f Pdfpages driver for pdfTeX (AM)
 LaTeX Warning: Unused global option(s):
     [UTF8,nofonts].
 
-(/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux
-
-LaTeX Warning: Label `fig:ring' multiply defined.
-
-)
+(/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux)
 \openout1 = `en_whitepaper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
@@ -815,45 +811,37 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 279.
- [3]
-Overfull \hbox (1.23373pt too wide) in paragraph at lines 469--469
+
+Overfull \hbox (8.5214pt too wide) in paragraph at lines 281--282
+[]\OT1/cmr/bx/n/10 Consortium Liq-uid-ity Shar-ing Blockchain/Relay-
+ []
+
+[3]
+Overfull \hbox (1.23373pt too wide) in paragraph at lines 475--475
 []\OT1/cmss/bx/n/8 blockchain 
  []
 
 [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 615--616
+Underfull \hbox (badness 10000) in paragraph at lines 618--619
 []\OT1/cmr/m/n/10 Sell ETH at price of 300 USD/ETH to
  []
 
 
-Underfull \hbox (badness 6380) in paragraph at lines 615--616
-\OT1/cmr/m/n/10 get 3000 USD. This or-der can ex-pressed as
+Underfull \hbox (badness 5316) in paragraph at lines 618--619
+\OT1/cmr/m/n/10 get 3000 USD. This or-der can ex-pressed as:
  []
 
 [6]
-Underfull \hbox (badness 5519) in paragraph at lines 816--817
+Underfull \hbox (badness 5519) in paragraph at lines 824--825
 []\OT1/cmr/m/n/10 To make the trans-ac-tions, the LPSC uses the
  []
 
 [7] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 973--974
+Underfull \hbox (badness 10000) in paragraph at lines 981--982
 []\OT1/cmr/m/n/10 The Loopring Pro-to-col will now ver-ify each
  []
 
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-[9]
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
- (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.bbl
+[9] (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 15--20
 []\OT1/cmr/m/n/10 Patrick Dai, Neil Mahi, Jor-dan Earls,
  []
@@ -948,24 +936,20 @@ Underfull \hbox (badness 10000) in paragraph at lines 105--110
 \OT1/cmtt/m/n/10 http : / / unenumerated . blogspot . ca / 2006 / 06 /
  []
 
-) [10] [11] (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+[10]) [11] (/Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 21824 strings out of 493014
- 437698 string characters out of 6133351
- 535541 words of memory out of 5000000
- 24896 multiletter control sequences out of 15000+600000
- 15612 words of font info for 59 fonts, out of 8000000 for 9000
+ 21624 strings out of 493014
+ 434623 string characters out of 6133351
+ 533316 words of memory out of 5000000
+ 24697 multiletter control sequences out of 15000+600000
+ 15307 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  48i,17n,77p,1268b,1037s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on /Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.pdf (11 pages, 325688 bytes).
+</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on /Users/d/Projects/loopring/whitepaper/.texpadtmp/en_whitepaper.pdf (11 pages, 312773 bytes).
 PDF statistics:
- 131 PDF objects out of 1000 (max. 8388607)
- 95 compressed objects within 1 object stream
+ 127 PDF objects out of 1000 (max. 8388607)
+ 92 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
