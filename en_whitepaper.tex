@@ -124,7 +124,7 @@ Loopring is an open protocol for building decentralized exchanges. Loopring oper
 \begin{multicols}{2}
 \section{Introduction\label{sec:introduction}}
 
-With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new tokens are introduced - including the tokenization of traditional assets - this need is magnified. Whether exchanging tokens for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem. Indeed, there is a potential energy in assets \cite{desotocapital}, and realizing this energy - unlocking capital - requires not only asserting ownership, which blockchains have allowed for with immutability,  but the ability to freely transfer and transform these assets.
+With the proliferation of blockchain-based assets, the need to exchange these assets amongst counterparties has significantly increased. As thousands of new token \verb|A|re introduced - including the tokenization of traditional assets - this need is magnified. Whether exchanging tokens for speculative trading motivations, or converting to access networks via their native utility tokens, the ability to exchange one cryptoasset for another is foundational for the larger ecosystem. Indeed, there is a potential energy in assets \cite{desotocapital}, and realizing this energy - unlocking capital - requires not only asserting ownership, which blockchains have allowed for with immutability,  but the ability to freely transfer and transform these assets.
  
 As such, the trustless exchange of tokens (value) is a compelling use case for blockchain technology. Until now, however, crypto enthusiasts have largely settled for trading tokens on traditional centralized exchanges. The Loopring protocol is needed because, just as Bitcoin \cite{nakamoto2008bitcoin} dutifully pointed out that, in regards to peer-to-peer electronic cash, "the main benefits are lost if a trusted third party is still required to prevent double-spending", so too are the main benefits of decentralized assets lost if they must pass through trusted, gated, centralized exchanges.
 
@@ -135,9 +135,9 @@ Trading decentralized tokens on centralized exchanges doesn't make sense from a 
 \subsection{Inadequacies of Centralized Exchanges}
 The three primary risks of centralized exchanges are; 1) Lack of security, 2) Lack of transparency, and 3) Lack of liquidity.
 
-\textbf{Lack of Security} arises from users typically surrendering control of their private keys (funds) to one centralized entity. This exposes users to the possibility that centralized exchanges fall prey to malicious hackers. The security and hacking risks facing all centralized exchanges are well known \cite{coincheckhack} \cite{mtgox} \cite{mcmillan2014inside}, yet are often accepted as "table stakes" for token trading. Centralized exchanges continue to be honeypots for hackers to attack as their servers have custody over millions of dollars of users' funds. Exchange developers can also make honest, accidental errors with user funds. Users are simply not in control of their own tokens when deposited at a centralized exchange.
+\textbf{Lack of Security} arises from users typically surrendering control of their private keys (funds) to one centralized entity. This exposes users to the possibility that centralized exchanges fall prey to malicious hackers. The security and hacking risks facing all centralized exchanges are well known \cite{coincheckhack}  \cite{mcmillan2014inside}, yet are often accepted as "table stakes" for token trading. Centralized exchanges continue to be honeypots for hackers to attack as their servers have custody over millions of dollars of users' funds. Exchange developers can also make honest, accidental errors with user funds. Users are simply not in control of their own tokens when deposited at a centralized exchange.
 
-\textbf{Lack of Transparency} exposes users to the risk of dishonest exchanges acting unfairly. The distinction here is by the exchange operator's malintentions since users are not truly trading their own assets on a centralized exchange, but rather, an IOU. When tokens are sent to the exchange's wallet, the exchange takes custody, and offers an IOU in its place. All trades are then effectively between users' IOUs. To withdraw, users redeem their IOU with the exchange, and receive their tokens to their external wallet address. Throughout this process there is a lack of transparency, and the exchange can shutdown, freeze your account, go bankrupt, etc. It is also possible that they use user assets for other purposes while in custody, such as lending them out to third parties. Lack of transparency can cost users without a total loss of funds, such as in higher trading fees, delays at peak demand, regulatory risk, and orders being front ran.
+\textbf{Lack of Transparency} exposes users to the risk of dishonest exchanges acting unfairly. The distinction here is by the exchange operator's malintentions since users are not truly trading their own assets on a centralized exchange, but rather, an IOU. When token \verb|A|re sent to the exchange's wallet, the exchange takes custody, and offers an IOU in its place. All trades are then effectively between users' IOUs. To withdraw, users redeem their IOU with the exchange, and receive their tokens to their external wallet address. Throughout this process there is a lack of transparency, and the exchange can shutdown, freeze your account, go bankrupt, etc. It is also possible that they use user assets for other purposes while in custody, such as lending them out to third parties. Lack of transparency can cost users without a total loss of funds, such as in higher trading fees, delays at peak demand, regulatory risk, and orders being front ran.
 
 \textbf{Lack of Liquidity.} From the point of view of exchange operators, fragmented liquidity inhibits entry by new exchanges because of two winner-takes-all scenarios. First, the exchange with the greatest number of available trading pairs wins, because users find it desirable to conduct all their trades on one exchange. Second, the exchange with the largest order book wins, because of favorable bid-ask spreads for each trading pair. This discourages competition from newcomers because it is difficult for them to build up initial liquidity. As a result, many exchanges command a high market share despite user complaints and even major hacking incidents. It's worth noting that as centralized exchanges win market share, they become an ever-larger hacking target. 
 
@@ -162,7 +162,7 @@ For the above reasons, purely blockchain-based exchanges have limitations that m
 Loopring is not a DEX, but a modular protocol for building DEXs on multiple blockchains. We disassemble the component parts of a traditional exchange and offer a set of public smart contracts and decentralized actors in its place. The roles in the network include wallets, Relays, liquidity-sharing consortium blockchains, order book browsers, Ring-Miners, and asset tokenization services. Before defining each, however, we should first understand what a Loopring compliant order looks like. 
 
 \subsection{Order Ring\label{sec:order_ring}}
-Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests, $amountS \over amountB$, (amount to sell/buy)  instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
+Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM \cite{coinport2014udom}). UDOM expresses orders as token exchange requests, \verb|amountS|/\verb|amountB|, (amount to sell/buy)  instead of bids and asks. Since every order is just an exchange rate between two tokens, a powerful feature of the protocol is the mixing and matching of multiple orders in circular trade. By using up to 10 orders instead of a single trading pair, there is a dramatic increase in liquidity and potential for price improvement. 
 
 \begin{center}
 \begin{figurehere}
@@ -176,7 +176,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
 
 \begin{tikzpicture}[
     auto, 
-    node distance=3cm,
+    node distance=2cm,
     >=latex',
     font=\bfseries\footnotesize\sffamily,
     order/.style={
@@ -199,9 +199,9 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  {%
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
-  \textbf{owner: addressY}\\
-  \textbf{amountS: 9  tokenB}\\
-  \textbf{amountB: 12 tokenC}
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9  B}\\
+  \textbf{amountB: 12 C}
  \end{tabular}
  };
  
@@ -209,9 +209,9 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  {%
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
-  \textbf{owner: addressX}\\
-  \textbf{amountS: 10000 tokenA}\\
-  \textbf{amountB: 2    tokenB}
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
  \end{tabular}
  };
  
@@ -220,15 +220,15 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
  {%
  \begin{tabular}{l}
   \textbf{ORDER 3}\\
-  \textbf{owner: addressZ}\\
-  \textbf{amountS: 100 tokenC}\\
-  \textbf{amountB: 160 tokenA}
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
  \end{tabular}
  };
  
- \draw [draw,->] (order1) -- node [label] {\textbf{7898 tokenA}} (order3);
- \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 tokenB}} (order1);
- \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 tokenC}} (order2);
+ \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 B}} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 C}} (order2);
 
 \end{tikzpicture}
 
@@ -247,9 +247,9 @@ where $n$ is the length of the ring, and $i\oplus 1 \equiv i+1 \mod n$.
 
 An Order Ring is valid when all component transactions can be executed at an exchange rate equal to or better than the original rate specified by the user. To verify ring validity, Loopring protocol smart contracts must receive Order Rings from miners where the product of the original exchange rates of all orders is equal to or greater than 1.
 
-Let's assume Alice and Bob want to trade their tokens A and B. Alice has 15 tokens A and she wants 4 tokens B for them; Bob has 10 tokens B  and he wants 30 tokens A for them.
+Let's assume Alice and Bob want to trade their token \verb|A| and verb|B|. Alice has 15 token \verb|A| and she wants 4 token \verb|B| for them; Bob has 10 token \verb|B|  and he wants 30 token \verb|A| for them.
 
-Who is buying and who is selling? This depends only on the asset we fix to give price quotations. If token A is the reference, then Alice is buying tokens B for ${15 \over 4} = 3.75$ XTA, while Bob is selling 10 tokens B for ${30 \over 10} = 3.00$ XTA. In the case of fixing token B as reference we say that Alice is selling 15 tokens A for ${4\over 15}=0.26666667$ XTB and Bob is buying 10 tokens A for ${10 \over 30}=0.33333334$ XTB. Hence, who's the buyer or seller is arbitrary.
+Who is buying and who is selling? This depends only on the asset we fix to give price quotations. If token A is the reference, then Alice is buying token \verb|B| for ${15 \over 4} = 3.75$ XTA, while Bob is selling 10 token \verb|B| for ${30 \over 10} = 3.00$ XTA. In the case of fixing token B as reference we say that Alice is selling 15 token \verb|A| for ${4\over 15}=0.26666667$ XTB and Bob is buying 10 token \verb|A| for ${10 \over 30}=0.33333334$ XTB. Hence, who's the buyer or seller is arbitrary.
 
 In the first situation Alice is willing to pay a higher price than the price Bob is selling his tokens for, while in the second situation Bob is willing to pay a higher price than the price Alice is selling her tokens for. It is clear that a trade is possible whenever the buyer is willing to pay an equal or higher price than the seller's price.
 
@@ -259,14 +259,15 @@ In the first situation Alice is willing to pay a higher price than the price Bob
 
 Thus, for a set of n orders to be able to be filled, fully or partially, we need to know if the product of each one of the exchange rates as buy orders results in a number greater or equal to 1. If so, all the n orders can be either partially, or totally filled \cite{supersymmetry}.
 
-If we introduce a third counterparty, Charlie, such that  Alice wants to give x1 tokens A and receive y1 tokens B, Bob wants to give x2 tokens B and receive y2 tokens C, and Charlie wants to give x3 tokens C and receive y3 tokens A. The necessary tokens are present, and the trade is possible if,
+If we introduce a third counterparty, Charlie, such that  Alice wants to give $x_1$ token \verb|A| and receive $y_1$ token \verb|B|, Bob wants to give $x_2$ token \verb|B| and receive $y_2$ token \verb|C|, and Charlie wants to give $x_3$ token \verb|C| and receive $y_3$ token \verb|A|. The necessary token \verb|A|re present, and the trade is possible if,
 
 \begin{equation}
-{{x1 \cdot x2 \cdot x3 \over y1 \cdot y2 \cdot y3} \geq 1}
+{{x1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
 \end{equation}
 
 
 See section \ref{anatomy} for more details about Loopring's orders.
+
 
 
 \section{Ecosystem Participants\label{sec:ecosystem}}
@@ -274,13 +275,15 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \begin{itemize}
 
-\item \textbf{Wallets}: A common wallet service or interface that gives users access to their tokens and a way to send orders to the Loopring network. Wallets will be incentivized to produce orders by sharing fees with miners (see section \ref{sec:token}). With the belief that the future of trading will take place within the safety of individual user's wallets, connecting these liquidity pools through our protocol is paramount.
+\item \textbf{Wallets}: A common wallet service or interface that gives users access to their token \verb|A|nd a way to send orders to the Loopring network. Wallets will be incentivized to produce orders by sharing fees with miners (see section \ref{sec:token}). With the belief that the future of trading will take place within the safety of individual user's wallets, connecting these liquidity pools through our protocol is paramount.
 
 \item \textbf{Relays / Ring-Miners}: Relays are nodes that form a decentralized network for order propagation. They maintain public order books and trade history and broadcast new orders to other Relays via any arbitrary off-chain medium. Ring-mining is a feature - not a requirement - of Relays. It is computationally heavy and is done completely off-chain. Ring-mining produces Order Rings: rings of between 2 and 10 orders created by stitching together disparate orders. Relays are free in how they choose to communicate with one another. 
 
-\item \textbf{Consortium Liquidity Sharing Blockchain}: A Relay-mesh network for order & liquidity sharing. When nodes run Loopring Relay software, they are able to join an existing network and share liquidity with other Relays over a consortium blockchain. The consortium blockchain we are building as a first implementation has near real time order sharing (1-2 second blocks), and trims old history to allow for faster download by new nodes. Notably, Relays need not join this consortium; they can act alone and not share liquidity with others, or, they can start and manage their own liquidity sharing network.
+\item \textbf{Consortium Liquidity Sharing Blockchain}: A Relay-mesh network for order \& liquidity sharing. When nodes run Loopring Relay software, they are able to join an existing network and share liquidity with other Relays over a consortium blockchain. The consortium blockchain we are building as a first implementation has near real time order sharing (1-2 second blocks), and trims old history to allow for faster download by new nodes. Notably, Relays need not join this consortium; they can act alone and not share liquidity with others, or, they can start and manage their own liquidity sharing network.
 
-\item \textbf{Loopring Protocol Smart Contracts (LSC)}: A set of public and free smart contracts that checks Order Rings received from miners, trustlessly settles and transfers tokens on behalf of users, incentivizes miners/wallets with fees, and emits events. Relays/order browsers listen to these events to keep their order books and trade history up to date. See appendix \ref{app:protocol_ethereum} for details.
+
+\item \textbf{Loopring Protocol Smart Contracts (LPSC)}: A set of public and free smart contracts that checks Order Rings received from miners, trustlessly settles and transfers tokens on behalf of users, incentivizes miners/wallets with fees, and emits events. Relays/order browsers listen to these events to keep their order books and trade history up to date. See appendix \ref{app:protocol_ethereum} for details.
+
 
 \item \textbf{Asset Tokenization Services (ATS)}: A bridge between assets that cannot be directly traded on Loopring. They are centralized services run by trustworthy companies or organizations. Users deposit assets (real, fiat or tokens from other chains) and get tokens issued, which can be redeemed for the deposit in the future. Loopring is not a cross-chain exchange protocol (until a suitable solution exists), but ATS enable trading of ERC20 tokens \cite{ERC20} with physical assets as well as assets on other blockchains. 
 
@@ -288,11 +291,228 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 
 \section{Exchange Process\label{sec:process}}
+
+
+
 \begin{enumerate} 
 
-\item \textbf{Smart Contract authorization}: User Y wants to exchange tokens and authorizes the LSC to handle $amountS$ of $TokenB$ the user wants to sell. This does not lock the user's tokens, who remains free to move them while the order is processed.
 
-\item \textbf{Create order}: The current rate and order book for $TokenB$ vs $TokenC$, are provided by Relays or other agents hooked up to the network, such as order book browsers. User Y places an order (limit order) specifying his exchange rate ($amountS \over amountB$) and other parameters through any integrated wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The order's data is signed with User Y's private key.
+\item \textbf{Smart contract authorization}: User Y wants to exchange token \verb|A|nd authorizes the LPSC to handle \verb|amountS| of token \verb|B| the user wants to sell. This does not lock the user's tokens, who remains free to move them while the order is processed.
+
+\item \textbf{Create order}: The current rate and order book for token \verb|B| vs token \verb|C|, are provided by Relays or other agents hooked up to the network, such as order book browsers. User \verb|Y| places an order (limit order) specifying his exchange rate (\verb|amountS| / \verb|amountB|) and other parameters through any integrated wallet interface. An amount of LRx can be added to the order as a fee for miners; higher LRx fee means a better chance to be processed earlier by miners. The order's data is signed with User \verb|Y|'s private key.
+
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    scale=0.7,
+    node distance=2cm,
+    >=latex',
+    font=\bfseries\footnotesize\sffamily,
+    order/.style={
+		rectangle,
+		scale=0.7,
+		rounded corners,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=30mm,
+		fill=white
+	},
+	role/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=12mm,
+		fill=white
+	},
+	steps/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+%		minimum height=12mm,
+%		minimum width=12mm,
+		fill=black,
+		text=white
+	},
+	account/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=16mm,
+		minimum width=16mm,
+		fill=white
+	},
+	label/.style={
+	  scale=0.7
+    }
+  ]
+
+ 
+ \node [role] (user1)  {user X};
+ \node [role, below of=user1] (user2)  {user Y};
+ \node [role, below of=user2] (user3)  {user Z};
+ \node [role, below of=user3, fill=gray!20] (relay1)  {relay M};
+ \node [role, below of=relay1, fill=gray!20] (relay2)  {relay N};
+
+ 
+ \node [order, left of=user1, xshift=-1cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 1}\\
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
+ \end{tabular}
+ };
+ 
+ \draw [draw, ->]  (user1) -- (order1) [label]{};
+ \draw [bend right,->] (order1) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order1) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order1) |- (relay1) [label]{};
+% \draw [draw, ->]  (order1) |- (relay2) [label]{};
+ 
+ \node [order,left of=user2, xshift=-1.5cm] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 2}\\
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9  B}\\
+  \textbf{amountB: 12 C}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user2) -- (order2) [label]{};
+ \draw [bend right,->] (order2) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order2) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order2) |- (relay1) [label]{};
+% \draw [draw, ->]  (order2) |- (relay2) [label]{};
+% 
+\node [order, left of=user3, xshift=-2cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 3}\\
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user3) -- (order3) [label]{};
+ \draw [bend right,->] (order3) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order3) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order3) |- (relay1) [label]{};
+% \draw [draw, ->]  (order3) |- (relay2) [label]{};
+ 
+% // The Ring
+\node [order, 
+yshift=-1.5cm,
+xshift=-2.75cm,
+below of=relay2,
+fill=gray!10,
+minimum width=4.2cm,
+minimum height=5cm] (ring) {};
+
+
+\node [order, dashed, below of=relay2,yshift=-0.2cm,xshift=-2.5cm] (order11) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 1}\\
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
+ \end{tabular}
+ };
+ \node [order, dashed,below of=order11,xshift=-0.25cm,yshift=0.7cm] (order21) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 2}\\
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9  B}\\
+  \textbf{amountB: 12 C}
+ \end{tabular}
+ };
+\node [order, dashed,below of=order21,xshift=-0.25cm,yshift=0.7cm] (order31) 
+ {%
+ \begin{tabular}{l}
+  \textbf{ORDER 3}\\
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
+ \end{tabular}
+ };
+ 
+ % // The blockchain
+\node [
+rectangle,
+fill=gray!20, 
+right of=user1,
+yshift=-4.5cm,
+xshift=0.1cm,
+scale=0.7,
+minimum width=3.2cm,
+minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
+% blockchain accounts
+  \node [account, right of=user1, xshift=1cm] (account1)  {accountX};
+  \node [account, right of=user2, xshift=1cm] (account2)  {accountY};
+  \node [account, right of=user3, xshift=1cm] (account3)  {accountZ};
+  \node [account, right of=relay1, xshift=1cm] (account4)  {accountM};
+  \node [account, right of=relay2, xshift=1cm] (account5)  {accountN};
+  \node [account, double, below of=account5, yshift=-1.5cm] (psc)  {LPSC};
+  
+ \draw [draw, ->]  (user1) -- (account1) [label]{};
+ \draw [draw, ->]  (user2) -- (account2) [label]{};
+ \draw [draw, ->]  (user3) -- (account3) [label]{};
+% \draw [draw, ->]  (relay1) -- (account4) [label]{};
+% \draw [draw, ->]  (relay2) -- (account5) [label]{};
+ \draw [draw, double, thick]  (relay1) to node [auto, scale=0.7] {share liquidity}  (relay2) [label]{};
+% \draw [draw, ->]  (relay1) -- (ring) [label]{};
+ \draw [draw, ->]  (relay2) to node [auto, scale=0.7, xshift=-1.8cm, yshift=0.3cm] {ring-mining}  (ring) [label]{};
+ \draw [draw, ->]  (ring) to node [auto, scale=0.7] {submitRing} (psc) [label]{};
+ 
+ \draw [bend left,->] (account1) to node [auto, scale=0.7] {\textbf{7898 A}} (account3);
+ \draw [bend left,->] (account2) to node [auto, scale=0.7] {\textbf{8 B}} (account1);
+ \draw [bend left,->] (account3) to node [auto, scale=0.7] {\textbf{98 C}} (account2);
+ 
+ \draw [bend left,->, dashed] (account1) to node [auto, scale=0.7] {} (account5);
+ \draw [bend left,->, dashed] (account2) to node [auto, scale=0.7] {} (account5);
+ \draw [bend left,->, dashed] (account3) to node [auto, scale=0.7, xshift=.5cm] {\textbf{Fee}} (account5);
+  
+  
+% \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
+% \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8 B}} (order1);
+% \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98 C}} (order2);
+
+\node [steps, right of=user2, xshift=-0.6cm] () {1};
+\node [steps, left of=user2, xshift=0.8cm] () {2};
+\node [steps, left of=relay2, xshift=0.3cm, yshift=1cm] () {3};
+\node [steps, left of=relay1, xshift=3.3cm, yshift=-1.6cm] () {4};
+\node [steps, below of=relay2, xshift=-0.2cm, yshift=0.4cm] () {5};
+\node [steps, right of=account3, xshift=-0.6cm] (step5) {6};
+
+ \draw [bend right, ->]  (psc) to node [auto, scale=0.7, xshift=0.5cm] {settlement} (step5) [label]{};
+ 
+\end{tikzpicture}
+
+\caption{Loopring Exchange Process}
+\label{fig:process}
+\end{figurehere}
+\end{center}
+
 
 \item \textbf{Order broadcast}: The wallet sends the order and its signature to one or more nodes (Relays) in the network. Relays update their public order book. The protocol doesn't require order books to be built in a certain way, such as first-come-first-serve. Instead, Relays have the power to make their own design decisions in building their order books.
 
@@ -304,8 +524,26 @@ The following ecosystem participants jointly provide all functionalities a centr
 
 \end{enumerate}
 
+
+
+
+
+%
+%\end{multicols}
+%
+%\begin{center}
+%\begin{figurehere}
+%\includegraphics[height=8cm]{images/en_protocol.png}
+%\caption{Loopring Trading Process}
+%\label{fig: Loopringrotocol}
+%\end{figurehere}
+%\end{center}
+%
+%\begin{multicols}{2}
+
 \section{Operational Flexibility\label{sec:business_model}}
 It's important to note that Loopring's open standard allows participants significant flexibility in how they operate. Actors with novel business models are free to implement them and provide value for their users, earning LRx fees on volume or other metrics in the process (if they so choose). The ecosystem is modular and meant to support participation from a multitude of applications. The non-proprietary protocol places control in the hands of users and collaborators.
+
 
 \subsection{Order Book\label{sec:order_book}}
 Relays can design their order books in any number of ways to display and match users' trades. A first implementation of our own order book follows an OTC model, where limit orders are positioned based on price alone. Timestamps of orders, in other words, have no bearing on the order book. However, a Relay is free to design their order book in such a way as to emulate a typical centralized exchange's matching engine, where orders are ranked by price, while respecting timestamps as well. If a Relay was inclined to offer this type of order book, they can own/integrate with a wallet, and have those wallet orders sent solely to the single Relay, who would then be able to match orders based on time. Any such configuration is possible.
@@ -346,41 +584,48 @@ An order is a pack of data that describes the intent of the user's trade. A Loop
     string  authKey;          
   }
 \end{verbatim}
-To ensure the origin of the order, it is signed against the hash of its parameters, excluding $\_authAddr$, with the user's private key. The $\_authAddr$ parameter is used for signing  Order Rings that this order is part of, which prevents front-running. Please reference section \ref{sec:dual_authoring} for more details. The signature is represented by the $v$, $r$, and $s$ fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
 
 
-UDOM doesn't include a price (which must be a floating-point number by nature), but, instead uses the term $rate$, which is expressed as $amountS \over amountB$. The rate is not a floating-point number but an expression that will only be evaluated with other unsigned integers on demand, to keep all intermediate results as unsigned integers and increase calculation accuracy. 
+To ensure the origin of the order, it is signed against the hash of its parameters, excluding \verb|authAddr|, with the user's private key. The \verb|authAddr| parameter is used for signing  order rings that this order is part of, which prevents front-running. Please reference \ref{sec:dual_authoring} for more details. The signature is represented by the \verb|v|, \verb|r|, and \verb|s| fields, and is sent alongside the order parameters over the network. This guarantees the order stays immutable during its whole lifetime. Even though the order never changes, the protocol can still compute its current state based on the balance of its address along with other variables.
+
+
+
+UDOM doesn't include a price (which must be a floating-point number by nature), but, instead uses the term \verb|rate|($r$), which is expressed as \verb|amountS|/\verb|amountB|. The rate is not a floating-point number but an expression that will only be evaluated with other unsigned integers on demand, to keep all intermediate results as unsigned integers and increase calculation accuracy. 
 
 \subsubsection{Buy Amounts}
-When a miner ring-matches orders, it's possible that a better rate will be executable, allowing users to get more $tokenB$ than the $amountB$ they specified. However, if $buyNoMoreThanAmountB$ is set to $true$, the protocol ensures users receive exactly $amountB$ of $tokenB$. Thus, UDOM's $buyNoMoreThanTokenB$ parameter determines when an order is considered completely filled. $buyNoMoreThanTokenB$ applies a cap on either $amountS$ or $amountB$, and allows users to express more granular trade intentions than traditional buy/sell orders.
 
-Example: with amountS = 10 and amountB = 2, r = 10/2 = 5. Thus the user is willing to sell 5 $tokenS$ for each $tokenB$. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 $tokenB$ instead of 2. However, if the user only wants 2 $tokenB$ and set the $buyNoMoreThanTokenB$ flag to $true$, the LSC performs the transaction at a rate of 4 and the user sells 4 tokenS for each $tokenB$, effectively saving 2 tokenS. Keep in mind this does not take into account miners' fees (See section \ref{sec:fee_model}).
+When a miner ring-matches orders, it's possible that a better rate will be executable, allowing you to get more \verb|tokenB| than the \verb|amountB| they specified. However, if \verb|buyNoMoreThanAmountB| is set to \verb|True|, the protocol ensures users receive exactly \verb|amountB| of \verb|tokenB|. Thus, UDOM's \verb|buyNoMoreThantokenB| parameter determines when an order is considered completely filled. \verb|buyNoMoreThantokenB| applies a cap on either \verb|amountS| or \verb|amountB|, and allows users to express more granular trade intentions than traditional buy/sell orders.
+
+Example: with \verb|amountS| = 10 and \verb|amountB| = 2, the rate $r$ = 10/2 = 5. Thus the user is willing to sell 5 \verb|tokenS| for each \verb|tokenB|. The miner ring-matches and finds the user a rate of 4, allowing the user to receive 2.5 \verb|tokenB| instead of 2. However, if the user only wants 2 \verb|tokenB| and set the \verb|buyNoMoreThanAmountB| flag to \verb|True|, the LPSC performs the transaction at a rate of 4 and the user sells 4 \verb|tokenS| for each \verb|tokenB|, effectively saving 2 \verb|tokenS|. Keep in mind this does not take into account miners' fees (See \ref{sec:fee_model}).
 
 Indeed, if we use
+
 
 \begin{verbatim}
 	      Order(amountS,tokenS,
 	            amountB,tokenB,
-	            buyNoMoreThanTokenB)
+	            buyNoMoreThantokenB)
 \end{verbatim}
 
 to represent an order in a simplified form, then for ETH/USD markets on a traditional exchange, traditional buy-sell modeling can express the 1st and the 3rd order below, but not the other two:
 
 \begin{enumerate}
-	\item Sell 10 ETH at price of 300 USD/ETH. This order can expressed as $Order(10, ETH, 3000, USD, false)$.
-	\item Sell ETH at price of 300 USD/ETH to get 3000 USD. This order can expressed as $Order(10, ETH, 3000, USD, true)$.
-	\item Buy 10 ETH at price of 300 USD/ETH, This order can expressed as $Order(3000, USD, 10, ETH, true)$.
-	\item Spend 3000 USD to buy as many ETH as possible at price of 300 USD/ETH, This order can expressed as $Order(3000, USD, 10, ETH, false)$.
+	\item Sell 10 ETH at price of 300 USD/ETH. This order can expressed as \verb|Order(10, ETH, 3000, USD, False)|.
+	\item Sell ETH at price of 300 USD/ETH to get 3000 USD. This order can expressed as \verb|Order(10, ETH, 3000, USD, True)|.
+	\item Buy 10 ETH at price of 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, True)|.
+	\item Spend 3000 USD to buy as many ETH as possible at price of 300 USD/ETH, This order can expressed as \verb|Order(3000, USD, 10, ETH, False)|.
 \end{enumerate}
 
 
 
 \subsection{Ring Verification\label{sec:ring_verification}}
 
-The Loopring Smart Contract does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. These calculations are done by miners for two main reasons: solidity does not have support for floating point math, especially pow(x, 1/n), and it is desirable for the computation to be made off-chain to save gas.
+The Loopring Smart Contract does not perform exchange rate or amount calculations, but must receive and verify what the miner supplies for these values. These calculations are done by miners for two main reasons: the programming language from smart contracts, such as solidity on Ethereum, does not have support for floating point math, especially $pow(x, 1/n)$ (calculating the n-th root of a floating point numbers), and it is desirable for the computation to be made off-chain to reduce blockchain computation.
+
 
 \subsubsection{Sub-Ring Checking\label{sec:sub_ring_check}}
-This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempting to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain a sub-ring. To check this, the LSC ensures a token cannot be in a buy or sell position twice. In Figure 2 below, we can see that tokenA is a sell token twice and a buy token twice, which would be disallowed. 
+This step prevents arbitrageurs from unfairly realizing all the margin in a ring by implementing new orders within it. Essentially, once a valid ring is found by a miner, it could be tempting to add other orders to the ring to fully absorb the users' margin (rate discounts). This is zero-risk, zero-value add to the network, and is considered unfair conduct by the miner. To prevent this, Loopring requires that a valid loop cannot contain any sub-ring. To check this, the LPSC ensures a token cannot be in a buy or sell position twice. In the below diagram, we can see that token \verb|A| is a sell token twice and a buy token twice, which would be disallowed. 
+
 
 \begin{center}
 \begin{figurehere}
@@ -394,7 +639,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
 
 \begin{tikzpicture}[
     auto, 
-    node distance=3cm,
+    node distance=2cm,
     >=latex',
     font=\bfseries\footnotesize\sffamily,
     order/.style={
@@ -417,9 +662,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 2}\\
-  \textbf{owner: addressY}\\
-  \textbf{amountS: 9  tokenB}\\
-  \textbf{amountB: 12 tokenC}
+  \textbf{owner: Y}\\
+  \textbf{amountS: 9B}\\
+  \textbf{amountB: 12C}
  \end{tabular}
  };
  
@@ -427,9 +672,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 1}\\
-  \textbf{owner: addressX}\\
-  \textbf{amountS: 10000 tokenA}\\
-  \textbf{amountB: 2    tokenB}
+  \textbf{owner: X}\\
+  \textbf{amountS: 10000 A}\\
+  \textbf{amountB: 2 B}
  \end{tabular}
  };
  
@@ -438,9 +683,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 3}\\
-  \textbf{owner: addressZ}\\
-  \textbf{amountS: 100   tokenC}\\
-  \textbf{amountB: 160 tokenA}
+  \textbf{owner: Z}\\
+  \textbf{amountS: 100 C}\\
+  \textbf{amountB: 160 A}
  \end{tabular}
  };
  
@@ -448,9 +693,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  {%
  \begin{tabular}{l}
   \textbf{ORDER 4}\\
-  \textbf{owner: addressM}\\
-  \textbf{amountS: x1 tokenA}\\
-  \textbf{amountB: y1 tokenB}
+  \textbf{owner: M}\\
+  \textbf{amountS: x1 A}\\
+  \textbf{amountB: y1 B}
  \end{tabular}
  };
  
@@ -460,8 +705,8 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
  \begin{tabular}{l}
   \textbf{ORDER 5}\\
   \textbf{owner: addressM}\\
-  \textbf{amountS: x2   tokenC}\\
-  \textbf{amountB: y2 tokenA}
+  \textbf{amountS: x2 C}\\
+  \textbf{amountB: y2 A}
  \end{tabular}
  };
  
@@ -479,7 +724,9 @@ This step prevents arbitrageurs from unfairly realizing all the margin in a ring
 \end{center}
 
 \subsubsection{Fill Rate Checking\label{sec:fill_rate_check}}
-The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LSC ensures that each order in the ring shares the same rate (margin) discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
+
+The exchange rate calculations in the ring are made by miners for reasons stated above. It is the LPSC that must verify they're correct. First, it verifies that the buy rate the miner can execute for each order is equal to or less than the original buy rate set by the user. This ensures the user gets at least the exchange rate they asked for or better on the transaction. Once the exchange rates are confirmed, the LSC ensures that each order in the ring shares the same rate (margin) discount. For instance, if the discounted rate is $\gamma$, then the price for each order will be:
+
 
 $r_{0\rightarrow 1} \cdot (1-\gamma)$, $r_{1\rightarrow 2} \cdot (1-\gamma)$, $r_{2 \rightarrow 0} \cdot (1-\gamma)$, and satisfied: 
 \begin{equation}
@@ -497,7 +744,8 @@ If the transaction crosses $n$ orders, the \texttt{discount} is:
 where $r^i$ is the order turnover rate of $i$-th order. Obviously, only when the discount rate is $\gamma \ge 0$, can these orders be filled; and the $i$-th order's $O^i$ actual exchange rate $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
 
 \subsubsection{Fill Tracking \& Cancellation}
-A user can partially or fully cancel an order by sending a special transaction to the LSC, containing the details about the order and the amounts to cancel. The LSC takes that into account, stores the amounts to cancel, and emits an $OrderCancelled$ event to the network. The LSC keeps track of fill and cancellation amounts by storing their values using the order's hash as an identifier. This data is publicly accessible and $OrderCancelled$ / $OrderFilled$ events are emitted when it changes. Tracking these values is critical for the LSC during the ring settlement step.
+
+A user can partially or fully cancel an order by sending a special transaction to the LPSC, containing the details about the order and the amounts to cancel. The LPSC takes that into account, stores the amounts to cancel, and emits an OrderCancelled event to the network. The LPSC keeps track of fill and cancellation amounts by storing their values using the order's hash as an identifier. This data is publicly accessible and \verb|OrderCancelled| / \verb|OrderFilled| events are emitted when it changes. Tracking these values is critical for the LPSC during the ring settlement step.
 
 
 \subsubsection{Order Scaling\label{sec:order_scaling}}
@@ -564,9 +812,9 @@ circle/.style={
 \end{figurehere}
 \end{center}
 
-To make the transactions, the LSC uses the $TokenTransferDelegate$ smart contract. The introduction of such a delegate makes upgrading the protocol smart contract easier as all orders only need to authorize this delegate instead of different versions of the protocol.
+To make the transactions, the LPSC uses the \verb|TokenTransferDelegate| smart contract. The introduction of such a delegate makes upgrading the protocol smart contract easier as all orders only need to authorize this delegate instead of different versions of the protocol.
 
-For each order in the ring, a payment of $tokenS$ is made to the following order. Then the miner's fee is paid depending on the fee model chosen by the miner. An $OrderFilled$ event is then emitted. Finally, once all the transactions are made, a $RingMined$ event is emitted.
+For each order in the ring, a payment of \verb|tokenS| is made to the following order. Then the miner's fee is paid depending on the fee model chosen by the miner. An \verb|OrderFilled| event is then emitted. Finally, once all the transactions are made, a \verb|RingMined| event is emitted.
 
 \subsubsection{Emitted Events\label{sec:events}}
 
@@ -650,10 +898,11 @@ We end up with the following graph:
 \centering
 \begin{tikzpicture}[
 font=\bfseries\footnotesize\sffamily,
-scale=1.5]
+oneway/.style={->,dashed,shorten >=2pt,shorten <=2pt,>=stealth},
+scale=1]
     % Draw axes
-    \draw [<->,thick] (0,2.8) node (yaxis) [above] {$y$}
-        |- (4,0) node (xaxis) [right] {$x$};
+    \draw [<->,thick] (0,2.7) node (yaxis) [above] {$y$}
+        |- (5,0) node (xaxis) [right] {$x$};
         
     \draw
   	(1,1) coordinate (A)
@@ -663,24 +912,20 @@ scale=1.5]
   	\draw[thick] (B) -- (3.7,2.7);
   	\draw[dotted] (B) -- (2,0) node[below] {$2f$};
   	\draw[dotted] (A) -- (1,0) node[below] {$f$};
-  	\draw[dashed] (0,0) -- (2.7,2.7);
-  	\draw[thick] (0,1) node[left] {$f$}--(B) node[
-      circle,
-      draw,
-      fill=white,
-      inner sep = 1pt,
-      minimum size = 4pt,
-     ]{$$};
-
+  	\draw[thick,color=gray!70] (0,0) -- (2.7,2.7);
+  	\draw[thick] (0,1) node[left] {$f$}--(B) node[     ]{$$};
+ 	\draw[oneway] (4,1) node[right]{$Expected Mining Income$} -- (3, 2);
 
 
 \end{tikzpicture}
-\caption{Loopring Fee Model}
+\caption{Loopring's Fee Model}
 \label{fig:feemodel}
 \end{figurehere}
 \end{center}
 
-where $f$ is the LRx fee, $x$ is the margin split, $y$ is the mining income. $y=max(f, x-f)$ as indicated by the solid line; if the LRx fee for the order is $0$, the equation is $y=max(0, x - 0)$ that simplifies to $y=x$ as indicated by the dashed line.\\
+
+where $f$ is the LRx fee, $x$ is the margin split, $y$ is the mining income. $y=max(f, x-f)$ as indicated by the solid line; if the LRx fee for the order is $0$, the equation is $y=max(0, x - 0)$ that simplifies to $y=x$ as indicated by the gray line.
+
 
 The consequences are:  
 \begin{enumerate}
@@ -694,7 +939,7 @@ It should be noted that if the LRx fee is non-zero, no matter which option the m
 Ring-Miners will share a certain percentage of fees with wallets. When a user places an order through a wallet and gets filled, the wallet is rewarded with a portion of the fees or margin split. Although this is modular, and unique business models or implementations are possible, our inclination is for wallets to receive approximately 20\%-25\% of earned fees. Wallets represent a primary target for Loopring protocol integration as they have the user base, but little or no source of income.
 
 \subsection{Decentralized Governance}
-At its root, the Loopring protocol is a social protocol in the sense that it relies on coordination amongst members to operate effectively towards a goal. This is not dissimilar to cryptoeconomic protocols at large, and indeed, its usefulness is largely protected by the same mechanisms of coordination problems \cite{vitalikgovernance}, grim trigger equilibrium, and bounded rationality. To this end, LRx tokens are not only used to pay fees, but also to align the financial incentives of the various network participants. Such alignment is necessary for broad adoption of any protocol, but is particularly acute for exchange protocols, given that success rests largely on improving liquidity in a robust decentralized ecosystem.
+At its root, the Loopring protocol is a social protocol in the sense that it relies on coordination amongst members to operate effectively towards a goal. This is not dissimilar to cryptoeconomic protocols at large, and indeed, its usefulness is largely protected by the same mechanisms of coordination problems \cite{vitalikgovernance}, grim trigger equilibrium, and bounded rationality. To this end, LRx token \verb|A|re not only used to pay fees, but also to align the financial incentives of the various network participants. Such alignment is necessary for broad adoption of any protocol, but is particularly acute for exchange protocols, given that success rests largely on improving liquidity in a robust decentralized ecosystem.
 
 LRx tokens will be used to effectuate protocol updates through decentralized governance. Smart contract updates will be governed by token holders to ensure continuity and safety, and to attenuate the risks of siphoned liquidity through incompatibility. Given that smart contracts cannot be altered once deployed, there is a risk that dApps or end users continue to interact with deprecated versions and preclude themselves from updated contracts. Upgradeability is crucial to the protocol's success as it must adapt to market demands and the underlying blockchains. Decentralized governance by LRx stakeholders will allow for protocol smart contract updates without disrupting dApps or end users. At first, this will be done through a simple multisignature smart contract.
 
@@ -704,37 +949,37 @@ LRx tokens will be used to effectuate protocol updates through decentralized gov
 
 In decentralized exchanges, front-running is when someone tries to copy another node's trade solution, and have it mined before the original transaction that is in the pending transaction pool (mempool). This can be achieved by specifying a higher transaction fee (gas). The major scheme of front-running in Loopring (and any protocol for order-matching) are order-filch: when a front-runner steals one or more orders from a pending ring settlement transaction; and, specific to Loopring is Ring-filch: when a front-runner steals the entire ring from the pending transaction.
 
-When a submitRing transaction is not confirmed and still in the pending transaction pool, anyone can easily spot such a transaction and replace $miner\_address$ with their own address (the filcher\_address), then they can re-sign the payload with filcher\_address to replace the ring's signature. The fincher can set a higher gas price and submit a new transaction hoping block miners will pick his new transaction into the next block instead of the original $submitRing$ transaction.
 
-Previous solutions to this problem had important downsides (v1.1): 1) requiring more transactions and thus costing miners more gas; and 2) taking at least twice the blocks to settle a ring.  Our new solution involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for mining \cite{dualauthor}.
+When a submitRing transaction is not confirmed and still in the pending transaction pool, anyone can easily spot such a transaction and replace \verb|minerAddress| with their own address (the \verb|filcherAddress|) , then they can re-sign the payload with \verb|filcherAddress| to replace the ring's signature. The fincher can set a higher gas price and submit a new transaction hoping block miners will pick his new transaction into the next block instead of the original submitRing transaction.
+
+Previous solutions to this problem had important downsides: requiring more transactions and thus cost miners more gas; and taking at least twice the blocks to settle a ring.  Our new solution involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for mining.
 
 How it works:
 
 \begin{enumerate}
 
-	\item For each order, the wallet software will generate a random public-key/private-key pair, and put the key pair into the order's JSON snippet. (An alternative is to use the address derived from the public-key instead of the public-key itself to reduce byte size. We use $authAddr$ to represent such an address, and $authKey$ to represent $authAddr$'s matching private-key).
+	\item For each order, the wallet software will generate a random public-key/private-key pair, and put the key pair into the order's JSON snippet. (An alternative is to use the address derived from the public-key instead of the public-key itself to reduce byte size. We use \verb|authAddr| to represent such an address, and \verb|authKey| to represent \verb|authAddr|'s matching private-key).
 
-	\item All fields in the order except $authKey$ is signed using the $owner$ address's private-key (not $authKey$) as shown in the image below.
+	\item All fields in the order except \verb|authKey| is signed using the \verb|owner| address's private-key (not \verb|authKey|) as shown in the image below.
 
-	\item The wallet will send the order, together with the $authKey$ to miners (Relays) for matching.The miner will verify that $authKey$ and $authAddr$ are correctly paired and the order's signature is valid with respect to owner\_address.
+	\item The wallet will send the order, together with the \verb|authKey| to miners (relays) for matching.The miner will verify that \verb|authKey| and \verb|authAddr| are correctly paired and the order's signature is valid with respect to owner\_address.
 
-	\item When a ring is identified, the miner will use each order's $authKey$ to sign the ring's hash, $miner\_address$, and all the mining parameters. In the example below, the ring contains 3 orders, therefore there will be 3 signatures by the 3 $authKey$s. We call these signatures the $auth\_signature$s. The miner also needs to sign the ring's hash together with all mining parameters using $miner\_address$'s private-key.
+	\item When a ring is identified, the miner will use each order's \verb|authKey| to sign the ring's hash, \verb|minerAddress|, and all the mining parameters. In the example below, the ring contains 3 orders, therefore there will be 3 signatures by the 3 \verb|authKey|s. We call these signatures the \verb|authSignature|s. The miner also needs to sign the ring's hash together with all mining parameters using \verb|minerAddress|'s private-key.
 
-	\item The miner calls the submitRing function with all the parameters, as well as the 3 extra $auth\_signature$s. Notice that $authKey$s are NOT part of the on-chain transaction and thus remain unknown to people other than the Relay itself, as shown in the image below.
+	\item The miner calls the submitRing function with all the parameters, as well as the 3 extra \verb|authSignature|s. Notice that \verb|authKey|s are NOT part of the on-chain transaction and thus remain unknown to people other than the relay itself, as shown in the image below.
 
-	\item The Loopring Protocol will now verify each $auth\_signature$ against the corresponding $authAddr$ of each order, and reject the ring if any $auth\_signature$ is invalid.
+
+	\item The Loopring Protocol will now verify each \verb|authSignature| against the corresponding \verb|authAddr| of each order, and reject the ring if any \verb|authSignature| is invalid.
  
 \end{enumerate}
-[TODO: daniel wang]
-
 
 The result is that now:
 
 \begin{itemize}
 
-	\item  The order’s signature (by the private-key of the $owner\_address$) guarantees the order cannot be modified, including the $authAddr$.
-	\item  The miner’s signature (by the private-key of the $miner\_address$) guarantees nobody can use his identity to mine a ring.
-	\item  The $auth\_signature$s guarantees the entire ring cannot be modified, including $miner\_address$. And since ring-filchers do not have access to $authKey$s, they cannot re-generate a new set of $auth\_signature$s thus are unable to generate a filch transaction.
+	\item  The order’s signature (by the private-key of the \verb|owner| address) guarantees the order cannot be modified, including the \verb|authAddr|.
+	\item  The miner’s signature (by the private-key of the \verb|minerAddress|) guarantees nobody can use his identity to mine a ring.
+	\item  The \verb|authSignature|s guarantees the entire ring cannot be modified, including \verb|minerAddress|. And since ring-filchers do not have access to \verb|authKey|s, they cannot re-generate a new set of \verb|authSignature|s thus are unable to generate a filch transaction.
 
 \end{itemize}
 
@@ -774,15 +1019,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 \end{multicols}
 
 \newpage
-
-
-
-
-
-
-
-
-
 
 
 \begin{figure}[h]
@@ -841,41 +1077,6 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 \caption{FOSS in Chrome influences industry structure by increasing competition}
 \label{fig:6forces}
 \end{figure}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \begin{appendices}
 
