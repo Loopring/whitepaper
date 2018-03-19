@@ -233,7 +233,7 @@ Loopring orders are expressed in what we call a Unidirectional Order Model (UDOM
 
 \end{tikzpicture}
 
-\caption{A order-ring of 3 Orders}
+\caption{An order-ring of 3 orders}
 \label{fig:ring}
 \end{figurehere}
 \end{center}
@@ -720,7 +720,7 @@ This step prevents arbitrageurs from unfairly realizing all the margin in an ord
   
 \end{tikzpicture}
 
-\caption{A order-ring with Sub-Ring}
+\caption{An order-ring with sub-ring}
 \label{fig:subring}
 \end{figurehere}
 \end{center}
@@ -747,6 +747,11 @@ If the transaction crosses $n$ orders, the \texttt{discount} is:
 \end{equation}
 
 where $r^i$ is the order turnover rate of $i$-th order. Obviously, only when the discount rate is $\gamma \ge 0$, can these orders be filled; and the $i$-th order ($O^i$)'s actual exchange rate is $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
+
+Recall our prior example where Alice has 15 token \verb|A| and wants 4 token \verb|B| for them, Bob has 10 token \verb|B| and wants 30 token \verb|A| for them. If token \verb|A| is the reference, then Alice is buying token \verb|B| for $\frac{15}{4}$ = 3.75\verb|A|, while Bob is selling token \verb|B| for $\frac{30}{10}$ = 3.00\verb|A|. To calculate the discount: $\frac{150}{120}$ = 1.25 thus $\frac{1}{1.25}$ = 0.8 = $(1 −- \gamma)^2$. Thus the exchange rate that renders the trade equitable for both parties is $\sqrt{0.8}$ $\cdot$ 3.75 $\approx$ 3.3541 token \verb|A| per token \verb|B|.
+
+Bob gives 4 token \verb|B| and receives 13.4164 token \verb|A|, more than the 12 he was expecting for those 4 tokens. Alice receives 4 token \verb|B| as intended but gives only 13.4164 token \verb|A| in exchange, less than the 15 she was willing to give for those 4 tokens.
+Note, a portion of this margin will go towards paying fees to incentivize miners (and wallets). (See section \ref{sec:fee_model}).
 
 
 \subsubsection{Fill Tracking \& Cancellation}
