@@ -32,6 +32,7 @@
 \usepackage{afterpage}
 \usepackage{pgf}
 \usepackage{tikz}
+\usepackage{fontspec}
 \usepackage{dirtree}
 \usepackage[style=american]{csquotes}
 \usepackage{amsfonts}
@@ -289,9 +290,7 @@ Les participants à l'écosystème suivants fournissent conjointement toutes les
 
 \item \textbf{Création d’ordres} : Le taux actuel et le carnet de commandes pour les jetons \verb|B| vs les jetons \verb|C|, sont fournis par des relais ou d'autres agents connectés au réseau, tels que les navigateurs de carnet de commandes. L'utilisateur \verb|Y| passe un ordre (ordre à cours limité) en spécifiant le\verb|montantS| et le \verb|montantB| et d'autres paramètres par le biais de n'importe quelle interface de portefeuille intégrée. Un montant de LRx peut être ajouté à la commande en tant que récompense pour les mineurs d'anneau ; des récompenses de LRx plus élevés signifient une meilleure chance d'être traités rapidement par les mineurs d'anneau. Le hash de la commande est signé avec la clé privée de l'utilisateur \verb|Y|.
 
-\item \textbf{Diffusion d’ordre} : Le portefeuille envoie la commande et sa signature à un ou plusieurs relais. Les relais mettent à jour leur carnet d'ordre public. Le protocole n'exige pas que les carnets de commandes soient construits d'une certaine façon, comme le principe du premier arrivé, premier servi. Au lieu de cela, les relais ont le pouvoir de prendre leurs propres décisions de conception en construisant leurs carnets de commandes.
 
-\item \textbf{Partage de Liquidité} : Les relais diffusent l'ordre à d'autres relais par n'importe quel moyen de communication. Ici encore, il y a une certaine souplesse quant à la façon dont les nœuds interagissent. Pour faciliter un certain niveau de connectivité du réseau, il y a un relais de partage de liquidité intégré utilisant un consortium de chaîne de blocs. Comme mentionné dans la section précédente, ce maillage de relais est optimisé pour la vitesse et la globalité.
 
 \begin{center}
 \begin{figurehere}
@@ -505,6 +504,9 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{chaîne de blocs}};
 \end{figurehere}
 \end{center}
 
+\item \textbf{Diffusion d’ordre} : Le portefeuille envoie la commande et sa signature à un ou plusieurs relais. Les relais mettent à jour leur carnet d'ordre public. Le protocole n'exige pas que les carnets de commandes soient construits d'une certaine façon, comme le principe du premier arrivé, premier servi. Au lieu de cela, les relais ont le pouvoir de prendre leurs propres décisions de conception en construisant leurs carnets de commandes.
+
+\item \textbf{Partage de Liquidité} : Les relais diffusent l'ordre à d'autres relais par n'importe quel moyen de communication. Ici encore, il y a une certaine souplesse quant à la façon dont les nœuds interagissent. Pour faciliter un certain niveau de connectivité du réseau, il y a un relais de partage de liquidité intégré utilisant un consortium de chaîne de blocs. Comme mentionné dans la section précédente, ce maillage de relais est optimisé pour la vitesse et la globalité.
 
 
 \item \textbf{Minage en anneaux (appariement des ordres)} : Les mineurs d’anneaux  essaient de satisfaire l’ordre entièrement ou partiellement au taux de change donné ,ou mieux, en l'appariant avec de multiples autres ordres. Le minage en anneau est la principale raison pour laquelle le protocole est capable de fournir une grande liquidité sur n'importe quelle paire. Si le taux d'exécution est meilleur que ce que l'utilisateur Y a spécifié, la marge est partagée entre tous les ordres dans l’anneau d’ordres. En guise de récompense, le mineur choisit entre réclamer une partie de la marge (partage de marge, et rendre le LRx à l'utilisateur), ou simplement garder les récompense de LRx.
