@@ -827,10 +827,10 @@ circle/.style={
 路印协议发布事件，允许中继、订单浏览器和其他参与者尽可能高效地接收订单更新。发布的事件有：
 
 \begin{itemize}
-	\item \textbf{取消某一订单（OrderCancelled）}：某一特定订单已被取消。
-	\item \textbf{取消某一交易对所有订单（OrdersCancelled）}：用户地址下某一交易对所有订单已全部取消。
-	\item \textbf{取消所有订单（AllOrdersCancelled）}：用户地址下所有交易对订单已全部取消。
-	\item \textbf{撮合完成（RingMined）}：某一订单环路已经成功撮合。该事件包含了环路内每笔代币转账的详细数据。
+	\item \textbf{OrderCancelled}：某一特定订单已被取消。
+	\item \textbf{OrdersCancelled}：用户地址下某一交易对所有订单已全部取消。
+	\item \textbf{AllOrdersCancelled}：用户地址下所有交易对订单已全部取消。
+	\item \textbf{RingMined}：某一订单环路已经成功撮合。该事件包含了环路内每笔代币转账的详细数据。
 \end{itemize}
 
 
@@ -1019,7 +1019,7 @@ LRx代币将用于通过去中心化自治实现协议更新。未来，智能�
 \end{itemize}
 
 \section{致谢}
-在这里，我们想由衷地感谢我们的导师、顾问以及广大路印社区参与者，感谢他们如此热情和慷慨地用自身学识对白皮书中的内容提出意见。在此，我们要尤其感谢中国分布式总账基础协议联盟（ChinaLedger)白硕；阚海滨博士；Alex  Cheng，达鸿飞；曹寅；吴小川；Zhen  Wang、于伟、段念、肖军、钱江、向江旭、郭一鹏、李大海、Kelvin Long、夏华夏、马俊和Encephalo Path对本项目的评审建议和意见。
+在这里，我们想由衷地感谢我们的导师、顾问以及广大路印社区参与者，感谢他们如此热情和慷慨地用自身学识对白皮书中的内容提出意见。在此，我们要尤其感谢中国分布式总账基础协议联盟（ChinaLedger)白硕；阚海滨博士；Alex  Cheng，达鸿飞；曹寅；吴小川；Zhen  Wang、于伟、段念、肖军、钱江、向江旭、郭一鹏、李大海、Kelvin Long、夏华夏、马俊和Encephalo Path对本项目的评审建议和意见。此外，我们也要在此感谢付金涛、张弛、时晓飞三位译者对于本白皮书的中文翻译所付出的努力。
 
 
 \bibliography{whitepaper}
@@ -1099,10 +1099,19 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 \begin{itemize}
 \item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
 \item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
-\item TokenTransferDelegate: \verb|0xc787aE8D6560FB77B82F42CED8eD39f94961e304|
-\item NameRegistry: \verb|0x0f3Dce8560a6010DE119396af005552B7983b7e7|
-\item LoopringProtocolImpl: \verb|0xc80BbAb86cED62CF795619A357581FaF0cB46511|
-\item TransferableMultsig: \verb|0x7421ad9C880eDF007a122f119AD12dEd5f7C123B|
+\item TokenTransferDelegate: \verb|0x7b126ab811f278f288bf1d62d47334351dA20d1d|
+\item NameRegistry: \verb|0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7|
+\item LoopringProtocolImpl: \verb|0x0B48b747436f10c846696e889e66425e05CD740f|
+\end{itemize}
+
+\subsection{Qtum}
+下述智能合约已经在量子链主网上部署完毕：
+\begin{itemize}
+\item LRQ: \verb| 2eb2a66afd4e465fb06d8b71f30fb1b93e18788d |
+\item TokenRegistry: \verb| c89ea34360258917daf3655f8bec5550923509b3 |
+\item TokenTransferDelegate: \verb| 60b3fa7f461664e4dafb621a36ac2722cc680f10 |
+\item NameRegistry: \verb| e26a27d92181069b25bc7283e03722f6ce7678bb |
+\item LoopringProtocolImpl: \verb| 5180bb56b696d16635abd8dc235e0ee432abf25d |
 \end{itemize}
 
 \end{appendices}
