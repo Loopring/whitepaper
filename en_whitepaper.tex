@@ -1,6 +1,7 @@
 % !TEX program = XeLaTeX
 % !TEX encoding = UTF-8
 \documentclass[UTF8,nofonts]{article}
+\usepackage[postscript]{ucs}
 %{ctexart}
 
 
@@ -263,7 +264,7 @@ Thus, for a set of $n$ orders to be able to be filled, fully or partially, we ne
 If we introduce a third counterparty, Charlie, such that  Alice wants to give $x_1$ token \verb|A| and receive $y_1$ token \verb|B|, Bob wants to give $x_2$ token \verb|B| and receive $y_2$ token \verb|C|, and Charlie wants to give $x_3$ token \verb|C| and receive $y_3$ token \verb|A|. The necessary tokens are present, and the trade is possible if:
 
 \begin{equation}
-{{x1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
+{{x_1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
 \end{equation}
 
 
@@ -776,7 +777,7 @@ Finding the lowest value order can help to figure out the fill volume for each o
 %\text{.}
 \end{split}
 \]
-where $\overline{s}_i$ is the the balance left after orders are partially filled.
+where $\overline{s}_i$ is the balance left after orders are partially filled.
 
 During implementation we can safely assume any order in the order-ring to have the lowest value, then iterate through the order-ring at most twice to calculate each order's fill volume. 
 
@@ -965,7 +966,7 @@ However, LRx token owners are not the only stakeholders to consider in steering 
 In decentralized exchanges, front-running is when someone tries to copy another node's trade solution, and have it mined before the original transaction that is in the pending transaction pool (mempool). This can be achieved by specifying a higher transaction fee (gas price). The major scheme of front-running in Loopring (and any protocol for order-matching) are order-filch: when a front-runner steals one or more orders from a pending order-ring settlement transaction; and, specific to Loopring: when a front-runner steals the entire order-ring from a pending transaction.
 
 
-When a submitRing transaction is not confirmed and is still in the pending transaction pool, anyone can easily spot such a transaction and replace \verb|minerAddress| with their own address (the \verb|filcherAddress|), then they can re-sign the payload with \verb|filcherAddress| to replace the order-ring's signature. The fincher can set a higher gas price and submit a new transaction hoping block-miners will pick his new transaction into the next block instead of the original submitRing transaction.
+When a submitRing transaction is not confirmed and is still in the pending transaction pool, anyone can easily spot such a transaction and replace \verb|minerAddress| with their own address (the \verb|filcherAddress|), then they can re-sign the payload with \verb|filcherAddress| to replace the order-ring's signature. The filcher can set a higher gas price and submit a new transaction hoping block-miners will pick his new transaction into the next block instead of the original submitRing transaction.
 
 Previous solutions to this problem had important downsides: requiring more transactions and thus costing ring-miners more gas; and taking at least twice the blocks to settle an order-ring.  Our new solution, Dual Authoring\cite{dualauthor}, involves the mechanism of setting up two levels of authorization for orders - one for settlement, and one for ring-mining.
 
