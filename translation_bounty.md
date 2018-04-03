@@ -1,4 +1,0 @@
-
-
-# Translation Bounty
-
