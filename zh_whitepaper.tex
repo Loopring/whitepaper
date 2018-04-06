@@ -579,7 +579,8 @@ minimum height=15.6cm] (区块链) {\parbox[b][15cm]{1.3cm}{区块链}};
     // 双重授权私钥,
     // 不用来计算订单哈希值,
     // 因此未被签名.
-    string  authKey;          
+    string  authKey; 
+    uint256 nonce;         
   }
 \end{verbatim}
 
@@ -1033,8 +1034,6 @@ LRx代币将用于通过去中心化自治实现协议更新。未来，智能�
 
 \section{以太坊网络上的路印协议\label{app:protocol_ethereum}}
 
-\subsection{智能合约}
-
 \begin{center}
 \begin{figurehere}
 \centering
@@ -1093,8 +1092,9 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 \end{figurehere}
 \end{center}
 
-\subsection{智能合约部署情况}
+\section{合约部署}
 
+\subsection{Ethereum}
 下述智能合约已经在以太坊主网上部署完毕：
 \begin{itemize}
 \item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|

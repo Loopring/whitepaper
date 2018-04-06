@@ -281,7 +281,7 @@ Se introduzirmos uma terceira contraparte, Charlie, de modo que Alice queira dar
 
 
 \begin{equation}
-{{x1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
+{{x_1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
 \end{equation}
 
 
@@ -589,19 +589,18 @@ Pedido de mensagem {
   unidade8 marginSplitPercentage; // [1-100]
   bool buyNoMoreThanAmountB;
   Unit 256 walletId;
-// Endereço de autoria dupla
+  // Endereço de autoria dupla
   endereço authAddr;
-// v, r, s são partes da assinatura
+  // v, r, s são partes da assinatura
   unidade8 v;
   bytes32 r;
   bytes32
-// Chave privada de autoria dupla,
-// não usado para calcular o hash do pedido
-// assim, isso NÃO é assinado.
+  // Chave privada de autoria dupla,
+  // não usado para calcular o hash do pedido
+  // assim, isso NÃO é assinado.
   string authKey;
+  uint256 nonce;
 }
-         
-  }
 \end{verbatim}
 
 

@@ -552,30 +552,31 @@
 	Ордер представляет собой пакет данных, в котором описывается намерение торговли. Ордер Loopring определяется с использованием модели Uni-Directional Order Model или UDOM следующим образом:
 	
 	\begin{verbatim}
-	message Order {
-	address protocol;
-	address owner;
-	address tokenS;
-	address tokenB;
-	uint256 amountS;
-	uint256 amountB;
-	unit256 lrcFee
-	unit256 validSince; // Секунд с начала эпохи
-	unit256 validUntil; // Секунд с начала эпохи
-	uint8   marginSplitPercentage;  // [1-100]
-	bool    buyNoMoreThanAmountB;
-	uint256 walletId;
-	// Адрес двойной авторизации
-	address authAddr;
-	// v, r, s - части подписи
-	uint8   v;       
-	bytes32 r;
-	bytes32 s;
-	// Секретный ключ двойной авторизации,
-	// не используется для вычисления хеша ордера,
-	// поэтому он НЕ подписан.
-	string  authKey;          
-	}
+message Order {
+  address protocol;
+  address owner;
+  address tokenS;
+  address tokenB;
+  uint256 amountS;
+  uint256 amountB;
+  unit256 lrcFee
+  unit256 validSince; // Секунд с начала эпохи
+  unit256 validUntil; // Секунд с начала эпохи
+  uint8   marginSplitPercentage;  // [1-100]
+  bool  buyNoMoreThanAmountB;
+  uint256 walletId;
+  // Адрес двойной авторизации
+  address authAddr;
+  // v, r, s - части подписи
+  uint8   v;     
+  bytes32 r;
+  bytes32 s;
+  // Секретный ключ двойной авторизации,
+  // не используется для вычисления хеша ордера,
+  // поэтому он НЕ подписан.
+  string  authKey;
+  uint256 nonce;      
+}
 	\end{verbatim}
 	
 	
