@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.4.1)  5 APR 2018 09:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.4.1)  7 APR 2018 19:02
 entering extended mode
 **./pt_whitepaper.tex
 (pt_whitepaper.tex
@@ -1210,75 +1210,9 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ("C:\Users\Leone Menezes\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ucs\uni-0.
 def"
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
-)
+) [1
 
-Package natbib Warning: Citation `buterin2017ethereum' on page 1 undefined on i
-nput line 133.
-
-
-Package natbib Warning: Citation `wood2014ethereum' on page 1 undefined on inpu
-t line 133.
-
-
-Package natbib Warning: Citation `dai2017smart' on page 1 undefined on input li
-ne 133.
-
-
-Package natbib Warning: Citation `atterlonn2018distributed' on page 1 undefined
- on input line 133.
-
-
-Package natbib Warning: Citation `desotocapital' on page 1 undefined on input l
-ine 141.
-
-
-Package natbib Warning: Citation `nakamoto2008bitcoin' on page 1 undefined on i
-nput line 144.
-
-
-Package natbib Warning: Citation `schuh2015bitshares' on page 1 undefined on in
-put line 145.
-
-
-Package natbib Warning: Citation `bancor' on page 1 undefined on input line 145
-.
-
-
-Package natbib Warning: Citation `kyber' on page 1 undefined on input line 145.
-
-
-
-Package natbib Warning: Citation `coincheckhack' on page 1 undefined on input l
-ine 152.
-
-
-Package natbib Warning: Citation `mcmillan2014inside' on page 1 undefined on in
-put line 152.
-
-[1
-
-{C:/Users/Leone Menezes/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-
-Package natbib Warning: Citation `fakevolume' on page 2 undefined on input line
- 158.
-
-
-Package natbib Warning: Citation `limitorderliquidity' on page 2 undefined on i
-nput line 165.
-
-[2]
-
-Package natbib Warning: Citation `warren20170x' on page 3 undefined on input li
-ne 172.
-
-
-Package natbib Warning: Citation `costofdecent' on page 3 undefined on input li
-ne 172.
-
-
-Package natbib Warning: Citation `coinport2014udom' on page 3 undefined on inpu
-t line 179.
-
+{C:/Users/Leone Menezes/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2]
 LaTeX Font Info:    Try loading font information for T1+cmss on input line 213.
 
 
@@ -1291,14 +1225,7 @@ Package amsmath Warning: Foreign command \over;
 (amsmath)                \frac or \genfrac should be used instead
 (amsmath)                 on input line 266.
 
-
-Package natbib Warning: Citation `supersymmetry' on page 3 undefined on input l
-ine 275.
-
 [3]
-
-LaTeX Warning: Reference `anatomy' on page 4 undefined on input line 284.
-
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 293.
 
 
@@ -1308,10 +1235,6 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 293.
-
-
-LaTeX Warning: Reference `sec:token' on page 4 undefined on input line 293.
-
 
 Underfull \hbox (badness 6825) in paragraph at lines 295--296
 []\T1/cmr/bx/n/10 Consórcio de Li-qui-dez com-par-ti-lhado do
@@ -1323,153 +1246,191 @@ Underfull \hbox (badness 5681) in paragraph at lines 295--296
  []
 
 
-LaTeX Warning: Reference `app:protocol_ethereum' on page 4 undefined on input l
-ine 299.
-
-
-Package natbib Warning: Citation `ERC20' on page 4 undefined on input line 301.
-
-
-
-LaTeX Warning: Reference `fig:process' on page 4 undefined on input line 313.
-
-[4]
-Overfull \hbox (2.44174pt too wide) in paragraph at lines 486--486
+Overfull \hbox (2.44174pt too wide) in paragraph at lines 485--485
 []\T1/cmss/bx/n/8 blockchain 
  []
 
-[5]
-Overfull \hbox (2.82529pt too wide) in paragraph at lines 601--601
+[4] [5]
+Overfull \hbox (2.82529pt too wide) in paragraph at lines 600--600
 []    \T1/cmtt/m/n/10 // não é usado para calcular o hash do pedido,[] 
  []
 
 
-LaTeX Warning: Reference `sec:dual_authoring' on page 6 undefined on input line
- 608.
-
-
-LaTeX Warning: Reference `sec:fee_model' on page 6 undefined on input line 619.
-
-
-
-Overfull \hbox (63.26111pt too wide) in paragraph at lines 633--634
+Overfull \hbox (63.26111pt too wide) in paragraph at lines 632--633
 \T1/cmr/m/n/10 dido pode ser ex-presso como: [][]\T1/cmtt/m/n/10 Order(10, ETH,
  3000, USD, False)[]\T1/cmr/m/n/10 . 
  []
 
 
-Overfull \hbox (58.01239pt too wide) in paragraph at lines 635--636
+Overfull \hbox (58.01239pt too wide) in paragraph at lines 634--635
 \T1/cmr/m/n/10 dido pode ser ex-presso como: [][]\T1/cmtt/m/n/10 Order(3000, US
 D, 10, ETH, True)[]\T1/cmr/m/n/10 . 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 636--637
+Underfull \hbox (badness 10000) in paragraph at lines 635--636
 \T1/cmr/m/n/10 mero pos-sí-vel de ETH pelo preço de 300
  []
 
-
-Package natbib Warning: Citation `dannen2017introducing' on page 6 undefined on
- input line 643.
-
 [6]
-
-LaTeX Warning: Reference `fig:subring' on page 7 undefined on input line 648.
-
-
 ("C:\Users\Leone Menezes\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ucs\uni-34
 .def"
 File: uni-34.def 2013/05/13 UCS: Unicode data U+2200..U+22FF
-)
-
-LaTeX Warning: Reference `sec:fee_model' on page 7 undefined on input line 772.
-
-
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 846--847
+) [7]
+Underfull \hbox (badness 10000) in paragraph at lines 845--846
 []\T1/cmr/m/n/10 Para fa-zer as tran-sa-ções, o LPSC usa o
  []
 
 [8]
-
-Package natbib Warning: Citation `vitalikgovernance' on page 9 undefined on inp
-ut line 973.
-
-
-Package natbib Warning: Citation `LRCtokendoc' on page 9 undefined on input lin
-e 975.
-
-
 ("C:\Users\Leone Menezes\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ucs\uni-32
 .def"
 File: uni-32.def 2013/05/13 UCS: Unicode data U+2000..U+20FF
-) [9]
+) [9] [10] (pt_whitepaper.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 15--20
+\T1/cmr/m/it/10 org/uploads/files/cf6d69348ca50dd985b60425ccf282f3.
+ []
 
-Package natbib Warning: Citation `dualauthor' on page 10 undefined on input lin
-e 988.
 
-[10]
+Underfull \hbox (badness 10000) in paragraph at lines 44--48
+[]\T1/cmr/m/n/10 Yaron Vel-ner Loi Luu.  Ky-ber-network: A
+ []
 
-Package natbib Warning: Citation `unenumerated2006' on page 11 undefined on inp
-ut line 1034.
 
-No file pt_whitepaper.bbl.
+Underfull \hbox (badness 10000) in paragraph at lines 44--48
+\T1/cmr/m/n/10 trus-tless de-cen-tra-li-zed ex-change and pay-ment
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--48
+\T1/cmr/m/n/10 ser-vice.  $\T1/cmtt/m/n/10 https : / / kr . kyber . network / a
+ssets /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--54
+[]\T1/cmr/m/n/10 Fortune.  How to steal $500 mil-lion in
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 50--54
+\T1/cmr/m/n/10 cryp-to-cur-rency.  $\T1/cmtt/m/n/10 http : / / fortune . com / 
+2018 / 01 /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 61--66
+\T1/cmtt/m/n/10 https : / / medium . com / @sylvainartplayribes /
+ []
+
+
+Overfull \hbox (18.65671pt too wide) in paragraph at lines 61--66
+\T1/cmtt/m/n/10 chasing-[]fake-[]volume-[]a-[]crypto-[]plague-[]ea1a3c1e0b5e$\T
+1/cmr/m/n/10 ,
+ []
+
 [11]
-
-Package natbib Warning: There were undefined citations.
-
-[12] (pt_whitepaper.aux)
-
-LaTeX Warning: There were undefined references.
+Underfull \hbox (badness 10000) in paragraph at lines 84--89
+\T1/cmtt/m/n/10 https : / / github . com / dong77 / backcore / blob /
+ []
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+Underfull \hbox (badness 10000) in paragraph at lines 84--89
+\T1/cmtt/m/n/10 master / coinex / coinex-[]backend / src / main / scala /
+ []
 
- ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 84--89
+\T1/cmtt/m/n/10 com / coinport / coinex / markets / MarketManager .
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--96
+[]\T1/cmr/m/n/10 Supersymmetry.  Re-marks on lo-o-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--96
+\T1/cmr/m/n/10 pring.  $\T1/cmtt/m/n/10 https : / / docs . loopring . org / pdf
+ /
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--96
+\T1/cmtt/m/n/10 supersimmetry-[]loopring-[]remark . pdf$\T1/cmr/m/n/10 , Ac-ces
+-sed:
+ []
+
+
+Underfull \hbox (badness 6910) in paragraph at lines 108--112
+[]\T1/cmr/m/n/10 Vitalik Bu-te-rin.  No-tes on block-chain go-ver-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--117
+[]\T1/cmr/m/n/10 Loopring Foun-da-tion.  Lrc to-ken do-cu-ments.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 114--117
+\T1/cmtt/m/n/10 https : / / docs . loopring . org / English / token/$\T1/cmr/m/
+n/10 ,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 119--124
+\T1/cmr/m/it/10 protocol/dual-authoring-looprings-solution-to-front-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 126--131
+\T1/cmtt/m/n/10 http : / / unenumerated . blogspot . ca / 2006 / 06 /
+ []
+
+) [12] [13] (pt_whitepaper.aux) ) 
 Here is how much of TeX's memory you used:
- 24167 strings out of 493305
- 475575 string characters out of 3126321
- 660742 words of memory out of 3000000
- 27174 multiletter control sequences out of 15000+200000
+ 24217 strings out of 493305
+ 476829 string characters out of 3126321
+ 667545 words of memory out of 3000000
+ 27222 multiletter control sequences out of 15000+200000
  25786 words of font info for 62 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,17n,77p,1502b,1052s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec
-\dpi600\ecss0700.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\
-ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users\Leone Menezes\AppData\Local\Mi
-KTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0700.pk> <C:\Users\Leone Meneze
-s\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecti1000.pk> <C:\
-Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600
-\ecsx0800.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\
-jknappen\ec\dpi600\ectt1000.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.
-9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk> <C:\Users\Leone Menezes\AppDa
-ta\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk> <C:\Users\L
-eone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm10
-00.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
-n\ec\dpi600\ecbx1440.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts
-\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\Leone Menezes\AppData\Loca
-l\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx0900.pk> <C:\Users\Leone Me
-nezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1200.pk> 
-<C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
-i600\ecrm1200.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljf
-our\jknappen\ec\dpi600\ecbx1728.pk><C:/Users/Leone Menezes/AppData/Local/Progra
-ms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/Leone Menezes
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C
-:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmmi5.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/Leone Menezes/AppData/Local/Pro
-grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/Leone Menez
-es/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><
-C:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/ams
-fonts/cm/cmr5.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/Leone Menezes/AppData/Local/Prog
-rams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/Leone Menezes
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C
-:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy7.pfb>
-Output written on pt_whitepaper.pdf (12 pages, 370273 bytes).
+ 48i,17n,77p,1502b,1043s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\Leone Menezes\AppData\Local\MiKTeX\
+2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecss0700.pk> <C:\Users\Leone Menezes\App
+Data\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk> <C:\Users
+\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm
+0700.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknap
+pen\ec\dpi600\ecti1000.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fon
+ts\pk\ljfour\jknappen\ec\dpi600\ecsx0800.pk> <C:\Users\Leone Menezes\AppData\Lo
+cal\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1000.pk> <C:\Users\Leone 
+Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1000.pk
+> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
+dpi600\ecbx1200.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\l
+jfour\jknappen\ec\dpi600\ecrm1000.pk> <C:\Users\Leone Menezes\AppData\Local\MiK
+TeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\Leone Menezes
+\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm0900.pk> <C:\U
+sers\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\
+ecbx0900.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\j
+knappen\ec\dpi600\ectt1200.pk> <C:\Users\Leone Menezes\AppData\Local\MiKTeX\2.9
+\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\Leone Menezes\AppDat
+a\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk><C:/Users/Leo
+ne Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cme
+x10.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmmi10.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/Leone Menezes/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/
+Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmmi8.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
+/public/amsfonts/cm/cmr10.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/Leone Menezes/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Users/L
+eone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mr8.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/p
+ublic/amsfonts/cm/cmsy10.pfb><C:/Users/Leone Menezes/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on pt_whitepaper.pdf (13 pages, 387272 bytes).
 PDF statistics:
- 728 PDF objects out of 1000 (max. 8388607)
+ 773 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
