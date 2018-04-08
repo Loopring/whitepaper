@@ -1,14 +1,12 @@
 % !TEX program = XeLaTeX
 % !TEX encoding = UTF-8
 \documentclass{article}
-
+ 
 \usepackage{xeCJK}
-\setCJKmainfont{IPAPMincho}
-\setCJKsansfont{IPAPGothic}
-\setCJKmonofont{IPAGothic}
+\setCJKmainfont{AozoraMinchoRegular.ttf}
+\setCJKsansfont{KodomoRounded-Light.otf}
+\setCJKmonofont{KodomoRounded-Light.otf}
 
-\usepackage[english,japanese]{babel}
-\usepackage{indentfirst}
 \usepackage{url}
 \usepackage{cancel}
 \usepackage{xspace}
@@ -40,7 +38,7 @@
 \usepackage{tkz-graph}
 \usetikzlibrary{arrows,decorations.pathmorphing,automata,positioning,backgrounds,fit,shapes.symbols,chains,intersections}
 
-\newtheorem{definition}{定義}[section]
+\newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}{Lemma}
 \newtheorem{proof}{Proof} [section]
@@ -54,7 +52,8 @@
 \renewcommand\appendixname{付\ 録}
 \renewcommand\appendixpagename{付\ 録}
 \renewcommand\appendixtocname{付\ 録}
-\renewcommand\abstractname{概要}
+\renewcommand\abstractname{要\ 約}
+
 
 \usepackage{perpage} %the perpage package
 \MakePerPage{footnote} %the perpage package command
