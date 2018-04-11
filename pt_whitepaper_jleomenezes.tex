@@ -81,7 +81,7 @@
 %\includepdf[pages=1]{cover}
 \hyphenpenalty=750
 
-\title{\textbf{Loopring:}\\\textbf{Protocolo para Exchanges Descentralizadas}}
+\title{\textbf{Loopring:}\\\textbf{Protocolo Descentralizado para Troca de Tokens}}
 \author{
   Daniel Wang\\
   \texttt{daniel@loopring.org}\\
@@ -130,7 +130,7 @@
 
 
 \begin{abstract}
-Loopring é um protocolo aberto para a construção de exchanges descentralizadas. Loopring opera como um conjunto público de contratos inteligentes responsáveis pela negociação (trader) e liquidação, com um grupo de agentes off-chain agregando e comunicando pedidos. O protocolo é gratuito, extensível e serve como um bloco de construção padronizado para aplicativos descentralizados (dApps) que incorporam a funcionalidade de exchange. Seus padrões interoperáveis facilitam a negociação anônimo e sem confiança. Uma melhoria importante em relação aos atuais protocolos de exchanges descentralizadas é a capacidade de os pedidos serem misturados e combinados com outros pedidos diferentes, eliminando as restrições dos pares de negociação de dois tokens e melhorando drasticamente a liquidez. A Loopring também emprega uma solução única e robusta para impedir o front-running: a tentativa injusta de enviar transações para um bloco mais rápido do que o provedor da solução original. Loopring é independente de blockchain e implementável em qualquer blockchain com funcionalidade de contrato inteligente. Nesse momento, é operável na Ethereum\cite{buterin2017ethereum} \cite{wood2014ethereum} e Qtum \cite{dai2017smart} com NEO \cite{atterlonn2018distributed} em construção.
+Loopring é um protocolo aberto para implementação descentralizada de Exchange. O protocolo Loopring opera como um conjunto público de contratos inteligentes responsáveis pela troca e execução, contando com um grupo de agentes off-chain responsáveis por agregar e comunicar os pedidos. O protocolo é gratuito, expansível e atua como um elemento de suporte padrão para a construção de aplicações descentralizados (dApps) que incorporam a funcionalidade de Exchange. Seus padrões interoperáveis permitem a negociação anônima e sem confiança. Uma melhoria importante em relação aos atuais protocolos de exchanges descentralizadas é a capacidade de os pedidos serem misturados e combinados com outros pedidos diferentes, eliminando a necessidade dos pares de negociação entre dois tokens e melhorando drasticamente a liquidez. Loopring também emprega uma solução única e robusta para impedir o front-running: a tentativa de enviar transações para um bloco mais rápido do que o provedor da solução original. Loopring é independente de blockchain e implementável em qualquer blockchain com funcionalidade de contrato inteligente. Nesse momento, é operável na Ethereum\cite{buterin2017ethereum} \cite{wood2014ethereum} e Qtum \cite{dai2017smart} com NEO \cite{atterlonn2018distributed} em construção.
 \end{abstract}
 
 
@@ -138,45 +138,45 @@ Loopring é um protocolo aberto para a construção de exchanges descentralizada
 \begin{multicols}{2}
 \section{Introdução\label{sec:introduction}}
 
-Com a proliferação de ativos baseados em blockchain, a necessidade de trocar esses ativos entre as contrapartes aumentou significativamente. À medida que milhares de novos tokens são introduzidos - incluindo a tokenização de ativos tradicionais - essa necessidade é ampliada. Seja motivado por negociações de tokens especulativos, ou convertendo para acessar redes através de seus tokens de utilidade nativos, a capacidade de trocar um cripto por outro é fundamental para o ecossistema maior. De fato, existe uma energia potencial em ativos \cite{desotocapital}, e a realização desse capital de desbloqueio de energia - requer não apenas a afirmação de propriedade, que as blockchains impediram imensamente, mas a capacidade de transferir e transformar livremente esses ativos.
+Com a proliferação de ativos baseados em blockchain, a necessidade de trocar esses ativos entre as contrapartes aumentou significativamente. À medida que milhares de novos tokens são introduzidos - incluindo a tokenização de ativos tradicionais - essa necessidade é ampliada. Seja motivado por negociações de tokens especulativos, ou sendo convertidos em tokens de uso para acessar redes específicas, a capacidade de trocar um ativo criptográfico por outro é fundamental para o ecossistema maior. De fato, existe uma energia potencial nesses ativos \cite{desotocapital}, mas a liberação dessa energia e a realização desse valor - requer não apenas a afirmação de propriedade, que as blockchains permitiram, mas a capacidade de transferir e transformar livremente esses ativos.
  
-Assim sendo, a negociação sem confiança de tokens (valor) é um caso de uso atraente para a tecnologia blockchain. 
-Até agora, no entanto, os entusiastas cripto decidiram amplamente fazer negociação de seus tokens em exchanges centralizadas tradicionais. O protocolo Loopring é necessário porque, assim como o Bitcoin \cite{nakamoto2008bitcoin} respeitosamente enfatizou que, em relação ao dinheiro eletrônico peer-to-peer, \enquote{os principais benefícios são perdidos se um terceiro confiável ainda for necessário para evitar gastos duplicados}, Da mesma forma, os principais benefícios dos ativos descentralizados são perdidos se eles precisarem passar por exchanges confiáveis, fechadas e centralizadas. 
-Fazer negociação de tokens descentralizados em exchanges centralizadas não faz sentido do ponto de vista filosófico, já que falha em defender as virtudes que esses projetos descentralizados adotam. Há também inúmeros riscos e limitações práticas no uso de exchanges centralizadas, descritas abaixo. Exchanges Descentralizadas (Decentralized Exchanges - DEXs) \cite{schuh2015bitshares} \cite{bancor} \cite{kyber} procuraram abordar essas questões e, em muitos casos, conseguiram aliviar os riscos de segurança usando blockchains para desintermediação. No entanto, como a capacidade do DEX torna-se uma infraestrutura crucial para a nova economia, há espaço substancial para a melhoria do desempenho. O Loopring visa fornecer ferramentas modulares para essa infraestrutura com seu protocolo aberto agnóstico do dApp.
+Desta forma, a negociação sem confiança de tokens (valor) é um caso de uso atraente para a tecnologia blockchain. 
+Até agora, no entanto, os entusiastas cripto decidiram amplamente fazer negociação de seus tokens em exchanges centralizadas tradicionais. O protocolo Loopring é necessário porque, assim como o Bitcoin \cite{nakamoto2008bitcoin} conscientemente enfatizou que, em relação ao dinheiro eletrônico peer-to-peer, \enquote{os principais benefícios são perdidos se um terceiro confiável ainda for necessário para evitar gastos duplicados}, Da mesma forma, os principais benefícios dos ativos descentralizados são perdidos se eles precisarem passar por exchanges fechadas e centralizadas. 
+A troca de tokens descentralizados em exchanges centralizadas não faz sentido do ponto de vista filosófico, já que falha em defender as virtudes que esses projetos descentralizados adotam. Há também inúmeros riscos e limitações práticas no uso de exchanges centralizadas, descritas abaixo. Exchanges Descentralizadas (Decentralized Exchanges - DEXs) \cite{schuh2015bitshares} \cite{bancor} \cite{kyber} procuraram abordar essas questões e, em muitos casos, conseguiram aliviar os riscos de segurança usando blockchains para desintermediação. No entanto, como a capacidade das DEX torna-se uma infraestrutura crucial para a nova economia, há espaço substancial para a melhoria do desempenho. Loopring visa fornecer ferramentas modulares para essa infraestrutura com seu protocolo dApp aberto e agnóstico.
 
 \section{Cenário atual das Exchange\label{sec:current_exchange_landscape}}
 
 \subsection{Inadequações das Exchanges Centralizadas}
 Os três principais riscos das exchanges centralizadas são; 1) Falta de segurança, 2) Falta de transparência e 3) Falta de liquidez.
 
-\textbf{Falta de Segurança} surge de usuários que entregam o controle de suas chaves privadas (fundos) a uma entidade centralizada. Isso expõe os usuários à possibilidade de que as exchanges centralizadas sejam vítimas de hackers mal-intencionados. Os riscos de segurança e hackers que enfrentam todas as exchanges centralizadas são bem conhecidos \cite{coincheckhack}  \cite{mcmillan2014inside}, ainda são muitas vezes aceitos como \enquote{table stakes (mesa de apostas)} para o negociador de tokens. As exchanges centralizadas continuam a ser chamariz para os hackers atacarem, pois seus servidores custodiam milhões de dólares em fundos de usuários. Os desenvolvedores das exchanges também podem cometer erros acidentais e sem más intenções com os fundos do usuário. Simplesmente, os usuários não estão no controle de seus próprios tokens quando depositados em uma exchange centralizada.
+\textbf{Falta de Segurança} surge de usuários que entregam o controle de suas chaves privadas (fundos) a uma entidade centralizada. Isso expõe os usuários à possibilidade de que as exchanges centralizadas sejam vítimas de hackers mal-intencionados. Os riscos de segurança e hackers que enfrentam todas as exchanges centralizadas são bem conhecidos \cite{coincheckhack}  \cite{mcmillan2014inside}, ainda são muitas vezes aceitos como \enquote{table stakes (mesa de apostas)} para o negociador de tokens. As exchanges centralizadas são chamariz para hackers atacarem, pois seus servidores custodiam milhões de dólares em fundos de usuários. Os desenvolvedores das exchanges também podem cometer erros acidentais e sem más intenções com os fundos do usuário. Simplesmente, os usuários não estão no controle de seus próprios tokens quando depositados em uma exchange centralizada.
 
-\textbf{Falta de Transparência} expõe os usuários ao risco de exchanges desonestas que agem de forma injusta. A distinção aqui é pelas intenções maliciosas da exchange, já que os usuários não estão realmente negociando seus próprios ativos em exchanges centralizadas, mas sim, uma nota promissória. Quando os tokens são enviados para a carteira da exchange, a exchange fica sob custódia e oferece uma nota promissória em seu lugar. Todos os negócios são efetivamente entre as notas promissórias dos usuários. Para retirar seus fundos, os usuários resgatam suas notas promissórias com a exchange e recebem seus tokens em seu endereço de carteira externa. Ao longo deste processo, há uma falta de transparência, e a exchange pode paralisar, congelar sua conta, ir à falência, etc. Também é possível que eles usem ativos dos usuários para outros fins enquanto estão sob custódia, como cedê-los a terceiros. A falta de transparência pode custar muito aos usuários mesmo sem uma perda total de fundos, como taxas de negociação mais altas, atrasos quando houver alta demanda, risco regulatório e pedidos em execução.
+\textbf{Falta de Transparência} expõe os usuários ao risco de exchanges desonestas que agem de forma injusta. A distinção aqui é pelas intenções maliciosas da exchange, já que os usuários não estão realmente negociando seus próprios ativos em exchanges centralizadas, mas sim, uma nota promissória. Quando os tokens são enviados para a carteira da exchange, a exchange fica sob custódia e oferece uma nota promissória em seu lugar. Todas as negociações são efetivamente entre as notas promissórias dos usuários. Para retirar seus fundos, os usuários resgatam suas notas promissórias com a exchange e recebem seus tokens em seu endereço de carteira externa. Ao longo deste processo, há uma falta de transparência, e a exchange pode paralisar, congelar sua conta, ir à falência, etc. Também é possível que eles usem ativos dos usuários para outros fins enquanto estão sob custódia, como cedê-los a terceiros. A falta de transparência pode custar muito aos usuários mesmo não ocorrendo uma perda total de fundos, como taxas de negociação mais altas, atrasos quando houver alta demanda, risco regulatório e pedidos em execução.
 
-\textbf{Falta de Liquidez.} Do ponto de vista dos operadores da exchange, a liquidez fragmentada inibe a entrada de novas exchanges por causa de dois cenários, "o vencedor leva tudo". Primeiro, a exchange com o maior número de pares de negociação ganha, porque os usuários acham mais fácil fazer todas suas negociações em uma única exchange. Em segundo lugar, a exchange com o maior livro de ofertas (order book) vence, devido a spreads favoráveis de compra-venda para cada par de negociação. Isso desencoraja a concorrência dos recém-chegados, porque é difícil para eles acumular liquidez inicial. Como resultado, muitas exchanges geram uma alta participação de mercado, apesar das queixas dos usuários e até mesmo grandes incidentes de hackers. Vale a pena notar que, à medida que as exchanges centralizadas ganham market share, elas se tornam um alvo cada vez maior de hackers.
+\textbf{Falta de Liquidez.} Do ponto de vista dos operadores de exchange, a liquidez fragmentada inibe a entrada de novas exchanges por causa de dois cenários. Primeiro, a exchange com o maior número de pares de negociação ganha, porque os usuários acham mais fácil fazer todas suas negociações em uma única exchange. Em segundo lugar, a exchange com o maior livro de ofertas vence, devido a spreads favoráveis de compra-venda para cada par de negociação. Isso desencoraja a concorrência dos recém-chegados, porque é difícil para eles acumular liquidez inicial. Como resultado, muitas exchanges geram uma alta participação de mercado, apesar das queixas dos usuários e até mesmo grandes incidentes de hackers. Vale a pena notar que, à medida que as exchanges centralizadas ganham market share, elas se tornam um alvo cada vez maior de hackers.
 
 Do ponto de vista dos usuários, a liquidez fragmentada reduz significativamente a experiência do usuário. Em uma exchange centralizada, os usuários só podem negociar dentro das próprias pools de liquidez da exchange, contra seu próprio livro de ofertas e entre seus pares de token suportados. Para negociar o token \verb|A| para o token \verb|B|, os usuários devem ir a uma exchange que suporte os dois tokens ou registrar-se em diferentes exchanges, divulgando informações pessoais. Os usuários geralmente precisam executar negociações preliminares ou intermediárias, normalmente contra o BTC ou ETH, pagando spreads no processo de compra e venda. Finalmente, os livros de ofertas podem não ter liquidez o suficiente para concluir o negócio. Mesmo que a exchange pretenda processar grandes volumes, não há garantia de que esse volume e liquidez não sejam falsos \cite{fakevolume}.
 
-O resultado são silos de liquidez desconexos e um ecossistema fragmentado que se assemelha ao legado sistema financeiro, com volume de negociação significativamente centralizado em poucas exchanges. As promessas de liquidez global das blockchains não têm mérito dentro de exchanges centralizadas.
+O resultado são silos de liquidez desconexos e um ecossistema fragmentado que se assemelha ao legado sistema financeiro, com volume de negociação significativamente centralizado em poucas exchanges. As promessas de liquidez global das blockchains não tem mérito dentro de exchanges centralizadas.
 
 \subsection{Inadequações das Exchanges Descentralizadas}
 As exchanges descentralizadas diferem das exchanges centralizadas em parte porque os usuários mantêm o controle de suas chaves privadas (ativos) executando negociações diretamente no blockchain subjacente. Ao alavancar a tecnologia sem confiança das criptomoedas, elas mitigam com sucesso muitos dos riscos acima mencionados relacionados à segurança. No entanto, persistem problemas em relação ao desempenho e limitações estruturais. 
 
-A liquidez muitas vezes continua sendo um problema, pois os usuários devem buscar contrapartes em diferentes pools e padrões de liquidez. Os efeitos de liquidez fragmentada estão presentes se os DEXs ou os dApps em geral não empregarem padrões consistentes para interoperar e se os pedidos não forem compartilhados/propagados em uma rede ampla. A liquidez dos livros de ofertas e, especificamente, sua resiliência - a rapidez com que as ordens de limite são regeneradas - podem afetar significativamente as estratégias de negociação ideais \cite{limitorderliquidity}. A ausência de tais padrões resultou não apenas em liquidez reduzida, mas também exposição a uma série de contratos inteligentes proprietários potencialmente inseguros.
+A liquidez muitas vezes continua sendo um problema, pois os usuários devem buscar contrapartes em diferentes pools e padrões de liquidez. Os efeitos de liquidez fragmentada estão presentes se os DEXs ou os dApps em geral não empregarem padrões consistentes para interoperar e se os pedidos não forem compartilhados/propagados em uma rede ampla. A liquidez dos livros de ofertas e, especificamente, sua resiliência - a rapidez com que os pedidos são executados - podem afetar significativamente as estratégias de negociação ideais \cite{limitorderliquidity}. A ausência de tais padrões resultou não apenas em liquidez reduzida, mas também exposição a uma série de contratos inteligentes proprietários potencialmente inseguros.
 
-Além disso, como as negociações são realizados na blockchain, as DEXs herdam as limitações da blockchain subjacente, a saber: escalabilidade, atrasos na execução (mineração) e modificações dispendiosas nas ordens. Assim, os livros de ofertas blockchain não são particularmente adequados, já que a execução de código na blockchain incorre em um custo (gás), tornando a opção de cancelamento de pedidos muito caras. 
+Além disso, como as negociações são realizados na blockchain, as DEXs herdam as limitações da blockchain subjacente, como: escalabilidade, atrasos na execução (mineração) e custos nos pedidos. Assim, os livros de ofertas blockchain não são particularmente adequados, já que a execução de código na blockchain incorre em um custo (gás), tornando a opção de cancelamento de pedidos muito caras. 
 
 Finalmente, como os livros de ofertas blockchain são públicos, a transação para fazer um pedido é visível para os mineiradores enquanto aguarda a mineração para o próximo bloco e colocados em um livro de ofertas. Esse atraso expõe o usuário ao risco de ter o preço ou a execução se movendo contra ele.
 
 \subsection{Soluções Híbridas}
-Pelas razões acima, as exchanges puramente baseadas em blockchain têm limitações que as tornam pouco competitivas em exchanges centralizadas. Existe uma compensação entre a confiabilidade inerente on-chain e a velocidade de uma exchange centralizada e a flexibilidade do pedido. Protocolos, como Loopring e 0x \cite{warren20170x} estendem uma solução de liquidação on-chain com o gerenciamento de pedidos off-chain. Essas soluções giram em torno de contratos inteligentes abertos, mas navegam pelas limitações de escalabilidade realizando diversas funções fora da cadeia e proporcionando aos nodes (nós) flexibilidade no cumprimento de funções críticas para a rede. No entanto, as desvantagens permanecem para o modelo híbrido \cite{costofdecent}. O protocolo Loopring propõe diferenças significativas em nossa abordagem para uma solução híbrida ao longo deste artigo.
+Pelas razões acima, as exchanges puramente baseadas em blockchain têm limitações que as tornam pouco competitivas em relação as exchanges centralizadas. Existe uma compensação entre a confiabilidade inerente on-chain e a velocidade de uma exchange centralizada e a flexibilidade do pedido. Protocolos, como Loopring e 0x \cite{warren20170x} propõem uma solução de liquidação on-chain com o gerenciamento de pedidos off-chain. Essas soluções giram em torno de contratos inteligentes abertos, mas navegam pelas limitações de escalabilidade realizando diversas funções fora da cadeia e proporcionando aos nodes (nós) flexibilidade no cumprimento de funções críticas para a rede. No entanto, as desvantagens permanecem para o modelo híbrido \cite{costofdecent}. O protocolo Loopring propõe diferenças significativas em nossa abordagem para uma solução híbrida ao longo deste artigo.
 
 
 \section{Protocolo Loopring\label{sec:loopring_protocol}}
 Loopring não é um DEX, mas um protocolo modular para construir DEXs em vários blockchains. Desmontamos em partes os componentes de uma exchange tradicional e oferecemos um conjunto de contratos públicos inteligentes e atores descentralizados em seu lugar. As funções na rede incluem carteiras, relays, blockchains de consórcio de compartilhamento de liquidez, navegadores de pedidos de compras, Ring-Miners e serviços de tokenização de ativos. Antes de definir cada um, devemos primeiro entender os comandos Loopring.
 
 \subsection{Order Ring\label{sec:order_ring}}
-Os comandos Loopring são expressos no que chamamos de ModelRing de Ordem Unidirecional (Unidirectional Order) (UDOM)\cite{coinport2014udom}. UDOM requisita pedidos como solicitações na exchange de tokens, \verb|amountS|/\verb|amountB|, (quantidade de venda/compra) em vez de lances compra e venda. Como cada pedido é apenas uma troca entre dois tokens, um recurso poderoso do protocolo é a mistura e a correspondência de vários pedidos de negociação circular. Utilizando até 16 pedidos em vez de um único par de negociação, há um aumento dramático na liquidez e potencial para melhoria de preço.
+Os comandos Loopring são expressos no que chamamos de ModelRing de Ordem Unidirecional (UDOM) \cite{coinport2014udom}. O UDOM requisita os pedidos como solicitações de troca de tokens, \verb|amountS|/\verb|amountB|, (quantidade de venda/compra) em vez de lances compra e venda. Como cada pedido é apenas uma troca entre dois tokens, um recurso poderoso do protocolo é combinar vários pedidos em uma troca circular. Utilizando até 16 pedidos em vez de um único par, há um aumento drástico na liquidez e potencial melhoria de preço.
 
 \begin{center}
 \begin{figurehere}
@@ -214,8 +214,8 @@ Os comandos Loopring são expressos no que chamamos de ModelRing de Ordem Unidir
  \begin{tabular}{l}
   \textbf{PEDIDO\#2}\\
   \textbf{Proprietário: Y}\\
-  \textbf{quantidadeS: 9B}\\
-  \textbf{quantidadeB: 12C}
+  \textbf{amountS: 9B}\\
+  \textbf{amountB: 12C}
  \end{tabular}
  };
  
@@ -224,8 +224,8 @@ Os comandos Loopring são expressos no que chamamos de ModelRing de Ordem Unidir
  \begin{tabular}{l}
   \textbf{PEDIDO\#1}\\
   \textbf{Proprietário: X}\\
-  \textbf{quantidadeS: 10000A}\\
-  \textbf{quantidadeB: 2B}
+  \textbf{amountS: 10000A}\\
+  \textbf{amountB: 2B}
  \end{tabular}
  };
  
@@ -235,8 +235,8 @@ Os comandos Loopring são expressos no que chamamos de ModelRing de Ordem Unidir
  \begin{tabular}{l}
   \textbf{PEDIDO\#3}\\
   \textbf{Proprietário: Z}\\
-  \textbf{quantidade: 100C}\\
-  \textbf{quantidadeB: 160A}
+  \textbf{amountS: 100C}\\
+  \textbf{amountB: 160A}
  \end{tabular}
  };
  
@@ -252,18 +252,18 @@ Os comandos Loopring são expressos no que chamamos de ModelRing de Ordem Unidir
 \end{center}
 
 
-A figura acima mostra um order-ring de 3 pedidos. O token de cada pedido para vender (\verb|tokenS|) e o token de outro pedido para comprar (\verb|tokenB|). Ele cria um loop que permite que cada pedido troque seus tokens desejados sem exigir uma ordem oposta para seu par. As negociações tradicionais de pares de pedidos podem, é claro, ainda ser executadas, no que é essencialmente um caso especial de um order-ring.
+A figura acima mostra um order-ring composto por 3 pedidos. O token (\verb|tokenS|) de cada pedido para vender e o token (\verb|tokenB|) do outro pedido para comprar . Ele cria um loop que permite que cada pedido troque seus tokens desejados sem exigir uma ordem oposta para o par. As trocas tradicionais de pares de pedidos podem, é claro, ainda serem executadas, no que é essencialmente um caso especial de um order-ring.
 
 \begin{definition}[order-ring] Sendo $C_{0}$, $C_{1}$, $\cdots$, $C_{n-1}$ com $n$ diferentes tokens, $O_{0\rightarrow 1}$, $\cdots$, $O_{i\rightarrow i\oplus 1}$, $\cdots$, $O_{n-1 \rightarrow 0}$ com $n$ pedidos. Esses pedidos podem formar um order-ring para negociação:
 $$O_{0\rightarrow 1} \rightarrow \cdots \rightarrow O_{i\rightarrow i\oplus 1} \rightarrow \cdots \rightarrow O_{n-1\rightarrow 0} \text{, }$$
 onde $n$ é o comprimento do order-ring, e $i\oplus 1 \equiv i+1 \mod n$.
 \end{definition}
 
-Um order-ring é válido quando todas as transações de componentes podem ser executadas em uma exchange igual ou melhor que a taxa original especificada implicitamente pelo usuário. Para verificar a validade do order-ring, os contratos inteligentes do protocolo Loopring devem receber order-rings dos ring-miners (mineradores), onde as taxas da exchange de todos os pedidos são igual ou maior que 1.
+Um order-ring é válido quando todas as transações que o compõem podem ser executadas em uma troca igual ou melhor que a taxa original especificada implicitamente pelo usuário. Para verificar a validade do order-ring, os contratos inteligentes do protocolo Loopring devem receber os order-rings dos ring-miners (mineradores), onde as taxas da troca de todos os pedidos são igual ou maior que 1.
 
 Vamos supor que Alice e Bob querem trocar seus tokens \verb|A| e \verb|B|. Alice tem 15 tokens \verb|A| e ela quer 4 tokens \verb|B| por eles; Bob tem 10 tokens \verb|B| e ele quer 30 tokens \verb|A| por eles.
 
-Quem está comprando e quem está vendendo? Isso depende apenas do ativo que fixamos para dar cotações de preço. Se token \verb|A| é a referência, então Alice está comprando token \verb|B| para o preço de ${15 \over 4} = 3.75$\verb|A|, enquanto Bob esta vendendo 10 tokens \verb|B| pelo preço de ${30 \over 10} = 3.00$\verb|A|. No caso de fixação de token \verb|B| como referência, dizemos que Alice está vendendo 15 tokens \verb|A| pelo preço de ${4\over 15}=0.26666667$\verb|B| e Bob está comprando 10 tokens \verb|A| pelo preço de ${10 \over 30}=0.33333334$\verb|B|. Portanto, quem é o comprador ou vendedor é arbitrário.
+Quem está comprando e quem está vendendo? Isso depende apenas do ativo que fixamos para dar cotações de preço. Se token \verb|A| é a referência, então Alice está comprando token \verb|B| para o preço de ${15 \over 4} = 3.75$\verb|A|, enquanto Bob esta vendendo 10 tokens \verb|B| pelo preço de ${30 \over 10} = 3.00$\verb|A|. No caso de fixação do token \verb|B| como referência, dizemos que Alice está vendendo 15 tokens \verb|A| pelo preço de ${4\over 15}=0.26666667$\verb|B| e Bob está comprando 10 tokens \verb|A| pelo preço de ${10 \over 30}=0.33333334$\verb|B|. Portanto, quem é o comprador ou vendedor é arbitrário.
 
 Na primeira situação, Alice está disposta a pagar um preço mais alto ($3.75$\verb|A|) do que o preço que Bob está vendendo seus tokens, ($3.00$\verb|A|), enquanto na segunda situação Bob está disposto a pagar um preço mais alto ($0.33333334$\verb|B|) do que o preço que Alice está vendendo seus tokens ($0.26666667$\verb|B|). É claro que uma negociação é possível sempre que o comprador esteja disposto a pagar um preço igual ou superior ao preço do vendedor.
 
@@ -271,13 +271,13 @@ Na primeira situação, Alice está disposta a pagar um preço mais alto ($3.75$
 {{15\over 4} \over {30\over 10}} = {{10\over 30} \over {4\over 15}}={15 \over 4} \cdot {10 \over 30} = 1.25 > 1
 \end{equation}
 
-Assim, para que um conjunto de $n$ pedidos possam ser preenchidos, total ou parcialmente, precisamos saber se o produto de cada uma das taxas da exchange como ordens de compra resulta em um número maior ou igual a 1. 
-Se assim for, todao os $n$ pedidos possam ser parcial ou totalmente preenchidos \cite{supersymmetry}.
+Assim, para que um conjunto de $n$ pedidos possam ser preenchidos, total ou parcialmente, precisamos saber se o valor de cada uma das taxas do pedido de compra resulta em um número maior ou igual a 1. 
+Se isso ocorrer, todos os $n$ pedidos podem ser parcial ou totalmente preenchidos \cite{supersymmetry}.
 
 Se introduzirmos uma terceira contraparte, Charlie, de modo que Alice queira dar $x_1$ token \verb|A| e receber $y_1$ token \verb|B|, Bob quer dar $x_2$ token \verb|B| e receber $y_2$ token \verb|C|, e Charlie quer dar $x_3$ token \verb|C| e receber $y_3$ token \verb|A|. Os tokens necessários estão presentes e a negociação é possível se:
 
 \begin{equation}
-{{x_1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
+{{x1 \cdot x_2 \cdot x_3 \over y_1 \cdot y_2 \cdot y_3} \geq 1}
 \end{equation}
 
 
@@ -290,11 +290,11 @@ Os seguintes participantes do ecossistema fornecem conjuntamente todas as funcio
 
 \begin{itemize}
 
-\item \textbf{Carteiras}: Um serviço de carteira comum ou interface que dá aos usuários acesso aos seus tokens e uma maneira de enviar pedidos para a rede Loopring. As carteiras serão incentivadas a produzir pedidos compartilhando as taxas com os ring-miners (veja seção \ref{sec:token}). Com a crença de que o futuro da negociação ocorrerá dentro da segurança das carteiras de usuários individuais, a conexão dessas pools de liquidez através de nosso protocolo é fundamental.
+\item \textbf{Carteiras}: Um serviço de carteira comum ou interface que dá aos usuários acesso aos seus tokens e uma maneira de enviar pedidos para a rede Loopring. As carteiras serão incentivadas a produzir pedidos compartilhando as taxas com os ring-miners (veja seção \ref{sec:token}). Com a crença de que a troca ocorrerá dentro da segurança das carteiras dos usuários, a conexão dessas pools de liquidez através do nosso protocolo é fundamental.
 
-\item \textbf{Consórcio de Liquidez compartilhado do Blockchain/Relay-Mesh}: Uma rede relay-mesh para compartilhamento de pedidos \& liquidez. Quando os nodes executam o software de retransmissão do Loopring, eles podem ingressar em uma rede existente e compartilhar a liquidez com outros relays em uma blockchain do consórcio. O blockchain do consórcio que estamos construindo como uma primeira implementação tem um compartilhamento de pedidos quase em tempo real (blocos de 1-2 segundos) e reduz o histórico antigo para permitir um download mais rápido por novos nodes. Notavelmente, os relays  não precisam ingressar nesse consórcio; eles podem agir sozinhos e não compartilhar a liquidez com outros, ou podem iniciar e administrar sua própria rede de compartilhamento de liquidez.
+\item \textbf{Consórcio de Liquidez compartilhado do Blockchain/Relay-Mesh}: Uma rede relay-mesh para compartilhamento de pedidos \& liquidez. Quando os nodes executam o software de retransmissão Loopring, eles podem se conectar em uma rede existente e compartilhar a liquidez com outros relays em uma blockchain do consórcio. O blockchain do consórcio que estamos construindo como uma primeira implementação tem um compartilhamento de pedidos quase em tempo real (blocos de 1-2 segundos) e reduz o histórico antigo para permitir um download mais rápido por novos nodes. É importante resaltar que os relays  não precisam se conectar nesse consórcio; eles podem agir sozinhos e não compartilhar a liquidez com outros, ou podem iniciar e administrar sua própria rede de compartilhamento de liquidez.
 
-\item \textbf{Relays/Ring-Miners}: Os relays são nodes que recebem pedidos de carteiras ou da relay-mesh, mantêm registros de pedidos públicos e histórico de transações e, opcionalmente, transmitem pedidos para outros relays (por meio de qualquer meio arbitrário off-chain) e/ou nodes relay-mesh. A Ring-mining é um recurso - não um requisito - de relays. É computacionalmente pesado e é feito completamente off-chain. Nós chamamos relays com o recurso de ring-mining ativado \enquote{Ring-Miners}, que produzem order-rings juntando pedidos diferentes. Os Relays são livres em (1) como eles escolhem se comunicar uns com os outros, (2) como eles constroem suas carteiras de pedidos, e (3) como os order-rings minam os pedidos (algoritmos de mineração).
+\item \textbf{Relays/Ring-Miners}: Os relays são nodes que recebem pedidos das carteiras ou do relay-mesh, mantêm registros de pedidos públicos e histórico de transações e, opcionalmente, transmitem pedidos para outros relays (por meio de qualquer meio off-chain) e/ou nodes relay-mesh. O Ring-mining é um recurso - não um requisito - de relays. É computacionalmente pesado e é feito completamente off-chain. Nós chamamos relays com o recurso de ring-mining ativado \enquote{Ring-Miners}, que produzem order-rings juntando pedidos diferentes. Os Relays são livres em (1) como eles escolhem se comunicar uns com os outros, (2) como eles constroem suas carteiras de pedidos, e (3) como os order-rings minam os pedidos (algoritmos de mineração).
 
 \item \textbf{Contratos Inteligêntes do Protocolo Loopring (LPSC)}: Um conjunto de contratos inteligentes públicos e livres que verificam os order-rings recebidos dos ring-miners, depositam e transferem tokens sem confiança em nome dos usuários, incentivam os ring-miners e carteiras com taxas e emitem eventos. Os Relays/navegadores de pedidos recebem esses pedidos para manter seus livros de pedidos e seu histórico de transações atualizados. Veja o apendice \ref{app:protocol_ethereum} para mais detalhes.
 
@@ -303,7 +303,7 @@ Os seguintes participantes do ecossistema fornecem conjuntamente todas as funcio
 \end{itemize}
 
 
-\section{Processo de Exchange\label{sec:process}}
+\section{Processo de Troca\label{sec:process}}
 
 
 
@@ -316,8 +316,7 @@ Os seguintes participantes do ecossistema fornecem conjuntamente todas as funcio
 
 \item \textbf{Transmissão do Pedido}: A carteira envia o pedido e sua assinatura para um ou mais relays. Os relays atualizam seu livro de ofertas público. O protocolo não exige que os livros de ofertas sejam criados de uma determinada maneira, como o primeiro a chegar, primeiro a ser executado. Em vez disso, os relays têm o poder de tomar suas próprias decisões em criar seus livros de ofertas.
 
-\item \textbf{Compartilhamento de Liquidez}: Relays transmitem a pedido para outros relays através de qualquer meio de comunicação arbitrário. Mais uma vez, há flexibilidade como/se os nodes interagem. Para facilitar um certo nível de conectividade de rede, existe um relay-
-mesh de compartilhamento de liquidez embutida usando um blockchain de consórcio. Conforme mencionado na seção anterior, esse relay-mesh é otimizado para velocidade e inclusividade.
+\item \textbf{Compartilhamento de Liquidez}: Os Relays transmitem o pedido para outros relays através de qualquer meio de comunicação adequado. Mais uma vez, há uma certa flexibilidade em como os nodes interagem. Para facilitar um certo nível de conectividade da rede, foi implementado um relay-mesh de compartilhamento de liquidez usando um blockchain de consórcio. Conforme mencionado na seção anterior, esse relay-mesh é otimizado para velocidade e inclusividade.
 
 \begin{center}
 \begin{figurehere}
@@ -497,7 +496,7 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
  \draw [draw, ->]  (user3) -- (account3) [label]{};
 % \draw [draw, ->]  (relay1) -- (account4) [label]{};
 % \draw [draw, ->]  (relay2) -- (account5) [label]{};
- \draw [draw, double, thick]  (relay1) to node [auto, scale=0.7] {share liquidity}  (relay2) [label]{};
+ \draw [draw, double, thick]  (relay1) to node [auto, scale=0.7] {compartilhamento de liquidez}  (relay2) [label]{};
 % \draw [draw, ->]  (relay1) -- (ring) [label]{};
  \draw [draw, ->]  (relay2) to node [auto, scale=0.7, xshift=-1.8cm, yshift=0.3cm] {ring-mining}  (ring) [label]{};
  \draw [draw, ->]  (ring) to node [auto, scale=0.7] {submitRing} (psc) [label]{};
@@ -508,7 +507,7 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
  
  \draw [bend left,->, dashed] (account1) to node [auto, scale=0.7] {} (account5);
  \draw [bend left,->, dashed] (account2) to node [auto, scale=0.7] {} (account5);
- \draw [bend left,->, dashed] (account3) to node [auto, scale=0.7, xshift=.5cm] {\textbf{Fee}} (account5);
+ \draw [bend left,->, dashed] (account3) to node [auto, scale=0.7, xshift=.5cm] {\textbf{Taxa}} (account5);
   
   
 % \draw [draw,->] (order1) -- node [label] {\textbf{7898 A}} (order3);
@@ -522,20 +521,20 @@ minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{blockchain}};
 \node [steps, below of=relay2, xshift=-0.2cm, yshift=0.4cm] () {5};
 \node [steps, right of=account3, xshift=-0.6cm] (step5) {6};
 
- \draw [bend right, ->]  (psc) to node [auto, scale=0.7, xshift=0.5cm] {settlement} (step5) [label]{};
+ \draw [bend right, ->]  (psc) to node [auto, scale=0.7, xshift=0.5cm] {execução} (step5) [label]{};
  
 \end{tikzpicture}
 
-\caption{Loopring Exchange Process}
+\caption{Processo de Troca Loopring}
 \label{fig:process}
 \end{figurehere}
 \end{center}
 
 
 
-\item \textbf{Ring-Mining (Order Matching)}:  Os ring-miners tentam preencher o pedido total ou parcialmente à taxa da exchange, ou melhor, tenta combiná-lo com vários outros pedidos. O ring-miners é a principal razão pela qual o protocolo é capaz de fornecer alta liquidez sobre qualquer par. Se a taxa executada for melhor do que a especificada pelo usuário Y, a diferença será compartilhada entre todos os pedidos no ring-miners. Como recompensa, os ring-miners escolhem entre reivindicar parte da diferença (Margin-Split, e devolver o LRx ao usuário), ou simplesmente manter a taxa de LRx.
+\item \textbf{Ring-Mining (Order Matching)}:  Os ring-miners tentam preencher o pedido total ou parcialmente à taxa da troca, ou melhor, tentam combiná-lo com vários outros pedidos. O ring-miner é a principal razão pela qual o protocolo é capaz de fornecer alta liquidez sobre qualquer par. Se a taxa executada for melhor do que a especificada pelo usuário Y, a diferença será compartilhada entre todos os pedidos no ring-miner. Como recompensa, os ring-miners escolhem entre reivindicar parte da diferença (Margin-Split, e devolver o LRx ao usuário), ou simplesmente manter a taxa de LRx.
 
-\item \textbf{Verificação \& Liquidação}: O order-ring é recebido pelo LPSC. Ele faz várias verificações para verificar os dados fornecidos pelo order-ring e determina se ele pode ser liquidado total ou parcialmente (dependendo da taxa de preenchimento de pedidos in-ring e tokens nas carteiras dos usuários). Se todas as verificações forem bem-sucedidas, o contrato transferirá automicamente os tokens aos usuários e pagará as taxas de minerador e de wallet ao mesmo tempo. Se o saldo do usuário \verb|Y|, conforme determinado pelo LPSC, for insuficiente, ele será considerado reduzido: uma ordem reduzida automaticamente aumentará até seu tamanho original, se fundos suficientes forem depositados em seu endereço, ao contrário de um cancelamento, que é uma maneira manual de operação e não pode ser revertida.
+\item \textbf{Verificação \& Execução}: O order-ring é recebido pelo LPSC. Ele faz várias verificações para verificar os dados fornecidos pelo order-ring e determina se ele pode ser executado total ou parcialmente (dependendo da taxa de preenchimento de pedidos in-ring e tokens nas carteiras dos usuários). Se todas as verificações forem bem-sucedidas, o contrato transferirá automicamente os tokens aos usuários e pagará as taxas de minerador e de wallet ao mesmo tempo. Se o saldo do usuário \verb|Y|, conforme determinado pelo LPSC for insuficiente, ele será considerado reduzido: um pedido reduzido automaticamente voltará para seu estado original e poderá ser executado se fundos suficientes forem depositados em seu endereço, ao contrário de um cancelamento, que é uma operação manual unidirecional e não pode ser revertida.
 
 
 \end{enumerate}
@@ -575,7 +574,7 @@ Os relays são livres para projetar como eles compartilham a liquidez (pedidos) 
 \section{Especificação do protocolo\label{sec:protocol}}
 
 \subsection{Anatomia de um Pedido\label{anatomy}}
-Um pedido é um pacote de dados que descreve a intenção de negociação do usuário. Um pedido Loopring é definida usando o Modelo de Unidade Unidirecional ou UDOM, da seguinte maneira:
+Um pedido é um pacote de dados que descreve a intenção de negociação do usuário. Um pedido Loopring é definido usando o Modelo de Unidade Unidirecional ou UDOM, da seguinte maneira:
 
 \begin{verbatim}
   message Order {
@@ -586,8 +585,8 @@ Um pedido é um pacote de dados que descreve a intenção de negociação do usu
     uint256 amountS;
     uint256 amountB;
     unit256 lrcFee
-    unit256 validSince; // Seconds since epoch
-    unit256 validUntil; // Seconds since epoch
+    unit256 validSince; // Segundos do evento
+    unit256 validUntil; // Segundos do evento
     uint8   marginSplitPercentage;  // [1-100]
     bool    buyNoMoreThanAmountB;
     uint256 walletId;
@@ -601,21 +600,20 @@ Um pedido é um pacote de dados que descreve a intenção de negociação do usu
     // não é usado para calcular o hash do pedido,
     // assim NÃO é assinado.
     string  authKey;          
-    uint256 nonce;
   }
 \end{verbatim}
 
 
-Para garantir a origem do pedido, ele é assinado com o hash de seus parâmetros, excluindo \verb|authAddr|, com a chave privada do usuário. o parâmetro \verb|authAddr| é usado para assinar os order-rings dos quais esse pedido faz parte, o que impede o front-running. Por favor, consulte a seção \ref{sec:dual_authoring} para mais detalhes. A assinatura é representada pelos campos \verb|v|, \verb|r|, e \verb|s| e é enviada juntamente com os parâmetros do pedido pela rede. Isso garante que o pedido permaneça imutável durante toda a sua vida útil. Mesmo que o pedido nunca mude, o protocolo ainda pode calcular seu estado atual com base no saldo de seu endereço junto com outras variáveis.
+Para garantir a origem do pedido, ele é assinado com o hash de seus parâmetros, excluindo o \verb|authAddr|, com a chave privada do usuário. O parâmetro \verb|authAddr| é usado para assinar os order-rings dos quais esse pedido faz parte, o que impede o front-running. Por favor, consulte a seção \ref{sec:dual_authoring} para mais detalhes. A assinatura é representada pelos campos \verb|v|, \verb|r|, e \verb|s| e é enviada juntamente com os parâmetros do pedido pela rede. Isso garante que o pedido permaneça imutável durante toda a sua vida útil. Mesmo que o pedido nunca mude, o protocolo ainda pode calcular seu estado atual com base no saldo de seu endereço junto com outras variáveis.
 
 
 
 O UDOM não inclui um preço (que deve ser um número de ponto flutuante por natureza), mas, em vez disso, usa o termo \verb|rate| ou $r$, que é expresso como \verb|amountS|/\verb|amountB|. A taxa não é um número de ponto flutuante, mas uma expressão que será avaliada somente com outros números inteiros não assinados sob demanda, para manter todos os resultados intermediários como números inteiros sem sinal e aumentar a precisão do cálculo.
 
-\subsubsection{Comprando Quantidades}
+\subsubsection{Quantidades de Compra}
 
 
-Quando um ring-miner encontra os pedidos, é possível que uma taxa melhor seja executável, permitindo que os usuários obtenham mais \verb|tokenB| do que o \verb|amountB| especificado. No entanto, se \verb|buyNoMoreThanAmountB| estiver definido como \verb|True|, o protocolo garante que os usuários recebam não mais que \verb|amountB| de \verb|tokenB|. Assim, o parâmetro \verb|buyNoMoreThantokenB| do UDOM determina quando um pedido é considerado completamente preenchido. O \verb|buyNoMoreThantokenB| aplica um limite tanto no \verb|amountS| ou \verb|amountB|, e permite que os usuários expressem intenções comerciais mais granulares do que os pedidos tradicionais de compra/venda.
+Quando um ring-miner encontra os pedidos, é possível que uma taxa melhor seja executável, permitindo que os usuários obtenham mais \verb|tokenB| do que o \verb|amountB| especificado. No entanto, se \verb|buyNoMoreThanAmountB| estiver definido como \verb|True|, o protocolo garante que os usuários recebam não mais que \verb|amountB| de \verb|tokenB|. Assim, o parâmetro \verb|buyNoMoreThantokenB| do UDOM determina quando um pedido é considerado completamente preenchido. O \verb|buyNoMoreThantokenB| aplica um limite tanto no \verb|amountS| ou \verb|amountB|, e permite que os usuários expressem intenções comerciais mais específicas do que os pedidos tradicionais de compra/venda.
 
 Por exemplo: com \verb|amountS| = 10 e \verb|amountB| = 2, a taxa $r$ = 10/2 = 5.  Assim, o usuário está disposto a vender 5 \verb|tokenS| por cada \verb|tokenB|. O ring-miner corresponde e considera o usuário uma taxa de 4, permitindo que o usuário receba 2.5 \verb|tokenB| ao invés de 2. No entanto, se o usuário desejar apenas 2 \verb|tokenB| e definir o\verb|buyNoMoreThanAmountB| como  \verb|True|, o LPSC executará a transação a uma taxa de 4 e o usuário vende 4 \verb|tokenS| por cada \verb|tokenB|, economizando efetivamente 2 \verb|tokenS|. Tenha em mente que isso não leva em conta as taxas de mineração (veja a seção \ref{sec:fee_model}).
 
@@ -628,7 +626,7 @@ De fato, se usarmos
 	            buyNoMoreThantokenB)
 \end{verbatim}
 
-Para representar um pedido de forma simplificada, para os mercados ETH/USD em uma exchange tradicional, a modelagem tradicional de compra e venda pode expressar a 1ª e a 3ª ordem abaixo, mas não as outras duas:
+Para representar um pedido de forma simplificada, para os mercados ETH/USD em uma exchange tradicional, a modelagem tradicional de compra e venda pode expressar o 1º e o 3º pedido abaixo, mas não as outras duas:
 
 \begin{enumerate}
 	\item Vender 10 ETH ao preço de 300 USD/ETH. Este pedido pode ser expresso como: \verb|Order(10, ETH, 3000, USD, False)|.
@@ -641,12 +639,12 @@ Para representar um pedido de forma simplificada, para os mercados ETH/USD em um
 
 \subsection{Ring de Verificação\label{sec:ring_verification}}
 
-Os contratos inteligentes Loopring não realizam cálculos de exchange ou de valor, mas devem receber e verificar o que os ring-miners fornecem para esses valores. Estes cálculos são feitos pelo ring-miners por duas razões principais: (1) a linguagem de programação para contratos inteligentes, como a solidez \cite{dannen2017introducing} no Ethereum, não tem suporte para matemática de floating point, especialmente $pow(x, 1/n)$ (calculando a n-th root de um número de ponto flutuante), e (2) é desejável que o cálculo seja feito off-chain para reduzir o cálculo computacional e o custo do blockchain.
+Os contratos inteligentes Loopring não realizam cálculos de troca ou de valor, mas devem receber e verificar o que os ring-miners fornecem para esses valores. Estes cálculos são feitos pelo ring-miners por duas razões principais: (1) a linguagem de programação para contratos inteligentes, como a solidez \cite{dannen2017introducing} no Ethereum, não tem suporte para matemática de floating point, especialmente $pow(x, 1/n)$ (calculando a n-th root de um número de ponto flutuante), e (2) é desejável que o cálculo seja feito off-chain para reduzir o cálculo computacional e o custo do blockchain.
 
 
 \subsubsection{Verificação de Sub-Ring\label{sec:sub_ring_check}}
 
-Essa etapa impede que os arbitradores realizem injustamente todo o spread em um order-ring, implementando novos pedidos dentro dele. Essencialmente, uma vez que um order-ring válido é encontrado por um ring-miner, pode ser tentador adicionar outros pedidos ao order-ring para absorver totalmente o spread dos usuários (descontos de taxa). Como ilustrado pela figura \ref{fig:subring} abaixo, cuidadosamente calculado $x1$, $y1$, $x2$ e $y2$ fará com que o produto de todas as encomendas seja exatamente 1, portanto não haverá desconto de taxa.
+Essa etapa impede que os arbitradores realizem injustamente todo o spread em um order-ring, implementando novos pedidos dentro dele. Essencialmente, uma vez que um order-ring válido é encontrado por um ring-miner, pode ser tentador adicionar outros pedidos ao order-ring para absorver totalmente o spread (descontos de taxa) dos usuários. Como ilustrado pela figura \ref{fig:subring} abaixo, cuidadosamente calculado $x1$, $y1$, $x2$ e $y2$ fará com que o produto de todos os pedidos seja exatamente 1, portanto não haverá desconto de taxa.
 
 \begin{center}
 \begin{figurehere}
@@ -750,7 +748,7 @@ Não é possível adicionar valor zero à rede e é considerado uma conduta inju
 \subsubsection{Verificador de Taxas\label{sec:fill_rate_check}}
 
 
-Os cálculos da exchange no order-ring são feitos por operadores de ring-miners por razões declaradas acima. É o LPSC que deve verificar se está correto. Primeiro, ele verifica se a taxa de compra que o ring-miner pode executar para cada pedido é igual ou menor que a taxa de compra original definida pelo usuário. Isso garante que o usuário receba pelo menos a taxa da exchange solicitada ou melhor na transação. Uma vez que as taxas da exchange são confirmadas, o LPSC garante que cada pedido do order-ring compartilhe o mesmo desconto de taxa. Por exemplo, se a taxa de desconto for $\gamma$, o preço de cada pedido será:
+Os cálculos da troca no order-ring são feitos por operadores de ring-miners por razões declaradas acima. É o LPSC que deve verificar se está correto. Primeiro, ele verifica se a taxa de compra que o ring-miner pode executar para cada pedido é igual ou menor que a taxa de compra original definida pelo usuário. Isso garante que o usuário receba pelo menos a taxa da troca solicitada ou melhor na transação. Uma vez que as taxas da troca são confirmadas, o LPSC garante que cada pedido do order-ring compartilhe o mesmo desconto de taxa. Por exemplo, se a taxa de desconto for $\gamma$, o preço de cada pedido será:
 
 $r_{0\rightarrow 1} \cdot (1-\gamma)$, $r_{1\rightarrow 2} \cdot (1-\gamma)$, $r_{2 \rightarrow 0} \cdot (1-\gamma)$, e satisfazer: 
 \begin{equation}
@@ -765,7 +763,7 @@ Se a transação cruzar $n$ pedidos, o \texttt{discount} é:
 \gamma = 1- \frac{1}{\sqrt[n]{\prod_{i=0}^{n-1} r^i}} \text{,}
 \end{equation}
 
-onde $r^i$ é a taxa de rotatividade do pedido de $i$º ordem. Obviamente, somente quando a taxa de desconto é $\gamma \ge 0$, esses pedidos podem ser preenchidas $i$º pedido ($O^i$) a taxa da exchange é $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
+onde $r^i$ é a taxa de rotatividade do pedido de $i$º ordem. Obviamente, somente quando a taxa de desconto é $\gamma \ge 0$, esses pedidos podem ser preenchidas $i$º pedido ($O^i$) a taxa da troca é $\hat{r^i} = r^i \cdot (1-\gamma)$, $\hat{r^i}\le r^i$.
 
 Lembre-se do nosso exemplo anterior, em que Alice tem 15 tokens \verb|A| e quer 4 tokens \verb|B|, Bob tem 10 tokens \verb|B| e quer 30 tokens \verb|A|. Se token \verb|A| é a referência, então Alice está comprando token \verb|B| por $\frac{15}{4}$ = 3.75\verb|A|, enquanto Bob esta vendendo token \verb|B| por $\frac{30}{10}$ = 3.00\verb|A|. Para calcular o desconto: $\frac{150}{120}$ = 1.25 portanto $\frac{1}{1.25}$ = 0.8 = $(1 −- \gamma)^2$. Assim, a taxa da exchange que torna a negociação equitativo para ambas as partes é $\sqrt{0.8}$ $\cdot$ 3.75 $\approx$ 3.3541 token \verb|A| por token \verb|B|.
 
@@ -784,7 +782,7 @@ O LPSC também suporta o cancelamento de todos os pedidos para qualquer par de n
 Os pedidos são escalonados de acordo com o histórico de valores preenchidos e cancelados e o saldo atual das contas dos remetentes. O processo encontra o pedido com a menor quantidade a ser preenchida de acordo com as características acima e o utiliza como referência para escalonar todas as transações no order-ring.
 
 
-Encontrar a pedido de menor valor pode ajudar a descobrir o volume de preenchimento para cada pedido. Por exemplo, se o pedido $i$ for o mais baixo, então o número de tokens vendidos de cada pedido $\hat{s}$ e o número de tokens adquiridos $\hat{b}$ de cada pedido podem ser calculados como:
+Encontrar o pedido de menor valor pode ajudar a descobrir o volume de preenchimento para cada pedido. Por exemplo, se o pedido $i$ for o mais baixo, então o número de tokens vendidos de cada pedido $\hat{s}$ e o número de tokens adquiridos $\hat{b}$ de cada pedido podem ser calculados como:
 
 \[
 \begin{split}
@@ -797,11 +795,11 @@ Encontrar a pedido de menor valor pode ajudar a descobrir o volume de preenchime
 \]
 onde $\overline{s}_i$ é o saldo deixado após os pedidos estarem parcialmente preenchidos.
 
-Durante a implementação, podemos assumir com segurança qualquer pedido no order-ring para ter o valor mais baixo e, em seguida, iterar no order-ring no máximo duas vezes para calcular o volume de preenchimento de cada pedido. 
+Durante a implementação, podemos assumir com segurança qualquer pedido no order-ring para ter o valor mais baixo e, em seguida, repetir no order-ring no máximo duas vezes para calcular o volume de preenchimento de cada pedido. 
 
-Exemplo: Se o menor valor a ser preenchido em comparação com o pedido original for 5\%, todas as transações no order-ring  serão reduzidas para 5\%. Depois que as transações forem concluídas, o pedido considerada como a menor quantidade restante a ser preenchida deve ser totalmente preenchida.
+Exemplo: Se o menor valor a ser preenchido em comparação com o pedido original for 5\%, todas as transações no order-ring  serão reduzidas para 5\%. Depois que as transações forem concluídas, o pedido considerado como a menor quantidade restante a ser preenchida deve ser totalmente preenchida.
 
-\subsection{Liquidez do Ring\label{sec:settlement}}
+\subsection{Execução do Ring\label{sec:settlement}}
 
 Se o order-ring atender a todas as verificações anteriores, o order-ring poderá ser fechado e as transações poderão ser feitas. Isso significa que todos os pedidos de $n$ formam um order-ring fechado de pedidos, conectado como na figura 4:
 
@@ -839,7 +837,7 @@ circle/.style={
 
 
 \end{tikzpicture}
-\caption{Liquidação do Ring}
+\caption{Execução do Ring}
 \label{fig:settlement}
 \end{figurehere}
 \end{center}
@@ -856,7 +854,7 @@ O protocolo emite eventos que permitem que os relays, order browsers e outros at
 	\item \textbf{OrderCancelled}: Um pedido específico foi cancelado.
 	\item \textbf{OrdersCancelled}: Todos os pedidos de um par de negociação de um endereço foram cancelados.
 	\item \textbf{AllOrdersCancelled}: Todos os pedidos de todos os pares de negociação de um endereço foram cancelados.
-	\item \textbf{RingMined}: Um order-ring  foi liquidado com sucesso. Este evento contém dados relacionados a cada transferência de token do inner-ring.
+	\item \textbf{RingMined}: Um order-ring  foi executado com sucesso. Este evento contém dados relacionados a cada transferência de token do inner-ring.
 \end{itemize}
 
 
@@ -973,7 +971,7 @@ Os Ring-miners dividirão uma certa porcentagem de taxas com carteiras. Quando u
 \subsection{Governança Descentralizada}
 Em sua raiz, o protocolo Loopring é um protocolo social no sentido de que se baseia na coordenação entre os membros para operar efetivamente em direção a um objetivo. Isso não é diferente dos protocolos criptoeconômicos em geral, e, de fato, sua utilidade é amplamente protegida pelos mesmos mecanismos de problemas de coordenação \cite{vitalikgovernance}, equilíbrio implacável de gatilhos e racionalidade limitada. Para esse fim, os tokens LRx não são usados apenas para pagar taxas, mas também para alinhar os incentivos financeiros dos vários participantes da rede. Esse alinhamento é necessário para a ampla adoção de qualquer protocolo, mas é particularmente agudo para os protocolos de exchange, uma vez que o sucesso depende, em grande parte, da melhoria da liquidez em um ecossistema robusto e descentralizado.
 
-Os tokens LRx serão usados para efetuar atualizações de protocolo por meio de governança descentralizada. Atualizações inteligentes de contratos serão, em parte, regidas por portadores de tokens (token holders) para garantir continuidade e segurança, e para atenuar os riscos de liquidez desviados por meio de incompatibilidade. Como os contratos inteligentes não podem ser alterados depois de implantados, há um risco de que os dApps ou os usuários finais continuem interagindo com versões obsoletas e não se atualizem com os contratos atualizados. A atualização é crucial para o sucesso do protocolo, pois ele deve se adaptar às demandas do mercado e às blockchains subjacentes. A governança descentralizada das partes interessadas do LRx permitirá atualizações de contratos inteligentes de protocolo sem interromper os dApps ou os usuários finais, ou confiar demais na abstração de contrato inteligente. Os tokens LRx têm um fornecimento fixo e, no caso do LRC, determinados percentuais são congelados da Fundação Loopring e alocados a fundos destinados à comunidade. \cite{LRCtokendoc}.
+Os tokens LRx serão usados para efetuar atualizações de protocolo por meio de governança descentralizada. Atualizações inteligentes de contratos serão, em parte, regidas por portadores de tokens (token holders) para garantir continuidade e segurança, e para atenuar os riscos de liquidez desviados por meio de incompatibilidade. Como os contratos inteligentes não podem ser alterados depois de implantados, há um risco de que os dApps ou os usuários finais continuem interagindo com versões obsoletas e não se atualizem com os contratos atualizados. A atualização é crucial para o sucesso do protocolo, pois ele deve se adaptar às demandas do mercado e às blockchains subjacentes. A governança descentralizada das partes interessadas do LRx permitirá atualizações de contratos inteligentes de protocolo sem interromper os dApps ou os usuários finais, ou confiar demais na abstração de contrato inteligente. Os tokens LRx têm um fornecimento fixo e, no caso do LRC, determinados percentuais que são congelados da Fundação Loopring e alocados a fundos destinados à comunidade. \cite{LRCtokendoc}.
 
 No entanto, os proprietários de tokens LRx não são os únicos interessados ​​a serem considerados na orientação do protocolo: relays/ring-miners, carteiras, desenvolvedores e outros são parte integrante do ecossistema e sua voz deve ser ouvida. De fato, dado que esses agentes não precisam deter nenhum LRx para desempenhar suas respectivas funções (já que vendedores/compradores tradicionais e criadores de mercado são inexistentes, as reservas simbólicas iniciais não são obrigatórias) devemos permitir que métodos alternativos para que seus interesses sejam respeitados. Além disso, a votação "simples" baseada em tokens, tanto on-chain quanto off, é uma solução imperfeita para desacordo, já que o baixo número de eleitores e a concentração de propriedade de token representam riscos. Assim, o objetivo é implementar um modelo de governança que é construído em camadas e repousa sobre um conhecimento compartilhado de que o conjunto de processos de tomada de decisão é a norma. Isso pode ser facilitado por instituições de coordenação que oferecem sinais de um conjunto diversificado de participantes e, talvez, de pontos focais do protocolo pré-estabelecido. À medida que isso se concretizar, a Fundação Loopring inevitavelmente evoluirá de desenvolvedores de protocolo para administradores de protocolos.
 
@@ -986,7 +984,7 @@ Em exchanges descentralizadas, o front-running é quando alguém tenta copiar a 
 
 Quando uma transação submitRing não é confirmada e ainda está no pool de transações pendente, qualquer pessoa pode identificar facilmente essa transação e substituir \verb|minerAddress| com o seu próprio endereço (o \verb|filcherAddress|), então eles podem assinar novamente o payload com\verb|filcherAddress| para substituir a assinatura do order-ring. O fincher pode definir um preço de gás mais alto e enviar uma nova transação esperando que os block-miners selecionem sua nova transação no próximo bloco, em vez da transação submitRing original.
 
-As soluções anteriores para esse problema tinham importantes desvantagens: exigir mais transações e, assim, custar aos ring-miners mais gás; e gastar mais pelo menos duas vezes aos blocos para resolver um order-ring.  Nossa nova solução, Dual Authoring\cite{dualauthor}, envolve o mecanismo de configuração de dois níveis de autorização para pedidos - um para liquidação e outro para ring-mining.
+As soluções anteriores para esse problema tinham importantes desvantagens: exigir mais transações e, assim, custar aos ring-miners mais gás; e gastar mais, pelo menos duas vezes, aos blocos para resolver um order-ring.  Nossa nova solução, Dual Authoring\cite{dualauthor}, envolve o mecanismo de configuração de dois níveis de autorização para pedidos - um para execução e outro para ring-mining.
 
 Processo de Dual Authoring:
 
@@ -995,11 +993,11 @@ Processo de Dual Authoring:
 	\item Para cada pedido, o software da carteira gerará
 um par de chave pública/chave privada aleatória e colocará o par de chaves no snippet JSON do pedido. (Uma alternativa é usar o endereço derivado da chave pública em vez da própria chave pública para reduzir o tamanho do byte. Nós usamos \verb|authAddr| para representar tal endereço e \verb|authKey| para representar \verb|authAddr| a chave privada correspondente).
 
-	\item Calcule o hash do pedido com todos os campos na ordem, exceto \verb|r|, \verb|v|, \verb|s|, e \verb|authKey|), e assine o hash usando a  \verb|owner| chave privada do proprietário (não \verb|authKey|).
+	\item Calcular o hash do pedido com todos os campos na ordem, exceto \verb|r|, \verb|v|, \verb|s|, e \verb|authKey|), e assinar o hash usando a  \verb|owner| chave privada do proprietário (não \verb|authKey|).
 
 	\item A carteira enviará o pedido juntamente com o \verb|authKey| para os relays de ring-mining. Os ring-miners verificarão se  \verb|authKey| e \verb|authAddr| estão emparelhados corretamente e se a assinatura do pedido é válida com relação ao \verb|owner| endereço do proprietário.
 
-	\item Quando um order-ring é identificado, o ring-miner usará o \verb|authKey| de cada pedido para assinar o hash do ring, \verb|minerAddress|, e todos os parâmetros de mineração. Se um order-ring conter $n$ ordens, haverá $n$ assinaturas pelas $n$ \verb|authKey|. Nós chamamos essas assinaturas de \verb|authSignature|. O ring-miner também pode precisar assinar o hash do ring junto com todos os parâmetros de mineração usando a chave privada do \verb|minerAddress|.
+	\item Quando um order-ring é identificado, o ring-miner usará o \verb|authKey| de cada pedido para assinar o hash do ring, \verb|minerAddress|, e todos os parâmetros de mineração. Se um order-ring conter $n$ pedidos, haverá $n$ assinaturas pelas $n$ \verb|authKey|. Nós chamamos essas assinaturas de \verb|authSignature|. O ring-miner também pode precisar assinar o hash do ring junto com todos os parâmetros de mineração usando a chave privada do \verb|minerAddress|.
 
 	\item O ring-miner chama a função submitRing com
 todos os parâmetros, bem como todas as \verb|authSignature|. Observe que os \verb|authKey| não fazem parte da transação on-chain e, portanto, permanecem desconhecidos para outras partes que não o próprio ring-miner.
@@ -1019,7 +1017,7 @@ O resultado é que agora:
 
 \end{itemize}
 
-A Dual Authoring (Autoria Dupla) evita ring-filch  e order-filch, ao mesmo tempo em que garante a liquidação dos order-rings em uma única transação. Além disso, a Dual Authoring abre as portas para os relays compartilharem pedidos de duas maneiras: compartilhamento não-conversível e compartilhamento que pode ser compartilhado. Por padrão, o Loopring opera um modelo OTC e suporta apenas ordens de preço limitado, o que significa que os timestamps dos pedidos são ignorados. Isto implica que o front-running de uma negociação não tem impacto sobre o preço real da mesma, mas afeta se ela é executada ou não.
+A Dual Authoring (Autoria Dupla) evita ring-filch  e order-filch, ao mesmo tempo em que garante a execução dos order-rings em uma única transação. Além disso, a Dual Authoring abre as portas para os relays compartilharem pedidos de duas maneiras: compartilhamento não-conversível e compartilhamento que pode ser compartilhado. Por padrão, o Loopring opera um modelo OTC e suporta apenas ordens de preço limitado, o que significa que os timestamps dos pedidos são ignorados. Isto implica que o front-running de uma negociação não tem impacto sobre o preço real da mesma, mas afeta se ela é executada ou não.
 
 \section{Outros ataques}
 
@@ -1032,7 +1030,7 @@ Os nodes devem gastar tempo para atualizar o status de um pedido, mas também po
 
 \section{Resumo}
 
-O protocolo Loopring se propõe a ser uma camada fundamental para uma exchange descentralizada. Ao fazê-lo, tem profundas repercussões em como as pessoas negociam ativos e valor. O dinheiro, como um produto intermediário, facilita ou substitui a negociação na exchange e resolve a dupla coincidência do problema \cite{unenumerated2006}, pelo qual duas contrapartes devem desejar o bem ou serviço distinto um do outro. Da mesma forma, o protocolo Loopring pretende dispensar a necessidade da nossa estrutura de negociações em pares que se completem, usando ring matching para negociações mais facilmente consumadas. Isso é significativo para como a sociedade e os mercados negociam tokens, ativos tradicionais e outros. De fato, assim como as criptomoedas descentralizadas representam uma ameaça ao controle de uma nação sobre o dinheiro, um protocolo combinatório que pode combinar os comerciantes (compradores/vendedores) em escala, é uma ameaça teórica ao conceito de dinheiro em si.
+O protocolo Loopring se propõe a ser uma camada fundamental para uma exchange descentralizada. Ao fazê-lo, tem profundas repercussões em como as pessoas negociam ativos e valor. O dinheiro, como um produto intermediário, facilita ou substitui a negociação na troca e resolve a dupla coincidência do problema \cite{unenumerated2006}, pelo qual duas contrapartes devem desejar o bem ou serviço distinto um do outro. Da mesma forma, o protocolo Loopring pretende dispensar a necessidade da nossa estrutura de negociações em pares que se completem, usando ring matching para negociações mais facilmente consumadas. Isso é significativo para como a sociedade e os mercados negociam tokens, ativos tradicionais e outros. De fato, assim como as criptomoedas descentralizadas representam uma ameaça ao controle de uma nação sobre o dinheiro, um protocolo combinatório que pode combinar os comerciantes (compradores/vendedores) em escala, é uma ameaça teórica ao conceito de dinheiro em si.
 
 Os benefícios do protocolo incluem:
 
@@ -1087,7 +1085,7 @@ force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, tex
 
 % impl
 \node [comment, below=0.25 of impl] (comment-impl) {- Valida os order-rings\\
-- Transfere tokens para liquidação\\
+- Transfere tokens para execução\\
 - Emite eventos};
 
 % nameregistry
