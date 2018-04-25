@@ -1,0 +1,1163 @@
+\documentclass[12pt, a4paper, leqno]{report}
+\usepackage{arabtex}
+\usepackage{url}
+\usepackage{cancel}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[LFE,LAE]{fontenc}
+\usepackage[english,main= arabic]{babel}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+\usepackage{fmultico}
+\usepackage{amsthm}
+\usepackage{amsmath,amsfonts,amssymb,blindtext, enumitem}
+\usepackage[a4paper, width=186mm, top=18mm, bottom=18mm, includeheadfoot]{geometry}
+\usepackage{titlesec}
+\usepackage{ragged2e}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{chngcntr}
+\usepackage{caption}
+\usepackage{natbib}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{mathtools}
+\usepackage[usenames, dvipsnames]{xcolor}
+\usepackage{afterpage}
+\usepackage{pgf}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows,decorations.pathmorphing,automata,positioning,backgrounds,fit,shapes.symbols,chains,intersections}
+\usepackage[toc, page, title, titletoc, header]{appendix}
+\usepackage{marginnote}
+\usepackage{tablefootnote}
+\usepackage{color}
+\usepackage{eso-pic}
+\usepackage[final]{pdfpages}
+\usepackage{environ}
+\usepackage{etoolbox}
+\usepackage{lipsum}
+
+
+
+\AtBeginEnvironment{tikzpicture}{\selectlanguage{english}}
+\tikzset{font=\selectlanguage{arabic}}
+\usetikzlibrary{shapes.geometric}%
+
+%\renewcommand\appendixname{\textRL{الملحقات}}
+%\renewcommand*appendixname{\textRL{الملحقات}}
+
+\titleclass{\chapter}{straight}
+\titleformat{\chapter}[hang]{\bfseries\huge}{\thechapter\quad}{0em}{}
+
+
+  
+\hyphenpenalty=750
+
+\title{\textbf{لوبرنج:}\\\textbf{بروتوكول تداول العملة الرمزية اللامركزيه}}
+\author{
+  \textRL{دانيال وانج}\\
+  \texttt{\textLR{daniel@loopring.org}}\\
+  \and
+  	\textRL{جي زهو}\\
+  	\texttt{\textLR{jay@loopring.org}}\\
+  	\and
+  	\textRL{أليكس وانج}\\
+  	\texttt{\textLR{alex@loopring.org}}\\
+  	\and
+  	\textRL{ماثيو فينيستون}\\
+  	\texttt{\textLR{matt.finestone@gmail.com}}\\ 
+  \\
+  \texttt{\textLR{https://loopring.org}}
+ }
+
+\makeatletter
+\def\CTEX@section@format{\Large\bfseries}
+\makeatother
+
+\makeatletter
+\newenvironment{tablehere}
+ {\def\@captype{table}}
+ {}
+
+\newenvironment{figurehere}
+ {\def\@captype{figure}}
+ {}
+\makeatother
+
+\let\Pagenumber\pagenumber
+\def\pagenumber{\hbox{\textdir TLT\Pagenumber}}
+
+
+\counterwithout{equation}{chapter}
+
+\newcommand{\arabincludegraphics}[2][]{%
+  \foreignlanguage{english}{\includegraphics[#1]{#2}}%
+}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] 
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{تعريف}
+
+\titleformat{\chapter}{\normalfont\huge}{\textLR{\thechapter.}}{20pt}{\huge\it}
+
+\begin{document}
+ \maketitle
+ 
+% ===============abstract
+\begin{abstract}
+\begin{otherlanguage}{arabic}
+لوبرنج هو بروتوكول مفتوح لبناء منصات التداول اللامركزية. لوبرنج  يعمل كمجموعة عامة من العقود الذكية المسؤولة عن التداول والتسوية ، مع مجموعة غيرمرتبطة بالسلسلة من الجهات الفاعلة التي تقوم بتجميع الأوامر وتوصيلها. البروتوكول مجاني وقابل للتوسعة ويعمل كأساس بناء الكتلة  للتطبيقات اللامركزية \textLR{(dApps)} التي تتضمن وظائف منصات التداول. تعمل معاييره القابلة للتشغيل البيني على تسهيل التداول المجهول. ومن التحسينات المهمة على بروتوكولات منصه التداول اللامركزية الحالية القدرة على مزج الطلبات ومطابقتها مع الأوامر الأخرى الغير متشابهة ، وتجنب قيود أزواج التداول ثنائي العملة الرمزية وتحسن السيولة بشكل كبير. توظف لوبرنج أيضًا حلًا فريدًا وقويًا لمنع تشغيل الواجهة: وهي محاولة غير عادلة لإرسال المعاملات إلى كتلة أسرع من مزود الحلل الأصلي. لوبرنج  قائم على البلوكشين ، وقابل للانتشار على أي بلوكشين مع وظيفة العقد الذكي. في وقت هذه الكتابة ، انه قابل للتشغيل على اثريوم \textLR{\cite{buterin2017ethereum} \cite{wood2014ethereum}} و \textLR{Qtum \cite{dai2017smart}} مع \textLR{NEO \cite{atterlonn2018distributed}} قيد الإنشاء.
+\end{otherlanguage}
+\end{abstract}
+
+% ===============end abstract
+
+% ===============intro
+\chapter{المقدمة}
+% \addcontentsline{toc}{chapter}{Introduction} 
+% \markboth{INTRODUCTION}{}
+\begin{multicols}{2}
+\begin{otherlanguage}{arabic}
+مع انتشار الأصول القائمة على البلوكشين ، الحاجة إلى تداول هذه الأصول بين الأطراف المختلفه ازداد بشكل ملحوظ. مع طرح آلاف العملات الرمزية الجديدة - بما في ذلك ترميز الأصول التقليدية - هذه الحاجة اصبحت كبيرة. سواء كان تبادل العملات الرمزية  لدوافع تداول المضاربة ، أو التحويل إلى شبكات الوصول عبر فائدة العملات الرمزية الأصلية الخاصة بها ، فإن القدرة على تداول واحد من الاصول المشفرة لآخرى هو الأساس للنظام الأكبر. في الواقع ، هناك طاقة محتملة للأصول \textLR{\cite{desotocapital}} ، وتحقيق هذه الطاقة - فتح رأس المال - يتطلب ليس فقط تأكيد الملكية ، التي تسمح تقنيات البلوكشين بثباتة ، ولكن القدرة على نقل هذه الأصول وتحويلها بحرية.
+على هذا النحو ، فإن تداول العملات الرمزية (القيمة) هي حالة استخدام مقنعة لتكنولوجيا البلوكشين. حتى الآن ، ومع ذلك ، اتفق عشاق التشفير إلى حد كبير بتداول العملات الرمزية على منصات التداول المركزية التقليدية. هناك حاجة إلى بروتوكول لوبرنج لأنه ، كما البيتكوين \textLR{\cite{nakamoto2008bitcoin}} يؤكد بشكل طوعي على ، ما يتعلق بالنقد الإلكتروني للاقران \textLR{(peer-to-peer)} ، "تضيع الفوائد الرئيسية إذا كان لا يزال هناك حاجة إلى طرف ثالث موثوق به لمنع الإنفاق المزدوج" ، لذلك أيضا الفوائد الرئيسية للأصول اللامركزية تفقد إذا كان يجب أن تمر عبر منصات تداول مركزية موثوقة ومبنية.
+إن تداول العملات الرمزية اللامركزية في منصات التداول  المركزية لا معنى له من الناحية الفلسفية ، حيث تفشل في دعم الفضائل التي تتبناها هذه المشاريع اللامركزية. هناك أيضًا العديد من المخاطر والقيود العملية في استخدام منصات التداول \textLR{\cite{schuh2015bitshares} \cite{bancor} \cite{kyber}} وفي كثير من الحالات نجحت في التخفيف من المخاطر الأمنية باستخدام تقنيات البلوكشين لالغاء الوساطة. ومع ذلك ، عندما تصبح قابلية \textLR{DEX} كبنية أساسية حاسمة للاقتصاد الجديد ، هناك مجال كبير لتحسين الأداء. يهدف  \textLR{Loopring} إلى توفير أدوات معيارية للبنية التحتية المذكورة من خلال \textLR{dApp} بروتوكولها المفتوح القائم على تطبيقات \textLR{dApp}.
+\end{otherlanguage}
+\end{multicols}
+% ===============end intro
+
+% ===============chapter2
+
+\chapter{مشهد التداول الحالي}
+\begin{multicols}{2}
+% ========sec1
+\section{أوجة القصور في منصات التداول المركزية}
+\begin{otherlanguage}{arabic}
+المخاطر الرئيسية الثلاثة للمنصات التداول المركزية هي ؛ 1) انعدام الأمن ، 2) انعدام الشفافية ، و 3) نقص السيولة.
+ينشأ انعدام الأمن عن المستخدمين الذين يسلمون عادة السيطرة على مفاتيحهم الخاصة (الأموال) إلى كيان مركزي واحد. هذا يعرض   المستخدمين لاحتمال أن منصات التداول المركزية تقع فريسة للقراصنة الاشرار. إن مخاطر الأمن والقرصنة التي تواجه جميع منصات التداول  المركزية معروفة جيداً \textLR{\cite{coincheckhack} \cite{mcmillan2014inside}} ، ومع ذلك يتم قبولها في كثير من الأحيان على أنها "حصص مخططة" لتداول العملات الرمزية. لا تزال منصات التداول المركزية تمثل مصائد مخترقة لهجمات القراصنة لأن خوادمهم تحتفظ بملايين الدولارات من أموال المستخدمين. يمكن لمطوري منصات التداول  أيضًا إجراء أخطاء بريئة وعرضية مع أموال المستخدمين. ببساطة ، لا يتحكم المستخدمون في العملات الرمزية الخاصة بهم عند إيداعها في منصه تداول مركزية.
+ويؤدي الافتقار إلى الشفافية إلى تعرض المستخدمين لخطر حدوث ان منصات تداول معروفه تتصرف بشكل غير عادل. ويكمن الفرق هنا في عوامل سوء تشغيل منصة التداول ، حيث لا يقوم المستخدمون فعليًا بالتداول في أصولهم الخاصة في منصات التداول المركزية ، ولكن بالأحرى يستخدمون  \textLR{IOU}. عندما يتم إرسال العمله الرمزية إلى محفظة منصة التداول ، فإن منصة التداول تأخذ الوصاية ، وتقدم \textLR{IOU}. جميع منصات التداول بعد ذلك تتم بشكل فعال بين ال \textLR{IOU} للمستخدمين. من أجل السحب ، يسترد المستخدمون قيمة نظام \textLR{IOU} الخاص بهم من خلال منصات التداول  ، ويستلمون العملات الرمزية إلى عنوان المحفظة الخارجية الخاصة بهم. خلال هذه العملية ، يوجد نقص في الشفافية ، ويمكن أن يتم إغلاق الحساب ، أو تجميد حسابك ، أو الإفلاس ، إلخ. ومن الممكن أيضًا أن يستخدموا أصول المستخدمين لأغراض أخرى أثناء الاحتجاز ، مثل إقراضهم لأطراف ثالثة. يمكن أن يؤدي الافتقار إلى الشفافية إلى تكبد المستخدمين دون فقد كامل للأموال ، كما هو الحال في رسوم منصات التداول المرتفعة ، والتأخير في ذروة الطلب ، والمخاطر التنظيمية ، والأوامر التي يتم تنفيذها على المستوى الأمامي.
+نقص السيولة. من وجهة نظر مشغلي منصات التداول  ، السيولة المجزأة تمنع تسجيل الدخول في منصات التداول الجديدة بسبب سيناريوهين يستلزمان الفوز. أولاً ، تفوز منصات التداول  مع أكبر عدد من أزواج التداول ، لأن المستخدمين يجدون أنه من المرغوب فيه إجراء جميع صفقاتهم في منصة تداول  واحدة. ثانياً ، تفوز منصات التداول  مع أكبر دفتر طلبيات ، بسبب فروق الأسعار المرغوبة عند كل زوج تداول. هذا لا يشجع المنافسة من الوافدين الجدد لأنه من الصعب عليهم بناء السيولة الأولية. ونتيجة لذلك ، فإن العديد من منصات التداول  تسيطر على حصة كبيرة من السوق على الرغم من شكاوى المستخدمين وحتى حوادث الاختراق الرئيسية. تجدر الإشارة إلى أنه مع فوز منصات التداول  المركزية بحصتها في السوق ، فإنها تصبح هدف اختراق دائمًا و في أي وقت. من وجهة نظر المستخدمين ، فإن السيولة المجزأة تقلل إلى حد كبير من تجربة المستخدم. في منصات التداول  المركزي ، يمكن للمستخدمين التداول فقط داخل صناديق السيولة الخاصة بمنصات التداول  ، ضد دفتر الطلبات الخاص بهم ، وبين أزواج العملات الرمزية المدعومة. للتداول في العملة الرمزية \textLR{A} من أجل العملة الرمزية \textLR{B} ، يجب على المستخدمين الذهاب إلى منصة تداول تدعم كلا العملات الرمزية أو التسجيل في منصات التداول  المختلفة ، والكشف عن المعلومات الشخصية. غالبًا ما يحتاج المستخدمون إلى تنفيذ الصفقات الأولية أو المتوسطة ، عادةً مقابل ال \textLR{BTC} أو ال\textLR{ETH}، ودفع فروق أسعار العطاء في العملية. وأخيرًا ، قد لا تكون سجلات الطلبات عميقة بما فيه الكفاية لإتمام الصفقة دون أي انزلاق مادي. حتى إذا كانت منصة التداول  تهدف إلى معالجة كميات كبيرة ، فليس هناك ما يضمن أن هذا الحجم والسيولة ليسا مزيفين \textLR{\cite{fakevolume}}. والنتيجة هي مستودعات سيولة منفصلة ونظام مجزأ يشبه النظام المالي القديم ، مع حجم تداول مركزي هام على عدد قليل من منصات التداول . إن وعود السيولة العالمية بالحصانات لا تحمل أي ميزة داخل منصات التداول المركزية.
+\end{otherlanguage}
+% ========endSec1
+% ========sec2
+\section{عدم ملاءمة منصات التداول اللامركزية }
+\begin{otherlanguage}{arabic}
+تختلف منصات التداول اللامركزية عن منصات التداول  المركزية جزئياً لأن المستخدمين يحتفظون بالسيطرة على مفاتيحهم الخاصة (الأصول) عن طريق تنفيذ الصفقات مباشرة على البلوكشين الأساسي. من خلال الاستفادة من التكنولوجيا الامنة للعمل المشفرة نفسها ، فإنها تخفف بنجاح العديد من المخاطر المذكورة أعلاه المحيطة بالأمن. ومع ذلك ، فإن المشاكل لا تزال قائمة فيما يتعلق بالأداء والقيود الهيكلية .
+
+غالبا ما تظل السيولة مشكلة حيث يجب عل المستخدمين البحث عن الأطراف المقابلة عبر مجموعات و معايير السيولة المتفاوتة. تتوجد تأثيرات السيولة المجزأة إذا لم تستخدم \textLR{DEXs} أو \textLR{dApps} بشكل عام معايير متسقة للتشغيل المتداخلالمتداخل ، وإذا لم يتم مشاركة $/$ نشر الطلبات عبر شبكة واسعة. يمكن أن تؤثر سيولة سجلات الأوامر المحدودة ، وعلى وجه التحديد ، على المرونة - مدى سرعة تجديد حد الاوامر المنفذة - بشكل ملحوظ على استراتيجيات التداول الأمثل \textLR{\cite{limitorderliquidity}}. إن غياب مثل هذه المعايير لم يؤد فقط إلى انخفاض السيولة ، بل إلى التعرض لمجموعة من العقود الذكية غير المحمية التي قد تكون غير آمنة.
+
+علاوة على ذلك ، بما أن عمليات التداول تتم على سلسلة ، فإن \textLR{DEXs} تمثل حدود البلوكشين الأساسي ، وهي: قابلية التوسع ، والتأخير في التنفيذ (التعدين) ، والتعديلات المكلفة على الطلبات. وبالتالي ، فإن سجلات أوامر البلوكشين لا تتوسع بشكل جيد ، حيث أن تنفيذ الشفرة على البلوكشين يتكبد تكلفة (جاز) ، مما يجعل من الإلغاء المتعدد لأوامر  أمرًا باهظًا.
+وأخيرا، لأن سجلات اوامر البلوكشين علنية، المعاملة لتضع امرا ما فانه يكون مرئيا من قبل المنقبين حيث انها تنتظر حتى تنقب الى الكتلة التاليه لها وتوضع في سجل الاوامر. هذا التأخير يعرض المستخدم لخطر أن يتجة للامام وأن يتحرك السعر أو التنفيذ ضده.
+\end{otherlanguage}
+% ========endSec2
+% ========sec3
+\section{الحلول الهجينة}
+\begin{otherlanguage}{arabic}
+للأسباب المذكورة أعلاه ، فإن منصات التداول القائمه على البلوكشين البحت لديها قيود تجعلها غير قادر على المنافسة مع منصات التداول ات المركزية. هناك مقايضة بين الثقة الممثلة في السلسلة ، وسرعة منصات التداول  المركزي ومرونة الطلب. تمد البروتوكولات مثل\textLR{Loopring} و \textLR{0x \cite{warren20170x}} حلًا للتسوية على السلسلة بإدارة أوامر خارج السلسلة. تدور هذه الحلول حول العقود الذكية المفتوحة ، ولكنها تتخطى حدود قابلية التوسع من خلال تنفيذ عدة وظائف خارج السلسلة وإعطاء نقاط مرونة في تحقيق الأدوار المهمة للشبكة. نهجنا لحل هجين من خلال هذه الورقة.
+مع ذلك ، لا تزال هناك عيوب للنموذج الهجين أيضًا \textLR{\cite{costofdecent}}. يقترح بروتوكول \textLR{Loopring} اختلافات ذات مغزى في نهجنا لحل هجين من خلال هذه الورقة.
+\end{otherlanguage}
+\end{multicols}
+% ========endSec3
+% ===============end chapter2
+
+% ===============chapter3
+
+\chapter{بروتوكول \textLR{Loopring}}
+\begin{multicols}{2}
+% ========intro
+\begin{otherlanguage}{arabic}
+\textLR{Loopring} ليس  \textLR{DEX}، بل هو عبارة عن بروتوكول نموذجي لبناء \textLR{DEXs} على العديد من تقنيات البلوكشين. نقوم بتفكيك الأجزاء المكونة لمنصة التداول التقليديه ونقدم مجموعة من العقود الذكية العامة والجهات الفاعلة اللامركزية في مكانها. وتشمل الأدوار في الشبكة المحافظ ، والمرحلات ، بلوكشين الكونسورتيوم في تقاسم السيولة ، ومستعرضين سجلات الطلبات ، وحلقة المنقبين ، وخدمات ترميز الأصول. قبل تحديد كل منهما ، يجب علينا أولاً أن نفهم أوامر \textLR{Loopring}.
+\end{otherlanguage}
+% ========endIntro
+% ========sec1
+% ========endSec1
+\section{ترتيب الطوق}
+\begin{otherlanguage}{arabic}
+يتم التعبير عن أوامر \textLR{Loopring} في ما نسميه نموذج أمر أحادي الاتجاه \textLR{\cite{coinport2014udom} (UDOM). UDOM} يعبر عن الطلبات كطلبات تبادل العملة الرمزية ، المبلغ بيع / المبلغ شراء ، (المبلغ  مقابل البيع / الشراء) بدلاً من المزايدات ويسأل. نظرًا لأن كل طلب هو سعر صرف بين عملتين رمزيتين ، فإن الميزة القوية للبروتوكول هي مزج ومطابقة الأوامر المتعددة في دائرة  التداول. باستخدام ما يصل إلى 16 طلبًا بدلاً من زوج تداول واحد ، هناك زيادة كبيرة في السيولة وإمكانية تحسين الأسعار..
+
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    node distance=2cm,
+    >=latex',
+    font=\bfseries\footnotesize\sffamily,
+    order/.style={
+		scale=0.7,
+		rectangle,
+		rounded corners,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		fill=white
+	},
+	label/.style={
+		scale=0.7
+	}
+  ]
+    % We start by placing the blocks
+
+  \node [order] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر\#2}}\\
+  \textRL{\textbf{المالك: $Y$}}\\
+  \textRL{\textbf{الكمية$S$: $9B$}}\\
+  \textRL{\textbf{الكمية$B$: $12C$}}
+ \end{tabular}
+ };
+ 
+  \node [order, below of=order2, xshift=-3cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر\#1}}\\
+  \textRL{\textbf{المالك: X}}\\
+  \textRL{\textbf{الكمية$S$: $10000A$}}\\
+  \textRL{\textbf{الكمية$B$: $2B$}}
+ \end{tabular}
+ };
+ 
+ 
+  \node [order, below of=order2, xshift=3cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر\#3}}\\
+  \textRL{\textbf{المالك: Z}}\\
+  \textRL{\textbf{الكمية$S$: $100C$}}\\
+  \textRL{\textbf{الكمية$B$: $160A$}}
+ \end{tabular}
+ };
+ 
+ \draw [draw,->] (order1) -- node [label] {\textbf{7898A}} (order3);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.8cm] {\textbf{8B}} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm, yshift=0.24cm] {\textbf{98C}} (order2);
+
+\end{tikzpicture}
+
+\caption{حلقة الطلب  ل3  أوامر}
+\label{fig:ring}
+\end{figurehere}
+\end{center}
+
+يوضح الشكل أعلاه حلقة الطلب من 3 أوامر. لكل طلب لبيع العملة الرمزية (العملات الرمزية بيع) هو طلب لشراء العملة الرمزية  الآخرى  (العملة الرمزية شراء). يقوم بإنشاء حلقة تسمح لكل أمر بتبادل العملات الرمزية المطلوبة دون الحاجة إلى طلب متعارض لزوجها. وبالطبع ، لا يزال من الممكن تنفيذ اوامر تداول الأزواج التقليدية ، في ما يتعلق بشكل أساسي بحلقة الطلب.
+
+\begin{defn}{(حلقة الطلب)}
+
+دع $C_0, C_1, ..., C_{n-1}$
+لتكن عدد $n$ من العملات الرمزية المختلفة ،
+
+$O_{0 \to 1}, ..., O_{i \to i \oplus 1}, ..., O_{n-1 \to 0}$ لتكن عدد $n$ من اوامر التداول. يمكن لهذه الاوامر تشكيل حلقة طلب للتداول:
+
+$O_{0 \to 1} \to ... \to O_{i \to i \oplus 1} \to ... \to O_{n-1 \to 0}$
+
+حيث $n$ هو طول حلقة الطلب, و
+$i \oplus 1 \equiv i + 1\quad mod\ n$
+\end{defn}
+
+تكون حلقة الطلب صالحة عندما يمكن تنفيذ جميع المعاملات المركبة بسعر صرف يساوي أو أفضل من المعدل الأصلي المحدد ضمنيًا من قبل المستخدم. للتحقق من صلاحية حلقة الطلب ، يجب أن تتلقى العقود الذكية لبروتوكول لوبرنج حلقات الاوامر من منقبين الحلقة حيث يكون سعر أسعار الصرف الأصلية لجميع الطلبات مساوياً أو أكبر من 1.
+
+لنفترض أن أليس و بوب يرغبان في تبادل العملة الرمزية $A$ و $B$.  أليس لديها $15$ عملة رمزية من $A$ وتريد $4$ عمل رمزية من $B$ لها ؛ يملك بوب $10$ عمل رمزية  $B$ ويريد $30$ عملة رمزية $A$ له.
+
+من يشتري ومن يبيع؟ هذا يعتمد فقط على الأصل الذي نقوم بتحديدة لتقديم عرض للأسعار. إذا كانت العملة  الرمزية $A$ هي المرجع ، فإن اليس ستشتري العملة الرمزية $B$ بسعر $\frac{15}{4} \  = A3.75$ ، بينما سيبيع بوب العملة الرمزية  $B$ بسعر $\frac{30}{10} \  = A3.00$ . في حالة تحديد العملة الرمزية $B$ كمرجع ، نفرض أن أليس ستبيع $15$ عملة رمزية $A$ بسعر $\frac{4}{15} \  = B0.26666667$  و بوب سيشتري $10$ عملة  رمزية $A$ بسعر $\frac{10}{30} \  = B0.33333334$. وبالتالي ، من هو المشتري أو البائع اعتباطيا.
+
+في الحالة الأولى ، تكون اليس على استعداد لدفع سعر أعلى $(3.75 A)$ من السعر الذي يبيعه بوب لعملاته الرمزية مقابل $(3.00 A)$ ، بينما في الحالة الثانية ، يكون بوب على استعداد لدفع سعر أعلى $(0.33333334 B)$ من السعرالذي تقوم أليس ببيعه لعملاتها الرمزيه مقابل $(0.26666667 B)$. من الواضح أن التداول ممكن عندما يرغب المشتري في دفع سعر مساوي أو أعلى من سعر البائع.
+
+\begin{equation}
+\label{1stequation}
+\frac{\frac{15}{4}}{\frac{30}{10}} \ 
+= \frac{\frac{10}{30}}{\frac{4}{15}} \ 
+= \frac{15}{4} \cdot \frac{10}{30} \ 
+= 1.25 > 1
+\end{equation}
+
+وبالتالي ، للمقدرة على تنفيذ مجموعة من الأوامر $n$ ، بشكل كامل أو جزئي ، نحتاج إلى معرفة ما إذا كان ناتج كل واحد من أسعار الصرف مثل نتائج أوامر الشراء برقم أكبرمن أو يساوي 1. إذا كان الأمر كذلك ، يمكن أن تكون الأوامر $n$ منفذه جزئيًا أو كليًا \textLR{\cite{supersymmetry}}.
+
+إذا قمنا بإدخال نظير ثالث ، تشارلي ، بحيث ترغب أليس في إعطاء $X_1$ للعملة الرمزية $A$ وتحصل على $Y_1$  من العملة الرمزية $B$ ، بوب يريد إعطاء $X_2$  للعملة الرمزية $B$ ويحصل على $Y_2$ للعملة الرمزية $C$ ، وتريد تشارلي اعطاء $X_3$  للعملة الرمزية $C$ وتحصل على $Y_3$ للعملة الرمزية $A$ . العملات الرمزية الضرورية موجودة ، والتداول ممكن إذا:
+
+\begin{equation}
+\label{1stequation}
+\frac{{x_1} \cdot {x_2} \cdot {x_3}}
+{{y_1} \cdot {y_2} \cdot {y_3}} \
+\geq 1
+\end{equation}
+
+انظر القسم $7.1$ لمزيد من التفاصيل حول أوامر لوبرنج
+\end{otherlanguage}
+\end{multicols}
+% ===============end chapter3
+
+
+% ===============chapter4
+\chapter{المشتركين في النظام}
+\begin{multicols}{2}
+% ========intro
+\begin{otherlanguage}{arabic}
+يزود المشتركون في النظام بشكل مشترك جميع الوظائف التي تقدمها منصات التداول  المركزي.
+
+\begin{itemize}
+  \item \textbf{المحافظ} : خدمة أو واجهة  المحفظة العامة التي تمنح المستخدمين إمكانية الوصول إلى العملات الرمزية الخاصة بهم والطريق لإرسال اوامر إلى شبكة \textLR{Loopring} . سيتم تحفيز المحافظ لإنتاج الطلبات من خلال تقاسم الرسوم مع منقبين الحلقة (انظر القسم 8). مع الإعتقاد بأن مستقبل التداول سيحدث مع أمان محافظ المستخدم الفردي ، فإن ربط صناديق السيولة هذه من خلال بروتوكولنا هو أمر بالغ الأهمية.
+  
+  \item \textbf{تحالف مشاركة سيولة البلوكشين/ شبكة الترحيل(التبديل)}: شبكة التبادل لتقاسم الامر والسيولة. عندما يقوم العقد بتشغيل برنامج تبادل لوبرنج ، فإنها تكون قادرة على الانضمام إلى الشبكة الموجودة وتشارك السيولة مع المرحلات الأخرى عبر البلوكشين المجمع. تحالف البلوكشين الذي نقوم ببناءه كأول تنفيذ لديه مشاركة طلب في الوقت الفعلي تقريبا (الكتل من ثانية إلى ثانيتن) ، وتزيل السجل القديم للسماح بتنزيل أسرع من خلال العقد الجديدة. بشكل خاص ، لا تحتاج المبدلات إلى الانضمام إلى هذا الاتحاد. يمكنهم العملات بمفردهم وعدم تقاسم السيولة مع الآخرين ، أو يمكنهم بدء وإدارة شبكة تقاسم السيولة الخاصة بهم.
+  
+  \item \textbf{المبدلات /منقبين الحلقة \textLR{(Relays/Ring-Miners)}} : المبدلات او المرحلات هي العقد التي تتلقى الاوامر من المحافظ أو شبكة المرحلات ، تحافظ على سجل حجوزات الطلب العامة والتداول ، و بث الأوامر اختياريا إلى المرحلات الأخرى (عن طريق أي وسط عشوائي خارج السلسلة) و / أو عقد شبكة الترحيل. تعدين الحلقة هي ميزة - وليس شرطا -  للمرحلات. وهو ثقيل حسابيا ويتم خارج السلسلة تمامًا. نسمي المرحلات بخاصية تعدين الحلقة التي يتم تشغيلها على "منقبين الحلقة" ، الذين ينتجون حلقات الاوامر عن طريق تجميع الأوامر المتباينة معا . تكون المرحلات مجانية في (1) كيفية اختيارها للتواصل مع بعضها البعض ، (2) كيفية بناء سجلات اوامرها ، و (3) كيفية تعدين حلقات الاوامر (خوارزميات التعدين).
+  
+  \item \textbf{العقود الذكية لبروتوكول لوبرنج \textLR{(LPSC)}} : مجموعة من العقود الذكية العامة و المجانية التي تتحقق من حلقات الاوامر المتلقاة من المنقبين ، تسوي وتحول العملات الرمزية نيابة عن المستخدمين بطريقة امنة ، وتكافيء منقبين الحلقة  والمحافظ برسوم ، وتصدر الأحداث. مستعرضي المرحلات /الطلبات يستمعوا إلى هذه الأحداث لابقاء سجلات حجز الطلبات و التداول. انظر الملحق (أ) للحصول على التفاصيل.
+
+  \item \textbf{خدمات ترميز الأصول (\textLR{ATS})} : الجسر بين الأصول التي لا يمكن تداولها مباشرة على لوبرنج . انها خدمات مركزية تدار من قبل شركات أو منظمات جديرة بالثقة. يقوم المستخدمون بإيداع الأصول (مادية أو عملات ورقية أو عمل رمزية من سلاسل أخرى) ويحصلوا على العملات الرمزية التي تم إصدارها ، والتي يمكن استبدالها بالإيداع في المستقبل. لا يعد لوبرنج بروتوكول تداول عبر السلسلة (حتى يوجد حل مناسب) ، ولكن \textLR{ATS}  تمكن من تداول العملات الرمزية \textLR{ERC20 \cite{ERC20}} مع الأصول المادية وكذلك الأصول على تقنيات البلوكشين الأخرى.
+\end{itemize}
+\end{otherlanguage}
+\end{multicols}
+% ===============end chapter4
+
+% ===============chapter5
+\chapter{عملية منصات التداول}
+\begin{multicols}{2}
+% ========intro
+\begin{otherlanguage}{arabic}
+\begin{enumerate}
+  \item \textbf{ترخيص البروتوكول} : في الشكل 2 ، المستخدم $Y_{who}$  يريد تبداول العملات الرمزية ويأذن ل \textLR{LPSC}  للتعامل مع عدد العملات الرمزية$B$  التي يريد المستخدم بيعها. لا يؤدي هذا إلى قفل العملات الرمزية للمستخدم ، الذي يظل حر في نقلها أثناء معالجة الطلب..
+  
+  \item \textbf{إنشاء الطلب} : السعر الحالي وحجز الطلب للعملة الرمزية $B$ مقابل العملة الرمزية $C$ يتم توفيرها من خلال المبدلات أو العوامل الأخرى المرتبطة بالشبكة ، مثل متصفحات حجز الطلب. يضع المستخدم $Y$ أمرًا (أمرًا محددًا) يحدد المبلغ $S$ والمبلغ $B$ والمعلمات الأخرى من خلال أي واجهة محفظة مدمجة. يمكن إضافة مبلغ من $LR_x$ إلى الطلب كرسوم لمنقبين الحاقة ؛ رسوم أعلى ل $LR_x$ تعني فرصة أفضل للمعالجة في وقت اسرع من قبل المنقبين. يتم توقيع تجزئة الطلب مع المفتاح الخاص للمستخدم $Y$.
+  
+  \item \textbf{بث الطلب} : ترسل المحفظة الطلب وتوقيعه إلى واحد أو أكثر من المبدلات.المبدلات تحدث حجز الطلب العام لها. لا يحتاج البروتوكول إلى حجوزات الطلب لكي يتم بناؤها بطريقة معينة ، مثل من ياتي اولا يخدم اولا. بدلاً من ذلك ، تمتلك المرحلات القدرة على اتخاذ قرارات التصميم الخاصة بها في بناء حجوزات طلباتها.
+  
+  \item \textbf{تقاسم السيولة} : تبث المبدلات الطلب إلى مرحلات (مبدلات) أخرى من خلال أي وسيلة اتصال عشوائية. مرة أخرى ، هناك مرونة كيف / اي من العقد تتفاعل. ولتسهيل مستوى معين من الاتصال بالشبكة ، هناك شبكة الترحيل (التبديل) مدمجة لتقاسم السيولة باستخدام البلوكشين المجمع. كما ذكرنا في القسم السابق ، تم تحسين شبكة الترحيل هذه للسرعة والشمولية.
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    scale=0.7,
+    node distance=2cm,
+    >=latex',
+    font=\bfseries\footnotesize\sffamily,
+    order/.style={
+		rectangle,
+		scale=0.7,
+		rounded corners,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=30mm,
+		fill=white
+	},
+	role/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		minimum width=12mm,
+		fill=white
+	},
+	steps/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+%		minimum height=12mm,
+%		minimum width=12mm,
+		fill=black,
+		text=white
+	},
+	account/.style={
+		circle,
+		scale=0.7,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=16mm,
+		minimum width=16mm,
+		fill=white
+	},
+	label/.style={
+	  scale=0.7
+    }
+  ]
+
+ 
+ \node [role] (user1)  {\textRL{المستخدم $X$}};
+ \node [role, below of=user1] (user2)  {\textRL{المستخدم $Y$}};
+ \node [role, below of=user2] (user3)  {\textRL{المستخدم $Z$}};
+ \node [role, below of=user3, fill=gray!20] (relay1)  {\textRL{المبدل $M$}};
+ \node [role, below of=relay1, fill=gray!20] (relay2)  {\textRL{المبدل $N$}};
+
+ 
+ \node [order, left of=user1, xshift=-.5cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 1}}\\
+  \textRL{\textbf{المالك: $X$}}\\
+  \textRL{\textbf{الكمية$S$: $10000 A$}}\\
+  \textRL{\textbf{الكمية$B$: $2 B$}}
+ \end{tabular}
+ };
+ 
+ \draw [draw, ->]  (user1) -- (order1) [label]{};
+ \draw [bend right,->] (order1) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order1) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order1) |- (relay1) [label]{};
+% \draw [draw, ->]  (order1) |- (relay2) [label]{};
+ 
+ \node [order,left of=user2, xshift=-1cm] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 2}}\\
+  \textRL{\textbf{المالك: $Y$}}\\
+  \textRL{\textbf{الكمية$S$: $9  B$}}\\
+  \textRL{\textbf{الكمية$B$: $12 C$}}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user2) -- (order2) [label]{};
+ \draw [bend right,->] (order2) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order2) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order2) |- (relay1) [label]{};
+% \draw [draw, ->]  (order2) |- (relay2) [label]{};
+% 
+\node [order, left of=user3, xshift=-1.5cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 3}}\\
+  \textRL{\textbf{المالك: $Z$}}\\
+  \textRL{\textbf{الكمية$S$: $100 C$}}\\
+  \textRL{\textbf{الكمية$B$: $160 A$}}
+ \end{tabular}
+ };
+ \draw [draw, ->]  (user3) -- (order3) [label]{};
+ \draw [bend right,->] (order3) to node [auto, scale=0.7] {} (relay1);
+ \draw [bend right,->] (order3) to node [auto, scale=0.7] {} (relay2);
+% \draw [draw, ->]  (order3) |- (relay1) [label]{};
+% \draw [draw, ->]  (order3) |- (relay2) [label]{};
+ 
+% // The Ring
+\node [order, 
+yshift=-1.5cm,
+xshift=-2.25cm,
+below of=relay2,
+fill=gray!10,
+minimum width=4.2cm,
+minimum height=5cm] (ring) {};
+
+
+\node [order, dashed, below of=relay2,yshift=-0.2cm,xshift=-2cm] (order11) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 1}}\\
+  \textRL{\textbf{المالك: $X$}}\\
+  \textRL{\textbf{الكمية$S$: $10000 A$}}\\
+  \textRL{\textbf{الكمية$B$: $2 B$}}
+ \end{tabular}
+ };
+ \node [order, dashed,below of=order11,xshift=-0.2cm,yshift=0.7cm] (order21) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 2}}\\
+  \textRL{\textbf{المالك: $Y$}}\\
+  \textRL{\textbf{الكمية$S$: $9  B$}}\\
+  \textRL{\textbf{الكمية$B$: $12 C$}}
+ \end{tabular}
+ };
+\node [order, dashed,below of=order21,xshift=-0.2cm,yshift=0.7cm] (order31) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 3}}\\
+  \textRL{\textbf{المالك: $Z$}}\\
+  \textRL{\textbf{الكمية$S$: $100 C$}}\\
+  \textRL{\textbf{الكمية$B$: $160 A$}}
+ \end{tabular}
+ };
+ 
+ % // The blockchain
+\node [
+rectangle,
+fill=gray!20, 
+right of=user1,
+yshift=-4.5cm,
+xshift=0.1cm,
+scale=0.7,
+minimum width=3.2cm,
+minimum height=15.6cm] (blockchain) {\parbox[b][15cm]{1.3cm}{\textRL{البلوكشين}}};
+% blockchain accounts
+  \node [account, right of=user1, xshift=0.5cm] (account1)  {\textRL{الحساب$X$}};
+  \node [account, right of=user2, xshift=0.5cm] (account2)  {\textRL{الحساب$Y$}};
+  \node [account, right of=user3, xshift=0.5cm] (account3)  {\textRL{الحساب$Z$}};
+  \node [account, right of=relay1, xshift=0.5cm] (account4)  {\textRL{الحساب$M$}};
+  \node [account, right of=relay2, xshift=0.5cm] (account5)  {\textRL{الحساب$N$}};
+  \node [account, double, below of=account5, yshift=-1.5cm] (psc)  {\textLR{LPSC}};
+  
+ \draw [draw, ->]  (user1) -- (account1) [label]{};
+ \draw [draw, ->]  (user2) -- (account2) [label]{};
+ \draw [draw, ->]  (user3) -- (account3) [label]{};
+
+ \draw [draw, double, thick]  (relay1) to node [auto, scale=0.7] {\textRL{حصة السيولة}}  (relay2) [label]{};
+% \draw [draw, ->]  (relay1) -- (ring) [label]{};
+ \draw [draw, ->]  (relay2) to node [auto, scale=0.7, xshift=-1.8cm, yshift=0.3cm] {\textRL{تعدين الحلقة}}  (ring) [label]{};
+ \draw [draw, ->]  (ring) to node [auto, scale=0.7] {\textRL{تسليم الحلقة}} (psc) [label]{};
+ 
+ \draw [bend left,->] (account1) to node [auto, scale=0.7] {\textbf{7898 A}} (account3);
+ \draw [bend left,->] (account2) to node [auto, scale=0.7] {\textbf{8 B}} (account1);
+ \draw [bend left,->] (account3) to node [auto, scale=0.7] {\textbf{98 C}} (account2);
+ 
+ \draw [bend left,->, dashed] (account1) to node [auto, scale=0.7] {} (account5);
+ \draw [bend left,->, dashed] (account2) to node [auto, scale=0.7] {} (account5);
+ \draw [bend left,->, dashed] (account3) to node [auto, scale=0.7, xshift=.5cm] {\textbf{\textRL{الرسوم}}} (account5);
+  
+\node [steps, right of=user2, xshift=-0.6cm] () {1};
+\node [steps, left of=user2, xshift=0.8cm] () {2};
+\node [steps, left of=relay2, xshift=0.3cm, yshift=1cm] () {3};
+\node [steps, left of=relay1, xshift=3.3cm, yshift=-1.6cm] () {4};
+\node [steps, below of=relay2, xshift=-0.2cm, yshift=0.4cm] () {5};
+\node [steps, right of=account3, xshift=-0.6cm] (step5) {6};
+
+ \draw [bend right, ->]  (psc) to node [auto, scale=0.7, xshift=0.5cm] {\textRL{التسوية}} (step5) [label]{};
+ 
+\end{tikzpicture}
+
+\caption{عملية تبادل $loopring$}
+\label{fig:process}
+\end{figurehere}
+\end{center}
+  
+  \item \textbf{تعدين الحلقة (مطابقة الطلب)} : يحاول المنقبين تنفيذ الطلب كليًا أو جزئيًا بسعر الصرف المحدد أو بشكل أفضل من خلال مطابقته مع طلبات أخرى متعددة.  تعدين الحلقة هو السبب الرئيسي في أن البروتوكول قادر على توفير سيولة عالية على أي زوج.  إذا كان المعدل الذي تم تنفيذه أفضل من ما يحدده المستخدم $Y$ ، يتم مشاركة الهامش بين جميع الطلبات في حلقة الطلب. كمكافأة ، يختارمنقب ا لحلقة  بين المطالبة بجزء من الهامش (فصل الهامش(، وإعادة $LR_x$  إلى المستخدم) ، أو ببساطة الاحتفاظ برسوم $LR_x$.
+
+  \item \textbf{التحقق والتسوية} : يتم استلام حلقة الطلب بواسطة \textLR{LPSC} . يقوم بإجراء العديد من الفحوصات للتحقق من البيانات التييتوفرها منقب الحلقة وتحدد ما إذا كان من الممكن تسوية حلقة الطلب كليًا أو جزئيًا (اعتمادًا على معدل تنفيذ الطلبات داخل الحلقة والعملات الرمزية في محافظ المستخدمين). في حالة نجاح جميع عمليات التحقق ، يقوم العقد بتحويل العملات الرمزية إلى المستخدمين ويدفع رسوم منقب الحلقة والمحفظة في نفس الوقت. إذا كان رصيد المستخدم $Y$ كما هو محدد بواسطة \textLR{LPSC} غير كافٍ ، فسيتم اعتباره منخفض:  الطلب المنخفض سيتم تلقائيًا تغييره إلى حجمه الأصلي إذا تم إيداع أموال كافية في عنوانه ، بخلاف الإلغاء ، الذي يعتبر عملية يدوية احادية الطريق ولا يمكن عكسها.
+
+\end{enumerate}
+\end{otherlanguage}
+\end{multicols}
+% ===============end chapter5
+
+% ===============chapter6
+\chapter{المرونة التشغيلية}
+\begin{multicols}{2}
+% ========intro
+\begin{otherlanguage}{arabic}
+من المهم ملاحظة أن معيار لوبرنج المفتوح يتيح للمشاركين مرونة كبيرة في كيفية عملهم. الفاعلون أحرار في تنفيذ نماذج أعمال جديدة وتوفير قيمة للمستخدمين ، وكسب رسوم $LR_x$ على الحجم أو غيرها من المقاييس في العملية (إذا اختاروا ذلك). النظام نظامي ويهدف إلى دعم المشاركة من العديد من التطبيقات.
+\end{otherlanguage}
+% ========intro
+% ========sec1
+\section{سجل الطلبيات}
+\begin{otherlanguage}{arabic}
+يمكن للمرحلات تصميم سجلات طلباتها بأي عدد من الطرق لعرض ومطابقة طلبات المستخدمين. يتبع التنفيذ الأول لسجل الطلب الخاص بنا نموذج $OTC$ ، حيث يتم وضع حد الأوامر على أساس السعر وحده. بعبارة أخرى ، لا تؤثر الطوابع الزمنية للأوامر على سجل الطلبات. ومع ذلك ، فإن المرحل حر في تصميم سجل الطلبات الخاص به بطريقة تحاكي محرك المطابقة النموذجي للتبادل المركزي ، حيث يتم ترتيب الطلبات حسب السعر ، مع احترام الطوابع الزمنية أيضًا. إذا كان المرحل يميل إلى تقديم هذا النوع من سجل الطلبات ، فيمكنه امتلاك / دمج مع المحفظة ، وإرسال أوامر المحفظة هذه فقط إلى المرحل المنفرد ، الذي سيكون قادرًا على مطابقة الطلبات بناءً على الوقت. أي تكوين من هذا القبيل ممكن
+
+في حين تتطلب بروتوكولات $DEX$ الأخرى في بعض الأحيان المرحلات للحصول على موارد - الأرصدة الأولية للعملة الرمزية لوضع أوامر المستقبلين - تحتاج مرحلات لوبرنج  فقط إلى العثور على أوامر قابلة للتطابق لكي يتم إتمام الصفقة ، ويمكنها القيام بذلك بدون العملات الرمزية الأولية.
+\end{otherlanguage}
+% ========endSec1
+% ========sec2
+\section{تقاسم السيولة}
+\begin{otherlanguage}{arabic}
+المرحلات حرة في تصميم كيفية مشاركة السيولة (الطلبات) مع بعضها البعض. إن اتحاد البلوكشين الخاص بنا ليس سوى حل واحد لإنجاز ذلك ، والنظام حر في التواصل والاتصال كما يحلو له. وبالاضافة الى الانضمام الى اتحاد البلوكشين ، يمكنها بناء وإدارة شؤونها الخاصة ، ووضع القواعد / الحوافز على النحو الذي يرونها مناسبا. يمكن أن تعمل المرحلات أيضًا بمفردها ، كما هو واضح في تنفيذ المحفظة الحساسة للوقت. بالطبع ، هناك مزايا واضحة في التواصل مع المرحلات الأخرى في السعي إلى مؤثرات الشبكة ، ومع ذلك ، قد تستلزم نماذج العملات المختلفة تصاميم مشاركة غريبة وتقسيم الرسوم بأي عدد من الطرق.
+\end{otherlanguage}
+% ========endSec2
+\end{multicols}
+% ===============end chapter6
+
+% ===============chapter6
+\chapter{مواصفات البروتوكول}
+\begin{multicols}{2}
+% ========sec1
+\section{تحليل الطلب}
+\begin{otherlanguage}{arabic}
+الطلب عبارة عن حزمة من البيانات التي تصف القصد من تداول المستخدم. يتم تعريف أمر لوبرنج باستخدام نموذج طلب أحادي الاتجاه ، أو \textLR{UDOM} ، كما يلي:
+
+\begin{otherlanguage}{english}
+\begin{verbatim}
+message Order {
+	address protocol;
+	address owner;
+	address tokenS;
+	address tokenB;
+	uint256 amountS;
+	uint256 amountB;
+	unit256 lrcFee
+	%unit256 validSince; // Seconds since epoch
+	%unit256 validUntil; // Seconds since epoch
+	%uint8 marginSplitPercentage; // [1-100]
+	bool buyNoMoreThanAmountB;
+	uint256 walletId;
+	%// Dual-Authoring address
+	address authAddr;
+	// v, r, s are parts of the signature
+	uint8 v;
+	bytes32 r;
+	bytes32 s;
+	%// Dual-Authoring private-key,
+	%// not used for calculating order's hash,
+	%// thus it is NOT signed.
+	string authKey;
+}
+\end{verbatim}
+\end{otherlanguage}
+
+لضمان أصل الطلب ، يتم توقيعه مقابل تجزئة معلماته ، باستثناء \textLR{authAddr} ، مع المفتاح الخاص للمستخدم. يتم استخدام المعلم \textLR{authAddr} لتوقيع حلقات الطلب التي يتم ترتيب هذا الطلب كجزء منها ، والذي يمنع التشغيل الأمامي. يرجى الرجوع إلى القسم 9.1 لمزيد من التفاصيل. يتم تمثيل التوقيع بواسطة $v$ ، $r$ ، و $sfields$ ، ويتم إرسالها بجانب معلمات الطلب عبر الشبكة. وهذا يضمن بقاء الطلب ثابتًا خلال فترة حياته الكاملة. على الرغم من أن الطلب لن يتغير أبدًا ، لا يزال بإمكان البروتوكول حساب حالته الحالية استنادًا إلى رصيد عنوانه بالإضافة إلى متغيرات أخرى.
+
+لا يشمل \textLR{UDOM} السعر (والذي يجب أن يكون رقمًا عشريا بطبيعته) ، ولكن بدلاً من ذلك يستخدم المصطلح معدل أو r ، والذي يتم التعبير عنه كمقدار / مبلغ. المعدل ليس رقم عشري بل هو تعبير سيتم تقييمه فقط مع أعداد صحيحة أخرى غير موقعة عند الطلب ، للحفاظ على جميع النتائج الوسيطة كأعداد صحيحة غير موقعة وزيادة دقة الحساب
+\subsection{مبالغ الشراء}
+عندما يقوم منقب الحلقة بمطابقات حلقة الأوامر ، من الممكن أن يكون معدل أفضل قابلاً للتنفيذ ،يسمح للمستخدمين بالحصول على مزيد من العملات الرمزية $B$ بمبلغ $B$ الذي حددوه. ومع ذلك ، إذا كان \textLR{\textbf{buyNoMoreThanAmountB}} تم تعيينه على $True$ ، يضمن البروتوكول أن المستخدمين لا يتلقون أكثر من مبلغ $B$ من العملات الرمزية $B$. وهكذا، يحدد المعلم \textLR{\textbf{buyNoMoreThanAmountB}} ل \textLR{UDOM} متى يعتبر الطلب منفذ كليا. \textLR{\textbf{buyNoMoreThanAmountB}} يطبق حد أقصى على المبلغS  أو المبلغ $B$  ، ويسمح للمستخدمين بالتعبير عن نوايا تجارية أكثر دقة من أوامر الشراء / البيع التقليدية.
+
+على سبيل المثال: مع $amountS = 10$ و $amountB = 2$ ، المعدل $r= \frac{10}{2} = 5$. وهكذا يكون المستخدم على استعداد لبيع 5 عمل رمزية لكل عمل رمزية $B$. يطابق منقب الحلقة ويجد للمستخدم معدل 4 ، مما يسمح للمستخدم بتلقي 2.5 عملة رمزية $B$ بدلاً من 2 . مع ذلك ، إذا كان المستخدم يريد 2 عملة رمزية $B$ فقط وقام بتعيين إشارة \textLR{\textbf{buyNoMoreThanAmountB}} إلى $True$ ، يقوم $LPSC$ بإجراء المعاملة بسعر 4 ويبيع المستخدم 4 عمل رمزية $S$ لكل عملة رمزية $B$ ، ويوفر بشكل فعال 2 عمل رمزية $S$. ضع في اعتبارك أن هذا لا يأخذ في الاعتبار رسوم التعدين (انظر القسم 8.1).
+
+
+\begin{otherlanguage}{english}
+\begin{verbatim}
+Order(amountS,tokenS,
+amountB,tokenB,
+buyNoMoreThantokenB)
+\end{verbatim}
+\end{otherlanguage}
+
+لتمثيل طلب في شكل مبسط ، فانه بالنسبة لأسواق $ETH / USD$ في منصات التداول  التقليدي ، يمكن لنماذج البيع والشراء التقليدية التعبير عن الطلب الأول والثالث أدناه ، ولكن ليس الثاني:
+\begin{enumerate}
+  \item بيع 10 $ETH$ بسعر 300 دولار أمريكي / $ETH$. يمكن التعبير عن هذا الطلب على النحو التالي:
+\textLR{Order(10, ETH, 3000, USD, False).}
+  
+  \item بيع $ETH$ بسعر 300 دولار أمريكي / $ETH$  للحصول على 3000 دولار أمريكي. يمكن التعبير عن هذا الطلب على النحو التالي:
+\textLR{Order(10, ETH, 3000, USD, True).}
+  
+  \item اشتر 10 $ETH$ بسعر 300 دولار أمريكي / $ETH$  ، يمكن التعبير عن هذا الطلب على النحو التالي:
+\textLR{Order(3000, USD, 10, ETH, True).}
+  
+  \item أنفق 3000 دولار أمريكي لشراء أكبر عدد ممكن من $ETH$ بسعر 300 دولار أمريكي / $ETH$ ، يمكن التعبير عن هذا الطلب على النحو التالي:
+\textLR{Order(3000, USD, 10, ETH, False).}  
+  
+\end{enumerate}
+\end{otherlanguage}
+% ========endSec1
+% ========sec2
+\section{التحقق من الحلقة}
+\begin{otherlanguage}{arabic}
+لا تقوم عقود \textLR{Loopring} الذكية بإجراء عمليات حساب أو كمية سعر الصرف ، ولكن يجب أن تتلقى و تتحقق مما يزودها به منقبين الحلقة لهذه القيم. يتم إجراء هذه الحسابات من قبل منقبين الحلقة لسببين رئيسيين: (1) لغة البرمجة للعقود الذكية ، مثل الصلابة \textLR{\cite{dannen2017introducing}} على الاثريوم ، لا يوجد لديها دعم لرياضيات العدد العشري ، لا سيما اعداد القوى $pow(x; 1=n)$ (حساب الجذر رقم $n$ للرقم العشري) ، و (2) من المستحسن أن يتم إجراء عملية حسابية خارج السلسلة للحد من حساب وتكلفة البلوكشين.
+\subsection{فحص فرع الحلقة}
+هذه الخطوة تمنع المراجعين من تحقيق جميع الهامش بشكل غير عادل في حلقة الطلب عن طريق تنفيذ أوامر جديدة داخله. وبشكل أساسي ، بمجرد العثور على حلقة طلب صالحة بواسطة منقب الحلقة ، قد يكون من المغري إضافة أوامر أخرى إلى حلقة الطلب لاستيعاب هامش المستخدمين (خصومات السعر) بشكل كامل. كما هو موضح في الشكل 3 أدناه ، فإن النتائج المحسوبة بدقة $x_1, y_1, x_2\ and\ y_2$ ستجعل ناتج معدل جميع الطلبات هو 1 بالضبط ، وبالتالي لن يكون هناك خصم للأسعار.
+
+\begin{center}
+\begin{figurehere}
+\centering
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+
+\begin{tikzpicture}[
+    auto, 
+    node distance=2cm,
+    >=latex',
+    font=\bfseries\footnotesize\sffamily,
+    order/.style={
+		scale=0.7,
+		rectangle,
+		rounded corners,
+		draw=black, 
+		text centered,
+%		text width=5cm,
+		minimum height=12mm,
+		fill=white
+	},
+	label/.style={
+		scale=0.7
+	}
+  ]
+    % We start by placing the blocks
+
+  \node [order] (order2) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 2}}\\
+  \textRL{\textbf{المالك: $Y$}}\\
+  \textRL{\textbf{الكمية$S$: $9B$}}\\
+  \textRL{\textbf{الكمية$B$: $12C$}}
+ \end{tabular}
+ };
+ 
+  \node [order, below of=order2, xshift=-3.5cm] (order1) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 1}}\\
+  \textRL{\textbf{المالك: $X$}}\\
+  \textRL{\textbf{الكمية$S$: $10000 A$}}\\
+  \textRL{\textbf{الكمية$B$: $2 B$}}
+ \end{tabular}
+ };
+ 
+ 
+  \node [order, below of=order2, xshift=3.5cm] (order3) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 3}}\\
+  \textRL{\textbf{المالك: $Z$}}\\
+  \textRL{\textbf{الكمية$S$: $100 C$}}\\
+  \textRL{\textbf{الكمية$B$: $160 A$}}
+ \end{tabular}
+ };
+ 
+   \node [order, below of=order3, fill=gray!20] (order4) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 4}}\\
+  \textRL{\textbf{المالك: $M$}}\\
+  \textRL{\textbf{الكمية$S$: $x1 A$}}\\
+  \textRL{\textbf{الكمية$B$: $y1 B$}}
+ \end{tabular}
+ };
+ 
+ 
+  \node [order, below of=order1, fill=gray!20] (order5) 
+ {%
+ \begin{tabular}{l}
+  \textRL{\textbf{الامر 5}}\\
+  \textRL{\textbf{المالك: $addressM$}}\\
+  \textRL{\textbf{الكمية$S$: $x2 C$}}\\
+  \textRL{\textbf{الكمية$B$: $y2 A$}}
+ \end{tabular}
+ };
+ 
+ \draw [draw,->] (order1) -- node [label, xshift=-2cm] {} (order5);
+ \draw [draw,->] (order2) -| node [label, xshift=-1.6cm] {} (order1);
+ \draw [draw,->] (order3) |- node [label, xshift=1cm] {} (order2);
+ \draw [draw,->] (order4) -- node [label, xshift=1.8cm] {} (order3);
+ \draw [draw,->] (order5) -- node [label, yshift=0.2cm] {} (order4);
+  
+\end{tikzpicture}
+
+\caption{حلقة طلب مع فرعها}
+\label{fig:subring}
+\end{figurehere}
+\end{center}
+
+هذا هو خطرالصفر ، إضافة القيمة صفر إلى الشبكة ، ويعتبر السلوك غير عادل من قبل منقب الحلقة. لمنع هذا ، تتطلب \textLR{Loopring} أن الحلقة الصالحة لا يمكن أن تحتوي على أي حلقات فرعية. للتحقق من ذلك ، يضمن \textLR{LPSC} أن لا تكون العملة الرمزيه في موضع الشراء.
+
+أو البيع مرتين. في الرسم البياني أعلاه ، يمكننا أن نرى أن العملة الرمزية $A$ هي عملة رمزية للبيع مرتين وعملة رمزية للشراء مرتين ، والذي لن يتم السماح به.
+
+\subsection{التحقق من تنفيذ السعر}
+يتم إجراء حسابات سعر الصرف في حلقة الطلب من قبل منقبين الحلقة لأسباب مذكورة أعلاه. يجب على \textLR{LPSC} التحقق من صحتها. أولاً ، تتحقق من أن معدل الشراء الذي يمكن لمنقب الحلقة تنفيذه لكل طلب يساوي أو أقل من سعر الشراء الأصلي الذي يحدده المستخدم. يضمن ذلك للمستخدم الحصول على الأقل على سعر الصرف الذي طلبه أو أفضل من الصفقة. وبمجرد تأكيد أسعار الصرف ، يضمن \textLR{LPSC} أن كل طلب في حلقة الطلب يشترك بنفس الخصم في السعر. على سبيل المثال ، إذا كان السعر المخفض هو $Y$ ، فسيكون السعر لكل طلب:
+
+$
+r_{0\to1} \cdot (1-\gamma), r_{1\to2} \cdot (1-\gamma), r_{2\to0} \cdot (1-\gamma), 
+$
+والتي تحقق
+\setcounter{equation}{2}
+\begin{equation}
+\label{1stequation}
+r_{0\to1} \cdot (1-\gamma), r_{1\to2} \cdot (1-\gamma),
+r_{2\to0} \cdot (1-\gamma) = 1 
+\end{equation}
+
+وبالتالي:
+
+\begin{equation}
+\label{1stequation}
+\gamma = 1 - \frac{1}{\sqrt[3]{r_{0\to1} \cdot r_{1\to2} \cdot r_{2\to0}}}
+\end{equation}
+
+إذا تجاوزت المعاملة عدد الطلبات ، يكون الخصم:
+
+\begin{equation}
+\label{1stequation}
+\gamma = 1 - \frac{1}{\sqrt[n]{\prod^{n-1}_{i=0} r^i}}
+\end{equation}
+
+حيث $r^i$ هو معدل دوران الطلب للطلب $i-th$ . من الواضح ، فقط عندما يكون معدل الخصم هو $\gamma \geq 0$ ، يمكن تنفيذ هذه الأوامر ؛ وسعر الصرف الفعلي للأمر $i-th \ order (O^i)'s$ هو
+
+\begin{equation}
+\label{1stequation}
+\hat{r^i} = r^i \cdot (1-\gamma), \hat{r^i} \leq r^i 
+\end{equation}
+\end{otherlanguage}
+
+\subsection{تعقب وإلغاء التنفيذ}
+يمكن للمستخدم إلغاء الطلب جزئيًا أو كليًا عن طريق إرسال معاملة خاصة إلى \textLR{LPSC} ، تحتوي على تفاصيل حول الطلب والمبلغ المراد إلغاءه. يأخذ \textLR{LPSC} ذلك في الاعتبار ، يخزن المبلغ المراد إلغاءه ، ويبعث حدث \textLR{OrderCancelled} إلى الشبكة. يتتبع \textLR{LPSC} المبالغ التي تم تنفيذها وإلغائها عن طريق تخزين قيمها باستخدام تجزئة الطلب كمعرف. هذه البيانات يمكن الوصول إليها بشكل عام و الاحداث \textLR{OrderCancelled/ OrderFilled} تُصدر عند تغييرها. تتبع هذه القيم أمر بالغ الأهمية ل\textLR{LPSC}  خلال خطوة تسوية حلقة الطلب.
+
+كما يدعم \textLR{LPSC} إلغاء جميع الطلبات الخاصة بأي زوج تداول مع الحدث \textLR{OrdersCancelled}  ويلغي جميع الطلبات لعنوان مع حدث \textLR{AllOrdersCancelled}.
+
+\subsection{قياس الطلب}
+يتم قياس الطلبات وفقًا لتاريخ المبالغ المنفذة والملغاة والرصيد الحالي لحسابات المرسلين. تجد العملية الطلب مع أصغر مقدار يتم تنفيذة وفقًا للخصائص المذكورة أعلاه وتستخدمه كمرجع لقياس جميع المعاملات في حلقة الطلب.
+
+يمكن أن يساعد العثور على الطلب ذو أدنى قيمة في معرفة حجم التنفيذ لكل طلب. على سبيل المثال ، إذا كان الطلب $i-th$  هو أقل قيمة ، فان عدد العملات الرمزية المباعة من كل طلب $S$ و عدد العملات الرمزية المشتراة $b$ من كل طلب يمكن حسابها على النحو التالي:
+\begin{gather*} 
+\hat{s^i} = \bar{s_i}, \hat{b^i} = \hat{s^i} / \hat{r^i}; \\ 
+\hat{s^{i\oplus1}} = \hat{b^i}, \hat{b^{i\oplus1}} = \hat{s^{i\oplus1}} / \hat{r^{i\oplus1}}; \\
+\hat{s^{i\oplus2}} = \hat{b^{i\oplus1}}, \hat{b^{i\oplus2}} = \hat{s^{i\oplus2}} / \hat{r^{i\oplus2}}; \\
+\cdots
+\end{gather*}
+حيث $s_i$ هو الرصيد المتبقي بعد تنفيذ الطلبات جزئيًا.
+
+أثناء التنفيذ ، يمكننا أن نفترض بأمان أي طلب في حلقة الطلب بأقل قيمة ، ثم يقوم بالتكرار عبر حلقة الطلب على الأكثر مرتين لحساب حجم التنفيذ لكل أمر.
+
+مثال: إذا كان الحد الأدنى المطلوب تنفيذة مقارنة بالطلب الأصلي هو $5٪$ ، فإن جميع المعاملات في حلقة الطلب يتم تخفيضها إلى $5٪$. بمجرد الانتهاء من المعاملات ، يجب التنفيذ كليا للطلب الذي كان يعتبر ذو أصغر كمية متبقية.
+% ========endSec2
+% ========sec3
+\section{تسوية الحلقة}
+\begin{otherlanguage}{arabic}
+إذا كانت حلقة الطلب تلبي جميع الفحوصات السابقة ، يمكن إغلاق حلقة الطلب ، ويمكن إجراء المعاملات. هذا يعني أن جميع الطلبات $n$ تشكل حلقة طلب مغلقة ، متصلة كما هو موضح في الشكل4:
+
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}[
+circle/.style={
+		scale=0.75,
+		rounded corners,
+		draw=black, 
+		text centered,
+		}
+]
+
+\def \n {6}
+\def \m {4}
+\def \radius {1.4cm}
+\def \margin {12} % margin in angles, depends on the radius
+
+\foreach \s in {1,...,\m}
+{
+  \node[draw, circle] at ({360/\n * (\s - 1)}:\radius) {$O^\s$};
+  \draw[<-, >=latex] ({360/\n * (\s - 1)+\margin}:\radius) 
+    arc ({360/\n * (\s - 1)+\margin}:{360/\n * (\s)-\margin}:\radius);
+}
+
+\node[draw, circle] at ({360/\n * 4}:\radius) {$O^5$};
+  \draw[<-, dashed, >=latex] ({360/\n * 4+\margin}:\radius) 
+    arc ({360/\n * 4+\margin}:{360/\n * (5)-\margin}:\radius);
+    
+\node[draw, circle] at ({360/\n * 5}:\radius) {$O^n$};
+  \draw[<-, >=latex] ({360/\n * 5+\margin}:\radius) 
+    arc ({360/\n * 5+\margin}:{360/\n * (6)-\margin}:\radius);
+
+
+\end{tikzpicture}
+\caption{تسوية الحلقة}
+\label{fig:settlement}
+\end{figurehere}
+\end{center}
+
+لإجراء المعاملات ، يستخدم \textLR{LPSC} العقد الذكي \textLR{TokenTransferDelegate}. إن إدخال مثل هذا التفويض يجعل تحديث بروتوكول العقد الذكي أسهل حيث أن جميع الطلبات تحتاج فقط إلى تصريح هذا التفويض بدلاً من إصدارات مختلفة من البروتوكول.
+
+لكل طلب في حلقة الطلب ، يتم دفع العملات الرمزية إلى الطلب التالي أو السابق بناءً على التنفيذ. ثم يتم دفع رسوم منقب الحلقة حسب نموذج الرسوم الذي يختاره منقب الحلقة. وأخيرًا ، بمجرد إجراء جميع المعاملات ، يتم إصدار حدث \textLR{RingMined}.
+
+\subsection{قياس الطلب}
+يُصدر البروتوكول أحداثًا تسمح للمرحلات و متصفحات الاوامر والممثلين الآخرين بتلقي تحديثات سجل الطلبات بأكبر قدر ممكن من الكفاءة. الأحداث المصدرة هي:
+\begin{itemize}
+	\item \textbf{\textLR{OrderCancelled}} : تم إلغاء طلب معين.
+	\item \textbf{\textLR{OrdersCancelled}} : تم إلغاء جميع طلبات زوج التداول من عنوان المالك.
+	\item \textbf{\textLR{AllOrdersCancelled}} : تم إلغاء جميع طلبات جميع أزواج التداول من عنوان المالك.
+	\item \textbf{\textLR{RingMined}} : تمت تسوية حلقة الطلب بنجاح. يحتوي هذا الحدث على بيانات متعلقة بكل نقل للعملة الرمزية داخل الحلقة.
+\end{itemize}
+\end{otherlanguage}
+% ========endSec3
+\end{multicols}
+% ===============end chapter6
+
+% ===============chapter7
+\chapter{العملة الرمزية $LRx$}
+\begin{multicols}{2}
+% ========intro
+\begin{otherlanguage}{arabic}
+$LRx$ هي رمز العملة  الرمزية العامة لدينا. $LRC$ هي العملة الرمزية ل Loopring على اثريوم ، $LRQ$ على $Qtum$ ، و $LRN$ على $NEO$ ، إلخ. سيتم إدخال أنواع $LRx$  الأخرى في المستقبل حيث يتم نشر \textLR{Loopring}  على تقنيات البلوكشين العامة الأخرى.
+\end{otherlanguage}
+% ========endIntro
+% ========sec1
+\section{نموذج الرسوم}
+\begin{otherlanguage}{arabic}
+عندما يقوم المستخدم بإنشاء طلب ، فإنه يحدد مبلغ $LRx$  ليتم دفعه إلى منقب الحلقة  كرسوم ، بالاقتران مع نسبة الهامش textLR{(marginSplitPercentage)} الذي  يتم إجراؤه  بناء على الطلب الذي يمكن لمنقب الحلقة المطالبة به. وهذا ما يسمى بتقسيم الهامش. يتم ترك قرار أي واحد للاختيار (الرسوم أو تقسيم الهامش) إلى منقب الحلقة  .
+تمثيل تقسيم الهامش:
+
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}[
+scale=1,
+font=\bfseries\footnotesize\sffamily,
+classical/.style={thick,<->,shorten >=2pt,shorten <=2pt,>=stealth},
+oneway/.style={->,dashed,shorten >=2pt,shorten <=2pt,>=stealth}
+]
+    % Draw axes
+    \draw [->,thick] (0,1) node (yaxis) [above] {$$}
+        |- (6.2,0) node (xaxis) [right] {$$};
+        
+    \draw
+  	(4,0) coordinate (A)
+  	(4,1) coordinate (A2)
+  	(4.8,-0.6) coordinate (B)
+  	(4.8,1) coordinate (B2)
+  	(6,-0.6) coordinate (C)
+  	(6,1) coordinate (C2);
+  	
+  	\fill [draw=none, fill=gray!20] 
+    (4.8, 0) rectangle (6, 1);
+    
+  	\fill [draw=none, fill=gray!10] 
+    (0, -0.6) rectangle (4.8, 0);
+	\draw[thick] (0, -0.6) -- (0, 0.6) node[below]{$$};
+  	\draw[thick, thin] (A) -- (A2) node[below]{$$};
+  	\draw[thick, thin] (B) -- (B2) node[below]{$$};
+  	\draw[thick] (C) node[below, xshift=0.5cm]{\textRL{اجمالي مبلغ الشراء}} -- (C2) ;
+  	
+  	\draw[classical] (0, 0.5) -> (4, 0.5) node[below]{$$};
+  	\draw[classical] (4, 0.75) -> (4.8, 0.75) node[below]{$$};
+%  	\draw[classical] (4.8, 0.5) -> (6, 0.5) node[below]{$$};
+  	\draw[classical] (4, 0.25) -> (6, 0.25) node[below]{$$};
+  	
+  	\draw[oneway] (2, 1.2) node[above]{\textRL{مقدار الشراء الاصلي}} -- (2, 0.5);
+  	\draw[oneway] (4.4, 2.2) node[above]{\textRL{مقدار الشراء الإضافي}} -- (4.4, 0.75);
+  	\draw[oneway] (5.4, 1.6) node[above]{\textRL{تقسيم الهامش}} -- (5.4, 1);
+  	\draw[oneway] (5, -1.2) node[below]{\textRL{الهامش}} -- (5, 0.25);
+  	\draw[oneway] (2.4, -1.7) node[below]{\textRL{مقدار الشراء الفعلي للطالب}} -- (2.4, -0.5);
+\end{tikzpicture}
+\caption{هامش بنسبة ستين بالمية}
+\label{fig:marginsplit}
+\end{figurehere}
+\end{center}
+
+إذا كان الهامش الموجود على حلقة الطلب صغيرًا جدًا ، فسيقوم منقب الحلقة باختيار رسوم $LRx$. إذا كان الهامش ، على النقيض من ذلك ، الهامش يكون كبيرًا بما فيه الكفاية لانتاج تقسيم الهامش الذي قيمتة أكثر بكثير من رسوم $LRx$ ، سيختار منقب الحلقة تقسيم الهامش. هناك شرط آخر ، على أي حال: عندما يختار منقب الحلقة  تقسيم الهامش ، يجب أن يدفع للمستخدم (منشئ الطلب) رسوم ، و تساوي $LRx$ التي كان المستخدم سيدفعها إلى منقب الحلقة  كرسوم. هذا يزيد القيمة الحدية حيث سيختار منقب الحلقة تقسيم الهامش إلى ضعف رسوم $LRx$ للطلب ، مما يزيد من الميل الى خيار رسوم $LRx$. يسمح هذا لمنقب الحلقة بالحصول على دخل ثابت على حلقات الطلب ذات الهامش المنخفض لمقايضة تلقي دخل أقل في حلقات الطلب ذات الهامش الأعلى. يعتمد نموذج الرسوم لدينا على التوقع بأنه مع نمو السوق ونضوجه ، سيكون هناك عدد أقل من حلقات الطلب ذات الهامش المرتفع ، مما يتطلب رسوم $LRx$ ثابتة كحافز.
+
+ننتهي بالرسم البياني التالي:
+
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}[
+font=\bfseries\footnotesize\sffamily,
+oneway/.style={->,dashed,shorten >=2pt,shorten <=2pt,>=stealth},
+scale=1]
+    % Draw axes
+    \draw [<->,thick] (0,2.7) node (yaxis) [above] {$y$}
+        |- (5,0) node (xaxis) [right] {$x$};
+        
+    \draw
+  	(1,1) coordinate (A)
+  	(2,1) coordinate (B);
+  	
+  	
+  	\draw[thick] (B) -- (3.7,2.7);
+  	\draw[dotted] (B) -- (2,0) node[below] {$2f$};
+  	\draw[dotted] (A) -- (1,0) node[below] {$f$};
+  	\draw[thick,color=gray!70] (0,0) -- (2.7,2.7);
+  	\draw[thick] (0,1) node[left] {$f$}--(B) node[     ]{$$};
+ 	\draw[oneway] (4,1) node[right]{\textRL{دخل التعدين المتوقع}} -- (3, 2);
+\end{tikzpicture}
+\caption{نموذج رسوم \textLR{Loopring}}
+\label{fig:feemodel}
+\end{figurehere}
+\end{center}
+
+حيث $f$ هي الرسوم  ، $x$ هو تقسيم الهامش ، $y$ هو دخل التعدين. $y = max(f, x - f)$ كما هو مشار إليه بواسطة الخط الصلب ؛ إذا كانت رسوم $LRx$ للطلب 0 ، فإن المعادلة تكون $y = max(0, x - 0)$  والتي تبسط إلى $y = x$ كما هو محدد بالخط الرمادي.
+
+النتائج هي:
+\begin{enumerate}
+	\item اذا كان تقسيم الهامش  0 ، سوف يختار منقبين الحلقة رسوم $LRx$ السطحية ولا يزالون محفزين.
+	\item إذا كانت رسوم $LRx$ هي 0 ، فإن نتائج الخط الرمادي والدخل يستند إلى نموذج الخط العام.
+	\item عندما يكون دخل تقسيم الهامش أكبر من $x2$ (رسوم $LRx$) ، يختار منقبين الحلقة تقسيم الهامش ويدفعوا $LRx$ إلى المستخدم.
+\end{enumerate}
+
+تجدر الإشارة إلى أنه إذا كانت رسوم $LRx$ غير صفرية ، وبغض النظر عن الخيار الذي يختاره منقب الحلقة ، فسيكون هناك دائمًا نقل ل $LRx$ بين منقب الحلقة ومرسل الطلب. إما أن يحصل منقب الحلقة على رسوم $LRx$ ، أو يدفع رسوم $LRx$ مرة أخرى إلى المرسل لاتخاذ تقسيم الهامش.
+
+سوف يشارك منقبين الحلقة بنسب معينة من الرسوم مع المحافظ. عندما يضع المستخدم طلبًا عبر محفظة ويتم تنفيذة ، تتم مكافأة المحفظة بجزء من الرسوم أو تقسيم الهامش. على الرغم من أن هذه الوحدات ، ونماذج الأعمال الفريدة أو التطبيقات ممكنة ، إلا أن ميلنا هو أن تستلم المحافظ ما يقارب $20٪ -25٪$ من الرسوم المكتسبة. تمثل المحافظ هدفًا أساسيًا لتكامل بروتوكول \textLR{Loopring} نظرًا لأنها تحتوي على قاعدة المستخدمين ، ولكن مصدر الدخل قليل أو معدوم.
+\end{otherlanguage}
+% ========endSec1
+% ========sec2
+\section{نظام العمل اللامركزي}
+\begin{otherlanguage}{arabic}
+في الاصل ، بروتوكول \textLR{Loopring}  هو بروتوكول اجتماعي بمعنى أنه يعتمد على التنسيق بين الأعضاء للعمل بفعالية نحو الهدف. وهذا لا يختلف عن بروتوكولات التشفير الاقتصادية بشكل عام ، بل إن فائدتها محمية إلى حد كبير من خلال نفس آليات مشاكل التنسيق \textLR{\cite{vitalikgovernance}} ، واتزان الحدث القاسي ، والعقلانية المحدودة. ولهذه الغاية ، لا تستخدم العملات الرمزية $LRx$ فقط لدفع الرسوم ، ولكن أيضًا لمواءمة الحوافز المالية للمشاركين في الشبكة المختلفة. ومثل هذا المواءمة ضروري لاعتماد واسع النطاق لأي بروتوكول ، ولكنه شديد الحدة بالنسبة لبروتوكولات منصات التداول  ، بالنظر إلى أن النجاح يعتمد بشكل كبير على تحسين السيولة في نظام لامركزي قوي.
+
+سيتم استخدام العملات الرمزية $LRx$ لتفعيل تحديثات البروتوكول من خلال الإدارة اللامركزية. تخضع تحديثات العقود الذكية لحاملي العملة الرمزية لضمان الاستمرارية والسلامة ، وللتخفيف من مخاطر سحب السيولة من خلال عدم التوافق. وبالنظر إلى أن العقود الذكية لا يمكن تغييرها بمجرد نشرها ، فهناك خطر بأن تستمر ال $dApps$ أو المستخدمين النهائيين في التفاعل مع الإصدارات التي تم إيقافها وإبطال نظرهم من العقود المحدثة .
+
+تعتبر قابلية الترقية أمراً حاسماً لنجاح البروتوكول حيث أنه يجب أن يتكيف مع متطلبات السوق و تقنيات البلوكشين الكامنة. ستسمح الإدارة اللامركزية من قبل أصحاب المصلحة في $LRx$ بتحديثات بروتوكول العقد الذكي دون تعطيل ال $dApps$ أو المستخدمين النهائيين ، أو الاعتماد بشكل كبير على تجريد العقود الذكية. في البداية ، سوف يتم ذلك من خلال عقد ذكي بسيط متعدد التوقيعات ، بهدف التقدم نحو نوع آلية $DAO$.
+\end{otherlanguage}
+% ========endSec2
+\end{multicols}
+% ===============end chapter7
+
+% ===============chapter8
+\chapter{الحمايه من الاحتيال و الهجوم}
+\begin{multicols}{2}
+% ========sec1
+\section{الوقاية من التداول المسبق}
+\begin{otherlanguage}{arabic}
+في منصات التداول ات اللامركزية ، يتم التداول المسبق عندما يحاول شخص ما نسخ حل التداول  لعقدة آخرى ، ويجعله مقوضاً قبل المعاملة الأصلية الموجودة في تجمع المعاملات المعلق (\textLR{mempool}). ويمكن تحقيق ذلك عن طريق تحديد رسوم معاملات أعلى (سعر الجاز). المخطط الرئيسي للتداول المسبق في \textLR{Loopring} (وأية بروتوكولات لمطابقة الطلب) هي عبارة عن سرقة الطلب:
+
+عندما يسرق القائم  بالتداول المسبق أمرًا واحدًا أو أكثر من معاملة تسوية طلبات الحلقة المعلقة ؛ وبالنسبة الى \textLR{Loopring} : عندما يسرق القائم  بالتداول المسبق حلقة الطلب بالكامل من معاملة معلقة.
+
+عندما لا يتم تأكيد معاملة \textLR{submitRing} ولا تزال في تجمع المعاملات المعلقة ، يمكن لأي شخص أن يكتشف مثل هذه المعاملة بسهولة ويستبدل عنوان المنقب بعنوانه الخاص (\textLR{filcherAddress}) ، ثم يمكنه إعادة التوقيع على الحمولة باستخدام \textLR{filcherAddress} لاستبدال توقيع حلقة الطلب. يمكن أن يقوم المختلس بتعيين سعر أعلى للجاز وتقديم معاملة جديدة على أمل أن يقوم منقبين الكتلة باختيار معاملته الجديدة في الكتلة التالية بدلاً من المعاملة الأصلية \textLR{submitRing}.
+
+الحلول السابقة لهذه المشكلة كانت لها جوانب سلبية مهمة: تتطلب المزيد من المعاملات وبالتالي تكلف منقبين الحلقة الكثير من الجاز ؛ وتأخذ على الأقل ضعف الكتل لتسوية حلقة الطلب. حلنا الجديد ، التأليف المزدوج \textLR{\cite{dualauthor}} ، ينطوي على آلية إنشاء مستويين من الترخيص للأوامر - واحد للتسوية ، والآخر للتنقيب عن الحلقة.
+
+عملية التأليف المزدوج:
+\begin{enumerate}
+	\item لكل طلب ، سيولد برنامج المحفظة زوجًا عشوائيًا من المفتاح العام / المفتاح الخاص ، ويضع زوج المفاتيح في مقتطف $JSON$ التابع للطلب. (البديل هو استخدام العنوان المستمد من المفتاح العام بدلاً من المفتاح العام نفسه لتقليل حجم البايت. نستخدم \textLR{authAddr} لتمثيل مثل هذا العنوان ، و \textLR{authKeys} لتمثيل المفتاح الخاص المطابق لـ \textLR{authAddr}).
+	\item حساب تجزئة الطلب مع جميع الحقول في الطلب باستثناء ( $r$ و $v$ و $s$ و \textLR{authKeys}) ، وتوقيع التجزئة باستخدام المفتاح الخاص بالمالك (وليس \textLR{authKeys}).
+	\item سترسل المحفظة الطلب مع \textLR{authKeys} إلى المرحلات من أجل تعدين الحلقة. سيتحقق منقبين الحلقة من أن \textLR{authKeys} و \textLR{authAddr}  قد تم إقرانها بشكل صحيح وأن توقيع الطلب صالح فيما يتعلق بعنوان المالك.
+	\item عند تحديد حلقة الطلب ، سيستخدم منقب الحلقة  \textLR{authKey}  لكل طلب لتوقيع تجزئة الحلقة و\textLR{minerAddress}  وجميع معلمات التعدين. إذا كانت حلقة الطلب تحتوي على $n$ من الأوامر ، فستكون هناك توقيعات $n$  بواسطة $n$  من ال \textLR{authKeys}  . نحن نسمي هذه التواقيع ب \textLR{authSignatures}  .قد يحتاج منقب الحلقة أيضًا إلى توقيع تجزئة الحلقة مع جميع معلمات التعدين باستخدام المفتاح الخاص لـ \textLR{minerAddress}.
+	\item يستدعي منقب الحلقة دالة \textLR{submitRing} مع كافة المعلمات ، بالإضافة إلى \textLR{authSignature} الإضافية. لاحظ أن \textLR{authKeys}  ليست جزءًا من المعاملة على السلسلة ، وبالتالي تظل غير معروفة لأطراف أخرى غيرمنقب الحلقة نفسه.
+	\item سيقوم بروتوكول \textLR{Loopring}  الآن بالتحقق من صحة كل من \textLR{authSignatureagainst}  مقابل \textLR{authAddr} لكل   طلب ، ويرفض حلقة الطلب إذا كان أي \textLR{authSignature} مفقودة أو غير صالح.
+\end{enumerate}
+
+والنتيجة هي الآن:
+\begin{itemize}
+	\item يضمن توقيع الطلب (بواسطة المفتاح الخاص لعنوان المالك) بعدم إمكانية تعديل الطلب ، بما في ذلك \textLR{authAddr}.
+	\item توقيع منقب الحلقة (بواسطة المفتاح الخاص ب  \textLR{minerAddress}) ، إذا تم توفيره ، يضمن أنه لا يمكن لأي شخص استخدام هويته للتنقيب عن حلقة الطلب.
+	\item يضمن \textLR{authSignatures}  لا يمكن تعديل حلقة النظام بأكملها ، بما في ذلك \textLR{minerAddress}، ولا يمكن سرقة أي أوامر.
+\end{itemize}
+
+يمنع التأليف المزدوج اختلاس الحلقة  واختلاس الطلب مع ضمان استمرار تسوية حلقات الطلب في معاملة واحدة. بالإضافة إلى ذلك ، تفتح ميزة "التأليف المزدوج" أبوابًا أمام المرحلات لمشاركة الطلبات بطريقتين: المشاركة الغير قابلة للمطابقة والمشاركة القابلة للمطابقة. بشكل افتراضي ، تقوم \textLR{Loopring} بتشغيل نموذج $OTC$ وتدعم فقط طلبات السعر المحدد ، بمعنى أنه يتم تجاهل الطوابع الزمنية للأوامر. ويعني هذا أن تداول التداول المسبق لا يؤثر على السعر الفعلي لذلك التداول ، ولكنه يؤثر على ما إذا تم تنفيذه أم لا.
+\end{otherlanguage}
+% ========endSec1
+\end{multicols}
+% ===============end chapter8
+
+% ===============chapter9
+\chapter{الهجمات الأخرى}
+\begin{multicols}{2}
+% ========sec1
+\section{هجوم $Sybil$ او $DOS$}
+\begin{otherlanguage}{arabic}
+يمكن للمستخدمين الضارين - بصفتهم أنفسهم أو بهويات مزوّرة - إرسال عدد كبير من الطلبات الصغيرة لمهاجمة عقد \textLR{Loopring} . ومع ذلك ، نظرًا لأننا نسمح للعقد برفض الطلبات استنادًا إلى معاييرها الخاصة - والتي قد تخفي أو تكشف عنها - فإن معظم هذه الطلبات سيتم رفضها لعدم تحقيق أرباح مرضية عند مطابقتها. من خلال تمكين المرحلات لإملاء كيفية إدارة الطلبيات ، لا نرى هجومًا كبيرًا جدًا على النظام كتهديد.
+\end{otherlanguage}
+% ========endSec1
+% ========sec2
+\section{عدم كفاية الرصيد}
+\begin{otherlanguage}{arabic}
+يمكن للمستخدمين الضارين تسجيل وتوزيع الطلبات التي تكون قيمتها غير صفرية ، ولكن عنوانها لا يحتوي على رصيد في الواقع. يمكن للعقد أن تراقب وتلاحظ أن بعض الطلبات رصيدها الفعلي هو صفر ، وتحدث حالات الطلب وفقا لذلك ، ثم تتجاهلها. يجب أن تقضي العقد الوقت لتحديث حالة الطلب ، ولكن يمكنها أيضًا اختيار تقليل الجهد من خلال ، على سبيل المثال ، وضع العناوين في القائمة السوداء وإفلات الطلبات ذات الصلة.
+\end{otherlanguage}
+% ========endSec2
+\end{multicols}
+% ===============end chapter9
+
+% ===============chapter10
+\chapter{الخلاصة}
+\begin{multicols}{2}
+\begin{otherlanguage}{arabic}
+يبدأ بروتوكول \textLR{Loopring}   كطبقة أساسية للتبادل اللامركزي. وبذلك ، فإن له تداعيات عميقة في كيفية تبادل الناس للأصول والقيمة. المال ، كسلعة وسيطة ، تسهل أو تحل محل تبادل المقايضة وتحل المصادفة المزدوجة لمشكلة الاحتياجات \textLR{\cite{unenumerated2006}} ، حيث يجب أن يرغب اثنان من الأطراف المقابلة في بضاعة أو خدمة كل منهما. وبالمثل ، يهدف بروتوكول \textLR{Loopring} إلى الاستغناء عن اعتمادنا على مصادفة الرغبات في أزواج التداول ، وذلك باستخدام مطابقة الحلقة لتداولات أكثر سهولة. وهذا مفيد لكيفية تبادل المجتمع والأسواق للعمل الرمزية ، والأصول التقليدية ، وما وراء ذلك. في الواقع ، مثلما العملات المشفرة اللامركزية تشكل تهديد لسيطرة دولة ما على المال ، فإن البروتوكول التوافقي الذي يمكن أن يربط المتداولين (المستهلكين / المنتجين) على نطاق واسع ، يشكل تهديدًا نظريًا لمفهوم المال نفسه.
+
+تشمل مزايا البروتوكول ما يلي:
+\begin{itemize}
+
+	\item عدم تضمن إدارة الطلب خارج السلسلة و التسوية على السلسلة أي تضحية في الأداء من أجل الأمن	
+	\item زيادة السيولة بسبب تعدين الحلقة وتقاسم الطلبات.
+	\item يحل التأليف المزدوج المشكلة الخبيثة في التداول المسبق التي يواجهها جميع ال $DEXs$  ومستخدميها اليوم.
+	\item تتيح العقود الذكية العامة المجانية لأي $dApp$ ببناء أو التفاعل مع البروتوكول.
+	\item يسمح التوحيد القياسي بين المشغلين بتأثيرات الشبكة وتحسين تجربة المستخدم النهائي.
+	\item تبقى الشبكة مرنة في تشغيل سجلات الطلب والتواصل.
+	\item انخفاض العوائق التي تحول دون الدخول تعني انخفاض تكاليف العقد المرتبطة بالشبكة والمستخدمين النهائيين.
+	\item التداول مجهول مباشرة من محافظ المستخدم.
+\end{itemize}
+\end{otherlanguage}
+\end{multicols}
+% ===============end chapter10
+
+% ===============chapter11
+\chapter{شكر وتقدير}
+\begin{multicols}{2}
+\begin{otherlanguage}{arabic}
+نود أن نعرب عن امتناننا لمرشدينا ومستشارينا وللعديد من الناس في المجتمع الذين كانوا مرتاحين وسخيين بمعرفتهم. على وجه الخصوص ، نود أن   نشكر شو باي (من \textLR{ChinaLedger}) ؛ البروفيسور هايبين كان، اليكس تشنغ ، هونغفي دا ؛ يين كاو، شياو تشوان وو، تشن وانغ ،وى يو، نيان دوان، جون شياو، جيانغ تشيان، جيانجزو شيانغ، يبينج جوه، داهاي لي، كلفن لونج، هواشيا شيا، جون ما، و انسيفالو باث  لمراجعة وتقديم تعليقات حول هذا المشروع.
+\end{otherlanguage}
+\end{multicols}
+% ===============end chapter11
+
+% ===============biblog
+
+\begin{otherlanguage}{english}
+\bibliography{whitepaper}
+\bibliographystyle{plain}
+\end{otherlanguage}
+
+\setcounter{page}{0}
+\pagenumbering{arabic}% resets `page` counter to 1
+\appendix
+\pretocmd{\chapter}{%
+  \clearpage
+  \pagenumbering{arabic}%
+  \renewcommand*{\thepage}{\thechapter\arabic{page}}%
+}{}{}
+
+\chapter{\textLR{Loopring}   على الاثريوم}
+
+\begin{center}
+\begin{figurehere}
+\centering
+\begin{tikzpicture}
+[node distance = 1cm, auto,font=\footnotesize,
+% STYLES
+every node/.style={node distance=3cm},
+% The comment style is used to describe the characteristics of each force
+comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+% The force style is used to draw the forces' name
+force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+% Draw forces
+\node [force] (impl) {\textRL{تطبيق بروتوكول $Loopring$}};
+\node [force, dashed, above of=impl] (protocol_interface) {\textRL{بروتوكول $Loopring$}};
+\node [force, left=1cm of impl] (nameregistry) {\textRL{سجل الاسماء}};
+\node [force, right=1cm of impl] (tokenregistry) {\textRL{سجل العملات الرمزية}};
+\node [force, below of=impl] (delegate) {\textRL{تفويض نقل العملات الرمزية}};
+\node [force, left=1cm of delegate] (multisig) {\textRL{متعدد التوقيع قابل للنقل}};
+%%%%%%%%%%%%%%%
+% Change data from here
+% impl
+\node [comment, below=0.05 of impl] (comment-impl) {- \textRL{يتحقق من صحة حلقات الطلب}\\
+- \textRL{ينقل العملات الرمزية للتسوية}\\
+- \textRL{يبعث الاحداث}};
+% nameregistry
+\node [comment, below=0.25cm of nameregistry]{- \textRL{يسجل المحافظ و المرحلات}};
+% protocol_interface
+\node [comment, below=0.25 of protocol_interface](comment-interface) {- \textRL{يعرف الواجهات و الاحداث}};
+% tokenregistry
+\node [comment, below=0.25 of tokenregistry] {- \textRL{تسجيل العملات الرمزية من نوع} $ERC20/ERC223$};
+% delegate
+\node [comment, below=0.25 of delegate] {- \textRL{ينقل العمل الرمزية نيابة عن المستخدمين}};
+% PUBLIC POLICIES
+\node [comment, text width=3cm, below=0.25 of multisig] {- \textRL{يمكن من الملكية المتعددة التوقيعات}};
+%%%%%%%%%%%%%%%%
+% Draw the links between forces
+\path[->,thick] 
+(comment-interface) edge (impl)
+(nameregistry) edge (impl)
+(tokenregistry) edge (impl)
+(delegate) edge (comment-impl);
+\end{tikzpicture} 
+\caption{العقود الذكية}
+\label{fig:smartcontracts}
+\end{figurehere}
+\end{center}
+
+\chapter{التطبيق}
+\section{الايثيريوم}
+تم تطبيق العقود الذكية التالية على الشبكة الرئيسية ل ايثريوم:
+\begin{itemize}
+\item $LRC$: $0xEF68e7C694F40c8202821eDF525dE3782458639f$
+\item $TokenRegistry$: $0xa21c1f2AE7f721aE77b1204A4f0811c642638da9$
+\item $TokenTransferDelegate$: $0x7b126ab811f278f288bf1d62d47334351dA20d1d$
+\item $NameRegistry$: $0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7$
+\item $LoopringProtocolImpl$: $0x0B48b747436f10c846696e889e66425e05CD740f$
+\end{itemize}
+\section{كيوتم}
+تم تطبيق العقود الذكية التالية على الشبكة الرئيسية ل كيوتم:
+\begin{itemize}
+\item $LRQ$:  $2eb2a66afd4e465fb06d8b71f30fb1b93e18788d$
+\item $TokenRegistry$: $c89ea34360258917daf3655f8bec5550923509b3$
+\item $TokenTransferDelegate$: $60b3fa7f461664e4dafb621a36ac2722cc680f10$
+\item $NameRegistry$: $e26a27d92181069b25bc7283e03722f6ce7678bb$
+\item $LoopringProtocolImpl$: $5180bb56b696d16635abd8dc235e0ee432abf25d$
+\end{itemize}
+\end{document}
