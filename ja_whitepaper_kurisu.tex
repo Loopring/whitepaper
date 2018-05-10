@@ -1032,92 +1032,92 @@ submitRingトランザクションが承認されないまま、未処理のト�
 \end{multicols}
 
 
-\begin{appendices}
-
-\section{イーサリウム上のループリング\label{app:protocol_ethereum}}
-
-\begin{center}
-\begin{figurehere}
-\centering
-\begin{tikzpicture}
-[node distance = 1cm, auto,font=\footnotesize,
-% STYLES
-every node/.style={node distance=3cm},
-% The comment style is used to describe the characteristics of each force
-comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
-% The force style is used to draw the forces' name
-force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
-
-% Draw forces
-\node [force] (impl) {ループリングProtocolImpl};
-\node [force, dashed, above of=impl] (protocol_interface) {ループリングProtocol};
-\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
-\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
-\node [force, below of=impl] (delegate) {TokenTransferDelegate};
-\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
-
-%%%%%%%%%%%%%%%
-% Change data from here
-
-% impl
-\node [comment, below=0.25 of impl] (comment-impl) {- オーダーリングを検証する\\
-- 決済用にトークンを転送\\
-- イベントを発生する};
-
-% nameregistry
-\node [comment, below=0.25cm of nameregistry]{- ウォレットとリレーを登録する};
-
-% protocol_interface
-\node [comment, below=0.25 of protocol_interface](comment-interface) {- インターフェースとイベントを定義する};
-
-% tokenregistry
-\node [comment, below=0.25 of tokenregistry] {- ERC20/ERC223トークンを登録する};
-
-% delegate
-\node [comment, below=0.25 of delegate] {- ユーザーに代わりトークンを転送する};
-
-% PUBLIC POLICIES
-\node [comment, text width=3cm, below=0.25 of multisig] {- マルチシグオーナーシップを実現する};
-
+%\begin{appendices}
+%
+%\section{イーサリウム上のループリング\label{app:protocol_ethereum}}
+%
+%\begin{center}
+%\begin{figurehere}
+%\centering
+%\begin{tikzpicture}
+%[node distance = 1cm, auto,font=\footnotesize,
+%% STYLES
+%every node/.style={node distance=3cm},
+%% The comment style is used to describe the characteristics of each force
+%comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+%% The force style is used to draw the forces' name
+%force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+%
+%% Draw forces
+%\node [force] (impl) {ループリングProtocolImpl};
+%\node [force, dashed, above of=impl] (protocol_interface) {ループリングProtocol};
+%\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
+%\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
+%\node [force, below of=impl] (delegate) {TokenTransferDelegate};
+%\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
+%
 %%%%%%%%%%%%%%%%
-
-% Draw the links between forces
-\path[->,thick] 
-(comment-interface) edge (impl)
-(nameregistry) edge (impl)
-(tokenregistry) edge (impl)
-(delegate) edge (comment-impl);
-
-\end{tikzpicture} 
-\caption{スマートコントラクト}
-\label{fig:smartcontracts}
-\end{figurehere}
-\end{center}
-
-\section{デプロイメント}
-
-\subsection{Ethereum}
-
-以下のスマートコントラクトはイーサリアムメインネット上にデプロイされています。
-
-\begin{itemize}
-\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
-\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
-\item TokenTransferDelegate: \verb|0x7b126ab811f278f288bf1d62d47334351dA20d1d|
-\item NameRegistry: \verb|0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7|
-\item ループリングProtocolImpl: \verb|0x0B48b747436f10c846696e889e66425e05CD740f|
-\end{itemize}
-
-\subsection{Qtum}
-以下のスマートコントラクトはクアンタムメインネット上にデプロイされています。
-\begin{itemize}
-\item LRQ: \verb| 2eb2a66afd4e465fb06d8b71f30fb1b93e18788d |
-\item TokenRegistry: \verb| c89ea34360258917daf3655f8bec5550923509b3 |
-\item TokenTransferDelegate: \verb| 60b3fa7f461664e4dafb621a36ac2722cc680f10 |
-\item NameRegistry: \verb| e26a27d92181069b25bc7283e03722f6ce7678bb |
-\item ループリングProtocolImpl: \verb| 5180bb56b696d16635abd8dc235e0ee432abf25d |
-\end{itemize}
-
-
-\end{appendices}
+%% Change data from here
+%
+%% impl
+%\node [comment, below=0.25 of impl] (comment-impl) {- オーダーリングを検証する\\
+%- 決済用にトークンを転送\\
+%- イベントを発生する};
+%
+%% nameregistry
+%\node [comment, below=0.25cm of nameregistry]{- ウォレットとリレーを登録する};
+%
+%% protocol_interface
+%\node [comment, below=0.25 of protocol_interface](comment-interface) {- インターフェースとイベントを定義する};
+%
+%% tokenregistry
+%\node [comment, below=0.25 of tokenregistry] {- ERC20/ERC223トークンを登録する};
+%
+%% delegate
+%\node [comment, below=0.25 of delegate] {- ユーザーに代わりトークンを転送する};
+%
+%% PUBLIC POLICIES
+%\node [comment, text width=3cm, below=0.25 of multisig] {- マルチシグオーナーシップを実現する};
+%
+%%%%%%%%%%%%%%%%%
+%
+%% Draw the links between forces
+%\path[->,thick] 
+%(comment-interface) edge (impl)
+%(nameregistry) edge (impl)
+%(tokenregistry) edge (impl)
+%(delegate) edge (comment-impl);
+%
+%\end{tikzpicture} 
+%\caption{スマートコントラクト}
+%\label{fig:smartcontracts}
+%\end{figurehere}
+%\end{center}
+%
+%\section{デプロイメント}
+%
+%\subsection{Ethereum}
+%
+%以下のスマートコントラクトはイーサリアムメインネット上にデプロイされています。
+%
+%\begin{itemize}
+%\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
+%\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
+%\item TokenTransferDelegate: \verb|0x7b126ab811f278f288bf1d62d47334351dA20d1d|
+%\item NameRegistry: \verb|0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7|
+%\item ループリングProtocolImpl: \verb|0x0B48b747436f10c846696e889e66425e05CD740f|
+%\end{itemize}
+%
+%\subsection{Qtum}
+%以下のスマートコントラクトはクアンタムメインネット上にデプロイされています。
+%\begin{itemize}
+%\item LRQ: \verb| 2eb2a66afd4e465fb06d8b71f30fb1b93e18788d |
+%\item TokenRegistry: \verb| c89ea34360258917daf3655f8bec5550923509b3 |
+%\item TokenTransferDelegate: \verb| 60b3fa7f461664e4dafb621a36ac2722cc680f10 |
+%\item NameRegistry: \verb| e26a27d92181069b25bc7283e03722f6ce7678bb |
+%\item ループリングProtocolImpl: \verb| 5180bb56b696d16635abd8dc235e0ee432abf25d |
+%\end{itemize}
+%
+%
+%\end{appendices}
 \end{document}

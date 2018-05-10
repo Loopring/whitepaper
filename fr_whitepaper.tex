@@ -1022,81 +1022,81 @@ Nous aimerions exprimer notre gratitude à nos mentors, conseillers et aux nombr
 \end{multicols}
 
 
-\begin{appendices}
-
-\section{Loopring sur Ethereum\label{app:protocol_ethereum}}
-
-\subsection{Contrats intelligents}
-
-\begin{center}
-\begin{figurehere}
-\centering
-\begin{tikzpicture}
-[node distance = 1cm, auto,font=\footnotesize,
-% STYLES
-every node/.style={node distance=3cm},
-% The comment style is used to describe the characteristics of each force
-comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
-% The force style is used to draw the forces' name
-force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
-
-% Draw forces
-\node [force] (impl) {LoopringProtocolImpl};
-\node [force, dashed, above of=impl] (protocol_interface) {LoopringProtocol};
-\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
-\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
-\node [force, below of=impl] (delegate) {TokenTransferDelegate};
-\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
-
-%%%%%%%%%%%%%%%
-% Change data from here
-
-% impl
-\node [comment, below=0.25 of impl] (comment-impl) {- Valide les anneaux d'ordres\\
-- Transfer de jetons pour les transactions\\
-- Évènement émis};
-
-% nameregistry
-\node [comment, below=0.25cm of nameregistry]{- Enregistre les portefeuilles et les relais};
-
-% protocol_interface
-\node [comment, below=0.25 of protocol_interface](comment-interface) {- Défini l'interface et l'évènement};
-
-% tokenregistry
-\node [comment, below=0.25 of tokenregistry] {- Enregistre les jetons ERC20/ERC223};
-
-% delegate
-\node [comment, below=0.25 of delegate] {- Transferts de jetons pour le compte des utilisateurs};
-
-% PUBLIC POLICIES
-\node [comment, text width=3cm, below=0.25 of multisig] {- Permet la propriété multisignature};
-
+%\begin{appendices}
+%
+%\section{Loopring sur Ethereum\label{app:protocol_ethereum}}
+%
+%\subsection{Contrats intelligents}
+%
+%\begin{center}
+%\begin{figurehere}
+%\centering
+%\begin{tikzpicture}
+%[node distance = 1cm, auto,font=\footnotesize,
+%% STYLES
+%every node/.style={node distance=3cm},
+%% The comment style is used to describe the characteristics of each force
+%comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+%% The force style is used to draw the forces' name
+%force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+%
+%% Draw forces
+%\node [force] (impl) {LoopringProtocolImpl};
+%\node [force, dashed, above of=impl] (protocol_interface) {LoopringProtocol};
+%\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
+%\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
+%\node [force, below of=impl] (delegate) {TokenTransferDelegate};
+%\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
+%
 %%%%%%%%%%%%%%%%
-
-% Draw the links between forces
-\path[->,thick] 
-(comment-interface) edge (impl)
-(nameregistry) edge (impl)
-(tokenregistry) edge (impl)
-(delegate) edge (comment-impl);
-
-\end{tikzpicture} 
-\caption{Contrats Intelligent}
-\label{fig:smartcontracts}
-\end{figurehere}
-\end{center}
-
-\subsection{Déploiement}
-
-Les contrats intelligents suivants ont été déployés sur le réseau principal d'Éthereum :
-\begin{itemize}
-\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
-\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
-\item TokenTransferDelegate: \verb|0xc787aE8D6560FB77B82F42CED8eD39f94961e304|
-\item NameRegistry: \verb|0x0f3Dce8560a6010DE119396af005552B7983b7e7|
-\item LoopringProtocolImpl: \verb|0xc80BbAb86cED62CF795619A357581FaF0cB46511|
-\item TransferableMultsig: \verb|0x7421ad9C880eDF007a122f119AD12dEd5f7C123B|
-\end{itemize}
-
-\end{appendices}
+%% Change data from here
+%
+%% impl
+%\node [comment, below=0.25 of impl] (comment-impl) {- Valide les anneaux d'ordres\\
+%- Transfer de jetons pour les transactions\\
+%- Évènement émis};
+%
+%% nameregistry
+%\node [comment, below=0.25cm of nameregistry]{- Enregistre les portefeuilles et les relais};
+%
+%% protocol_interface
+%\node [comment, below=0.25 of protocol_interface](comment-interface) {- Défini l'interface et l'évènement};
+%
+%% tokenregistry
+%\node [comment, below=0.25 of tokenregistry] {- Enregistre les jetons ERC20/ERC223};
+%
+%% delegate
+%\node [comment, below=0.25 of delegate] {- Transferts de jetons pour le compte des utilisateurs};
+%
+%% PUBLIC POLICIES
+%\node [comment, text width=3cm, below=0.25 of multisig] {- Permet la propriété multisignature};
+%
+%%%%%%%%%%%%%%%%%
+%
+%% Draw the links between forces
+%\path[->,thick] 
+%(comment-interface) edge (impl)
+%(nameregistry) edge (impl)
+%(tokenregistry) edge (impl)
+%(delegate) edge (comment-impl);
+%
+%\end{tikzpicture} 
+%\caption{Contrats Intelligent}
+%\label{fig:smartcontracts}
+%\end{figurehere}
+%\end{center}
+%
+%\subsection{Déploiement}
+%
+%Les contrats intelligents suivants ont été déployés sur le réseau principal d'Éthereum :
+%\begin{itemize}
+%\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
+%\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
+%\item TokenTransferDelegate: \verb|0xc787aE8D6560FB77B82F42CED8eD39f94961e304|
+%\item NameRegistry: \verb|0x0f3Dce8560a6010DE119396af005552B7983b7e7|
+%\item LoopringProtocolImpl: \verb|0xc80BbAb86cED62CF795619A357581FaF0cB46511|
+%\item TransferableMultsig: \verb|0x7421ad9C880eDF007a122f119AD12dEd5f7C123B|
+%\end{itemize}
+%
+%\end{appendices}
 \end{document}

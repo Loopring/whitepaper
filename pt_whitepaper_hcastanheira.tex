@@ -958,80 +958,80 @@ Nós gostaríamos de expressar nossa gratidão aos nossos mentores, conselheiros
 \bibliographystyle{unsrt}
 \end{multicols}
 
-\begin{appendices}
-\section{Loopring no Ethereum\label{app:protocol_ethereum}}
-\begin{center}
-\begin{figurehere}
-\centering
-\begin{tikzpicture}
-[node distance = 1cm, auto,font=\footnotesize,
-% STYLES
-every node/.style={node distance=3cm},
-% The comment style is used to describe the characteristics of each force
-comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
-% The force style is used to draw the forces' name
-force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
-% Draw forces
-\node [force] (impl) {LoopringProtocolImpl};
-\node [force, dashed, above of=impl] (protocol_interface) {LoopringProtocol};
-\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
-\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
-\node [force, below of=impl] (delegate) {TokenTransferDelegate};
-\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
-
-%%%%%%%%%%%%%%%
-% Change data from here
-
-% impl
-\node [comment, below=0.25 of impl] (comment-impl) {- Valida anéis de ordens\\
-- Transfere tokens para liquidação\\
-- Emite Eventos};
-
-% nameregistry
-\node [comment, below=0.25cm of nameregistry] {- Registra carteiras e relays};
-
-% protocol_interface
-\node [comment, below=0.25 of protocol_interface](comment-interface) {- Define interfaces e eventos};
-
-% tokenregistry
-\node [comment, below=0.25 of tokenregistry] {- Registra tokens ERC20/ERC223};
-
-% delegate
-\node [comment, below=0.25 of delegate] {- Transfere tokens em nome dos usuários};
-
-% PUBLIC POLICIES
-\node [comment, below=0.25 of multisig] {- Permite posse multi-assinada};
+%\begin{appendices}
+%\section{Loopring no Ethereum\label{app:protocol_ethereum}}
+%\begin{center}
+%\begin{figurehere}
+%\centering
+%\begin{tikzpicture}
+%[node distance = 1cm, auto,font=\footnotesize,
+%% STYLES
+%every node/.style={node distance=3cm},
+%% The comment style is used to describe the characteristics of each force
+%comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+%% The force style is used to draw the forces' name
+%force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+%% Draw forces
+%\node [force] (impl) {LoopringProtocolImpl};
+%\node [force, dashed, above of=impl] (protocol_interface) {LoopringProtocol};
+%\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
+%\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
+%\node [force, below of=impl] (delegate) {TokenTransferDelegate};
+%\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
+%
 %%%%%%%%%%%%%%%%
-
-% Draw the links between forces
-\path[->,thick] 
-(comment-interface) edge (impl)
-(nameregistry) edge (impl)
-(tokenregistry) edge (impl)
-(delegate) edge (comment-impl);
-\end{tikzpicture} 
-\caption{Contratos Inteligentes}
-\label{fig:smartcontracts}
-\end{figurehere}
-\end{center}
-\section{Implantação}
-\subsection{Ethereum}
-Os seguintes contratos inteligentes foram implantados na mainnet da Ethereum:
-\begin{itemize}
-\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
-\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
-\item TokenTransferDelegate: \verb|0x7b126ab811f278f288bf1d62d47334351dA20d1d|
-\item NameRegistry: \verb|0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7|
-\item LoopringProtocolImpl: \verb|0x0B48b747436f10c846696e889e66425e05CD740f|
-\end{itemize}
-\subsection{Qtum}
-Os seguintes contratos inteligentes foram implantados na mainnet da Qtum:
-\begin{itemize}
-\item LRQ: \verb|2eb2a66afd4e465fb06d8b71f30fb1b93e18788d|
-\item TokenRegistry: \verb|c89ea34360258917daf3655f8bec5550923509b3|
-\item TokenTransferDelegate: \verb|60b3fa7f461664e4dafb621a36ac2722cc680f10|
-\item NameRegistry: \verb|e26a27d92181069b25bc7283e03722f6ce7678bb|
-\item LoopringProtocolImpl: \verb|5180bb56b696d16635abd8dc235e0ee432abf25d|
-\end{itemize}
-\end{appendices}
+%% Change data from here
+%
+%% impl
+%\node [comment, below=0.25 of impl] (comment-impl) {- Valida anéis de ordens\\
+%- Transfere tokens para liquidação\\
+%- Emite Eventos};
+%
+%% nameregistry
+%\node [comment, below=0.25cm of nameregistry] {- Registra carteiras e relays};
+%
+%% protocol_interface
+%\node [comment, below=0.25 of protocol_interface](comment-interface) {- Define interfaces e eventos};
+%
+%% tokenregistry
+%\node [comment, below=0.25 of tokenregistry] {- Registra tokens ERC20/ERC223};
+%
+%% delegate
+%\node [comment, below=0.25 of delegate] {- Transfere tokens em nome dos usuários};
+%
+%% PUBLIC POLICIES
+%\node [comment, below=0.25 of multisig] {- Permite posse multi-assinada};
+%%%%%%%%%%%%%%%%%
+%
+%% Draw the links between forces
+%\path[->,thick] 
+%(comment-interface) edge (impl)
+%(nameregistry) edge (impl)
+%(tokenregistry) edge (impl)
+%(delegate) edge (comment-impl);
+%\end{tikzpicture} 
+%\caption{Contratos Inteligentes}
+%\label{fig:smartcontracts}
+%\end{figurehere}
+%\end{center}
+%\section{Implantação}
+%\subsection{Ethereum}
+%Os seguintes contratos inteligentes foram implantados na mainnet da Ethereum:
+%\begin{itemize}
+%\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
+%\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
+%\item TokenTransferDelegate: \verb|0x7b126ab811f278f288bf1d62d47334351dA20d1d|
+%\item NameRegistry: \verb|0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7|
+%\item LoopringProtocolImpl: \verb|0x0B48b747436f10c846696e889e66425e05CD740f|
+%\end{itemize}
+%\subsection{Qtum}
+%Os seguintes contratos inteligentes foram implantados na mainnet da Qtum:
+%\begin{itemize}
+%\item LRQ: \verb|2eb2a66afd4e465fb06d8b71f30fb1b93e18788d|
+%\item TokenRegistry: \verb|c89ea34360258917daf3655f8bec5550923509b3|
+%\item TokenTransferDelegate: \verb|60b3fa7f461664e4dafb621a36ac2722cc680f10|
+%\item NameRegistry: \verb|e26a27d92181069b25bc7283e03722f6ce7678bb|
+%\item LoopringProtocolImpl: \verb|5180bb56b696d16635abd8dc235e0ee432abf25d|
+%\end{itemize}
+%\end{appendices}
 \end{document}

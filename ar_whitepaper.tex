@@ -1073,7 +1073,7 @@ scale=1]
 \begin{otherlanguage}{arabic}
 نود أن نعرب عن امتناننا لمرشدينا ومستشارينا وللعديد من الناس في المجتمع الذين كانوا مرتاحين وسخيين بمعرفتهم. على وجه الخصوص ، نود أن   نشكر شو باي (من \textLR{ChinaLedger}) ؛ البروفيسور هايبين كان، اليكس تشنغ ، هونغفي دا ؛ يين كاو، شياو تشوان وو، تشن وانغ ،وى يو، نيان دوان، جون شياو، جيانغ تشيان، جيانجزو شيانغ، يبينج جوه، داهاي لي، كلفن لونج، هواشيا شيا، جون ما، و انسيفالو باث  لمراجعة وتقديم تعليقات حول هذا المشروع.
 \end{otherlanguage}
-\end{multicols}
+
 % ===============end chapter11
 
 % ===============biblog
@@ -1082,82 +1082,82 @@ scale=1]
 \bibliography{whitepaper}
 \bibliographystyle{plain}
 \end{otherlanguage}
-
+\end{multicols}
 \setcounter{page}{0}
 \pagenumbering{arabic}% resets `page` counter to 1
-\appendix
-\pretocmd{\chapter}{%
-  \clearpage
-  \pagenumbering{arabic}%
-  \renewcommand*{\thepage}{\thechapter\arabic{page}}%
-}{}{}
-
-\chapter{\textLR{Loopring}   على الاثريوم}
-
-\begin{center}
-\begin{figurehere}
-\centering
-\begin{tikzpicture}
-[node distance = 1cm, auto,font=\footnotesize,
-% STYLES
-every node/.style={node distance=3cm},
-% The comment style is used to describe the characteristics of each force
-comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
-% The force style is used to draw the forces' name
-force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
-% Draw forces
-\node [force] (impl) {\textRL{تطبيق بروتوكول $Loopring$}};
-\node [force, dashed, above of=impl] (protocol_interface) {\textRL{بروتوكول $Loopring$}};
-\node [force, left=1cm of impl] (nameregistry) {\textRL{سجل الاسماء}};
-\node [force, right=1cm of impl] (tokenregistry) {\textRL{سجل العملات الرمزية}};
-\node [force, below of=impl] (delegate) {\textRL{تفويض نقل العملات الرمزية}};
-\node [force, left=1cm of delegate] (multisig) {\textRL{متعدد التوقيع قابل للنقل}};
-%%%%%%%%%%%%%%%
-% Change data from here
-% impl
-\node [comment, below=0.05 of impl] (comment-impl) {- \textRL{يتحقق من صحة حلقات الطلب}\\
-- \textRL{ينقل العملات الرمزية للتسوية}\\
-- \textRL{يبعث الاحداث}};
-% nameregistry
-\node [comment, below=0.25cm of nameregistry]{- \textRL{يسجل المحافظ و المرحلات}};
-% protocol_interface
-\node [comment, below=0.25 of protocol_interface](comment-interface) {- \textRL{يعرف الواجهات و الاحداث}};
-% tokenregistry
-\node [comment, below=0.25 of tokenregistry] {- \textRL{تسجيل العملات الرمزية من نوع} $ERC20/ERC223$};
-% delegate
-\node [comment, below=0.25 of delegate] {- \textRL{ينقل العمل الرمزية نيابة عن المستخدمين}};
-% PUBLIC POLICIES
-\node [comment, text width=3cm, below=0.25 of multisig] {- \textRL{يمكن من الملكية المتعددة التوقيعات}};
+%\appendix
+%\pretocmd{\chapter}{%
+%  \clearpage
+%  \pagenumbering{arabic}%
+%  \renewcommand*{\thepage}{\thechapter\arabic{page}}%
+%}{}{}
+%
+%\chapter{\textLR{Loopring}   على الاثريوم}
+%
+%\begin{center}
+%\begin{figurehere}
+%\centering
+%\begin{tikzpicture}
+%[node distance = 1cm, auto,font=\footnotesize,
+%% STYLES
+%every node/.style={node distance=3cm},
+%% The comment style is used to describe the characteristics of each force
+%comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
+%% The force style is used to draw the forces' name
+%force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
+%% Draw forces
+%\node [force] (impl) {\textRL{تطبيق بروتوكول $Loopring$}};
+%\node [force, dashed, above of=impl] (protocol_interface) {\textRL{بروتوكول $Loopring$}};
+%\node [force, left=1cm of impl] (nameregistry) {\textRL{سجل الاسماء}};
+%\node [force, right=1cm of impl] (tokenregistry) {\textRL{سجل العملات الرمزية}};
+%\node [force, below of=impl] (delegate) {\textRL{تفويض نقل العملات الرمزية}};
+%\node [force, left=1cm of delegate] (multisig) {\textRL{متعدد التوقيع قابل للنقل}};
 %%%%%%%%%%%%%%%%
-% Draw the links between forces
-\path[->,thick] 
-(comment-interface) edge (impl)
-(nameregistry) edge (impl)
-(tokenregistry) edge (impl)
-(delegate) edge (comment-impl);
-\end{tikzpicture} 
-\caption{العقود الذكية}
-\label{fig:smartcontracts}
-\end{figurehere}
-\end{center}
-
-\chapter{التطبيق}
-\section{الايثيريوم}
-تم تطبيق العقود الذكية التالية على الشبكة الرئيسية ل ايثريوم:
-\begin{itemize}
-\item $LRC$: $0xEF68e7C694F40c8202821eDF525dE3782458639f$
-\item $TokenRegistry$: $0xa21c1f2AE7f721aE77b1204A4f0811c642638da9$
-\item $TokenTransferDelegate$: $0x7b126ab811f278f288bf1d62d47334351dA20d1d$
-\item $NameRegistry$: $0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7$
-\item $LoopringProtocolImpl$: $0x0B48b747436f10c846696e889e66425e05CD740f$
-\end{itemize}
-\section{كيوتم}
-تم تطبيق العقود الذكية التالية على الشبكة الرئيسية ل كيوتم:
-\begin{itemize}
-\item $LRQ$:  $2eb2a66afd4e465fb06d8b71f30fb1b93e18788d$
-\item $TokenRegistry$: $c89ea34360258917daf3655f8bec5550923509b3$
-\item $TokenTransferDelegate$: $60b3fa7f461664e4dafb621a36ac2722cc680f10$
-\item $NameRegistry$: $e26a27d92181069b25bc7283e03722f6ce7678bb$
-\item $LoopringProtocolImpl$: $5180bb56b696d16635abd8dc235e0ee432abf25d$
-\end{itemize}
+%% Change data from here
+%% impl
+%\node [comment, below=0.05 of impl] (comment-impl) {- \textRL{يتحقق من صحة حلقات الطلب}\\
+%- \textRL{ينقل العملات الرمزية للتسوية}\\
+%- \textRL{يبعث الاحداث}};
+%% nameregistry
+%\node [comment, below=0.25cm of nameregistry]{- \textRL{يسجل المحافظ و المرحلات}};
+%% protocol_interface
+%\node [comment, below=0.25 of protocol_interface](comment-interface) {- \textRL{يعرف الواجهات و الاحداث}};
+%% tokenregistry
+%\node [comment, below=0.25 of tokenregistry] {- \textRL{تسجيل العملات الرمزية من نوع} $ERC20/ERC223$};
+%% delegate
+%\node [comment, below=0.25 of delegate] {- \textRL{ينقل العمل الرمزية نيابة عن المستخدمين}};
+%% PUBLIC POLICIES
+%\node [comment, text width=3cm, below=0.25 of multisig] {- \textRL{يمكن من الملكية المتعددة التوقيعات}};
+%%%%%%%%%%%%%%%%%
+%% Draw the links between forces
+%\path[->,thick] 
+%(comment-interface) edge (impl)
+%(nameregistry) edge (impl)
+%(tokenregistry) edge (impl)
+%(delegate) edge (comment-impl);
+%\end{tikzpicture} 
+%\caption{العقود الذكية}
+%\label{fig:smartcontracts}
+%\end{figurehere}
+%\end{center}
+%
+%\chapter{التطبيق}
+%\section{الايثيريوم}
+%تم تطبيق العقود الذكية التالية على الشبكة الرئيسية ل ايثريوم:
+%\begin{itemize}
+%\item $LRC$: $0xEF68e7C694F40c8202821eDF525dE3782458639f$
+%\item $TokenRegistry$: $0xa21c1f2AE7f721aE77b1204A4f0811c642638da9$
+%\item $TokenTransferDelegate$: $0x7b126ab811f278f288bf1d62d47334351dA20d1d$
+%\item $NameRegistry$: $0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7$
+%\item $LoopringProtocolImpl$: $0x0B48b747436f10c846696e889e66425e05CD740f$
+%\end{itemize}
+%\section{كيوتم}
+%تم تطبيق العقود الذكية التالية على الشبكة الرئيسية ل كيوتم:
+%\begin{itemize}
+%\item $LRQ$:  $2eb2a66afd4e465fb06d8b71f30fb1b93e18788d$
+%\item $TokenRegistry$: $c89ea34360258917daf3655f8bec5550923509b3$
+%\item $TokenTransferDelegate$: $60b3fa7f461664e4dafb621a36ac2722cc680f10$
+%\item $NameRegistry$: $e26a27d92181069b25bc7283e03722f6ce7678bb$
+%\item $LoopringProtocolImpl$: $5180bb56b696d16635abd8dc235e0ee432abf25d$
+%\end{itemize}
 \end{document}
