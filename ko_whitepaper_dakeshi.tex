@@ -920,7 +920,7 @@ submitRing 트랜잭션이 확정되지 않았고 아직 보류 중인 트랜잭
 
 	\item \verb|r|, \verb|v|, \verb|s|, \verb|authKey|를 제외한 주문에 있는 모든 필드로 주문의 해시를 계산하고, \verb|owner|의 개인키(\verb|authKey|가 아님)를 사용해 해시에 서명합니다.
 
-	\item 지갑은 링-채굴을 위해 주문을 \verb|authKey|와 함께 relay에게 보낼 것입니다. 링-채굴자는 \verb|authKey|와 \verb|authAddr| 이 정확하게 일치하는 페어인지, \verb|owner| 주소와 관련해 주문의 서명이 유효한 지 검증할 것입니다.
+	\item 지갑은 링-채굴을 위해 주문을 \verb|authKey|와 함께 relay에게 보낼 것입니다. 링-채굴자는 \verb|authKey|와 \verb|authAddr| 이 정확하게 일치하는 페어인지, \verb|owner| 주소와 관련해 주문의 서명이 유효한지 검증할 것입니다.
 
 	\item 주문-링이 식별되면, 링-채굴자는 각 주문의 \verb|authKey|를 사용해 링의 해시와 모든 채굴 관련 매개변수에 서명할 것입니다. 주문-링에 $n$ 개 주문이 포함되어 있다면, $n$ 개의 \verb|authKey|에 의해 $n$ 개의 서명이 생성될 것입니다. 우리는 이 서명들을 \verb|authSignature|s라고 부릅니다. 링-채굴자는 \verb|minerAddress|의 개인 키를 사용해 모든 채굴 관련 매개변수와 링 해시에 서명해야 할 수도 있습니다.
  
