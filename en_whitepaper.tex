@@ -17,6 +17,9 @@
 \usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{etoolbox}
+
+
 \usepackage[a4paper, width=186mm, top=18mm, bottom=18mm, includeheadfoot]{geometry}
 %\usepackage[a4paper, width=140mm, top=18mm, bottom=22mm, includeheadfoot]{geometry}
 \usepackage{booktabs}
@@ -44,7 +47,8 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{proof}{Proof} [section]
 
-
+\AtBeginEnvironment{quote}{\singlespace\vspace{-\topsep}\small}
+\AtEndEnvironment{quote}{\vspace{-\topsep}\endsinglespace}
 
 \usepackage[toc, page, title, titletoc, header]{appendix}
 \usepackage{marginnote}
@@ -1033,11 +1037,7 @@ We would like to express our gratitude to our mentors, advisers and to the many 
 
 
 
-\bibliography{whitepaper}
-\bibliographystyle{unsrt}
 
-
-\pagebreak
 \begin{appendices}
 
 \section{New Fee Model in Loopring 2.0}
@@ -1056,7 +1056,7 @@ Open financial infrastructure is in its infancy, and what was considered best pr
 We knew we wanted to:
 
 \begin{itemize}
-	\item Make fee payment more flexible: remove the friction of requiring a specific fee-payment token.
+	\item Make fee payment more flexible: remove the friction of \textbf{requiring} a specific fee-payment token.
 	\item Ensure the LRC token is coveted and provides real utility to the network.
 	\item Remain rent-free, with all benefits remaining in-protocol, accruing to every participant.
 \end{itemize}
@@ -1064,9 +1064,9 @@ We knew we wanted to:
 We realize that while incentives are the most powerful force to allow rational actors to organize themselves, mechanisms which optimize for the desired network behavours are valuable. 
 
 \subsection{Introducing the “LRC Burn Rate”}
-With this in mind, we have introduced a fee element, LRC burn rate (or burn rate). Wallets and ring-miners who earn fees by fulfilling roles on the Loopring protocol will have a portion of their fees converted into LRC (if not LRC already) and burned. 
+With this in mind, we have introduced a fee element, \textbf{LRC burn rate} (or \textit{burn rate}). \textbf{Wallets and ring-miners who earn fees by fulfilling roles on the Loopring protocol will have a portion of their fees converted into LRC (if not LRC already) and burned}. 
 
-In the example below, the user pays for their trading fees using BNB. It does not matter if the trade actually involves BNB or not. Let’s assume the protocol-defined LRC burn rate for the BNB token is 20\%, and the fee for the transaction is 100BNB. At settlement, the trader pays 100BNB and the wallet and relay earn 100*(1–20\%)=80BNB, with the 20BNB being sent to a smart contract which buys and burns LRC. 
+In the example below, the user pays for their trading fees using BNB. It does not matter if the trade actually involves BNB or not. Let’s assume the protocol-defined LRC burn rate for the BNB token is 20\%, and the fee for the transaction is 100BNB. At settlement, the trader pays 100BNB and the wallet and relay earn 100*(1–20\%)=80BNB, \textbf{with the 20BNB being sent to a smart contract which buys and burns LRC.} 
 
 
 \begin{center}
@@ -1099,9 +1099,9 @@ Now, a user can pay fees in any token, but there will be preferable treatment, a
 The preferable treatment is for the fee-earning participants: wallets and relays; the fee to the trader is the same. However, our reasonable assumption is that wallets and relays will pass-upwards the fee (dis)savings, and calculate different fees for payment in different tokens. 
 
 \subsection{Other Projects Burning LRC}
-We want other protocols and projects to be able to take advantage of the fee model. As such, it is possible for a third-party project to burn a certain amount of LRC to knock down the burn rates applied to their token when users pay fees in it. The exact burn rate schedule is TBD, and again, will ultimately be configurable.
+We want other protocols and projects to be able to take advantage of the fee model. As such, it is possible for \textbf{a third-party project to burn a certain amount of LRC to knock down the burn rates applied to their token when users pay fees in it.} The exact burn rate schedule is TBD, and again, will ultimately be configurable.
 
-If you want to lower the rate of a certain token, such as GTO, to the same third tier burn rate as WETH for 24 months, you may need to burn 1\% of the total LRC supply (currently equivalent to \$550,000 USD); if you want to lower the burn rate to the first tier — LRC’s burn rate —  for 24 months, it may be necessary to burn 1.5\% of the total LRC. As more LRC are burned, the total LRC supply will decrease, and the number of LRC that need to be burned to switch tiers will decrease accordingly.
+If you want to lower the rate of a certain token, such as GTO, to the same third tier burn rate as WETH for 24 months, you may need to burn 1\% of the total LRC supply (currently equivalent to \$550,000 USD); if you want to lower the burn rate to the first tier — LRC’s burn rate —  for 24 months, it may be necessary to burn 1.5\% of the total LRC. \textbf{As more LRC are burned, the total LRC supply will decrease, and the number of LRC that need to be burned to switch tiers will decrease accordingly.}
 
 Lowering the burn rate is particularly appealing for other decentralized exchanges that use their own platform payment tokens:
 
@@ -1113,12 +1113,11 @@ Lowering the burn rate is particularly appealing for other decentralized exchang
 
 
 \subsection{P2P vs ‘Normal’ Orders}
-In 2.0, we distinguish between normal orders — as seen in all the examples above — and P2P orders. 
+In 2.0, we distinguish between \textbf{normal orders} — as seen in all the examples above — and P2P orders. 
 
 
-\begin{definition}[P2P Order]If the order’s tokenSFeePercentageor tokenBFeePercentageis greater than zero, the order is a P2P order. Other fee parameters in the P2P order will be ignored by the protocol.
+\begin{definition}[P2P Order]If the order’s \\ \verb|tokenSFeePercentageor| or \verb|tokenBFeePercentage| is greater than zero, the order is a P2P order. Other fee parameters in the P2P order will be ignored by the protocol.
 \end{definition}
-
 
 
 
@@ -1139,9 +1138,9 @@ P2P Order Parameters:
 
 A ‘normal’ order is what most of us are used to: we submit an order to a DEX and leave it to them to match and settle it on the Ethereum blockchain. On the backend, a ring-miner is the one finding the match and submitting it, and that is why you pay them a fee in the first place.
 
-P2P orders do not pay matching fees, because they do not want to be matched by a third party (ring-miner), but want to match it themselves with a counter-party. Thus, the fees for P2P orders are paid only to the wallet. 
+\textbf{P2P orders do not pay matching fees}, because they do not want to be matched by a third party (ring-miner), but want to match it themselves with a counter-party. Thus, \textbf{the fees for P2P orders are paid only to the wallet}. 
 
-However, the wallet here is a broader concept, including any tools that can help you generate orders. As a fee, the wallet can obtain a percentage of the purchase token (tokenB) and the sell token (tokenS) from a P2P order. This percentage is set by the wallet, approved by the user, and is not provided by the protocol itself.
+However, the wallet here is a broader concept, including any tools that can help you generate orders. As a fee, the wallet can obtain a percentage of the purchase token (\verb|tokenB|) and the sell token (\verb|tokenS|) from a P2P order. This percentage is set by the wallet, approved by the user, and is not provided by the protocol itself.
 
 Let’s assume that both fees set by a wallet are 0\%. In the example below, two P2P orders are swapped between 100DAI and 400GTO:
 
@@ -1153,7 +1152,7 @@ Let’s assume that both fees set by a wallet are 0\%. In the example below, two
 \end{figurehere}
 \end{center}
 
-However, if the wallets corresponding to the two P2P orders are set to charge different tokenSFeePercentageor tokenBFeePercentage, the actual fee and transaction calculation is more complicated:
+However, if the wallets corresponding to the two P2P orders are set to charge different \verb|tokenSFeePercentage| or \verb|tokenBFeePercentage|, the actual fee and transaction calculation is more complicated:
 
 \begin{center}
 \begin{figurehere}
@@ -1181,7 +1180,7 @@ In the ICO example, the wallet/ICO platform can charge the project fees for this
 Without the new P2P model in 2.0, these scenarios cannot be achieved.
 
 \subsection{P2P Fee Burn Rate}
-For P2P orders, the protocol specifies different burn rates. Assuming that the burn rates for DAI and GTO are 10\% and 20\%, respectively, the transaction calculations need to be adjusted as follows:
+\textbf{For P2P orders, the protocol specifies different burn rates.} Assuming that the burn rates for DAI and GTO are 10\% and 20\%, respectively, the transaction calculations need to be adjusted as follows:
 
 
 \begin{center}
@@ -1195,36 +1194,43 @@ For P2P orders, the protocol specifies different burn rates. Assuming that the b
 Burn Contract Specifications
 With the new fee model, a small piece of every transaction will be directed to this smart contract and ultimately reduce LRC supply. As such, more Loopring network activity results in more burn, and in LRC holders owning a larger share of the token supply. So now, we have an economy where LRC holders:
 \begin{enumerate}
-	\item Pay the lowest fees for their transactions,
-	\item Benefit from all network-wide activity.
+	\item \textbf{Pay the lowest fees for their transactions.}
+	\item \textbf{Benefit from all network-wide activity.}
 \end{enumerate}
 
 You may have a few questions:
 
-Who burns the LRC tokens?
+
+(Q1) \textbf{\textit{Who burns the LRC tokens?}}
+
 
 Given that the Loopring Foundation is a non-profit and ultimately wants to take a backseat as the protocol flourishes, the burning smart contract (aka holding smart contract) will be coded to allow any user (willing to pay the small gas cost to trigger the function) to burn the tokens.
 
-What happens to the non-LRC (WETH, BNB, etc) that are sent to the burning smart contract?
 
-Like the burn rates, this will ultimately be configurable. LRC holders may be inclined to send the tokens to some external address to fund a community project, but for now, they will be used to buy and burn more LRC. 
+
+(Q2) \textbf{\textit{What happens to the non-LRC (WETH, BNB, etc) that are sent to the burning smart contract?}}
+
+Like the burn rates, this will ultimately be configurable. LRC holders may be inclined to send the tokens to some external address to fund a community project, but for now, they will be used to \textbf{buy and burn more LRC}. 
+
 The means by which non-LRC tokens will be sold for LRC is quite an interesting topic, and highlights the spirit of open financial infrastructure. We will allow anyone (willing to pay the gas cost) to trigger functionality in the smart contract that queries other DEXs — specifically Dutch auction models — for any token’s price vs LRC, and submits the tokens to be sold on the open market. This allows the burning contract to trustlessly sell our non-LRC tokens at discrete times, all at once.
 
 The purchased LRC will then be burned. This has the effect of:
 
-\begin{enumerate}
-	\item Increasing LRC demand,
-	\item Reducing LRC supply.
-\end{enumerate}
+\begin{itemize}
+	\item \textbf{Increasing LRC demand.}
+	\item \textbf{Reducing LRC supply.}
+\end{itemize}
 
 \subsection{LRC Lockup for Fee Rebates}
-Loopring 2.0 also allows LRC token holders to lock up LRC in a smart contract in exchange for a percentage of fees that would have otherwise been burned — effectively, a rebate. This would apply for each and every order during the lockup period.
+Loopring 2.0 also allows LRC token holders to lock up LRC in a smart contract in exchange for a percentage of fees that would have otherwise been burned — effectively, a \textbf{rebate}. This would apply for each and every order during the lockup period.
 
-For example, an order has a total fee of 10 AnyToken, and 4 AnyToken (40\%) is to be burned. Assuming the fee payer locked up 1 million LRC and has a 50\% rebate rate, he/she will ended up paying only 8 AnyToken, 2 of which will be burned. The rebate comes from the fee component that is to be burned, not the wallet or relay income. Please also note that a wallet/relay can also lockup LRC for rebates, but that doesn’t apply here.
+For example, an order has a total fee of 10 AnyToken, and 4 AnyToken (40\%) is to be burned. Assuming the fee payer locked up 1 million LRC and has a 50\% \textbf{rebate rate}, he/she will ended up paying only 8 AnyToken, 2 of which will be burned. \textbf{The rebate comes from the fee component that is to be burned, not the wallet or relay income}. Please also note that a wallet/relay can also lockup LRC for rebates, but that doesn’t apply here.
 
-A rebate rate of 100\% ensures all orders are burn-free. The Fee-Rebate feature will be very helpful for high frequency traders.
+A rebate rate of 100\% ensures all orders are \textbf{burn-free}. The Fee-Rebate feature will be very helpful for high frequency traders.
+
+
 \subsection{Incentivize Market Makers}
-Market making is not a protocol level consideration, but a business decision made by a ring-miner on their own. It is up to them to incentivize market makers by waiving fees for orders, so we introduce the parameter waiveFeePercentage.
+Market making is not a protocol level consideration, but a business decision made by a ring-miner on their own. It is up to them to \textbf{incentivize market makers by waiving fees} for orders, so we introduce the parameter \verb|waiveFeePercentage|.
 
 If this parameter is positive, say, 50\%, then if the original fee paid to the ring-miner is 80BNB, it now becomes 40BNB, before the burn. The waived fee is applied to the ring-miner’s part of the fee, but not the wallet’s.
 
@@ -1236,7 +1242,7 @@ If this parameter is positive, say, 50\%, then if the original fee paid to the r
 \end{figurehere}
 \end{center}
 
-This waiveFeePercentage parameter can also be negative. If it were -50\%, the order does not pay any fees to the relayer, but can also get 50\% of the fee other orders pay in the ring. For example, in the below diagram, the ring-miner will pay Alice half of the 40 LRC fee paid by Bob. Alice’s rebates are also subject to the corresponding burn.
+This \verb|waiveFeePercentage| parameter can also be negative. If it were -50\%, the order does not pay any fees to the relayer, but can also get 50\% of the fee other orders pay in the ring. For example, in the below diagram, the ring-miner will pay Alice half of the 40 LRC fee paid by Bob. Alice’s rebates are also subject to the corresponding burn.
 
 \begin{center}
 \begin{figurehere}
@@ -1251,12 +1257,15 @@ With this functionality, the relay can choose to exempt some or all of the fees 
 \subsection{Decentralized Governance}
 Please note that in addition to its utility, we’ve always planned on giving LRC holders governance rights. While this is easy to say, and just about every project can throw that in as a catchall, well-defined rights are truly important to us as the Loopring Foundation will cede control. However, in isolation, we find a pure-governance token to be lacking, and are excited to reveal our 2.0 model which supports further utility and value capture. 
 
-With that said, there is now more to govern within the protocol itself. Important future governance issues of the Loopring protocol will mainly relate to the various burn rate parameters, and which ERC20s should be placed in certain tiers. 
+With that said, there is now more to govern within the protocol itself. \textbf{Important future governance issues of the Loopring protocol will mainly relate to the various burn rate parameters, and which ERC20s should be placed in certain tiers.} 
 
 Decentralized governance is incredibly difficult and nuanced, and faces risks like plutocracies and voter apathy. We are currently exploring this aspect and hope to provide an upgraded version in the first half of 2019, allowing community parameter proposal and voting.
 
 \end{appendices}
 
-\end{multicols}
+\bibliography{whitepaper}
+\bibliographystyle{unsrt}
 
+
+\end{multicols}
 \end{document}
