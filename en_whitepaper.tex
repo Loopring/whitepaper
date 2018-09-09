@@ -1101,7 +1101,7 @@ The preferable treatment is for the fee-earning participants: wallets and relays
 \subsection{Other Projects Burning LRC}
 We want other protocols and projects to be able to take advantage of the fee model. As such, it is possible for a third-party project to burn a certain amount of LRC to knock down the burn rates applied to their token when users pay fees in it. The exact burn rate schedule is TBD, and again, will ultimately be configurable.
 
-If you want to lower the rate of a certain token, such as GTO, to the same third tier burn rate as WETH for 24 months, you may need to burn 1% of the total LRC supply (currently equivalent to $550,000 USD); if you want to lower the burn rate to the first tier — LRC’s burn rate —  for 24 months, it may be necessary to burn 1.5% of the total LRC. As more LRC are burned, the total LRC supply will decrease, and the number of LRC that need to be burned to switch tiers will decrease accordingly.
+If you want to lower the rate of a certain token, such as GTO, to the same third tier burn rate as WETH for 24 months, you may need to burn 1\% of the total LRC supply (currently equivalent to \$550,000 USD); if you want to lower the burn rate to the first tier — LRC’s burn rate —  for 24 months, it may be necessary to burn 1.5\% of the total LRC. As more LRC are burned, the total LRC supply will decrease, and the number of LRC that need to be burned to switch tiers will decrease accordingly.
 
 Lowering the burn rate is particularly appealing for other decentralized exchanges that use their own platform payment tokens:
 
@@ -1115,22 +1115,26 @@ Lowering the burn rate is particularly appealing for other decentralized exchang
 \subsection{P2P vs ‘Normal’ Orders}
 In 2.0, we distinguish between normal orders — as seen in all the examples above — and P2P orders. 
 
-<DEFINITION>
-P2P order: If the order’s tokenSFeePercentageor tokenBFeePercentageis greater than zero, the order is a P2P order. Other fee parameters in the P2P order will be ignored by the protocol.
+
+\begin{definition}[P2P Order]If the order’s tokenSFeePercentageor tokenBFeePercentageis greater than zero, the order is a P2P order. Other fee parameters in the P2P order will be ignored by the protocol.
+\end{definition}
+
+
+
 
 Normal Order Parameters:
 
 \begin{itemize}
-	\item address feeToken: optional and defaults to LRC token address if not specified. This is the type of ERC20 token to be paid to the miner as matching fees.
-	\item unit feeAmount: optional and defaults to 0. This is the amount of feeToken to be paid. This number should be calculated by the wallet software off-chain.
-	\item uint16 feePercentage: optional and defaults to 0. This is the percentage of tokenB (token that user is buying) to be paid as matching fees if the order does not have enough feeToken to pay. This parameter should also be supplied by the wallet.
-	\item uint16 waiveFeePercentage: optional and defaults to 0. If this number is positive, the miner will waive a waiveFeePercentage\% percentage of the fees before the burn; if this number is negative, the miner will reward-waiveFeePercentage\%of its total fee after the burn to the order — the reward is also subject to burn.
+	\item \verb|address feeToken|: optional and defaults to LRC token address if not specified. This is the type of ERC20 token to be paid to the miner as matching fees.
+	\item \verb|unit feeAmount|: optional and defaults to 0. This is the amount of feeToken to be paid. This number should be calculated by the wallet software off-chain.
+	\item \verb|uint16 feePercentage|: optional and defaults to 0. This is the percentage of tokenB (token that user is buying) to be paid as matching fees if the order does not have enough feeToken to pay. This parameter should also be supplied by the wallet.
+	\item \verb|uint16 waiveFeePercentage|: optional and defaults to 0. If this number is positive, the miner will waive a waiveFeePercentage\% percentage of the fees before the burn; if this number is negative, the miner will reward-waiveFeePercentage\%of its total fee after the burn to the order — the reward is also subject to burn.
 \end{itemize}
 
 P2P Order Parameters:
 \begin{itemize}
-	\item tokenSFeePercentage: optional and defaults to 0. The percentage of tokenS to charge by the wallet.
-	\item tokenBFeePercentage: optional and defaults to 0. The percentage of tokenB to charge by the wallet.
+	\item \verb|uint16 tokenSFeePercentage|: optional and defaults to 0. The percentage of tokenS to charge by the wallet.
+	\item \verb|uint16 tokenBFeePercentage|: optional and defaults to 0. The percentage of tokenB to charge by the wallet.
 \end{itemize}
 
 A ‘normal’ order is what most of us are used to: we submit an order to a DEX and leave it to them to match and settle it on the Ethereum blockchain. On the backend, a ring-miner is the one finding the match and submitting it, and that is why you pay them a fee in the first place.
