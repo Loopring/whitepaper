@@ -17,6 +17,9 @@
 \usepackage{subfig}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{etoolbox}
+
+
 \usepackage[a4paper, width=186mm, top=18mm, bottom=18mm, includeheadfoot]{geometry}
 %\usepackage[a4paper, width=140mm, top=18mm, bottom=22mm, includeheadfoot]{geometry}
 \usepackage{booktabs}
@@ -44,7 +47,8 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{proof}{Proof} [section]
 
-
+\AtBeginEnvironment{quote}{\singlespace\vspace{-\topsep}\small}
+\AtEndEnvironment{quote}{\vspace{-\topsep}\endsinglespace}
 
 \usepackage[toc, page, title, titletoc, header]{appendix}
 \usepackage{marginnote}
@@ -64,6 +68,7 @@
 %\usepackage[pages=some, placement=top]{background}
 \usepackage{eso-pic}
 \usepackage[final]{pdfpages}
+\graphicspath{ {./images/} }
 
 %\includepdf[pages=1]{cover}
 \hyphenpenalty=750
@@ -1031,97 +1036,236 @@ Protocol benefits include:
 We would like to express our gratitude to our mentors, advisers and to the many people in the community that have been so welcoming and generous with their knowledge. In particular, we would like to thank Shuo Bai (from ChinaLedger); Professor Haibin Kan; Alex Cheng, Hongfei Da; Yin Cao; Xiaochuan Wu; Zhen Wang, Wei Yu, Nian Duan, Jun Xiao, Jiang Qian, Jiangxu Xiang, Yipeng Guo, Dahai Li, Kelvin Long, Huaxia Xia, Jun Ma, and Encephalo Path for reviewing and providing feedback on this project. 
 
 
+
+
+\begin{appendices}
+
+\section{New Fee Model in Loopring 2.0}
+
+One of the most exciting developments of 2.0 has been reimagining the protocol fee model, the role of our native token, LRC, within it, and how we can ensure token holders capture the value of the Loopring network.
+
+\subsection{Why We’re Open to Change}
+
+Utility tokens that act as a medium of exchange within a particular ecosystem have been popular in terms of projects issuing them, but, more recently, less popular in terms of expected value capture and actual usefulness.
+
+Beyond the questionable value accretion for these types of utility tokens, the imposition of a specific token as the means of payment creates significant friction. dApps, including DEXs, are currently UX un-friendly enough without requiring users pay with an esoteric and otherwise non-demanded token. Abstracting away token transfer behind the scenes helps, but is still only a half-solution.
+
+Open financial infrastructure is in its infancy, and what was considered best practice last year will certainly change. Projects, protocols, and builders must remain adaptive and open to tweak their token dynamics, lest they stubbornly cling to suboptimal models.
+
+\subsection{Objectives}
+We knew we wanted to:
+
+\begin{itemize}
+	\item Make fee payment more flexible: remove the friction of \textbf{requiring} a specific fee-payment token.
+	\item Ensure the LRC token is coveted and provides real utility to the network.
+	\item Remain rent-free, with all benefits remaining in-protocol, accruing to every participant.
+\end{itemize}
+
+We realize that while incentives are the most powerful force to allow rational actors to organize themselves, mechanisms which optimize for the desired network behavours are valuable. 
+
+\subsection{Introducing the “LRC Burn Rate”}
+With this in mind, we have introduced a fee element, \textbf{LRC burn rate} (or \textit{burn rate}). \textbf{Wallets and ring-miners who earn fees by fulfilling roles on the Loopring protocol will have a portion of their fees converted into LRC (if not LRC already) and burned}. 
+
+In the example below, the user pays for their trading fees using BNB. It does not matter if the trade actually involves BNB or not. Let’s assume the protocol-defined LRC burn rate for the BNB token is 20\%, and the fee for the transaction is 100BNB. At settlement, the trader pays 100BNB and the wallet and relay earn 100*(1–20\%)=80BNB, \textbf{with the 20BNB being sent to a smart contract which buys and burns LRC.} 
+
+
+\begin{center}
+\begin{figurehere}
+\centering
+
+\includegraphics[width=9cm]{1.png}
+
+\caption{Fee model in Loopring protocol 2.0}
+\end{figurehere}
+\end{center}
+
+
+\subsection{Burn Rate Settings}
+If the above fee were to be paid in LRC instead of BNB, for example, the burn rate would be lower, such as 5\%, allowing the wallet and ring-miner to keep more of their earned fees. The burn rate associated with different ERC20 tokens will be configurable by LRC token holders governing the protocol. For now, we propose the following:
+
+\begin{center}
+\begin{figurehere}
+\centering
+
+\includegraphics[width=9cm]{2.png}
+
+\caption{Default settings, but will be configurable.}
+\end{figurehere}
+\end{center}
+
+
+Now, a user can pay fees in any token, but there will be preferable treatment, and thus lower cost, to pay fees in LRC. 
+
+The preferable treatment is for the fee-earning participants: wallets and relays; the fee to the trader is the same. However, our reasonable assumption is that wallets and relays will pass-upwards the fee (dis)savings, and calculate different fees for payment in different tokens. 
+
+\subsection{Other Projects Burning LRC}
+We want other protocols and projects to be able to take advantage of the fee model. As such, it is possible for \textbf{a third-party project to burn a certain amount of LRC to knock down the burn rates applied to their token when users pay fees in it.} The exact burn rate schedule is TBD, and again, will ultimately be configurable.
+
+If you want to lower the rate of a certain token, such as GTO, to the same third tier burn rate as WETH for 24 months, you may need to burn 1\% of the total LRC supply (currently equivalent to \$550,000 USD); if you want to lower the burn rate to the first tier — LRC’s burn rate —  for 24 months, it may be necessary to burn 1.5\% of the total LRC. \textbf{As more LRC are burned, the total LRC supply will decrease, and the number of LRC that need to be burned to switch tiers will decrease accordingly.}
+
+Lowering the burn rate is particularly appealing for other decentralized exchanges that use their own platform payment tokens:
+
+\begin{enumerate}
+	\item The cost of burning LRC to obtain a lower rate is much less than the cost of developing a new DEX/protocol, or bootstrapping liquidity. 
+	\item This mechanism actually gives the respective DEX token increased utility and value. 
+	\item After the third-party DEX platform token is enabled for a lower burn rate, using that token to pay fees is no different to the user than using LRC, which should enhance the competitiveness of the platform.
+\end{enumerate}
+
+
+\subsection{P2P vs ‘Normal’ Orders}
+In 2.0, we distinguish between \textbf{normal orders} — as seen in all the examples above — and P2P orders. 
+
+
+\begin{definition}[P2P Order]If the order’s \\ \verb|tokenSFeePercentageor| or \verb|tokenBFeePercentage| is greater than zero, the order is a P2P order. Other fee parameters in the P2P order will be ignored by the protocol.
+\end{definition}
+
+
+
+Normal Order Parameters:
+
+\begin{itemize}
+	\item \verb|address feeToken|: optional and defaults to LRC token address if not specified. This is the type of ERC20 token to be paid to the miner as matching fees.
+	\item \verb|unit feeAmount|: optional and defaults to 0. This is the amount of feeToken to be paid. This number should be calculated by the wallet software off-chain.
+	\item \verb|uint16 feePercentage|: optional and defaults to 0. This is the percentage of tokenB (token that user is buying) to be paid as matching fees if the order does not have enough feeToken to pay. This parameter should also be supplied by the wallet.
+	\item \verb|uint16 waiveFeePercentage|: optional and defaults to 0. If this number is positive, the miner will waive a waiveFeePercentage\% percentage of the fees before the burn; if this number is negative, the miner will reward-waiveFeePercentage\%of its total fee after the burn to the order — the reward is also subject to burn.
+\end{itemize}
+
+P2P Order Parameters:
+\begin{itemize}
+	\item \verb|uint16 tokenSFeePercentage|: optional and defaults to 0. The percentage of tokenS to charge by the wallet.
+	\item \verb|uint16 tokenBFeePercentage|: optional and defaults to 0. The percentage of tokenB to charge by the wallet.
+\end{itemize}
+
+A ‘normal’ order is what most of us are used to: we submit an order to a DEX and leave it to them to match and settle it on the Ethereum blockchain. On the backend, a ring-miner is the one finding the match and submitting it, and that is why you pay them a fee in the first place.
+
+\textbf{P2P orders do not pay matching fees}, because they do not want to be matched by a third party (ring-miner), but want to match it themselves with a counter-party. Thus, \textbf{the fees for P2P orders are paid only to the wallet}. 
+
+However, the wallet here is a broader concept, including any tools that can help you generate orders. As a fee, the wallet can obtain a percentage of the purchase token (\verb|tokenB|) and the sell token (\verb|tokenS|) from a P2P order. This percentage is set by the wallet, approved by the user, and is not provided by the protocol itself.
+
+Let’s assume that both fees set by a wallet are 0\%. In the example below, two P2P orders are swapped between 100DAI and 400GTO:
+
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{3.png}
+\caption{Two orders of zero-fee P2P orders}
+\end{figurehere}
+\end{center}
+
+However, if the wallets corresponding to the two P2P orders are set to charge different \verb|tokenSFeePercentage| or \verb|tokenBFeePercentage|, the actual fee and transaction calculation is more complicated:
+
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{4.png}
+\caption{Two orders consisting of P2P orders with commissions}
+\end{figurehere}
+\end{center}
+
+There are many instances in the real world that will make use of P2P orders and do not require third-party matching:
+
+\begin{enumerate}
+	\item You create an order for 100 AnyTokens for 1 WETH on your Loopring-enabled wallet, and show the QR code to your friend. She scans it from her wallet, signs it, and submits it directly to the Ethereum blockchain in one tap, resulting in a trustless token swap. Your friend was the ring-miner here, because she submitted the transaction.
+	\item You’re launching your ICO and plan to distribute it by submitting sell orders for your NewToken on a Loopring-built DEX. You send this order out in emails to your subscribers, or put the QR code printed on the back of your team’s t-shirts. Any interested buyer can fill these orders with a Loopring-enabled wallet, and act as ring-miner by submitting it as a transaction to the Ethereum blockchain.
+\end{enumerate}
+
+In the ICO example, the wallet/ICO platform can charge the project fees for this service in a few different ways: 
+
+\begin{enumerate}
+	\item Use NewTokens as income. For example, for every 100 NewTokens sold, 5 NewTokens are charged from the project side as a handling fee (the project party distributes a total of 105 tokens, the buyer buys 100 tokens); or every 100 NewTokens sold, 5 are charged from the buyer (the project party distributes a total of 100 tokens and the buyer receives 95 tokens).
+	\item Use ETH as income. For example, if there are 100 ETH received from ICO buyers, 7 ETH will be charged from the project side (the project party will get 93 ETH); or the 7 ETH will be charged from the user (the user actually needs to pay 107 ETH).
+	\item Any combination of the above four different methods.
+\end{enumerate}
+
+Without the new P2P model in 2.0, these scenarios cannot be achieved.
+
+\subsection{P2P Fee Burn Rate}
+\textbf{For P2P orders, the protocol specifies different burn rates.} Assuming that the burn rates for DAI and GTO are 10\% and 20\%, respectively, the transaction calculations need to be adjusted as follows:
+
+
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{5.png}
+\caption{P2P fee burn rates. See the table in the 'Burn Rate Setting' section above for default P2P burn rates.}
+\end{figurehere}
+\end{center}
+
+Burn Contract Specifications
+With the new fee model, a small piece of every transaction will be directed to this smart contract and ultimately reduce LRC supply. As such, more Loopring network activity results in more burn, and in LRC holders owning a larger share of the token supply. So now, we have an economy where LRC holders:
+\begin{enumerate}
+	\item \textbf{Pay the lowest fees for their transactions.}
+	\item \textbf{Benefit from all network-wide activity.}
+\end{enumerate}
+
+You may have a few questions:
+
+
+(Q1) \textbf{\textit{Who burns the LRC tokens?}}
+
+
+Given that the Loopring Foundation is a non-profit and ultimately wants to take a backseat as the protocol flourishes, the burning smart contract (aka holding smart contract) will be coded to allow any user (willing to pay the small gas cost to trigger the function) to burn the tokens.
+
+
+
+(Q2) \textbf{\textit{What happens to the non-LRC (WETH, BNB, etc) that are sent to the burning smart contract?}}
+
+Like the burn rates, this will ultimately be configurable. LRC holders may be inclined to send the tokens to some external address to fund a community project, but for now, they will be used to \textbf{buy and burn more LRC}. 
+
+The means by which non-LRC tokens will be sold for LRC is quite an interesting topic, and highlights the spirit of open financial infrastructure. We will allow anyone (willing to pay the gas cost) to trigger functionality in the smart contract that queries other DEXs — specifically Dutch auction models — for any token’s price vs LRC, and submits the tokens to be sold on the open market. This allows the burning contract to trustlessly sell our non-LRC tokens at discrete times, all at once.
+
+The purchased LRC will then be burned. This has the effect of:
+
+\begin{itemize}
+	\item \textbf{Increasing LRC demand.}
+	\item \textbf{Reducing LRC supply.}
+\end{itemize}
+
+\subsection{LRC Lockup for Fee Rebates}
+Loopring 2.0 also allows LRC token holders to lock up LRC in a smart contract in exchange for a percentage of fees that would have otherwise been burned — effectively, a \textbf{rebate}. This would apply for each and every order during the lockup period.
+
+For example, an order has a total fee of 10 AnyToken, and 4 AnyToken (40\%) is to be burned. Assuming the fee payer locked up 1 million LRC and has a 50\% \textbf{rebate rate}, he/she will ended up paying only 8 AnyToken, 2 of which will be burned. \textbf{The rebate comes from the fee component that is to be burned, not the wallet or relay income}. Please also note that a wallet/relay can also lockup LRC for rebates, but that doesn’t apply here.
+
+A rebate rate of 100\% ensures all orders are \textbf{burn-free}. The Fee-Rebate feature will be very helpful for high frequency traders.
+
+
+\subsection{Incentivize Market Makers}
+Market making is not a protocol level consideration, but a business decision made by a ring-miner on their own. It is up to them to \textbf{incentivize market makers by waiving fees} for orders, so we introduce the parameter \verb|waiveFeePercentage|.
+
+If this parameter is positive, say, 50\%, then if the original fee paid to the ring-miner is 80BNB, it now becomes 40BNB, before the burn. The waived fee is applied to the ring-miner’s part of the fee, but not the wallet’s.
+
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{6.png}
+\caption{Waiving 50\% of fee for Market Maker Alice}
+\end{figurehere}
+\end{center}
+
+This \verb|waiveFeePercentage| parameter can also be negative. If it were -50\%, the order does not pay any fees to the relayer, but can also get 50\% of the fee other orders pay in the ring. For example, in the below diagram, the ring-miner will pay Alice half of the 40 LRC fee paid by Bob. Alice’s rebates are also subject to the corresponding burn.
+
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{7.png}
+\caption{Giving a -50\% fee rebate to Market Maker Alice}
+\end{figurehere}
+\end{center}
+
+With this functionality, the relay can choose to exempt some or all of the fees of a market maker’s order, and even pay part of the fees earned on other orders. Market makers will be incentivized to provide liquidity to generous and prosperous ring-miners.
+
+\subsection{Decentralized Governance}
+Please note that in addition to its utility, we’ve always planned on giving LRC holders governance rights. While this is easy to say, and just about every project can throw that in as a catchall, well-defined rights are truly important to us as the Loopring Foundation will cede control. However, in isolation, we find a pure-governance token to be lacking, and are excited to reveal our 2.0 model which supports further utility and value capture. 
+
+With that said, there is now more to govern within the protocol itself. \textbf{Important future governance issues of the Loopring protocol will mainly relate to the various burn rate parameters, and which ERC20s should be placed in certain tiers.} 
+
+Decentralized governance is incredibly difficult and nuanced, and faces risks like plutocracies and voter apathy. We are currently exploring this aspect and hope to provide an upgraded version in the first half of 2019, allowing community parameter proposal and voting.
+
+\end{appendices}
+
 \bibliography{whitepaper}
 \bibliographystyle{unsrt}
 
 
 \end{multicols}
-
-%
-%\begin{appendices}
-%
-%\section{Loopring Implemented on EVM\label{app:protocol_ethereum}}
-%
-%\begin{center}
-%\begin{figurehere}
-%\centering
-%\begin{tikzpicture}
-%[node distance = 1cm, auto,font=\footnotesize,
-%% STYLES
-%every node/.style={node distance=3cm},
-%% The comment style is used to describe the characteristics of each force
-%comment/.style={rectangle, inner sep= 5pt, text width=4cm, node distance=0.25cm, font=\scriptsize\sffamily},
-%% The force style is used to draw the forces' name
-%force/.style={rectangle, draw, fill=black!10, inner sep=5pt, text width=4cm, text badly centered, minimum height=1.2cm, font=\bfseries\footnotesize\sffamily}] 
-%
-%% Draw forces
-%\node [force] (impl) {LoopringProtocolImpl};
-%\node [force, dashed, above of=impl] (protocol_interface) {LoopringProtocol};
-%\node [force, left=1cm of impl] (nameregistry) {NameRegistry};
-%\node [force, right=1cm of impl] (tokenregistry) {TokenRegistry};
-%\node [force, below of=impl] (delegate) {TokenTransferDelegate};
-%\node [force, left=1cm of delegate] (multisig) {TransferableMultsig};
-%
-%%%%%%%%%%%%%%%%
-%% Change data from here
-%
-%% impl
-%\node [comment, below=0.25 of impl] (comment-impl) {- Validates order-rings\\
-%- Transfers tokens for settlement\\
-%- Emits events};
-%
-%% nameregistry
-%\node [comment, below=0.25cm of nameregistry]{- Registers wallets and relays};
-%
-%% protocol_interface
-%\node [comment, below=0.25 of protocol_interface](comment-interface) {- Defines interfaces and events};
-%
-%% tokenregistry
-%\node [comment, below=0.25 of tokenregistry] {- Registers ERC20/ERC223 tokens};
-%
-%% delegate
-%\node [comment, below=0.25 of delegate] {- Transfers tokens on behalf of users};
-%
-%% PUBLIC POLICIES
-%\node [comment, text width=3cm, below=0.25 of multisig] {- Enables multisignature ownership};
-%
-%%%%%%%%%%%%%%%%%
-%
-%% Draw the links between forces
-%\path[->,thick] 
-%(comment-interface) edge (impl)
-%(nameregistry) edge (impl)
-%(tokenregistry) edge (impl)
-%(delegate) edge (comment-impl);
-%
-%\end{tikzpicture} 
-%\caption{Smart Contracts}
-%\label{fig:smartcontracts}
-%\end{figurehere}
-%\end{center}
-%
-%\section{Deployment}
-%
-%
-%\subsection{Ethereum}
-%The following smart contracts have been deployed on Ethereum mainnet:
-%\begin{itemize}
-%\item LRC: \verb|0xEF68e7C694F40c8202821eDF525dE3782458639f|
-%\item TokenRegistry: \verb|0xa21c1f2AE7f721aE77b1204A4f0811c642638da9|
-%\item TokenTransferDelegate: \verb|0x7b126ab811f278f288bf1d62d47334351dA20d1d|
-%\item NameRegistry: \verb|0xd181c1808e3f010F0F0aABc6Fe1bcE2025DB7Bb7|
-%\item LoopringProtocolImpl: \verb|0x0B48b747436f10c846696e889e66425e05CD740f|
-%\end{itemize}
-%
-%\subsection{Qtum}
-%The following smart contracts have been deployed on Qtum mainnet:
-%\begin{itemize}
-%\item LRQ: \verb| 2eb2a66afd4e465fb06d8b71f30fb1b93e18788d |
-%\item TokenRegistry: \verb| c89ea34360258917daf3655f8bec5550923509b3 |
-%\item TokenTransferDelegate: \verb| 60b3fa7f461664e4dafb621a36ac2722cc680f10 |
-%\item NameRegistry: \verb| e26a27d92181069b25bc7283e03722f6ce7678bb |
-%\item LoopringProtocolImpl: \verb| 5180bb56b696d16635abd8dc235e0ee432abf25d |
-%\end{itemize}
-%
-%\end{appendices}
 \end{document}
