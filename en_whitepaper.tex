@@ -64,6 +64,7 @@
 %\usepackage[pages=some, placement=top]{background}
 \usepackage{eso-pic}
 \usepackage[final]{pdfpages}
+\graphicspath{ {./images/} }
 
 %\includepdf[pages=1]{cover}
 \hyphenpenalty=750
@@ -1067,12 +1068,31 @@ With this in mind, we have introduced a fee element, LRC burn rate (or burn rate
 
 In the example below, the user pays for their trading fees using BNB. It does not matter if the trade actually involves BNB or not. Let’s assume the protocol-defined LRC burn rate for the BNB token is 20\%, and the fee for the transaction is 100BNB. At settlement, the trader pays 100BNB and the wallet and relay earn 100*(1–20\%)=80BNB, with the 20BNB being sent to a smart contract which buys and burns LRC. 
 
-<IMAGE>
+
+\begin{center}
+\begin{figurehere}
+\centering
+
+\includegraphics[width=9cm]{1.png}
+
+\caption{Fee model in Loopring protocol 2.0}
+\end{figurehere}
+\end{center}
+
 
 \subsection{Burn Rate Settings}
 If the above fee were to be paid in LRC instead of BNB, for example, the burn rate would be lower, such as 5\%, allowing the wallet and ring-miner to keep more of their earned fees. The burn rate associated with different ERC20 tokens will be configurable by LRC token holders governing the protocol. For now, we propose the following:
 
-<TABLE>
+\begin{center}
+\begin{figurehere}
+\centering
+
+\includegraphics[width=9cm]{2.png}
+
+\caption{Default settings, but will be configurable.}
+\end{figurehere}
+\end{center}
+
 
 Now, a user can pay fees in any token, but there will be preferable treatment, and thus lower cost, to pay fees in LRC. 
 
@@ -1121,11 +1141,23 @@ However, the wallet here is a broader concept, including any tools that can help
 
 Let’s assume that both fees set by a wallet are 0\%. In the example below, two P2P orders are swapped between 100DAI and 400GTO:
 
-<IMAGE>
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{3.png}
+\caption{Two orders of zero-fee P2P orders}
+\end{figurehere}
+\end{center}
 
 However, if the wallets corresponding to the two P2P orders are set to charge different tokenSFeePercentageor tokenBFeePercentage, the actual fee and transaction calculation is more complicated:
 
-<IMAGE>
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{4.png}
+\caption{Two orders consisting of P2P orders with commissions}
+\end{figurehere}
+\end{center}
 
 There are many instances in the real world that will make use of P2P orders and do not require third-party matching:
 
@@ -1147,7 +1179,15 @@ Without the new P2P model in 2.0, these scenarios cannot be achieved.
 \subsection{P2P Fee Burn Rate}
 For P2P orders, the protocol specifies different burn rates. Assuming that the burn rates for DAI and GTO are 10\% and 20\%, respectively, the transaction calculations need to be adjusted as follows:
 
-<IMAGE>
+
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{5.png}
+\caption{P2P fee burn rates. See the table in the 'Burn Rate Setting' section above for default P2P burn rates.}
+\end{figurehere}
+\end{center}
+
 Burn Contract Specifications
 With the new fee model, a small piece of every transaction will be directed to this smart contract and ultimately reduce LRC supply. As such, more Loopring network activity results in more burn, and in LRC holders owning a larger share of the token supply. So now, we have an economy where LRC holders:
 \begin{enumerate}
@@ -1173,23 +1213,34 @@ The purchased LRC will then be burned. This has the effect of:
 	\item Reducing LRC supply.
 \end{enumerate}
 
-\subsection{Fee Rebate}
-Loopring 2.0 also allows LRC token holders to lock up LRC in a smart contract in exchange for a percentage of fees to be burned otherwise, or a rebate, for each and every order during the lockup period.
+\subsection{LRC Lockup for Fee Rebates}
+Loopring 2.0 also allows LRC token holders to lock up LRC in a smart contract in exchange for a percentage of fees that would have otherwise been burned — effectively, a rebate. This would apply for each and every order during the lockup period.
 
-For example, if in an order the total fee is 10 AnyToken, and 4 AnyToken is to be burned. Assuming the fee payer locked up 1 million LRC and has a 50\% rebate rate. He/she will ended up with paying only 8 AnyToken and 2 of them will be burned. The rebate comes from fees otherwise to be burned, not payee’s income. Please also note that payee’s rebate rate doesn’t apply.
+For example, an order has a total fee of 10 AnyToken, and 4 AnyToken (40\%) is to be burned. Assuming the fee payer locked up 1 million LRC and has a 50\% rebate rate, he/she will ended up paying only 8 AnyToken, 2 of which will be burned. The rebate comes from the fee component that is to be burned, not the wallet or relay income. Please also note that a wallet/relay can also lockup LRC for rebates, but that doesn’t apply here.
 
-A rebate rate of 100\% ensures all orders are burn-free. The Fee-Rebate feature will be very helpful for high frequent traders.
-
+A rebate rate of 100\% ensures all orders are burn-free. The Fee-Rebate feature will be very helpful for high frequency traders.
 \subsection{Incentivize Market Makers}
 Market making is not a protocol level consideration, but a business decision made by a ring-miner on their own. It is up to them to incentivize market makers by waiving fees for orders, so we introduce the parameter waiveFeePercentage.
 
 If this parameter is positive, say, 50\%, then if the original fee paid to the ring-miner is 80BNB, it now becomes 40BNB, before the burn. The waived fee is applied to the ring-miner’s part of the fee, but not the wallet’s.
 
-<IMAGE>
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{6.png}
+\caption{Waiving 50\% of fee for Market Maker Alice}
+\end{figurehere}
+\end{center}
 
 This waiveFeePercentage parameter can also be negative. If it were -50\%, the order does not pay any fees to the relayer, but can also get 50\% of the fee other orders pay in the ring. For example, in the below diagram, the ring-miner will pay Alice half of the 40 LRC fee paid by Bob. Alice’s rebates are also subject to the corresponding burn.
 
-<IMAGE>
+\begin{center}
+\begin{figurehere}
+\centering
+\includegraphics[width=9cm]{7.png}
+\caption{Giving a -50\% fee rebate to Market Maker Alice}
+\end{figurehere}
+\end{center}
 
 With this functionality, the relay can choose to exempt some or all of the fees of a market maker’s order, and even pay part of the fees earned on other orders. Market makers will be incentivized to provide liquidity to generous and prosperous ring-miners.
 
